@@ -1,0 +1,92 @@
+{
+  "name": "ai_drama",
+  "version": "1.0.0",
+  "description": "AI短剧生成 — 自动创作短视频剧本、配音、渲染合成全流程",
+  "language": "python",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "actions": {
+    "script": {
+      "description": "生成短剧剧本（含场景、台词、镜头说明）",
+      "args": [
+        "script"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "generate": {
+      "description": "一键全流程：剧本+配音+渲染+合成",
+      "args": [
+        "generate"
+      ],
+      "input": "stdin",
+      "timeout_ms": 300000,
+      "output": "json"
+    },
+    "dub": {
+      "description": "为剧本台词生成AI配音",
+      "args": [
+        "dub"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "render": {
+      "description": "渲染视频片段",
+      "args": [
+        "render"
+      ],
+      "input": "stdin",
+      "timeout_ms": 180000,
+      "output": "json"
+    },
+    "assemble": {
+      "description": "合成最终短剧视频",
+      "args": [
+        "assemble"
+      ],
+      "input": "stdin",
+      "timeout_ms": 180000,
+      "output": "json"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "短剧",
+      "剧本",
+      "短视频",
+      "ai drama",
+      "drama",
+      "配音",
+      "tts",
+      "视频生成",
+      "视频创作",
+      "影视",
+      "脚本",
+      "台词",
+      "场景",
+      "镜头",
+      "合成",
+      "渲染",
+      "抖音剧",
+      "快手剧"
+    ],
+    "intent": "生成视频内容、创作短剧",
+    "examples": [
+      "帮我生成一个短剧",
+      "写一个短视频剧本",
+      "创作短剧脚本",
+      "生成配音视频",
+      "做一个抖音短剧"
+    ]
+  },
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "AI创作"
+}

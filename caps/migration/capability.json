@@ -1,0 +1,43 @@
+{
+  "id": "migration",
+  "name": "migration",
+  "version": "1.0.0",
+  "description": "数据库迁移 — schema版本管理/迁移/回滚",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "基础设施",
+  "actions": {
+    "auto_migrate": {
+      "description": "auto_migrate"
+    },
+    "create": {
+      "description": "创建新迁移文件"
+    },
+    "init": {
+      "description": "初始化迁移表"
+    },
+    "migrate": {
+      "description": "运行待处理的迁移"
+    },
+    "rollback": {
+      "description": "回滚最近一次迁移"
+    },
+    "status": {
+      "description": "查看迁移状态"
+    },
+    "validate_schemas": {
+      "description": "validate_schemas"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "migration",
+      "迁移",
+      "schema",
+      "版本",
+      "升级数据库"
+    ],
+    "intent": "migration"
+  }
+}

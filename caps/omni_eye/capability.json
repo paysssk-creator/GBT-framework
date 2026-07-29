@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "omni_eye",
+  "version": "1.0.0",
+  "description": "UIA直接遍历桌面所有窗口元素，返回name/state/rect结构化数据",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "感知域",
+  "tier": "core",
+  "actions": {
+    "see": {
+      "description": "遍历桌面所有窗口元素"
+    },
+    "focus": {
+      "description": "聚焦指定窗口"
+    }
+  },
+  "auto_exec": false
+}

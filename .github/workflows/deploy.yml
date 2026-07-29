@@ -1,0 +1,36 @@
+# GitHub Actions CI/CD — GBT 3D 自动部署
+# 推送到 main 分支 → 自动同步到服务器
+
+name: Deploy GBT 3D Showcase
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy via rsync
+        uses: burnett01/rsync-deployments@v6
+        with:
+          switches: -avz --delete --exclude='.git' --exclude='node_modules'
+          path: ./
+          remote_path: /var/www/gbt3d/
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Restart Docker
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: |
+            cd /var/www/gbt3d
+            docker-compose down
+            docker-compose up -d --build
+            echo "Deployed GBT3D V16"

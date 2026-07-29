@@ -1,0 +1,565 @@
+/* ═══════════════════════════════════════════════════════════
+   GBT 科技动态风 — Futuristic Tech Theme
+   网格 · 粒子流 · 扫描线 · 数据流 · 发光边框
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══ 全局科技氛围 ═══ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    /* 网格线 */
+    linear-gradient(rgba(255,107,53,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,107,53,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+  animation: gridShift 20s linear infinite;
+}
+@keyframes gridShift {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 60px 60px, 60px 60px; }
+}
+
+/* ═══ 扫描线 ═══ */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,0.003) 2px,
+    rgba(255,255,255,0.003) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+/* ═══ Hero 科技风重做 ═══ */
+.hero {
+  padding: 140px 0 100px;
+  position: relative;
+  overflow: hidden;
+  min-height: auto;
+  z-index: 2;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255,107,53,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 60%, rgba(99,91,255,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(13,148,136,0.03) 0%, transparent 40%);
+  animation: heroPulse 8s ease-in-out infinite;
+  z-index: 0;
+}
+@keyframes heroPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* 简练标题 */
+.hero h1 {
+  font-size: clamp(44px, 7vw, 80px);
+  font-weight: 900;
+  letter-spacing: -2.5px;
+  line-height: 1.05;
+  margin-bottom: 16px;
+  position: relative;
+}
+.hero h1 .hl {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff9a56 30%, #a78bfa 60%, #6366f1 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hero p {
+  font-size: clamp(14px, 2vw, 17px);
+  line-height: 1.7;
+  color: var(--fg-secondary);
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+
+/* 数据流装饰线 */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255,107,53,0.3),
+    rgba(99,91,255,0.3),
+    rgba(13,148,136,0.3),
+    transparent
+  );
+  animation: dataFlow 3s linear infinite;
+}
+@keyframes dataFlow {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* orbs → 科技光环 */
+.hero-orbs { display: none; }
+.hero .hero-orb {
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,107,53,0.1);
+  animation: orbSpin 20s linear infinite;
+}
+@keyframes orbSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* ═══ 钱包修复 ═══ */
+.gbt-wallet-v2 {
+  max-width: 480px !important;
+  margin: 0 auto !important;
+  position: relative;
+  z-index: 2;
+}
+.gbt-wallet-v2 > * {
+  margin-bottom: 14px !important;
+}
+.gbt-wallet-balance-card {
+  text-align: center !important;
+}
+.gbt-wallet-balance {
+  font-size: 40px !important;
+  line-height: 1.1 !important;
+}
+
+/* 钱包列表项对齐 */
+.gbt-ticker-table { overflow-x: auto !important; }
+.gbt-ticker-table table { min-width: 460px; }
+
+/* 用量面板修复 */
+.gbt-usage-panel {
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* 所有面板内部间距 */
+.gbt-panel {
+  overflow: visible !important;
+}
+.gbt-panel button, .gbt-panel input, .gbt-panel select {
+  box-sizing: border-box !important;
+}
+
+/* ═══ 卡片科技边框 ═══ */
+.card-glass {
+  position: relative;
+}
+.card-glass::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    rgba(255,107,53,0.1),
+    transparent 40%,
+    transparent 60%,
+    rgba(99,91,255,0.08)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ═══ 按钮科技感 ═══ */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: buttonShine 3s ease-in-out infinite;
+}
+@keyframes buttonShine {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+/* ═══ 数字跳动感 ═══ */
+.stat-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+.stat-num.updating {
+  animation: numGlow 0.6s ease-out;
+}
+@keyframes numGlow {
+  0% { text-shadow: 0 0 20px rgba(255,107,53,0.6); }
+  100% { text-shadow: 0 0 0 transparent; }
+}
+
+/* ═══ 移动端适配 ═══ */
+@media (max-width: 768px) {
+  .hero { padding: 100px 0 70px; }
+  .hero h1 { font-size: 36px; letter-spacing: -1px; }
+  .hero p { font-size: 14px; }
+  .gbt-wallet-v2 { max-width: 100% !important; padding: 0 12px !important; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 30px; }
+  body::before { background-size: 40px 40px; }
+}
+
+/* ═══ 滚动指示弹跳 ═══ */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); opacity: .3; }
+  50% { transform: translateY(8px); opacity: .6; }
+}
+
+/* ═══ 信任品牌行悬停 ═══ */
+.hero-trust span {
+  transition: all .3s ease;
+  cursor: default;
+}
+.hero-trust:hover span {
+  opacity: .4;
+}
+.hero-trust span:hover {
+  opacity: 1 !important;
+  transform: scale(1.1);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   视觉冲击五维度 (提炼自上线了 sxl.cn)
+   1. 动态部署演示  2. 样例轮播  3. 数字跳动
+   4. 渐变流动    5. 深度留白
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══ 1. 动态部署终端动画 ═══ */
+.deploy-terminal {
+  background: #0a0a12;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px;
+  overflow: hidden;
+  font-family: 'Fira Code','SF Mono',monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  padding: 20px 24px;
+  position: relative;
+}
+.deploy-terminal::before {
+  content: '● ● ●';
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  font-size: 20px;
+  letter-spacing: 4px;
+  color: #ff5f57;
+  word-spacing: 4px;
+}
+.deploy-terminal .line {
+  display: block;
+  opacity: 0;
+  animation: lineIn .3s ease-out forwards;
+  padding-left: 16px;
+  position: relative;
+}
+.deploy-terminal .line:nth-child(1) { animation-delay: 0.1s; }
+.deploy-terminal .line:nth-child(2) { animation-delay: 0.4s; }
+.deploy-terminal .line:nth-child(3) { animation-delay: 0.7s; }
+.deploy-terminal .line:nth-child(4) { animation-delay: 1.0s; }
+.deploy-terminal .line:nth-child(5) { animation-delay: 1.3s; }
+.deploy-terminal .line:nth-child(6) { animation-delay: 1.6s; }
+.deploy-terminal .line:nth-child(7) { animation-delay: 1.9s; }
+@keyframes lineIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.deploy-terminal .cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: #ff6b35;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ═══ 2. 样例轮播区 ═══ */
+.showcase-carousel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 48px 0;
+}
+.showcase-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #1a1a2e, #0d0d1a);
+  border: 1px solid rgba(255,255,255,.04);
+  cursor: pointer;
+  transition: all .4s cubic-bezier(.16,1,.3,1);
+}
+.showcase-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(255,107,53,.3);
+  box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 40px rgba(255,107,53,.08);
+}
+.showcase-card img, .showcase-card svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.showcase-label {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  background: rgba(0,0,0,.7);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+
+/* ═══ 3. 数字统计跳动 ═══ */
+.counter-animate {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+.counter-animate.counting {
+  animation: countUp .8s cubic-bezier(.16,1,.3,1);
+}
+@keyframes countUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ═══ 4. 渐变流动边框 ═══ */
+.gradient-border {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: 16px;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 17px;
+  padding: 1px;
+  background: linear-gradient(
+    270deg,
+    #ff6b35, #ff9a56, #a78bfa, #6366f1, #0ea5e9, #30d158,
+    #ff6b35
+  );
+  background-size: 400% 400%;
+  animation: gradientFlow 8s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ═══ 5. 深度留白区域 ═══ */
+.spacer-xl { height: 120px; }
+.spacer-lg { height: 80px; }
+.spacer-md { height: 48px; }
+.spacer-sm { height: 24px; }
+
+/* ═══ 部署进度条 ═══ */
+.deploy-progress {
+  width: 100%;
+  height: 3px;
+  background: rgba(255,255,255,.06);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+.deploy-progress::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #ff6b35, #ff9a56, #30d158);
+  background-size: 200% 100%;
+  animation: progressFlow 1.5s ease-in-out infinite;
+  width: 60%;
+  border-radius: 2px;
+}
+@keyframes progressFlow {
+  0% { left: -60%; }
+  100% { left: 100%; }
+}
+
+/* ═══ 脉冲成功标记 ═══ */
+.pulse-success {
+  animation: successPulse .6s cubic-bezier(.16,1,.3,1);
+}
+@keyframes successPulse {
+  0% { transform: scale(.5); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ═══ 响应式样例区 ═══ */
+@media (max-width: 768px) {
+  .showcase-carousel {
+    grid-template-columns: 1fr;
+  }
+  .spacer-xl { height: 60px; }
+  .spacer-lg { height: 40px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   AI时代视觉增强 — 神经网络 · 数据脉冲 · 智能光效
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══ AI思考指示器 ═══ */
+.ai-thinking {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255,107,53,.15), rgba(99,102,241,.15));
+  border: 1px solid rgba(255,107,53,.2); font-size: 13px; color: #ff8a65;
+}
+.ai-thinking::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: #ff6b35; box-shadow: 0 0 12px #ff6b35;
+  animation: aiPulse 1.2s ease-in-out infinite;
+}
+.ai-dot { animation-delay: .4s; } .ai-dot:nth-child(2) { animation-delay: .8s; }
+@keyframes aiPulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .3; transform: scale(1.8); }
+}
+
+/* ═══ 神经网络节点连线 ═══ */
+.neural-bg {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
+}
+.neural-node {
+  position: absolute; width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,107,53,.6); box-shadow: 0 0 8px rgba(255,107,53,.4);
+  animation: neuralFloat 6s ease-in-out infinite;
+}
+.neural-node:nth-child(odd) { animation-delay: -3s; }
+.neural-node:nth-child(3n) { background: rgba(99,102,241,.6); box-shadow: 0 0 8px rgba(99,102,241,.4); }
+.neural-node:nth-child(5n) { background: rgba(16,185,129,.6); box-shadow: 0 0 8px rgba(16,185,129,.4); }
+@keyframes neuralFloat {
+  0%,100% { transform: translateY(0) scale(1); opacity: .6; }
+  50% { transform: translateY(-20px) scale(1.5); opacity: 1; }
+}
+
+/* ═══ 数据脉冲波纹 ═══ */
+.data-pulse {
+  position: relative;
+}
+.data-pulse::after {
+  content: ''; position: absolute; inset: -2px; border-radius: inherit;
+  border: 2px solid rgba(255,107,53,.3);
+  animation: pulseRing 2s ease-out infinite;
+}
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: .8; }
+  100% { transform: scale(1.05); opacity: 0; }
+}
+
+/* ═══ 全息扫描线 ═══ */
+.holo-scan {
+  position: relative; overflow: hidden;
+}
+.holo-scan::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,107,53,.8), transparent);
+  animation: holoScan 3s linear infinite; z-index: 2;
+}
+@keyframes holoScan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+/* ═══ 智能边框发光 ═══ */
+.ai-border {
+  border: 1px solid transparent;
+  background: linear-gradient(#0a0a0f, #0a0a0f) padding-box,
+              linear-gradient(135deg, #ff6b35, #6366f1, #10b981, #ff6b35) border-box;
+  animation: borderGlow 4s linear infinite;
+}
+@keyframes borderGlow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* ═══ 代码雨效果 ═══ */
+.code-rain {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; opacity: .08;
+}
+.code-rain span {
+  position: absolute; color: #10b981; font-family: 'Fira Code', monospace;
+  font-size: 13px; animation: rainDrop 8s linear infinite;
+  white-space: nowrap;
+}
+@keyframes rainDrop {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* ═══ AI头像/品牌标记 ═══ */
+.ai-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 100px;
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
+  font-size: 12px; letter-spacing: .5px; color: #888;
+}
+.ai-badge .dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #10b981;
+  box-shadow: 0 0 6px #10b981; animation: aiPulse 2s ease-in-out infinite;
+}
+
+/* ═══ 3D卡片悬浮 ═══ */
+.card-3d {
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s ease;
+  transform-style: preserve-3d; perspective: 1000px;
+}
+.card-3d:hover {
+  transform: translateY(-6px) rotateX(2deg) rotateY(-1deg);
+  box-shadow: 0 20px 60px rgba(255,107,53,.12), 0 0 40px rgba(99,102,241,.06);
+}

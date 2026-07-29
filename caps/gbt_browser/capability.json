@@ -1,0 +1,59 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "gbt_browser",
+  "version": "1.0.0",
+  "description": "GBT隐身浏览器：15维浏览器指纹生成/隐身浏览器启动/反检测请求头/持久化配置管理",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "浏览器",
+  "tier": "tool",
+  "actions": {
+    "generate_fingerprint": {
+      "description": "生成完整的15维浏览器指纹（UA/分辨率/时区/语言/字体/WebGL等）",
+      "params": [
+        "os",
+        "country",
+        "browser",
+        "canvas_noise"
+      ]
+    },
+    "launch_browser": {
+      "description": "启动隐身浏览器（自动选择SeleniumBase或Playwright引擎）",
+      "params": [
+        "headless",
+        "fingerprint",
+        "proxy",
+        "engine"
+      ]
+    },
+    "stealth_headers": {
+      "description": "生成一次性随机反检测HTTP请求头",
+      "params": [
+        "url"
+      ]
+    },
+    "create_profile": {
+      "description": "创建持久化浏览器配置文件",
+      "params": [
+        "name",
+        "fingerprint",
+        "proxy"
+      ]
+    },
+    "list_profiles": {
+      "description": "列出所有已保存的浏览器配置文件",
+      "params": []
+    },
+    "delete_profile": {
+      "description": "删除指定名称的浏览器配置文件",
+      "params": [
+        "name"
+      ]
+    },
+    "status": {
+      "description": "查看浏览器引擎可用性状态",
+      "params": []
+    }
+  },
+  "auto_exec": false
+}

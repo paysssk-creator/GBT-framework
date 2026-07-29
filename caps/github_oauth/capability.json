@@ -1,0 +1,53 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "github_oauth",
+  "version": "1.0.0",
+  "description": "GitHub OAuth开发者授权 · 对标Whop Connect · 登录→授权→读代码→提交部署",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI协作",
+  "actions": {
+    "browse": {
+      "description": "browse"
+    },
+    "exchange": {
+      "description": "OAuth code换access_token",
+      "timeout_ms": 15000
+    },
+    "list_repos": {
+      "description": "列出已授权用户仓库",
+      "timeout_ms": 15000
+    },
+    "login_url": {
+      "description": "生成GitHub OAuth登录URL",
+      "timeout_ms": 5000
+    },
+    "read_file": {
+      "description": "read_file"
+    },
+    "run": {
+      "description": "run"
+    },
+    "status": {
+      "description": "查询授权状态",
+      "timeout_ms": 5000
+    },
+    "submit": {
+      "description": "提交仓库进行部署评估",
+      "timeout_ms": 10000
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "github",
+      "登录",
+      "授权",
+      "oauth",
+      "提交项目",
+      "deploy repo",
+      "connect github"
+    ],
+    "intent": "github_oauth"
+  }
+}

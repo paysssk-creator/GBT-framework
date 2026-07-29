@@ -1,0 +1,34 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "log_analyzer",
+  "version": "1.0.0",
+  "description": "日志分析·结构化解析与异常检测",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "特殊域",
+  "actions": {
+    "analyze": {
+      "description": "分析日志内容"
+    },
+    "anomaly_detect": {
+      "description": "anomaly_detect"
+    },
+    "pattern_learn": {
+      "description": "pattern_learn"
+    },
+    "tail_errors": {
+      "description": "tail_errors"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "log",
+      "日志",
+      "分析",
+      "error log",
+      "syslog"
+    ],
+    "intent": "log_analyzer"
+  }
+}

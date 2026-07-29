@@ -1,0 +1,1 @@
+cd C:/Users/ADMIN/GBTxiaotudouV5 && python _tmp_compile_check.py

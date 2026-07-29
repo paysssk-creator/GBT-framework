@@ -1,0 +1,77 @@
+{
+  "name": "brain_nexus",
+  "version": "2.0.0",
+  "description": "邻域中枢 — 全领域能力映射/意图路由/健康审计/启动自检/跨领域数据通道。GBT大脑的神经网络总控。",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI协作",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "actions": {
+    "map": {
+      "description": "全领域能力映射 — 展示所有领域和能力的完整拓扑图",
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "route": {
+      "description": "意图路由 — 根据用户意图自动匹配最佳能力模块",
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "audit": {
+      "description": "健康审计 — 检查所有领域的能力状态和覆盖率",
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "boot": {
+      "description": "启动自检 — 全邻域能力扫描+依赖验证",
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "bridge": {
+      "description": "跨领域数据通道 — 在不同领域能力之间传递数据",
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "neighborhoods": {
+      "description": "邻域拓扑 — 展示所有AI领域及其能力分布",
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "邻域",
+      "中枢",
+      "能力映射",
+      "路由",
+      "拓扑",
+      "nexus",
+      "neighborhood",
+      "领域",
+      "全部能力",
+      "有什么能力",
+      "能做什么",
+      "capabilities"
+    ],
+    "intent": "nexus_orchestrate",
+    "examples": [
+      "你能做什么",
+      "列出所有能力",
+      "哪个模块可以处理这个任务",
+      "检查所有系统状态"
+    ]
+  },
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除"
+}

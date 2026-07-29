@@ -1,0 +1,25 @@
+{
+  "name": "fingerprint_browser",
+  "version": "1.0.0",
+  "description": "指纹浏览器-反侦测多开独立环境",
+  "language": "python",
+  "category": "侦察域",
+  "risk_level": "medium",
+  "tier": "core",
+  "actions": {
+    "create_profile": {
+      "description": "创建独立浏览器指纹环境"
+    },
+    "launch": {
+      "description": "启动指纹浏览器实例"
+    },
+    "list_profiles": {
+      "description": "列出所有指纹环境"
+    },
+    "delete_profile": {
+      "description": "删除指纹环境"
+    }
+  },
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "auto_exec": false
+}

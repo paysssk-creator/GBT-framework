@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "dir_buster",
+  "version": "1.0.0",
+  "description": "目录/文件爆破扫描",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "侦察域",
+  "tier": "ready",
+  "actions": {
+    "scan": {
+      "description": "扫描目录"
+    },
+    "brute": {
+      "description": "暴力扫描"
+    }
+  },
+  "auto_exec": false
+}

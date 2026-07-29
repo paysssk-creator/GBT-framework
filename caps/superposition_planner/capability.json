@@ -1,0 +1,15 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "superposition_planner",
+  "version": "1.0.0",
+  "description": "叠加态规划(多方案同时推演)",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "量子邻域",
+  "actions": {
+    "plan": {
+      "description": "plan"
+    }
+  }
+}

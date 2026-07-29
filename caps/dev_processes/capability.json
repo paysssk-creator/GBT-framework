@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "dev_processes",
+  "version": "1.0.0",
+  "description": "进程实时监控",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "设备感知层",
+  "tier": "ready",
+  "actions": {
+    "list": {
+      "description": "列出所有进程"
+    },
+    "detail": {
+      "description": "进程详情"
+    }
+  },
+  "auto_exec": false
+}

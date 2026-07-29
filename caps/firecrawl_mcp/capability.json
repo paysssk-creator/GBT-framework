@@ -1,0 +1,38 @@
+{
+  "name": "firecrawl_mcp",
+  "version": "1.0.0",
+  "description": "Firecrawl网页抓取 — 任意网站→干净Markdown+结构化提取 (~143k GitHub stars)",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": true,
+  "category": "AI知识",
+  "entry": {
+    "program": "python",
+    "args": ["run.py"]
+  },
+  "actions": {
+    "scrape": {
+      "description": "抓取单个URL, 返回干净Markdown/HTML/结构化数据",
+      "input": "args",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "crawl": {
+      "description": "爬取整个网站, 批量提取所有页面",
+      "input": "args",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "extract": {
+      "description": "用LLM从页面提取结构化数据(schema验证)",
+      "input": "args",
+      "timeout_ms": 60000,
+      "output": "json"
+    }
+  },
+  "triggers": {
+    "keywords": ["firecrawl", "网页抓取", "爬虫", "scrape web", "网站提取", "crawl site"],
+    "intent": "web_scrape",
+    "examples": ["用Firecrawl抓这个网页", "爬取整个文档站", "提取这个页面的结构化数据"]
+  }
+}

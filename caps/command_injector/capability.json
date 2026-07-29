@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "command_injector",
+  "version": "1.0.0",
+  "description": "命令注入检测与利用",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "攻击域",
+  "tier": "ready",
+  "actions": {
+    "test": {
+      "description": "检测命令注入点"
+    },
+    "inject": {
+      "description": "执行命令注入"
+    }
+  },
+  "auto_exec": false
+}

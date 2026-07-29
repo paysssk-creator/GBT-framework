@@ -1,0 +1,25 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "osint_aggregator",
+  "version": "1.0.0",
+  "description": "OSINT情报聚合·公开信息收集与关联",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": false,
+  "category": "侦察域",
+  "actions": {
+    "aggregate": {
+      "description": "聚合多方情报数据"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "OSINT",
+      "intelligence",
+      "情报",
+      "公开信息",
+      "开源情报"
+    ],
+    "intent": "osint_aggregator"
+  }
+}

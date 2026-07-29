@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "process_injector",
+  "version": "1.0.0",
+  "description": "process_injector capability",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "攻击域",
+  "tier": "ready",
+  "actions": {
+    "dll": {
+      "description": "dll"
+    },
+    "inject": {
+      "description": "进程注入"
+    }
+  },
+  "auto_exec": false
+}

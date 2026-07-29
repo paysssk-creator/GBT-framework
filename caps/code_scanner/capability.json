@@ -1,0 +1,25 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "code_scanner",
+  "version": "1.0.0",
+  "description": "代码层深度分析引擎 每根触手内置的安全漏洞/病毒/后门/代码质量扫描 34种安全漏洞模式 10种恶意代码特征 5种代码质量检测",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "AI编程",
+  "tier": "core",
+  "actions": {
+    "scan": {
+      "description": "扫描代码文本(直接传入代码字符串)"
+    },
+    "scan_file": {
+      "description": "扫描代码文件(传入文件路径)"
+    },
+    "scan_response": {
+      "description": "扫描HTTP响应体(从攻击cap传入)"
+    },
+    "semgrep": {
+      "description": "semgrep"
+    }
+  },
+  "auto_exec": false
+}

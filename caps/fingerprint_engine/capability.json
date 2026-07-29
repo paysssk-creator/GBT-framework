@@ -1,0 +1,41 @@
+{
+  "name": "fingerprint_engine",
+  "version": "1.0.0",
+  "description": "GBT自建浏览器指纹引擎 — 不依赖2Captcha，本地生成真实指纹，平台直接赚钱",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI协作",
+  "entry": {"program": "python", "args": ["run.py"]},
+  "actions": {
+    "random": {
+      "description": "随机真实浏览器指纹(Chromium格式)",
+      "input": "args", "timeout_ms": 5000, "output": "json"
+    },
+    "generate": {
+      "description": "按参数定制指纹(OS/浏览器/国家)",
+      "input": "args", "timeout_ms": 5000, "output": "json"
+    },
+    "browser_context": {
+      "description": "生成Playwright browser.new_context()完整参数",
+      "input": "args", "timeout_ms": 5000, "output": "json"
+    },
+    "puppeteer_context": {
+      "description": "生成Puppeteer launch参数",
+      "input": "args", "timeout_ms": 5000, "output": "json"
+    },
+    "stealth_config": {
+      "description": "完整隐身配置: launch_args+context+headers+cdp",
+      "input": "args", "timeout_ms": 5000, "output": "json"
+    },
+    "stats": {
+      "description": "指纹库统计(可用指纹数/覆盖OS/浏览器)",
+      "input": "args", "timeout_ms": 3000, "output": "json"
+    }
+  },
+  "triggers": {
+    "keywords": ["指纹", "fingerprint", "浏览器指纹", "隐身", "stealth", "反检测"],
+    "intent": "fingerprint",
+    "examples": ["生成美国Chrome指纹", "Windows浏览器隐身配置", "Playwright隐身上下文"]
+  }
+}

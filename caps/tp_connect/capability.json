@@ -1,0 +1,33 @@
+{
+  "name": "tp_connect",
+  "version": "1.0.0",
+  "description": "TokenPocket Wallet Connect 集成 · 多链(EVM+TRON+SOL) · 零私钥接触",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": false,
+  "category": "金融域",
+  "tier": "core",
+  "actions": {
+    "balance": {
+      "description": "查询多链余额"
+    },
+    "chains": {
+      "description": "列出支持的区块链"
+    },
+    "connect": {
+      "description": "连接 TokenPocket 钱包"
+    },
+    "list": {
+      "description": "list"
+    },
+    "run": {
+      "description": "run"
+    },
+    "self_test": {
+      "description": "self_test"
+    },
+    "verify_deposit": {
+      "description": "验证链上充值交易"
+    }
+  }
+}

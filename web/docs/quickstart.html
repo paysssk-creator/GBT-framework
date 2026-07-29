@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>快速开始 · GBT Docs</title><link rel="stylesheet" href="/styles.css"><style>:root{--sidebar-w:260px}body{display:flex;min-height:100vh;font-family:'Inter',-apple-system,sans-serif}.sidebar{width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);padding:20px;position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:10}.sidebar h2{font-size:14px;font-weight:700;margin-bottom:16px;color:var(--accent)}.sidebar nav{display:flex;flex-direction:column;gap:4px}.sidebar a{color:var(--dim);text-decoration:none;font-size:13px;padding:6px 10px;border-radius:6px;transition:all .15s;display:block}.sidebar a:hover,.sidebar a.active{color:var(--text);background:rgba(255,255,255,.04)}.sidebar .section{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-top:20px;margin-bottom:8px;padding-left:10px}.main{margin-left:var(--sidebar-w);flex:1;padding:40px 60px;max-width:900px}.main h1{font-size:32px;font-weight:800;margin-bottom:8px}.main h2{font-size:22px;font-weight:700;margin:40px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}.main h3{font-size:17px;font-weight:600;margin:24px 0 8px}.main p{font-size:15px;color:var(--dim);line-height:1.8;margin-bottom:16px}.main code{background:var(--bg);padding:2px 8px;border-radius:4px;font-size:13px;color:var(--accent);font-family:monospace}.main pre{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px 20px;overflow-x:auto;margin:16px 0;font-size:13px;line-height:1.6}.main pre code{background:none;padding:0;color:var(--text)}.main .callout{background:rgba(88,166,255,.08);border-left:3px solid var(--accent);padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;font-size:14px}.main .step{display:flex;gap:16px;align-items:flex-start;margin:20px 0}.main .step-num{width:36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:16px}@media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:24px 20px}}</style></head><body>
+<aside class="sidebar"><h2>📖 GBT Docs</h2><nav><a href="/docs/">首页</a><div class="section">快速开始</div><a href="/docs/quickstart.html" class="active">5分钟部署第一个项目</a><div class="section">核心</div><a href="/docs/pricing.html">定价与分成</a><a href="/docs/faq.html">常见问题</a></nav></aside>
+<main class="main">
+<h1>5分钟部署第一个项目</h1>
+<p>只需要一个 GitHub 链接，不需要写 Dockerfile，不需要配服务器。</p>
+
+<h2>前提条件</h2>
+<p>✅ 一个公开的 GitHub 仓库（Python / Node.js / Go / 静态站均可）<br>✅ GBT 开发者账号（<a href="/onboard.html">免费注册</a>）</p>
+
+<h2>部署步骤</h2>
+<div class="step"><div class="step-num">1</div><div><strong>粘贴仓库地址</strong><p>在首页输入框或 <a href="/onboard.html">开发者面板</a> 粘贴 GitHub 链接</p></div></div>
+<div class="step"><div class="step-num">2</div><div><strong>AI 自动分析</strong><p>GBT 自动检测：语言（Python/Node/Go）→ 依赖文件（requirements.txt/package.json）→ 端口号 → 启动命令</p></div></div>
+<div class="step"><div class="step-num">3</div><div><strong>等待构建（~30秒）</strong><p>AI 生成 Dockerfile → 构建镜像 → 配置内网隧道 → 生成公网地址</p></div></div>
+<div class="step"><div class="step-num">4</div><div><strong>上线！</strong><p>获得 <code>https://your-project.gbtxiaotudou.com</code> 公网地址，自动上架项目市场</p></div></div>
+
+<h2>CLI 部署（进阶）</h2>
+<pre><code># 安装 CLI
+pip install gbt-cli
+# 一键部署
+gbt deploy https://github.com/your/awesome-project
+# 查看状态
+gbt status
+# 查看收益
+gbt earnings</code></pre>
+
+<h2>API 部署</h2>
+<pre><code>curl -X POST https://api.gbtxiaotudou.com/deploy \
+  -H "Authorization: Bearer $GBT_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"repo_url":"https://github.com/user/project","name":"my-app"}'</code></pre>
+
+<div class="callout">💡 部署后项目自动进入"审核队列"，AI 自动评估质量并定价。通常 1-5 分钟完成。</div>
+</main></body></html>

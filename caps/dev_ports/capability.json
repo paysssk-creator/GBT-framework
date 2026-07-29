@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "dev_ports",
+  "version": "1.0.0",
+  "description": "端口监听状态",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "设备感知层",
+  "tier": "ready",
+  "actions": {
+    "list": {
+      "description": "列出监听端口"
+    },
+    "check": {
+      "description": "检查指定端口"
+    }
+  },
+  "auto_exec": false
+}

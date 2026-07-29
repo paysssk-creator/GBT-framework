@@ -1,0 +1,50 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "n8n_automation",
+  "version": "1.0.0",
+  "description": "N8N全局自动化编排·三大核心工作流:支付分账+部署监控+邻域巡检",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "运维域",
+  "actions": {
+    "generate_all": {
+      "description": "一键生成全部3个N8N工作流",
+      "timeout_ms": 10000
+    },
+    "generate_deploy": {
+      "description": "生成部署自动化工作流",
+      "timeout_ms": 10000
+    },
+    "generate_monitor": {
+      "description": "生成全局监控工作流",
+      "timeout_ms": 10000
+    },
+    "generate_payment": {
+      "description": "生成支付自动化工作流",
+      "timeout_ms": 10000
+    },
+    "list": {
+      "description": "列出已有工作流",
+      "timeout_ms": 5000
+    },
+    "run": {
+      "description": "run"
+    },
+    "status": {
+      "description": "N8N运行状态",
+      "timeout_ms": 5000
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "n8n",
+      "workflow",
+      "自动化",
+      "编排",
+      "webhook",
+      "payment flow"
+    ],
+    "intent": "n8n_automation"
+  }
+}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GBT Brain Runtime v5.3.0 — 三脑驱动</title>
+<style>
+:root{--bg:#050510;--card:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:#e0e0e0;font-family:'Inter',system-ui,-apple-system,sans-serif;overflow-x:hidden}
+#particle-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
+.container{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:20px}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+h1{font-size:clamp(2rem,6vw,4rem);font-weight:900;line-height:1.1}
+.gradient-text{background:linear-gradient(135deg,#00d4ff,#a855f7,#ffd700,#00d4ff);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradient 4s ease infinite}
+@keyframes gradient{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.subtitle{font-size:1.2rem;color:#666;margin-top:16px;letter-spacing:2px}
+.badges{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:24px 0}
+.badge{padding:6px 18px;border-radius:20px;font-size:0.8rem;font-weight:600;border:1px solid;backdrop-filter:blur(8px)}
+.badge.b1{color:#00d4ff;border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.08)}
+.badge.b2{color:#a855f7;border-color:rgba(168,85,247,0.3);background:rgba(168,85,247,0.08)}
+.badge.b3{color:#ffd700;border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.08)}
+.badge.b4{color:#22c55e;border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.08)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:60px 0;max-width:800px;margin:0 auto}
+.stat{text-align:center;padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(12px);transition:all 0.4s}
+.stat:hover{border-color:rgba(0,212,255,0.3);transform:translateY(-4px)}
+.stat .num{font-size:2.5rem;font-weight:900}
+.stat .lbl{font-size:0.8rem;color:#888;margin-top:4px}
+.brain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:40px 0}
+.brain-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 24px;text-align:center;backdrop-filter:blur(16px);transition:all 0.4s;opacity:0;transform:translateY(30px)}
+.brain-card.visible{opacity:1;transform:translateY(0)}
+.brain-card:hover{border-color:rgba(0,212,255,0.3);transform:translateY(-6px)!important;box-shadow:0 20px 60px rgba(0,212,255,0.06)}
+.brain-icon{font-size:3rem;margin-bottom:12px}
+.brain-card h3{font-size:1.1rem;margin-bottom:8px}
+.brain-card p{font-size:0.82rem;color:#888;line-height:1.7}
+.tag{display:inline-block;padding:4px 12px;border-radius:12px;font-size:0.7rem;margin-top:12px;font-family:monospace}
+.mirror-section{padding:40px 0}
+.mirror-card{max-width:700px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;text-align:center;backdrop-filter:blur(16px);opacity:0;transform:translateY(30px);transition:all 0.6s}
+.mirror-card.visible{opacity:1;transform:translateY(0)}
+.mirror-card h2{color:#22c55e;font-size:1.4rem;margin-bottom:16px}
+.mirror-layer{font-family:monospace;font-size:0.85rem;color:#aaa;line-height:2.2;text-align:left;max-width:500px;margin:0 auto}
+.quantum-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:30px 0}
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 16px;text-align:center;backdrop-filter:blur(12px);opacity:0;transform:translateY(30px);transition:all 0.5s}
+.q-card.visible{opacity:1;transform:translateY(0)}
+.q-card:hover{border-color:rgba(168,85,247,0.4)}
+.q-icon{font-size:2rem;margin-bottom:8px}
+.q-card h4{font-size:0.85rem;margin-bottom:4px}
+.q-card span{font-size:0.7rem;color:#666}
+.footer{text-align:center;padding:60px 20px 40px;color:#444;font-size:0.8rem}
+.footer a{color:#00d4ff;text-decoration:none}
+.section-title{text-align:center;font-size:1.5rem;margin:20px 0 30px;font-weight:700}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 5px #00d4ff,0 0 20px rgba(0,212,255,0.1)}50%{box-shadow:0 0 20px #00d4ff,0 0 60px rgba(0,212,255,0.2)}}
+.cta-btn{display:inline-block;padding:16px 48px;background:var(--bg);color:#00d4ff;border:1px solid rgba(0,212,255,0.3);border-radius:16px;font-size:1.1rem;text-decoration:none;animation:pulse-glow 2s infinite;transition:all 0.3s}
+.cta-btn:hover{border-color:#00d4ff;box-shadow:0 0 30px rgba(0,212,255,0.3)}
+@media(max-width:768px){.brain-grid{grid-template-columns:1fr}.quantum-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<div id="particle-bg"></div>
+
+<div class="container">
+  <section class="hero">
+    <h1 class="gradient-text">GBT Brain<br>Runtime</h1>
+    <p class="subtitle">v5.3.0 · 三脑驱动 AI 框架</p>
+    <div class="badges">
+      <span class="badge b1">🧠 推理脑</span>
+      <span class="badge b2">🎯 设计脑</span>
+      <span class="badge b3">⚡ 编程脑</span>
+      <span class="badge b4">190 caps</span>
+    </div>
+    <p style="color:#777;max-width:550px;margin-top:20px;line-height:1.7">
+      拥有自我认知、视觉皮层、自主调度能力的<br>
+      <strong style="color:#00d4ff">智能体操作系统</strong>
+    </p>
+  </section>
+
+  <section class="stats">
+    <div class="stat reveal"><div class="num" style="color:#00d4ff">3</div><div class="lbl">AI 大脑</div></div>
+    <div class="stat reveal"><div class="num" style="color:#a855f7">190</div><div class="lbl">能力模块</div></div>
+    <div class="stat reveal"><div class="num" style="color:#ffd700">18</div><div class="lbl">能力领域</div></div>
+    <div class="stat reveal"><div class="num" style="color:#22c55e">15</div><div class="lbl">认知层</div></div>
+  </section>
+
+  <h2 class="section-title" style="color:#00d4ff">🧠 三脑架构</h2>
+  <section class="brain-grid">
+    <div class="brain-card reveal">
+      <div class="brain-icon">🧠</div>
+      <h3 style="color:#00d4ff">推理脑</h3>
+      <p>DeepSeek 实时对话通道<br>会话隔离 · 多轮上下文<br>自动前缀技术层</p>
+      <span class="tag" style="color:#00d4ff;border:1px solid rgba(0,212,255,0.3)">reasoning_brain.py</span>
+    </div>
+    <div class="brain-card reveal">
+      <div class="brain-icon">🎯</div>
+      <h3 style="color:#a855f7">设计脑</h3>
+      <p>自主调度技能工具<br>推理消化→精细思维导图<br>每30分钟邻域巡检</p>
+      <span class="tag" style="color:#a855f7;border:1px solid rgba(168,85,247,0.3)">DesignBrainInterface</span>
+    </div>
+    <div class="brain-card reveal">
+      <div class="brain-icon">⚡</div>
+      <h3 style="color:#ffd700">编程脑</h3>
+      <p>按思维导图逐步执行<br>卡点返回设计脑<br>15层认知闭环验证</p>
+      <span class="tag" style="color:#ffd700;border:1px solid rgba(255,215,0,0.3)">AutonomousExecutor</span>
+    </div>
+  </section>
+
+  <h2 class="section-title" style="color:#22c55e">🪞 镜像多维度空间</h2>
+  <section class="mirror-section">
+    <div class="mirror-card reveal">
+      <h2>🪞 MirrorFusion · 五层安全实验</h2>
+      <div class="mirror-layer">
+        ① VisionBridge &nbsp;→&nbsp; 看懂截图/图片<br>
+        ② BypassLLM &nbsp;&nbsp;&nbsp;&nbsp;→&nbsp; 模型拒绝→DeepSeek→Kimi→GPT→Ollama→自主推理<br>
+        ③ SandboxExecutor → 隔离目录安全执行<br>
+        ④ Ablation &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→&nbsp; 回放+消融测试<br>
+        ⑤ Replay &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→&nbsp; 决策日志完整回放
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title" style="color:#a855f7">⚛️ 量子邻域</h2>
+  <section class="quantum-grid">
+    <div class="q-card reveal"><div class="q-icon">🪞</div><h4 style="color:#22c55e">镜像空间</h4><span>5层实验隔离</span></div>
+    <div class="q-card reveal"><div class="q-icon">🔮</div><h4 style="color:#a855f7">量子推理</h4><span>叠加态多路径</span></div>
+    <div class="q-card reveal"><div class="q-icon">🔗</div><h4 style="color:#00d4ff">纠缠桥接</h4><span>跨邻域通道</span></div>
+    <div class="q-card reveal"><div class="q-icon">🌊</div><h4 style="color:#ffd700">波函数坍缩</h4><span>多路径→最优</span></div>
+  </section>
+
+  <section style="text-align:center;padding:60px 0">
+    <a href="https://github.com/paysssk-creator/GBT-brain-runtime" class="cta-btn">⭐ GitHub</a>
+  </section>
+
+  <div class="footer">
+    Built with 🧠 by 自由的风 · MIT License
+  </div>
+</div>
+
+<!-- ═══ Three.js 粒子引擎 (从CDN直拉, 零本地依赖) ═══ -->
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+const IS_MOBILE = /Mobi|Android/i.test(navigator.userAgent);
+const COUNT = IS_MOBILE ? 600 : 2000;
+const RINGS = IS_MOBILE ? 2 : 3;
+const SPEED = IS_MOBILE ? 0.0003 : 0.0005;
+
+const container = document.getElementById('particle-bg');
+const W = window.innerWidth, H = window.innerHeight;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(60, W/H, 0.1, 100);
+camera.position.z = 5;
+
+const renderer = new THREE.WebGLRenderer({alpha:true,antialias:!IS_MOBILE});
+renderer.setSize(W,H);
+renderer.setPixelRatio(Math.min(devicePixelRatio, IS_MOBILE?1:2));
+container.appendChild(renderer.domElement);
+
+const geo = new THREE.BufferGeometry();
+const pos = new Float32Array(COUNT*3);
+const col = new Float32Array(COUNT*3);
+for(let i=0;i<COUNT;i++){
+  const ri=i%RINGS,r=3+ri*0.3,a=(i/COUNT)*Math.PI*2*(ri+1),y=(Math.random()-0.5)*0.5*(ri+1);
+  pos[i*3]=Math.cos(a)*r;pos[i*3+1]=y;pos[i*3+2]=Math.sin(a)*r;
+  const c=new THREE.Color().setHSL(0.55+ri*0.05,0.8,0.5+Math.random()*0.3);
+  col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;
+}
+geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+geo.setAttribute('color',new THREE.BufferAttribute(col,3));
+
+const mat = new THREE.PointsMaterial({size:IS_MOBILE?0.04:0.02,vertexColors:true,blending:THREE.AdditiveBlending,depthWrite:false});
+const points = new THREE.Points(geo,mat);
+scene.add(points);
+
+// 环形参考线
+for(let ri=0;ri<RINGS;ri++){
+  const r=3+ri*0.3;
+  const ringGeo=new THREE.TorusGeometry(r,0.005,16,200);
+  const ring=new THREE.Mesh(ringGeo,new THREE.MeshBasicMaterial({color:0x00d4ff,transparent:true,opacity:0.15-ri*0.04}));
+  ring.rotation.x=Math.PI/2;
+  scene.add(ring);
+  points.add(ring);
+}
+
+function animate(){
+  requestAnimationFrame(animate);
+  points.rotation.x+=SPEED*0.3;
+  points.rotation.y+=SPEED;
+  renderer.render(scene,camera);
+}
+animate();
+
+window.addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+</script>
+
+<!-- ═══ 滚动入场 ═══ -->
+<script>
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+},{threshold:0.15});
+document.querySelectorAll('.reveal,.brain-card,.mirror-card,.q-card,.stat').forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>

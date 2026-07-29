@@ -1,0 +1,32 @@
+{
+  "id": "cap_docs",
+  "name": "cap_docs",
+  "version": "1.0.0",
+  "description": "API文档生成器 — 扫描所有cap的capability.json并生成Markdown/HTML文档",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "基础设施",
+  "actions": {
+    "generate": {
+      "description": "扫描所有caps生成 docs/caps_api.md 文档"
+    },
+    "generate_html": {
+      "description": "生成 docs/caps_api.html 文档"
+    },
+    "search": {
+      "description": "按关键字搜索已生成的文档"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "docs",
+      "文档",
+      "api",
+      "generate docs",
+      "生成文档",
+      "cap_docs"
+    ],
+    "intent": "generate_docs"
+  }
+}

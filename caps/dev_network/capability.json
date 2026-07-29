@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "dev_network",
+  "version": "1.0.0",
+  "description": "网络实时状态传感器",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "设备感知层",
+  "tier": "core",
+  "actions": {
+    "status": {
+      "description": "获取网络状态"
+    },
+    "speed": {
+      "description": "获取网络速度"
+    }
+  },
+  "auto_exec": false
+}

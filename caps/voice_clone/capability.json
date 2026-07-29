@@ -1,0 +1,30 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "voice_clone",
+  "version": "1.0.0",
+  "description": "语音克隆·Coqui+Edge+pyttsx3三引擎",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": false,
+  "category": "AI创作",
+  "actions": {
+    "clone": {
+      "description": "克隆目标语音"
+    },
+    "speak": {
+      "description": "合成语音输出"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "voice",
+      "clone",
+      "语音",
+      "克隆",
+      "TTS",
+      "Coqui",
+      "speech"
+    ],
+    "intent": "voice_clone"
+  }
+}

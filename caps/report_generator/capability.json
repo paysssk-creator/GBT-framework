@@ -1,0 +1,28 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "report_generator",
+  "version": "1.0.0",
+  "description": "报告生成器·自动化安全报告与文档",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "特殊域",
+  "actions": {
+    "generate": {
+      "description": "生成报告文档"
+    },
+    "types": {
+      "description": "types"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "report",
+      "报告",
+      "generate",
+      "生成",
+      "文档"
+    ],
+    "intent": "report_generator"
+  }
+}

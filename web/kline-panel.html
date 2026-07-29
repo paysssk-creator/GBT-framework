@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GBT A股交易终端 · 3D实时看盘</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="gbt-3d.js" defer></script>
+<link rel="stylesheet" href="gbt-animations.css">
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#e0e0e0;font-family:'Inter','Segoe UI',system-ui;height:100vh;overflow:hidden}
+
+/* ═══ 3D 背景层 ═══ */
+#bg-particles{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
+#globe-container{position:fixed;top:12px;right:16px;width:280px;height:280px;z-index:1;pointer-events:none;opacity:0.85}
+
+/* ═══ 主布局 ═══ */
+#app{position:relative;z-index:2;display:flex;height:100vh;gap:0}
+
+/* ═══ 左侧面板 ═══ */
+#sidebar{width:300px;display:flex;flex-direction:column;padding:12px;gap:10px;overflow-y:auto;z-index:3}
+.glass{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;backdrop-filter:blur(16px)}
+
+.side-header{padding:14px 16px;text-align:center}
+.side-header .logo{font-size:14px;font-weight:800;letter-spacing:2px}
+.gbt-gradient-text{background:linear-gradient(135deg,#00d4ff,#a855f7,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.side-header .sub{font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;letter-spacing:3px}
+
+/* 搜索 */
+.search-box{padding:10px 14px}
+.search-box input{width:100%;padding:9px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:#e0e0e0;font-size:13px;outline:none;transition:all .2s}
+.search-box input:focus{border-color:#00d4ff;box-shadow:0 0 16px rgba(0,212,255,0.1)}
+
+/* 市场情绪卡 */
+.mood-card{padding:12px 16px;display:flex;align-items:center;gap:12px}
+.mood-icon{font-size:28px}
+.mood-info{flex:1}
+.mood-label{font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px}
+.mood-value{font-size:18px;font-weight:700}
+.mood-stats{font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px}
+
+/* 股票列表 */
+.stock-list{flex:1;overflow-y:auto;padding:4px 8px}
+.stock-item{display:flex;align-items:center;padding:9px 12px;border-radius:10px;cursor:pointer;transition:all .15s;margin-bottom:1px;border:1px solid transparent}
+.stock-item:hover{background:rgba(0,212,255,0.05);border-color:rgba(0,212,255,0.1)}
+.stock-item.active{background:rgba(0,212,255,0.08);border-color:rgba(0,212,255,0.2)}
+.stock-item .s-code{font-size:10px;color:rgba(255,255,255,0.25);width:58px;font-family:monospace}
+.stock-item .s-name{font-size:13px;font-weight:600;flex:1}
+.stock-item .s-price{font-size:13px;font-weight:600;text-align:right;width:72px}
+.stock-item .s-change{font-size:11px;text-align:right;width:64px;padding:2px 6px;border-radius:4px;font-weight:600}
+.up{color:#22c55e;background:rgba(34,197,94,0.1)}
+.down{color:#ef4444;background:rgba(239,68,68,0.1)}
+
+/* 底部状态栏 */
+.side-footer{padding:10px 14px;display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,0.25)}
+.side-footer .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px}
+.dot-off{background:#f59e0b;animation:gbt-pulse-glow 3s ease-in-out infinite}
+@keyframes gbt-pulse-glow{0%,100%{box-shadow:0 0 4px #22c55e}50%{box-shadow:0 0 12px #22c55e}}
+
+/* ═══ 主面板 ═══ */
+#main{flex:1;display:flex;flex-direction:column;min-width:0;padding:12px 12px 12px 0;gap:10px;z-index:2}
+.topbar{display:flex;align-items:center;padding:10px 18px;gap:12px}
+.topbar .t-name{font-size:17px;font-weight:700}
+.topbar .t-price{font-size:22px;font-weight:800;font-family:monospace}
+.topbar .t-change{padding:3px 10px;border-radius:6px;font-size:12px;font-weight:700}
+.topbar .t-spacer{flex:1}
+.period-btn{padding:5px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);border-radius:8px;cursor:pointer;font-size:12px;transition:all .15s}
+.period-btn:hover{border-color:rgba(0,212,255,0.3);color:#e0e0e0}
+.period-btn.active{background:rgba(0,212,255,0.12);color:#00d4ff;border-color:rgba(0,212,255,0.3)}
+
+/* K线容器 */
+#chart-wrap{flex:1;min-height:0;padding:4px;overflow:hidden}
+#chart-container{width:100%;height:100%}
+
+/* 指标栏 */
+.indicator-bar{display:flex;padding:8px 16px;gap:20px;flex-wrap:wrap;font-size:11px}
+.ind-item{color:rgba(255,255,255,0.4)}
+.ind-item span{font-weight:600}
+.ind-item .val-up{color:#22c55e}
+.ind-item .val-down{color:#ef4444}
+.ind-item .val-warn{color:#f59e0b}
+
+/* ═══ 光效连线 ═══ */
+#globe-container{position:fixed;top:12px;right:16px;width:260px;height:260px;z-index:1;pointer-events:none;opacity:0.8}
+#sentiment-target{position:fixed;top:130px;left:160px;width:1px;height:1px;z-index:1;pointer-events:none}
+
+/* 滚动条 */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px}
+
+/* 响应式 */
+@media(max-width:768px){
+  #sidebar{display:none;position:fixed;z-index:20;height:100vh;width:280px}
+  #sidebar.open{display:flex}
+  #globe-container{width:180px;height:180px;top:4px;right:4px;opacity:0.5}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ 3D 粒子背景 ═══ -->
+<div id="bg-particles"
+     data-gbt3d="particles"
+     data-count="2000"
+     data-color="#ffd700"
+     data-rings="3"
+     data-speed="0.0003"
+     style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;opacity:0.5">
+</div>
+
+<!-- ═══ 3D 地球 ═══ -->
+<div id="globe-container"
+     data-gbt3d="globe"
+     data-markers="上海,121.47,31.23;深圳,114.07,22.62;香港,114.17,22.28;纽约,-74.01,40.71"
+     data-color="#00d4ff"
+     data-speed="0.0015">
+</div>
+
+<!-- ═══ 光束连接 ═══ -->
+<div data-beam="from: #globe-container, to: #sentiment-target"
+     data-beam-color="#00d4ff"
+     data-beam-width="1.5"
+     data-beam-dash="6,4">
+</div>
+<div id="sentiment-target"></div>
+
+<!-- ═══ 主应用 ═══ -->
+<div id="app">
+  <!-- ═══ 左侧面板 ═══ -->
+  <div id="sidebar">
+    <div class="glass side-header">
+      <div class="logo gbt-gradient-text">GBT A股终端</div>
+      <div class="sub">PROFESSIONAL TRADING TERMINAL</div>
+    </div>
+
+    <div class="glass search-box" data-parallax data-parallax-depth="1">
+      <input id="searchInput" placeholder="🔍 搜索代码/名称..." onkeyup="filterStocks()">
+    </div>
+
+    <div class="glass mood-card gbt-reveal" id="moodCard">
+      <div class="mood-icon" id="moodIcon">📈</div>
+      <div class="mood-info">
+        <div class="mood-label">Market Sentiment</div>
+        <div class="mood-value" id="moodValue">--</div>
+        <div class="mood-stats" id="moodStats">加载中...</div>
+      </div>
+    </div>
+
+    <div class="glass stock-list" id="stockList" data-parallax data-parallax-depth="0.5"></div>
+
+    <div class="glass side-footer">
+      <span><span class="dot dot-live" id="bridgeDot"></span><span id="bridgeLabel">CHECKING</span></span>
+      <span id="updateTime">--:--:--</span>
+      <span id="stockCount">0只</span>
+    </div>
+  </div>
+
+  <!-- ═══ 主面板 ═══ -->
+  <div id="main">
+    <div class="glass topbar" id="topbar">
+      <span class="t-name" id="stockTitle">选择股票查看K线</span>
+      <span class="t-price" id="stockPrice"></span>
+      <span class="t-change" id="stockChange"></span>
+      <span class="t-spacer"></span>
+      <button class="period-btn active" onclick="setPeriod('day')">日K</button>
+      <button class="period-btn" onclick="setPeriod('week')">周K</button>
+      <button class="period-btn" onclick="setPeriod('month')">月K</button>
+    </div>
+
+    <div class="glass" id="chart-wrap">
+      <div id="chart-container"></div>
+    </div>
+
+    <div class="glass indicator-bar" id="indicatorBar">
+      <div class="ind-item">MA5 <span id="indMA5">--</span></div>
+      <div class="ind-item">MA10 <span id="indMA10">--</span></div>
+      <div class="ind-item">MA20 <span id="indMA20">--</span></div>
+      <div class="ind-item">MACD <span id="indMACD">--</span></div>
+      <div class="ind-item">RSI <span id="indRSI">--</span></div>
+      <div class="ind-item">VOL <span id="indVOL">--</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══ Bridge 连接配置 ═══
+const BRIDGE = 'http://localhost:15999';
+let bridgeOnline = false;
+let allStocks = [];
+let chart = null;
+let currentStock = null;
+let currentPeriod = 'day';
+async function init() {
+  initChart();
+  // 立即显示演示数据，不等bridge
+  loadDemoData();
+  // 选中第一只股票
+  setTimeout(() => {
+    if (allStocks.length > 0 && !currentStock) {
+      selectStock(allStocks[0].code, allStocks[0].name);
+    }
+  }, 800);
+  // 检查桥状态，再异步加载真实数据
+  await checkBridgeHealth();
+  if (bridgeOnline) tryLoadRealData();
+  // 定期重试
+  setInterval(async () => {
+    await checkBridgeHealth();
+    if (bridgeOnline) tryLoadRealData();
+  }, 15000);
+  // 每分钟更新时间
+  setInterval(updateTime, 60000);
+}
+
+async function checkBridgeHealth() {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 3000);
+    const resp = await fetch(BRIDGE + '/health', { signal: controller.signal });
+    clearTimeout(timeout);
+    const data = await resp.json();
+    bridgeOnline = data.status === 'ok';
+  } catch (e) {
+    bridgeOnline = false;
+  }
+  updateBridgeStatus();
+}
+
+function updateBridgeStatus() {
+  const dot = document.getElementById('bridgeDot');
+  const label = document.getElementById('bridgeLabel');
+  if (!dot || !label) return;
+  dot.className = 'dot ' + (bridgeOnline ? 'dot-live' : 'dot-off');
+  label.textContent = bridgeOnline ? 'BRIDGE LIVE' : 'DEMO MODE';
+  label.style.color = bridgeOnline ? 'rgba(34,197,94,0.7)' : 'rgba(245,158,11,0.7)';
+}
+
+async function tryLoadRealData() {
+  if (!bridgeOnline) return;
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    const resp = await fetch(BRIDGE + '/cap', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({cap: 'stock_scalper', action: 'scan', params: {limit: 40}, timeout: 10}),
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+    const data = await resp.json();
+    if (data.ok && data.stocks && data.stocks.length > 0) {
+      allStocks = data.stocks;
+      bridgeOnline = true;
+      updateBridgeStatus();
+      renderStockList();
+      updateMood();
+      updateTime();
+    }
+  } catch (e) {
+    bridgeOnline = false;
+    updateBridgeStatus();
+  }
+}
+function loadDemoData() {
+  allStocks = [
+    {code:'sh600519',name:'贵州茅台',price:1680.50,change_pct:1.23},
+    {code:'sz000858',name:'五粮液',price:142.30,change_pct:2.15},
+    {code:'sh600036',name:'招商银行',price:38.50,change_pct:-0.52},
+    {code:'sz000333',name:'美的集团',price:62.80,change_pct:0.89},
+    {code:'sh601318',name:'中国平安',price:45.20,change_pct:-1.34},
+    {code:'sz002415',name:'海康威视',price:32.10,change_pct:3.45},
+    {code:'sz300750',name:'宁德时代',price:198.50,change_pct:5.67},
+    {code:'sh600030',name:'中信证券',price:22.30,change_pct:0.45},
+    {code:'sz000651',name:'格力电器',price:39.80,change_pct:-0.75},
+    {code:'sh600276',name:'恒瑞医药',price:48.60,change_pct:-2.10},
+    {code:'sz002594',name:'比亚迪',price:268.80,change_pct:3.21},
+    {code:'sh600900',name:'长江电力',price:22.15,change_pct:0.33},
+    {code:'sz000001',name:'平安银行',price:11.80,change_pct:-1.08},
+    {code:'sh601398',name:'工商银行',price:5.42,change_pct:0.18},
+    {code:'sz300059',name:'东方财富',price:16.75,change_pct:2.88},
+    {code:'sh601899',name:'紫金矿业',price:14.20,change_pct:-0.42},
+    {code:'sz000725',name:'京东方A',price:4.15,change_pct:1.72},
+    {code:'sh600809',name:'山西汾酒',price:225.60,change_pct:-1.55},
+  ];
+  renderStockList();
+  updateMood();
+  updateTime();
+}
+
+function updateTime() {
+  document.getElementById('updateTime').textContent =
+    new Date().toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  document.getElementById('stockCount').textContent = allStocks.length + '只';
+}
+
+function renderStockList(filter) {
+  const list = document.getElementById('stockList');
+  let stocks = allStocks;
+  if (filter) {
+    const q = filter.toLowerCase().replace(/[^a-z0-9]/g, '');
+    stocks = allStocks.filter(s => {
+      const code = (s.code||'').toLowerCase().replace('sh','').replace('sz','');
+      return code.includes(q);
+    });
+  }
+  list.innerHTML = stocks.map((s, i) => {
+    const isUp = s.change_pct >= 0;
+    const arrow = isUp ? '▲' : '▼';
+    const activeCls = currentStock && currentStock.code === s.code ? ' active' : '';
+    const delay = Math.min(i * 0.03, 0.6);
+    return `<div class="stock-item gbt-reveal${activeCls}"
+                style="animation-delay:${delay}s"
+                onclick="selectStock('${s.code}','${s.name}')">
+      <div class="s-code">${(s.code||'').replace('sh','').replace('sz','')}</div>
+      <div class="s-name">${s.name}</div>
+      <div class="s-price">${s.price.toFixed(2)}</div>
+      <div class="s-change ${isUp?'up':'down'}">${arrow}${Math.abs(s.change_pct).toFixed(2)}%</div>
+    </div>`;
+  }).join('');
+}
+
+function filterStocks() {
+  renderStockList(document.getElementById('searchInput').value);
+}
+
+function updateMood() {
+  if (!allStocks.length) return;
+  const upCount = allStocks.filter(s => s.change_pct > 0).length;
+  const upRatio = Math.round(upCount / allStocks.length * 100);
+  const avgChange = (allStocks.reduce((a,s) => a + s.change_pct, 0) / allStocks.length).toFixed(2);
+
+  let mood, icon, color;
+  if (upRatio >= 70) { mood = '强势多头'; icon = '&#x1F525;'; color = '#ef4444'; }
+  else if (upRatio >= 55) { mood = '偏多震荡'; icon = '&#x1F4C8;'; color = '#f97316'; }
+  else if (upRatio >= 45) { mood = '中性平衡'; icon = '&#x2696;'; color = '#eab308'; }
+  else if (upRatio >= 30) { mood = '偏空震荡'; icon = '&#x1F4C9;'; color = '#22c55e'; }
+  else { mood = '弱势空头'; icon = '&#x2744;'; color = '#3b82f6'; }
+
+  document.getElementById('moodValue').textContent = mood;
+  document.getElementById('moodValue').style.color = color;
+  document.getElementById('moodIcon').innerHTML = icon;
+  document.getElementById('moodStats').textContent =
+    `上涨${upCount}只 (${upRatio}%) · 均价${avgChange}%`;
+}
+
+// ═══════════════════ K线图 ═══════════════════
+function initChart() {
+  chart = echarts.init(document.getElementById('chart-container'), 'dark');
+  window.addEventListener('resize', () => chart.resize());
+
+  // 空状态
+  chart.setOption({
+    backgroundColor: 'transparent',
+    title: {text:'GBT A股交易终端',subtext:'选择左侧股票查看实时K线',
+            left:'center',top:'40%',
+            textStyle:{color:'rgba(255,255,255,0.15)',fontSize:24},
+            subtextStyle:{color:'rgba(255,255,255,0.08)',fontSize:13}}
+  });
+}
+
+async function selectStock(code, name) {
+  currentStock = {code, name};
+  document.getElementById('stockTitle').textContent = name;
+  document.getElementById('searchInput').value = '';
+
+  const stockData = allStocks.find(s => s.code === code);
+  if (stockData) {
+    document.getElementById('stockPrice').textContent = stockData.price.toFixed(2);
+    const isUp = stockData.change_pct >= 0;
+    const changeEl = document.getElementById('stockChange');
+    changeEl.textContent = (isUp ? '+' : '') + stockData.change_pct.toFixed(2) + '%';
+    changeEl.className = 't-change ' + (isUp ? 'up' : 'down');
+  }
+
+  renderStockList();
+  await loadKline(code, currentPeriod);
+}
+
+async function setPeriod(period) {
+  currentPeriod = period;
+  document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.period-btn').forEach(b => {
+    const map = {day:'日K',week:'周K',month:'月K'};
+    if (b.textContent === map[period]) b.classList.add('active');
+  });
+  if (currentStock) await loadKline(currentStock.code, period);
+}
+
+async function loadKline(code, period) {
+  // 桥在线时尝试获取真实数据
+  if (bridgeOnline) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
+      const resp = await fetch(BRIDGE + '/cap', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({cap: 'stock_trader', action: 'kline',
+          params: {code, period, limit: 60}, timeout: 8}),
+        signal: controller.signal
+      });
+      clearTimeout(timeout);
+      const data = await resp.json();
+      if (data.ok && data.klines && data.klines.length > 0) {
+        renderChart(data);
+        updateIndicators(data);
+        return;
+      }
+    } catch (e) {
+      bridgeOnline = false;
+      updateBridgeStatus();
+    }
+  }
+  // 否则渲染模拟K线
+  renderDemoChart(code, period);
+}
+
+function renderChart(data) {
+  const klines = data.klines;
+  const dates = klines.map(k => k.date);
+  const ohlc = klines.map(k => [k.open, k.close, k.low, k.high]);
+  const volumes = klines.map(k => k.volume);
+
+  const option = {
+    backgroundColor: 'transparent',
+    animation: true,
+    animationDuration: 800,
+    tooltip: {
+      trigger: 'axis', axisPointer: {type: 'cross'},
+      backgroundColor: 'rgba(8,8,12,0.95)',
+      borderColor: 'rgba(0,212,255,0.3)',
+      textStyle: {color: '#e0e0e0', fontSize: 12}
+    },
+    grid: [
+      {left:'8%',right:'3%',top:'5%',height:'52%'},
+      {left:'8%',right:'3%',top:'65%',height:'25%'}
+    ],
+    xAxis: [
+      {type:'category',data:dates,gridIndex:0,
+       axisLabel:{color:'#555',fontSize:10},axisLine:{lineStyle:{color:'#1a1a1a'}},
+       axisTick:{show:false}},
+      {type:'category',data:dates,gridIndex:1,
+       axisLabel:{show:false},axisLine:{lineStyle:{color:'#1a1a1a'}},
+       axisTick:{show:false}}
+    ],
+    yAxis: [
+      {type:'value',gridIndex:0,scale:true,
+       splitLine:{lineStyle:{color:'rgba(255,255,255,0.04)'}},
+       axisLabel:{color:'#555',fontSize:10}},
+      {type:'value',gridIndex:1,
+       axisLabel:{color:'#555',fontSize:9},
+       splitLine:{lineStyle:{color:'rgba(255,255,255,0.04)'}}}
+    ],
+    series: [
+      {name:'K线',type:'candlestick',data:ohlc,xAxisIndex:0,yAxisIndex:0,
+       itemStyle:{color:'#ef4444',color0:'#22c55e',
+                  borderColor:'#ef4444',borderColor0:'#22c55e'},
+       markLine:{silent:true,data:[
+         {yAxis:klines[klines.length-1]?.close,name:'现价',
+          lineStyle:{color:'#ffd700',type:'dashed',width:1}}
+       ]}},
+      {name:'VOL',type:'bar',data:volumes,xAxisIndex:1,yAxisIndex:1,
+       itemStyle:{color:params => {
+         const idx = params.dataIndex;
+         if (idx === 0) return '#22c55e';
+         return params.data >= (volumes[idx-1]||0) ? '#ef4444' : '#22c55e';
+       }}}
+    ]
+  };
+
+  // MA均线
+  const closes = klines.map(k => k.close);
+  const ma5 = calcMA(closes, 5), ma10 = calcMA(closes, 10), ma20 = calcMA(closes, 20);
+  option.series.push(
+    {name:'MA5',type:'line',data:ma5,xAxisIndex:0,yAxisIndex:0,
+     smooth:true,lineStyle:{width:1.5,color:'#f59e0b'},symbol:'none'},
+    {name:'MA10',type:'line',data:ma10,xAxisIndex:0,yAxisIndex:0,
+     smooth:true,lineStyle:{width:1.5,color:'#3b82f6'},symbol:'none'},
+    {name:'MA20',type:'line',data:ma20,xAxisIndex:0,yAxisIndex:0,
+     smooth:true,lineStyle:{width:1.5,color:'#a855f7'},symbol:'none'}
+  );
+
+  chart.setOption(option, true);
+}
+
+function calcMA(data, period) {
+  return data.map((_, i) => {
+    if (i < period - 1) return null;
+    return +(data.slice(i-period+1, i+1).reduce((a,b)=>a+b,0)/period).toFixed(2);
+  });
+}
+
+function renderDemoChart(code, period) {
+  const klines = [];
+  let price = code.startsWith('6') ? 30 + Math.random() * 100 : 15 + Math.random() * 50;
+  const now = new Date();
+  for (let i = 60; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i * (period==='week'?7:period==='month'?30:1));
+    const change = (Math.random() - 0.48) * price * 0.04;
+    const open = price, close = price + change;
+    klines.push({
+      date: d.toISOString().split('T')[0],
+      open: +open.toFixed(2), close: +close.toFixed(2),
+      high: +Math.max(open,close)*(1+Math.random()*0.02).toFixed(2),
+      low: +Math.min(open,close)*(1-Math.random()*0.02).toFixed(2),
+      volume: Math.floor(Math.random()*1e7)
+    });
+    price = close;
+  }
+  renderChart({klines, code, name: currentStock?.name||'', period});
+  updateDemoIndicators(klines);
+}
+
+function updateIndicators(data) {
+  const k = data.klines;
+  if (!k || k.length < 5) return;
+  const last = k[k.length-1], prev = k[k.length-2];
+  const change = last.close - prev.close;
+  const isUp = change >= 0;
+  const cls = isUp ? 'val-up' : 'val-down';
+
+  const closes = k.map(x => x.close);
+  const ma5 = calcMA(closes,5), ma10 = calcMA(closes,10), ma20 = calcMA(closes,20);
+  const m5 = ma5[ma5.length-1], m10 = ma10[ma10.length-1], m20 = ma20[ma20.length-1];
+
+  // 简单RSI
+  let rsi = 50;
+  if (k.length >= 15) {
+    let gains = 0, losses = 0;
+    for (let i = -14; i < 0; i++) {
+      const ch = closes[closes.length-1+i] - closes[closes.length-2+i];
+      if (ch > 0) gains += ch; else losses -= ch;
+    }
+    if (losses > 0) rsi = Math.round(100 - 100/(1+(gains/14)/(losses/14)));
+    else if (gains > 0) rsi = 100;
+  }
+
+  document.getElementById('indMA5').innerHTML = `<span class="${m5>m20?'val-up':'val-down'}">${m5?.toFixed(2)||'--'}</span>`;
+  document.getElementById('indMA10').innerHTML = `<span class="${m10>m20?'val-up':'val-down'}">${m10?.toFixed(2)||'--'}</span>`;
+  document.getElementById('indMA20').textContent = m20?.toFixed(2) || '--';
+  document.getElementById('indMACD').innerHTML = `<span class="${isUp?'val-up':'val-down'}">${change>=0?'+':''}${change.toFixed(2)}</span>`;
+  document.getElementById('indRSI').innerHTML = `<span class="${rsi>70?'val-warn':rsi<30?'val-up':''}">${rsi}</span>`;
+  document.getElementById('indVOL').textContent = (last.volume/10000).toFixed(0) + '万手';
+}
+
+function updateDemoIndicators(klines) {
+  const last = klines[klines.length-1];
+  const closes = klines.map(k => k.close);
+  const ma5 = calcMA(closes,5), ma10 = calcMA(closes,10), ma20 = calcMA(closes,20);
+  document.getElementById('indMA5').innerHTML = `<span class="val-warn">${ma5[ma5.length-1]?.toFixed(2)||'--'}</span>`;
+  document.getElementById('indMA10').textContent = ma10[ma10.length-1]?.toFixed(2) || '--';
+  document.getElementById('indMA20').textContent = ma20[ma20.length-1]?.toFixed(2) || '--';
+  document.getElementById('indMACD').textContent = last.close.toFixed(2);
+  document.getElementById('indRSI').textContent = '模拟';
+  document.getElementById('indVOL').textContent = (last.volume/10000).toFixed(0) + '万手';
+}
+
+init();
+</script>
+</body>
+</html>

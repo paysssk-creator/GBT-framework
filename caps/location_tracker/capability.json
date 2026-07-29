@@ -1,0 +1,26 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "location_tracker",
+  "version": "1.0.0",
+  "description": "位置追踪·GPS+IP+WiFi多源定位",
+  "language": "python",
+  "risk_level": "dangerous",
+  "auto_exec": false,
+  "category": "特殊域",
+  "actions": {
+    "locate": {
+      "description": "定位目标设备"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "location",
+      "GPS",
+      "track",
+      "位置",
+      "定位",
+      "追踪"
+    ],
+    "intent": "location_tracker"
+  }
+}

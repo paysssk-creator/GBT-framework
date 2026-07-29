@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "sqli_tester",
+  "version": "1.0.0",
+  "description": "SQL注入自动检测(时间盲注/布尔/报错注入)",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "攻击域",
+  "tier": "core",
+  "actions": {
+    "test": {
+      "description": "测试SQL注入点"
+    },
+    "blind": {
+      "description": "时间盲注检测"
+    },
+    "error": {
+      "description": "报错注入检测"
+    }
+  },
+  "auto_exec": false
+}

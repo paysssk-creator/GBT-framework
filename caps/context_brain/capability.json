@@ -1,0 +1,63 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "context_brain",
+  "version": "1.0.0",
+  "description": "上下文管理大脑 — 事件记录·任务前注入·压力监控·自动清理·防溢出",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI记忆",
+  "actions": {
+    "auto_maintain": {
+      "description": "自动维护(检测→清理→记录)",
+      "timeout_ms": 20000
+    },
+    "cleanup": {
+      "description": "清理上下文(过期+归档+压缩)",
+      "timeout_ms": 30000
+    },
+    "inject": {
+      "description": "任务前注入相关上下文(记忆+卡点+认知)",
+      "timeout_ms": 15000
+    },
+    "post_task": {
+      "description": "post_task"
+    },
+    "pre_task": {
+      "description": "pre_task"
+    },
+    "pressure": {
+      "description": "上下文压力检测(token预算/使用率)",
+      "timeout_ms": 10000
+    },
+    "recent_events": {
+      "description": "查看最近事件日志",
+      "timeout_ms": 5000
+    },
+    "record_decision": {
+      "description": "记录关键决策",
+      "timeout_ms": 5000
+    },
+    "record_stuck": {
+      "description": "记录卡点及恢复方案",
+      "timeout_ms": 5000
+    },
+    "run": {
+      "description": "run"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "上下文",
+      "context",
+      "记忆清理",
+      "压力",
+      "溢出",
+      "token",
+      "清理记忆",
+      "记录卡点",
+      "注入上下文"
+    ],
+    "intent": "context_manage"
+  }
+}

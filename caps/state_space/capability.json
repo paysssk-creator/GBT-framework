@@ -1,0 +1,43 @@
+{
+  "name": "state_space",
+  "version": "1.0.0",
+  "description": "状态空间搜索引擎 · 融合VulnClaw solve架构。Fact+Intent黑板图防原地打转 + 证据反幻觉闸门 + L0-L4渐进升级。",
+  "category": "元邻域",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "actions": {
+    "add_fact": {
+      "description": "添加已确认事实到黑板"
+    },
+    "anti_hallucination": {
+      "description": "证据级反幻觉验证"
+    },
+    "converge": {
+      "description": "判断是否已达成目标"
+    },
+    "detect_loop": {
+      "description": "detect_loop"
+    },
+    "escalate": {
+      "description": "L0-L4渐进升级策略"
+    },
+    "escape_loop": {
+      "description": "escape_loop"
+    },
+    "execute": {
+      "description": "执行探索方向→产出新Fact"
+    },
+    "explore_branch": {
+      "description": "explore_branch"
+    },
+    "init": {
+      "description": "初始化状态空间(origin→goal)"
+    },
+    "propose": {
+      "description": "大脑提出探索方向(防重复)"
+    },
+    "status": {
+      "description": "查看状态空间全貌"
+    }
+  }
+}

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="GBT小土豆 · 页面未找到 — 您访问的页面不存在或已被移动。请检查URL或返回首页浏览AI开源项目市场，探索热门部署项目。">
+<meta name="theme-color" content="#000">
+<meta name="robots" content="noindex, follow">
+<title>GBT | Page Not Found</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileImage" content="/apple-touch-icon.svg">
+<meta name="msapplication-TileColor" content="#ff6b35">
+<meta property="og:title" content="GBT小土豆 · 页面未找到">
+<meta property="og:description" content="您访问的页面不存在。返回首页浏览AI开源项目市场。">
+<meta property="og:image" content="https://gbtxiaotudou.com/logo.svg">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:url" content="https://gbtxiaotudou.com/404.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GBT小土豆">
+<link rel="canonical" href="https://gbtxiaotudou.com/404.html">
+<link rel="alternate" hreflang="zh" href="https://gbtxiaotudou.com/404.html">
+<link rel="alternate" hreflang="en" href="https://gbtxiaotudou.com/404.html">
+<link rel="alternate" hreflang="x-default" href="https://gbtxiaotudou.com/404.html">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  body { background: var(--bg); color: var(--fg); font-family: var(--font); }
+
+  .e404-wrap {
+    display: flex; align-items: center; justify-content: center;
+    min-height: calc(100vh - 80px); padding: 120px 24px 80px;
+    position: relative; overflow: hidden;
+  }
+
+  /* ── Floating Background Orbs ── */
+  .e404-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .e404-orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(120px); opacity: .08; animation: orbDrift 18s ease-in-out infinite;
+  }
+  .e404-orb-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -150px; animation-delay: 0s; }
+  .e404-orb-2 { width: 400px; height: 400px; background: var(--purple); bottom: -150px; right: -100px; animation-delay: -6s; }
+  .e404-orb-3 { width: 300px; height: 300px; background: var(--teal); top: 40%; left: 50%; animation-delay: -12s; }
+
+  @keyframes orbDrift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25%  { transform: translate(80px, -60px) scale(1.15); }
+    50%  { transform: translate(-40px, 80px) scale(.85); }
+    75%  { transform: translate(-80px, -30px) scale(1.1); }
+  }
+
+  /* ── Main Card ── */
+  .e404-card {
+    position: relative; z-index: 1;
+    max-width: 560px; width: 100%;
+    text-align: center;
+    animation: fadeInUp .7s var(--ease-out-expo) both;
+  }
+
+  /* ── Animated SVG Illustration ── */
+  .e404-art {
+    width: 200px; height: 200px; margin: 0 auto 36px;
+    animation: float 4s ease-in-out infinite;
+  }
+  .e404-art .ring { animation: ringRotate 12s linear infinite; transform-origin: 100px 100px; }
+  .e404-art .ring2 { animation: ringRotate 16s linear reverse infinite; transform-origin: 100px 100px; }
+  .e404-art .needle { animation: needlePulse 3s ease-in-out infinite; transform-origin: 100px 100px; }
+  .e404-art .dot { animation: dotBlink 2s ease-in-out infinite; }
+
+  @keyframes ringRotate {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes needlePulse {
+    0%, 100% { transform: rotate(-15deg); opacity: .9; }
+    50%  { transform: rotate(15deg); opacity: 1; }
+  }
+  @keyframes dotBlink {
+    0%, 100% { opacity: .3; }
+    50%  { opacity: 1; }
+  }
+
+  /* ── 404 Code ── */
+  .e404-code {
+    font-size: clamp(80px, 16vw, 160px); font-weight: 900; line-height: 1;
+    letter-spacing: -.06em;
+    background: linear-gradient(135deg, var(--accent) 0%, #a855f7 50%, var(--teal) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .e404-title {
+    font-size: clamp(22px, 3.5vw, 32px); font-weight: 700;
+    letter-spacing: -.03em; margin-bottom: 12px; color: var(--fg);
+  }
+
+  .e404-sub {
+    color: var(--dim); font-size: 15px; line-height: 1.7;
+    max-width: 420px; margin: 0 auto 32px;
+  }
+
+  /* ── Search ── */
+  .e404-search {
+    display: flex; gap: 10px; max-width: 420px; margin: 0 auto 32px;
+  }
+  .e404-search input {
+    flex: 1; height: 48px; border-radius: var(--radius-full); padding: 0 20px;
+    border: 1px solid var(--border); background: var(--bg3); color: var(--fg);
+    font-size: 15px; font-family: var(--font);
+  }
+  .e404-search input:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255,107,53,.15);
+    outline: none;
+  }
+  .e404-search button {
+    height: 48px; padding: 0 24px; border-radius: var(--radius-full);
+    background: var(--accent); color: #fff; border: none;
+    font-size: 15px; font-weight: 600; font-family: var(--font);
+    cursor: pointer; white-space: nowrap;
+    transition: all var(--duration-base) var(--ease-out-expo);
+  }
+  .e404-search button:hover {
+    background: var(--accent2); transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(255,107,53,.3);
+  }
+
+  /* ── Popular Links ── */
+  .e404-links-label {
+    font-size: 12px; font-weight: 500; color: var(--dim);
+    letter-spacing: .08em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .e404-links {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .e404-links a {
+    padding: 10px 22px; border-radius: var(--radius-full);
+    border: 1px solid var(--border); color: var(--dim);
+    font-size: 14px; font-weight: 500; text-decoration: none;
+    font-family: var(--font);
+    transition: all var(--duration-base) var(--ease-out-expo);
+  }
+  .e404-links a:hover {
+    border-color: var(--accent); color: var(--fg);
+    background: rgba(255,107,53,.06);
+    transform: translateY(-1px);
+  }
+  .e404-links a svg { width: 14px; height: 14px; vertical-align: -2px; margin-right: 6px; }
+
+  /* ── Report Link ── */
+  .e404-report {
+    font-size: 13px; color: var(--dim);
+  }
+  .e404-report a {
+    color: var(--accent); text-decoration: none;
+    font-weight: 500; transition: color .2s ease;
+  }
+  .e404-report a:hover { color: var(--accent2); text-decoration: underline; }
+
+  @media (max-width: 480px) {
+    .e404-wrap { padding: 100px 20px 60px; }
+    .e404-art { width: 150px; height: 150px; margin-bottom: 24px; }
+    .e404-search { flex-direction: column; }
+    .e404-search button { width: 100%; }
+  }
+</style>
+<script src="/gbt-analytics.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"GBT小土豆","item":"https://gbtxiaotudou.com/index.html"},
+    {"@type":"ListItem","position":2,"name":"页面未找到","item":"https://gbtxiaotudou.com/404.html"}
+  ]
+}
+</script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+<script src="/nav-footer.js?v=2"></script>
+
+  <main id="main-content">
+<div class="e404-wrap">
+  <div class="e404-bg" aria-hidden="true">
+    <div class="e404-orb e404-orb-1"></div>
+    <div class="e404-orb e404-orb-2"></div>
+    <div class="e404-orb e404-orb-3"></div>
+  </div>
+
+  <div class="e404-card">
+    <!-- Animated compass-style SVG illustration -->
+    <svg class="e404-art" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Outer ring -->
+      <circle class="ring" cx="100" cy="100" r="88" stroke="rgba(255,107,53,.15)" stroke-width="1.5" stroke-dasharray="12 6" fill="none"/>
+      <!-- Middle ring -->
+      <circle class="ring2" cx="100" cy="100" r="72" stroke="rgba(124,58,237,.12)" stroke-width="1" stroke-dasharray="8 8" fill="none"/>
+      <!-- Inner ring -->
+      <circle cx="100" cy="100" r="56" stroke="rgba(13,148,136,.1)" stroke-width="1" fill="none"/>
+      <!-- Cardinal dots -->
+      <circle cx="100" cy="12" r="3" fill="rgba(255,255,255,.08)"/>
+      <circle cx="100" cy="188" r="3" fill="rgba(255,255,255,.08)"/>
+      <circle cx="12" cy="100" r="3" fill="rgba(255,255,255,.08)"/>
+      <circle cx="188" cy="100" r="3" fill="rgba(255,255,255,.08)"/>
+      <!-- Diagonal dots -->
+      <circle cx="38" cy="38" r="2.5" fill="rgba(255,255,255,.04)"/>
+      <circle cx="162" cy="38" r="2.5" fill="rgba(255,255,255,.04)"/>
+      <circle cx="38" cy="162" r="2.5" fill="rgba(255,255,255,.04)"/>
+      <circle cx="162" cy="162" r="2.5" fill="rgba(255,255,255,.04)"/>
+      <!-- Compass needle -->
+      <g class="needle">
+        <line x1="100" y1="50" x2="100" y2="150" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+        <line x1="50" y1="100" x2="150" y2="100" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+        <polygon points="100,48 96,62 104,62" fill="var(--accent)" opacity=".9"/>
+        <polygon points="100,152 96,138 104,138" fill="var(--dim)" opacity=".4"/>
+      </g>
+      <!-- Center dot -->
+      <circle cx="100" cy="100" r="6" fill="var(--bg3)" stroke="var(--accent)" stroke-width="1.5"/>
+      <circle class="dot" cx="100" cy="100" r="2.5" fill="var(--accent)"/>
+      <!-- Lost marker dot (pulsing) -->
+      <circle class="dot" cx="64" cy="72" r="4" fill="var(--green)" opacity=".7"/>
+      <circle cx="64" cy="72" r="8" stroke="var(--green)" stroke-width="1" opacity=".2"/>
+    </svg>
+
+    <div class="e404-code">404</div>
+    <h1 class="e404-title">Page Not Found</h1>
+    <p class="e404-sub">We couldn't find the page you're looking for. It may have been moved, renamed, or never existed — but we're happy to help you get back on track.</p>
+
+    <!-- Search -->
+    <form class="e404-search" onsubmit="event.preventDefault(); const q=this.querySelector('input').value.trim(); if(q) window.location.href='/market.html?search='+encodeURIComponent(q);">
+      <input type="search" placeholder="Search projects, pages, or docs…" aria-label="Search site">
+      <button type="submit">Search</button>
+    </form>
+
+    <div class="e404-links-label">Popular Destinations</div>
+    <div class="e404-links">
+      <a href="/market.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Market
+      </a>
+      <a href="/pricing.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Pricing
+      </a>
+      <a href="/help.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Help
+      </a>
+      <a href="/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </a>
+    </div>
+
+    <p class="e404-report">
+      Think this link should work?
+      <a href="mailto:support@gbtxiaotudou.com?subject=Broken%20Link%20Report&amp;body=Reported%20URL%3A%20">Report broken link</a>
+    </p>
+  </div>
+</div>
+  </main>
+</body>
+</html>

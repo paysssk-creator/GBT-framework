@@ -1,0 +1,52 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "nanobrowser",
+  "version": "1.0.0",
+  "description": "AI多智能体浏览器自动化 — Planner+Navigator+Extractor+Validator四体协同 · 基于Nanobrowser架构 · 集成15维指纹+三引擎+食谱",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "桌面域",
+  "tier": "core",
+  "auto_exec": true,
+  "actions": {
+    "task": {
+      "description": "执行多智能体浏览器任务 — 输入自然语言目标，Planner分解→Navigator执行→Extractor提取→Validator验证",
+      "params": ["goal", "url", "max_steps", "headless", "fingerprint", "proxy"],
+      "timeout_ms": 300000
+    },
+    "navigate": {
+      "description": "智能导航到URL — 自动指纹伪装+反检测+页面加载等待",
+      "params": ["url", "headless", "fingerprint", "wait_selector"],
+      "timeout_ms": 60000
+    },
+    "extract": {
+      "description": "智能数据提取 — CSS/XPath选择器+AI语义理解+分页抓取",
+      "params": ["url", "selectors", "schema", "paginate", "headless", "fingerprint"],
+      "timeout_ms": 120000
+    },
+    "screenshot": {
+      "description": "页面截图 — 全页/元素/视口",
+      "params": ["url", "selector", "full_page", "headless", "fingerprint"],
+      "timeout_ms": 30000
+    },
+    "interact": {
+      "description": "智能页面交互 — 点击/输入/滚动/等待，拟人化操作",
+      "params": ["url", "actions", "headless", "fingerprint"],
+      "timeout_ms": 120000
+    },
+    "status": {
+      "description": "查看Nanobrowser引擎状态 — 可用引擎/指纹引擎/agent就绪情况",
+      "params": []
+    }
+  },
+  "depends_on": ["gbt_browser", "browser_automation", "browser_fingerprint"],
+  "triggers": {
+    "keywords": [
+      "nanobrowser", "多智能体浏览", "AI浏览器", "智能浏览",
+      "自动浏览", "网页任务", "browser agent", "web agent",
+      "planner navigator", "浏览器agent", "智能填表", "自动抓取",
+      "页面分析", "网页自动化", "AI browsing"
+    ],
+    "intent": "nanobrowser"
+  }
+}

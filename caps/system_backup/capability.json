@@ -1,0 +1,58 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "system_backup",
+  "version": "1.0.0",
+  "description": "系统备份恢复 — 备份~/.gbt/及caps/ · 恢复 · 列表 · 清理",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "系统维护",
+  "actions": {
+    "auto_backup_cycle": {
+      "description": "auto_backup_cycle"
+    },
+    "backup": {
+      "description": "备份~/.gbt/和caps/目录到zip",
+      "timeout_ms": 60000
+    },
+    "backup_on_change": {
+      "description": "backup_on_change"
+    },
+    "cleanup": {
+      "description": "保留最近N个备份，删除旧备份",
+      "timeout_ms": 10000
+    },
+    "help": {
+      "description": "help"
+    },
+    "list": {
+      "description": "列出所有可用备份",
+      "timeout_ms": 5000
+    },
+    "list_files": {
+      "description": "list_files"
+    },
+    "restore": {
+      "description": "从备份zip恢复",
+      "timeout_ms": 60000
+    },
+    "run": {
+      "description": "run"
+    },
+    "self_test": {
+      "description": "self_test"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "备份",
+      "backup",
+      "恢复",
+      "restore",
+      "系统备份",
+      "数据备份",
+      "还原"
+    ],
+    "intent": "system_backup"
+  }
+}

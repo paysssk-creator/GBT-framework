@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "dev_os",
+  "version": "1.0.0",
+  "description": "操作系统信息感知",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "设备感知层",
+  "tier": "core",
+  "actions": {
+    "info": {
+      "description": "获取系统信息"
+    },
+    "users": {
+      "description": "列出用户"
+    },
+    "uptime": {
+      "description": "系统运行时间"
+    }
+  },
+  "auto_exec": false
+}

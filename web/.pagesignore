@@ -1,0 +1,10 @@
+downloads/
+*.exe
+*.zip
+*.tar.gz
+node_modules/
+.wrangler/
+orbitx-clone/
+gbt_source.zip
+package-lock.json
+ 

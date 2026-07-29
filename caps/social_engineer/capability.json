@@ -1,0 +1,28 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "social_engineer",
+  "version": "1.0.0",
+  "description": "社会工程攻击·目标画像与社工策略",
+  "language": "python",
+  "risk_level": "dangerous",
+  "auto_exec": false,
+  "category": "攻击域",
+  "actions": {
+    "generate": {
+      "description": "generate"
+    },
+    "tactics": {
+      "description": "tactics"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "social engineer",
+      "社工",
+      "社会工程",
+      "profile",
+      "pretext"
+    ],
+    "intent": "social_engineer"
+  }
+}

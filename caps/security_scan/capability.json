@@ -1,0 +1,30 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "security_scan",
+  "version": "1.0.0",
+  "description": "密钥泄露+危险模式全面扫描",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "安全域",
+  "tier": "core",
+  "actions": {
+    "scan": {
+      "description": "全面安全扫描"
+    },
+    "keys": {
+      "description": "扫描密钥泄露"
+    },
+    "patterns": {
+      "description": "扫描危险模式"
+    },
+    "auto_audit_cycle": {
+      "description": "周期性全cap安全审计",
+      "timeout_ms": 300000
+    },
+    "score_cap": {
+      "description": "单cap安全评分0-100",
+      "timeout_ms": 30000
+    }
+  },
+  "auto_exec": false
+}

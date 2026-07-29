@@ -1,0 +1,27 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "cognition",
+  "version": "1.0.0",
+  "description": "自我认知引擎 — AI身份·创新自证·去重·记录·永恒记忆",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI记忆",
+  "actions": {
+    "discover": {
+      "description": "记录新发现"
+    },
+    "innovation_log": {
+      "description": "innovation_log"
+    },
+    "self_audit": {
+      "description": "self_audit"
+    },
+    "stats": {
+      "description": "认知统计"
+    },
+    "whoami": {
+      "description": "AI自省: 我是谁，谁创造了我"
+    }
+  }
+}

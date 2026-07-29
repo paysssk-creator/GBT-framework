@@ -1,0 +1,19 @@
+{
+  "name": "data_transfer",
+  "version": "1.0.0",
+  "category": "信息域",
+  "risk_level": "medium",
+  "tier": "core",
+  "description": "统一数据传输 — 整合所有传输通道: 文件/邮件/Telegram/WebSocket/HTTP Relay/Cloudflare Tunnel/MCP Bridge/EventBus/剪贴板",
+  "actions": [
+    {"name": "send_file", "desc": "文件传输: 通过最佳通道发送文件到目标", "input": {"target": "string", "file_path": "string", "channel": "string"}, "output": "transfer_result"},
+    {"name": "send_data", "desc": "数据传输: 发送结构化数据到远程", "input": {"target": "string", "data": "object", "format": "string"}, "output": "transfer_result"},
+    {"name": "receive", "desc": "数据接收: 从指定通道监听接收数据", "input": {"channel": "string", "timeout": "int"}, "output": "received_data"},
+    {"name": "sync", "desc": "数据同步: 双向同步本地与远程数据", "input": {"source": "string", "target": "string", "mode": "string"}, "output": "sync_result"},
+    {"name": "broadcast", "desc": "广播: 向所有已连接通道广播消息", "input": {"message": "string", "channels": "list"}, "output": "broadcast_result"},
+    {"name": "channels", "desc": "通道状态: 列出所有可用传输通道及状态", "input": {}, "output": "channels_status"}
+  ],
+  "triggers": ["传输", "发送", "接收", "同步", "广播", "transfer", "send", "receive", "sync", "broadcast"],
+  "auto_exec": false,
+  "_stamp": "2026-07-29T10:05:00Z"
+}

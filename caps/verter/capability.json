@@ -1,0 +1,64 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "verter",
+  "version": "1.0.0",
+  "description": "万能转换器：单位换算/进制转换/颜色转换/数字格式化/实时汇率，零外部依赖",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "开发工具",
+  "tier": "utility",
+  "actions": {
+    "unit": {
+      "description": "单位换算 (长度/重量/温度/存储/时间/面积/体积/速度/压强)",
+      "params": [
+        "value",
+        "from",
+        "to"
+      ],
+      "output": "json"
+    },
+    "base": {
+      "description": "进制转换 (2/8/10/16/36进制互转)",
+      "params": [
+        "value",
+        "from",
+        "to"
+      ],
+      "output": "json"
+    },
+    "color": {
+      "description": "颜色转换 (HEX↔RGB↔HSL)",
+      "params": [
+        "action(hex2rgb/rgb2hex/hex2hsl/rgb2hsl/hsl2rgb/parse)",
+        "value",
+        "r",
+        "g",
+        "b",
+        "h",
+        "s",
+        "l"
+      ],
+      "output": "json"
+    },
+    "number": {
+      "description": "数字格式化 (千分位/中文大写/科学计数/百分比/保留小数/文件大小/罗马数字)",
+      "params": [
+        "action(comma/cn_upper/scientific/percent/round/filesize/roman/from_roman)",
+        "value",
+        "decimals",
+        "lang"
+      ],
+      "output": "json"
+    },
+    "currency": {
+      "description": "实时汇率换算 (内置固定汇率表，覆盖主要货币)",
+      "params": [
+        "value",
+        "from",
+        "to"
+      ],
+      "output": "json"
+    }
+  },
+  "auto_exec": false
+}

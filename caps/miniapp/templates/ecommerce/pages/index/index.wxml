@@ -1,0 +1,73 @@
+<!-- pages/index/index.wxml — 首页 -->
+<view class="page">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="搜索商品"
+        value="{{keyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearchConfirm"
+      />
+    </view>
+    <view class="cart-entry" bindtap="onCartTap">
+      <text class="cart-icon">🛒</text>
+      <view class="badge" wx:if="{{cartCount > 0}}">{{cartCount > 99 ? '99+' : cartCount}}</view>
+    </view>
+  </view>
+
+  <!-- 轮播图 -->
+  <swiper class="banner-swiper" indicator-dots autoplay circular interval="4000">
+    <swiper-item wx:for="{{banners}}" wx:key="id" data-id="{{item.id}}" bindtap="onBannerTap">
+      <image class="banner-image" src="{{item.image}}" mode="aspectFill" />
+    </swiper-item>
+  </swiper>
+
+  <!-- 分类快捷入口 -->
+  <view class="category-row">
+    <view
+      class="category-item"
+      wx:for="{{categories}}"
+      wx:key="name"
+      data-name="{{item.name}}"
+      bindtap="onCategoryTap"
+    >
+      <text class="category-icon">{{item.icon}}</text>
+      <text class="category-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 商品推荐标题 -->
+  <view class="section-header">
+    <view class="section-title">
+      <text class="title-bar">|</text>
+      <text>为你推荐</text>
+    </view>
+    <text class="section-more">更多 ›</text>
+  </view>
+
+  <!-- 商品网格 -->
+  <view class="product-grid">
+    <view
+      class="product-card"
+      wx:for="{{products}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onProductTap"
+    >
+      <view class="product-img-wrap">
+        <image class="product-img" src="{{item.image}}" mode="aspectFill" lazy-load />
+        <view class="product-tag" wx:if="{{item.tag}}">{{item.tag}}</view>
+      </view>
+      <view class="product-info">
+        <text class="product-name ellipsis-2">{{item.name}}</text>
+        <view class="product-price-row">
+          <text class="price"><text class="price-symbol">¥</text>{{item.price}}</text>
+          <text class="original-price" wx:if="{{item.originalPrice > item.price}}">¥{{item.originalPrice}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

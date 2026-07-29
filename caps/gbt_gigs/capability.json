@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "gbt_gigs",
+  "version": "1.0.0",
+  "description": "GBT零工市场",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "特殊域",
+  "tier": "ready",
+  "actions": {
+    "list": {
+      "description": "列出零工任务"
+    },
+    "accept": {
+      "description": "接受任务"
+    },
+    "complete": {
+      "description": "完成任务"
+    }
+  },
+  "auto_exec": false
+}

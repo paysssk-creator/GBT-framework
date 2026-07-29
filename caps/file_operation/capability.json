@@ -1,0 +1,31 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "file_operation",
+  "version": "1.0.0",
+  "description": "file_operation capability",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "AI编程",
+  "tier": "ready",
+  "actions": {
+    "copy": {
+      "description": "copy"
+    },
+    "delete": {
+      "description": "delete"
+    },
+    "encrypt": {
+      "description": "encrypt"
+    },
+    "read": {
+      "description": "读取文件"
+    },
+    "search": {
+      "description": "search"
+    },
+    "write": {
+      "description": "写入文件"
+    }
+  },
+  "auto_exec": false
+}

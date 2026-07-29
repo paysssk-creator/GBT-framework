@@ -1,0 +1,25 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "forensic_collector",
+  "version": "1.0.0",
+  "description": "取证收集器·数字证据采集与分析",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": false,
+  "category": "特殊域",
+  "actions": {
+    "collect": {
+      "description": "采集数字证据"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "forensic",
+      "evidence",
+      "取证",
+      "证据",
+      "数字取证"
+    ],
+    "intent": "forensic_collector"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "calendar_sync",
+  "version": "1.0.0",
+  "description": "Google Calendar via service account + iCal (.ics) export fallback",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "特殊域",
+  "actions": {
+    "create_event": {
+      "description": "Create a calendar event",
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "event_trigger": {
+      "description": "Detect calendar events starting now (polling-based, window_minutes)",
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "export_ical": {
+      "description": "export_ical"
+    },
+    "free_busy": {
+      "description": "Check free/busy for time range",
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "list_events": {
+      "description": "List calendar events (time range, search)",
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "schedule_from_calendar": {
+      "description": "Read upcoming calendar events and create scheduler tasks for each",
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "calendar",
+      "google calendar",
+      "schedule",
+      "event",
+      "free busy",
+      "ical",
+      "ics"
+    ],
+    "intent": "calendar_sync"
+  }
+}

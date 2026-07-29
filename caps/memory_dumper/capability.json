@@ -1,0 +1,16 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "memory_dumper",
+  "version": "1.0.0",
+  "description": "memory_dumper capability",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "攻击域",
+  "tier": "ready",
+  "actions": {
+    "dump": {
+      "description": "内存转储"
+    }
+  },
+  "auto_exec": false
+}

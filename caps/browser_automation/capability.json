@@ -1,0 +1,80 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "browser_automation",
+  "version": "2.0.0",
+  "description": "AI浏览器操控大师 — SeleniumBase+Playwright+Puppeteer 三引擎 · 隐身模式 · 拟人交互 · 多标签编排 · 网络拦截 · 会话持久化 · CDP全能力 · 2Captcha云端浏览器 · 验证码自动求解",
+  "language": "python+js",
+  "risk_level": "medium",
+  "auto_exec": true,
+  "category": "桌面域",
+  "engines": {
+    "python": "caps/browser_automation/run.py",
+    "js_mastery": "caps/browser_automation/browser-mastery.js",
+    "recipes": "caps/browser_automation/recipes/"
+  },
+  "actions": {
+    "autonomous_patrol": {
+      "description": "autonomous_patrol"
+    },
+    "engines": {
+      "description": "检测可用浏览器引擎",
+      "timeout_ms": 10000
+    },
+    "extract_data": {
+      "description": "CSS选择器数据提取",
+      "timeout_ms": 30000
+    },
+    "fill_form": {
+      "description": "智能填表+拟人提交",
+      "timeout_ms": 60000
+    },
+    "monitor_page": {
+      "description": "monitor_page"
+    },
+    "navigate": {
+      "description": "导航到URL并返回内容",
+      "timeout_ms": 60000
+    },
+    "run": {
+      "description": "run"
+    },
+    "screenshot": {
+      "description": "页面截图 base64",
+      "timeout_ms": 30000
+    }
+  },
+  "recipes": {
+    "login": "通用登录自动化 (支持 GitHub/Gmail 预设)",
+    "scrape": "分页/无限滚动智能抓取",
+    "monitor": "页面监控 & 变化检测"
+  },
+  "triggers": {
+    "keywords": [
+      "浏览器",
+      "browser",
+      "selenium",
+      "playwright",
+      "puppeteer",
+      "headless",
+      "隐身",
+      "反检测",
+      "拟人",
+      "自动填表",
+      "网页截图",
+      "数据抓取",
+      "页面监控",
+      "多标签",
+      "CDP",
+      "网络拦截",
+      "会话持久化",
+      "移动模拟",
+      "云浏览器",
+      "captcha",
+      "验证码",
+      "2captcha",
+      "recaptcha",
+      "turnstile"
+    ],
+    "intent": "browser_automation"
+  }
+}

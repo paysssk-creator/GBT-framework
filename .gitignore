@@ -1,0 +1,41 @@
+# ⛔ 开发者：自由的风 · 永久钢印 · 禁止删除
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Secrets
+.env
+api_keys.json
+
+# Memory data
+*.db
+*.sqlite
+memory/
+lessons.json
+decisions.jsonl
+weaknesses.json
+
+# Build
+dist/
+build/
+*.spec
+node_modules/
+
+# GBT项目配置 — 除模板外全部不提交
+.gbt/
+!.gbt/credentials.env.example
+!.gbt/GBT-brand.md
+
+# GBT 本地凭证 (永不提交)
+.gbt/accounts.ini

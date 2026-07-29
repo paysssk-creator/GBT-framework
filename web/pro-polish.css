@@ -1,0 +1,293 @@
+/* ═══════════════════════════════════════════════════════════
+   GBT Pro Polish — Whop 级专业风格
+   对标: whop.com 的排版/间距/动画/质感
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══ 字体渲染 ═══ */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ═══ 全局间距节奏 (8px 网格) ═══ */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Whop 风格色彩微调 */
+  --bg-deep: #030305;
+  --bg-card: #08080c;
+  --bg-hover: #0d0d14;
+  --fg-primary: #fafafa;
+  --fg-secondary: #a1a1aa;
+  --fg-tertiary: #71717a;
+  --border-subtle: rgba(255,255,255,0.04);
+  --border-default: rgba(255,255,255,0.06);
+  --border-strong: rgba(255,255,255,0.1);
+}
+
+/* ═══ 全局过渡 ═══ */
+.btn, .card, a, button, input, select, .gbt-collapse-header {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ═══ Hero — Whop 级别排版 ═══ */
+.hero {
+  padding: 120px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero h1 {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+.hero p {
+  font-size: clamp(15px, 2vw, 18px);
+  line-height: 1.7;
+  color: var(--fg-secondary);
+  max-width: 560px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-default);
+  font-size: 13px;
+  color: var(--fg-secondary);
+  margin-bottom: 24px;
+}
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #30d158;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+/* ═══ 按钮 ═══ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #ff6b35, #e85d2a);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(255,107,53,0.2);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255,107,53,0.3);
+}
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--fg-primary);
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* ═══ 卡片 — Whop 级别 ═══ */
+.card, .card-glass {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 24px;
+  overflow: hidden;
+}
+.card-glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.card:hover, .card-glass:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.05);
+}
+.card::before, .card-glass::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.card:hover::before, .card-glass:hover::before { opacity: 1; }
+
+/* ═══ 区块标题 ═══ */
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent, #ff6b35);
+  margin-bottom: 12px;
+}
+h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.section-sub {
+  font-size: 15px;
+  color: var(--fg-secondary);
+  max-width: 500px;
+  line-height: 1.6;
+}
+.hl {
+  background: linear-gradient(135deg, #ff6b35, #ff9a56, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══ 全局间距 ═══ */
+.section {
+  padding: 80px 0;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+  margin: 0 24px;
+}
+
+/* ═══ 统计数字 ═══ */
+.stat-num {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+.stat-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ═══ 导航精修 ═══ */
+.gbt-nav {
+  height: 52px;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+.gbt-nav.scrolled {
+  background: rgba(3,3,5,0.85);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.gbt-nav a {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+}
+
+/* ═══ 页脚 ═══ */
+.gbt-footer {
+  padding: 64px 0 32px;
+  border-top: 1px solid var(--border-subtle);
+}
+.gbt-footer h5 {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--fg-tertiary);
+  margin-bottom: 16px;
+}
+
+/* ═══ 输入框 ═══ */
+input, select, textarea {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  color: var(--fg-primary);
+  outline: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent, #ff6b35);
+  box-shadow: 0 0 0 3px rgba(255,107,53,0.1);
+}
+
+/* ═══ 滚动条 ═══ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* ═══ 选中文字 ═══ */
+::selection {
+  background: rgba(255,107,53,0.3);
+  color: #fff;
+}
+
+/* ═══ 模态框 ═══ */
+.modal-overlay {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.6);
+}
+.modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  animation: modalIn 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ═══ 响应式 ═══ */
+@media (max-width: 768px) {
+  .hero { padding: 80px 0 60px; }
+  .hero h1 { font-size: 36px; letter-spacing: -1px; }
+  .section { padding: 56px 0; }
+  .container { padding: 0 16px; }
+}
+@media (max-width: 480px) {
+  .btn { padding: 10px 20px; font-size: 13px; }
+  .card, .card-glass { padding: 18px; border-radius: 14px; }
+}

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  gbt:
+    build: .
+    container_name: gbt-xiaotudou
+    restart: unless-stopped
+    ports:
+      - "9877:9877"  # remote_agent
+    volumes:
+      - gbt_memory:/root/.gbt
+      - ./caps:/app/caps:ro
+      - ./brain:/app/brain:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+      - GBT_CONTEXT_BUDGET=128000
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY:-}
+      - KIMI_API_KEY=${KIMI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN:-}
+      - STRIPE_API_KEY=${STRIPE_API_KEY:-}
+      - DEEPL_API_KEY=${DEEPL_API_KEY:-}
+    command: python gbt.py daemon
+
+volumes:
+  gbt_memory:

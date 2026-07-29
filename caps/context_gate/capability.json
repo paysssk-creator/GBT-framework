@@ -1,0 +1,91 @@
+{
+  "name": "context_gate",
+  "version": "1.0.0",
+  "description": "上下文守门人 — 本地小模型读取项目状态/日志/文件→压缩摘要→喂给主AI。零API费用，确保长时间工作上下文精准不膨胀",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "上下文",
+      "摘要",
+      "总结",
+      "概括",
+      "压缩",
+      "context",
+      "summarize",
+      "回顾"
+    ],
+    "intent": "context_summary",
+    "examples": [
+      "总结当前项目状态",
+      "压缩上下文",
+      "给我一个项目概览"
+    ]
+  },
+  "actions": {
+    "auto_gate": {
+      "description": "auto_gate"
+    },
+    "brief": {
+      "description": "brief",
+      "args": [
+        "--action",
+        "brief"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "compress_context": {
+      "description": "compress_context"
+    },
+    "inject": {
+      "description": "inject",
+      "args": [
+        "--action",
+        "inject"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "pressure": {
+      "description": "pressure",
+      "args": [
+        "--action",
+        "pressure"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "recall": {
+      "description": "recall",
+      "args": [
+        "--action",
+        "recall"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "summary": {
+      "description": "summary",
+      "args": [
+        "--action",
+        "summary"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    }
+  }
+}

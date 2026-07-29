@@ -1,0 +1,25 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "deepfake_detector",
+  "version": "1.0.0",
+  "description": "深度伪造检测·图像与视频真伪鉴别",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": false,
+  "category": "特殊域",
+  "actions": {
+    "detect": {
+      "description": "检测深度伪造内容"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "deepfake",
+      "伪造",
+      "检测",
+      "deep fake",
+      "AI生成"
+    ],
+    "intent": "deepfake_detector"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "coder",
+  "version": "1.0.0",
+  "description": "代码工具集：格式化/压缩/统计/检查/AST打印，零外部依赖",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "开发工具",
+  "tier": "utility",
+  "actions": {
+    "format": {
+      "description": "代码缩进美化 (json/js/python/html)",
+      "params": [
+        "code",
+        "lang"
+      ],
+      "output": "json"
+    },
+    "minify": {
+      "description": "代码压缩去空白和注释",
+      "params": [
+        "code",
+        "lang"
+      ],
+      "output": "json"
+    },
+    "count": {
+      "description": "代码统计：行数/函数数/类数/符号数",
+      "params": [
+        "code",
+        "lang"
+      ],
+      "output": "json"
+    },
+    "lint": {
+      "description": "基础代码检查：常见问题检测",
+      "params": [
+        "code",
+        "lang"
+      ],
+      "output": "json"
+    },
+    "ast": {
+      "description": "打印代码AST结构",
+      "params": [
+        "code",
+        "lang"
+      ],
+      "output": "json"
+    }
+  },
+  "auto_exec": false
+}

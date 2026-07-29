@@ -1,0 +1,28 @@
+# ⛔ OMP框架禁止触碰此项目任何文件
+# GBTxiaotudouV5是独立项目, 不是框架附属
+# 框架重启/更新不得覆盖、修改、删除本项目内任何文件
+
+*.py
+*.html
+*.js
+*.css
+*.json
+*.md
+*.yml
+*.yaml
+*.toml
+*.sh
+*.ps1
+*.bat
+*.svg
+*.jpg
+.git/
+.gbt/
+caps/
+brain/
+docs/
+assets/
+tests/
+Lib/
+
+# 仅允许OMP读取, 禁止写入

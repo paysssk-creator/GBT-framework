@@ -1,0 +1,59 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "netter",
+  "version": "1.0.0",
+  "description": "网络工具集：HTTP请求/DNS查询/TCP连通性/WHOIS/SSL证书/URL缩短",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "开发工具",
+  "tier": "utility",
+  "actions": {
+    "http": {
+      "description": "HTTP 请求测试 (GET/POST/HEAD)",
+      "params": [
+        "url",
+        "method",
+        "headers",
+        "body",
+        "timeout"
+      ]
+    },
+    "dns": {
+      "description": "DNS 记录查询 (A/AAAA/MX/NS/TXT/CNAME)",
+      "params": [
+        "domain",
+        "rtype",
+        "server"
+      ]
+    },
+    "ping": {
+      "description": "TCP 端口连通性测试",
+      "params": [
+        "host",
+        "port",
+        "timeout"
+      ]
+    },
+    "whois": {
+      "description": "WHOIS 域名信息查询",
+      "params": [
+        "domain"
+      ]
+    },
+    "ssl": {
+      "description": "SSL/TLS 证书信息查询",
+      "params": [
+        "hostname",
+        "port"
+      ]
+    },
+    "shorten": {
+      "description": "URL 缩短 (调用公共API)",
+      "params": [
+        "url",
+        "service"
+      ]
+    }
+  },
+  "auto_exec": false
+}

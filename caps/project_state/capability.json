@@ -1,0 +1,103 @@
+{
+  "name": "project_state",
+  "version": "1.0.0",
+  "description": "项目状态追踪 — 目标/进度/决策/上下文/跑偏检测。确保长时间工作不走偏不丢失上下文",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "进度",
+      "状态",
+      "目标",
+      "做了什么",
+      "到哪里了",
+      "继续",
+      "恢复",
+      "跑偏",
+      "上下文"
+    ],
+    "intent": "project_tracking",
+    "examples": [
+      "查看项目进度",
+      "我们做到哪了",
+      "继续上次的工作"
+    ]
+  },
+  "actions": {
+    "auto_snapshot": {
+      "description": "auto_snapshot"
+    },
+    "checkpoint": {
+      "description": "保存上下文快照 (当前状态完整存档)",
+      "args": [
+        "--action",
+        "checkpoint"
+      ],
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "diff_snapshots": {
+      "description": "diff_snapshots"
+    },
+    "drift_check": {
+      "description": "跑偏检测: 当前工作是否偏离目标",
+      "args": [
+        "--action",
+        "drift_check"
+      ],
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "goal": {
+      "description": "设置/查看当前目标 (支持层级子目标)",
+      "args": [
+        "--action",
+        "goal"
+      ],
+      "input": "stdin",
+      "timeout_ms": 5000,
+      "output": "json"
+    },
+    "log": {
+      "description": "记录一条工作日志 (决策/完成/发现)",
+      "args": [
+        "--action",
+        "log"
+      ],
+      "input": "stdin",
+      "timeout_ms": 5000,
+      "output": "json"
+    },
+    "progress": {
+      "description": "查看整体进度摘要 (目标/已完成/进行中/待办)",
+      "args": [
+        "--action",
+        "progress"
+      ],
+      "timeout_ms": 5000,
+      "output": "json"
+    },
+    "restore_latest": {
+      "description": "restore_latest"
+    },
+    "resume": {
+      "description": "恢复上次工作状态 (加载最新快照)",
+      "args": [
+        "--action",
+        "resume"
+      ],
+      "timeout_ms": 5000,
+      "output": "json"
+    }
+  }
+}

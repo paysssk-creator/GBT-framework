@@ -1,0 +1,34 @@
+{
+  "name": "stock_trader",
+  "version": "1.0.0",
+  "description": "A股自动操盘-选股/分析/下单/风控/复盘",
+  "language": "python",
+  "category": "金融域",
+  "risk_level": "medium",
+  "tier": "core",
+  "actions": {
+    "analyze": {
+      "description": "深度技术分析"
+    },
+    "order": {
+      "description": "自动下单交易"
+    },
+    "positions": {
+      "description": "持仓查询"
+    },
+    "review": {
+      "description": "交易复盘"
+    },
+    "risk": {
+      "description": "风控评估"
+    },
+    "run": {
+      "description": "run"
+    },
+    "scan": {
+      "description": "智能选股扫描"
+    }
+  },
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "auto_exec": false
+}

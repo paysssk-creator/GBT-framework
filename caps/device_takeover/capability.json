@@ -1,0 +1,43 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "device_takeover",
+  "version": "1.0.0",
+  "description": "设备接管引擎 触手击穿后第一动作 文件扫描(敏感文档/凭证/钱包/浏览器数据) 摄像头接管(拍照/录像抓取攻击者) 防关机锁 证据销毁 数据回传",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "攻击域",
+  "tier": "core",
+  "actions": {
+    "anti_shutdown": {
+      "description": "防关机锁 阻止系统关闭/重启/注销"
+    },
+    "camera": {
+      "description": "camera"
+    },
+    "camera_capture": {
+      "description": "摄像头接管 拍照+录像 抓取操作者面部"
+    },
+    "destroy": {
+      "description": "destroy"
+    },
+    "destroy_evidence": {
+      "description": "销毁入侵证据(历史/日志/临时文件)"
+    },
+    "full_takeover": {
+      "description": "全自动接管 五步并发执行"
+    },
+    "lock": {
+      "description": "lock"
+    },
+    "scan": {
+      "description": "scan"
+    },
+    "scan_files": {
+      "description": "全设备敏感文件扫描(凭证/钱包/浏览器/SSH/数据库)"
+    },
+    "takeover": {
+      "description": "takeover"
+    }
+  },
+  "auto_exec": false
+}

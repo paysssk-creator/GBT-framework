@@ -1,0 +1,52 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "human_task",
+  "version": "1.0.0",
+  "description": "Human-in-the-Loop人类任务委托 — HumanAPI集成+本地队列+自动审批",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "AI协作",
+  "actions": {
+    "complete": {
+      "description": "标记任务完成(人类提交结果)",
+      "timeout_ms": 10000
+    },
+    "create": {
+      "description": "创建人类任务(8种类型)",
+      "timeout_ms": 30000
+    },
+    "list": {
+      "description": "列出任务队列",
+      "timeout_ms": 10000
+    },
+    "run": {
+      "description": "run"
+    },
+    "status": {
+      "description": "HumanAPI状态+任务统计",
+      "timeout_ms": 5000
+    },
+    "types": {
+      "description": "列出支持的任务类型",
+      "timeout_ms": 5000
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "人类任务",
+      "human task",
+      "委托",
+      "找人",
+      "人工",
+      "human in the loop",
+      "物理世界",
+      "实地",
+      "录音",
+      "标注",
+      "humanapi",
+      "thehumanapi"
+    ],
+    "intent": "human_task"
+  }
+}

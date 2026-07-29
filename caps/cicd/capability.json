@@ -1,0 +1,54 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "cicd",
+  "version": "1.0.0",
+  "description": "CI/CD流水线管理",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "运维域",
+  "tier": "ready",
+  "actions": {
+    "analyze_failure": {
+      "description": "analyze_failure"
+    },
+    "auto_deploy_loop": {
+      "description": "监听git仓库变更自动部署",
+      "params": {
+        "repo_path": "仓库路径",
+        "branch": "分支",
+        "poll_seconds": "轮询间隔",
+        "max_iterations": "最大轮询次数"
+      }
+    },
+    "canary_release": {
+      "description": "金丝雀发布: 先部署子集, 监控后全量",
+      "params": {
+        "canary_target": "金丝雀目标",
+        "full_target": "全量目标",
+        "health_url": "健康检查URL",
+        "monitor_seconds": "监控秒数"
+      }
+    },
+    "deploy": {
+      "description": "部署"
+    },
+    "rollback": {
+      "description": "回滚到上一个部署状态",
+      "params": {
+        "target": "目标环境",
+        "steps": "自定义回滚步骤",
+        "restart_cmd": "重启命令"
+      }
+    },
+    "self_heal": {
+      "description": "self_heal"
+    },
+    "status": {
+      "description": "查看状态"
+    },
+    "trigger": {
+      "description": "触发流水线"
+    }
+  },
+  "auto_exec": false
+}

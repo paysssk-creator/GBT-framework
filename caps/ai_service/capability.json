@@ -1,0 +1,44 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "ai_service",
+  "version": "1.0.0",
+  "description": "GBT平台AI客服·DeepSeek驱动·解答·引导·推荐·教学",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI推理",
+  "actions": {
+    "chat": {
+      "description": "AI对话·智能问答",
+      "timeout_ms": 15000
+    },
+    "help": {
+      "description": "help"
+    },
+    "run": {
+      "description": "run"
+    },
+    "screenshot": {
+      "description": "screenshot"
+    },
+    "suggest": {
+      "description": "suggest"
+    },
+    "vision": {
+      "description": "vision"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "客服",
+      "AI",
+      "助手",
+      "chat",
+      "help",
+      "帮助",
+      "推荐",
+      "土豆仔"
+    ],
+    "intent": "ai_service"
+  }
+}

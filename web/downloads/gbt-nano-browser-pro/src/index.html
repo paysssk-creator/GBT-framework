@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>GBT小土豆 · Nano Browser Pro</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#e0e0e0;font-family:'Inter','Segoe UI',system-ui;height:100vh;overflow:hidden}
+/* ═══ CSS 粒子动画 ═══ */
+@keyframes orbit1{from{transform:rotate(0deg) translateX(180px) rotate(0deg)}to{transform:rotate(360deg) translateX(180px) rotate(-360deg)}}
+@keyframes orbit2{from{transform:rotate(120deg) translateX(220px) rotate(-120deg)}to{transform:rotate(480deg) translateX(220px) rotate(-480deg)}}
+@keyframes orbit3{from{transform:rotate(240deg) translateX(160px) rotate(-240deg)}to{transform:rotate(600deg) translateX(160px) rotate(-600deg)}}
+@keyframes orbit4{from{transform:rotate(60deg) translateX(260px) rotate(-60deg)}to{transform:rotate(420deg) translateX(260px) rotate(-420deg)}}
+@keyframes pulse-glow{0%,100%{opacity:0.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:0.8;transform:translate(-50%,-50%) scale(1.1)}}
+.particle{position:fixed;width:3px;height:3px;border-radius:50%;z-index:0;pointer-events:none}
+.particle.ring1{background:#00d4ff;box-shadow:0 0 6px #00d4ff;animation:orbit1 20s linear infinite}
+.particle.ring2{background:#a855f7;box-shadow:0 0 6px #a855f7;animation:orbit2 25s linear infinite}
+.particle.ring3{background:#ffd700;box-shadow:0 0 6px #ffd700;animation:orbit3 18s linear infinite}
+.particle.ring4{background:#22c55e;box-shadow:0 0 6px #22c55e;animation:orbit4 22s linear infinite}
+.center-glow{position:fixed;top:50%;left:50%;width:500px;height:500px;z-index:0;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,0.08) 0%,rgba(168,85,247,0.04) 40%,transparent 70%);animation:pulse-glow 4s ease-in-out infinite}
+/* ═══ UI ═══ */
+#app{position:relative;z-index:1;display:flex;height:100vh}
+#sidebar{width:56px;background:rgba(8,8,12,0.85);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;padding-top:12px;gap:6px;border-right:1px solid rgba(255,255,255,0.06)}
+#sidebar button{width:40px;height:40px;border:none;background:none;color:rgba(255,255,255,0.4);cursor:pointer;border-radius:10px;font-size:18px;transition:all .2s;position:relative}
+#sidebar button:hover{background:rgba(0,212,255,0.1);color:#00d4ff}
+#sidebar button.active{background:rgba(0,212,255,0.15);color:#00d4ff;box-shadow:0 0 20px rgba(0,212,255,0.15)}
+#sidebar button.active::after{content:'';position:absolute;left:0;top:8px;width:3px;height:24px;background:#00d4ff;border-radius:0 2px 2px 0}
+#main{flex:1;display:flex;flex-direction:column;min-width:0}
+#tabbar{display:flex;height:36px;background:rgba(8,8,12,0.7);backdrop-filter:blur(10px);gap:2px;padding:3px 8px;align-items:center}
+.tab{display:flex;align-items:center;height:30px;padding:0 14px;background:rgba(255,255,255,0.03);border-radius:8px 8px 0 0;font-size:12px;color:rgba(255,255,255,0.4)}
+.tab.active{background:rgba(0,212,255,0.08);color:#e0e0e0}
+#urlbar{display:flex;height:42px;background:rgba(8,8,12,0.7);backdrop-filter:blur(10px);padding:0 10px;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.04)}
+#urlbar input{flex:1;height:32px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;color:#e0e0e0;padding:0 16px;font-size:13px;outline:none}
+#urlbar input:focus{border-color:#00d4ff;box-shadow:0 0 20px rgba(0,212,255,0.1)}
+#urlbar button{height:32px;padding:0 20px;border:none;background:linear-gradient(135deg,#00d4ff,#0090cc);color:#000;border-radius:16px;cursor:pointer;font-size:12px;font-weight:600;transition:all .2s}
+#urlbar button:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,212,255,0.3)}
+#content{flex:1;display:flex;align-items:center;justify-content:center;overflow-y:auto}
+.glass-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;backdrop-filter:blur(16px);padding:20px;margin:10px 0;text-align:left;max-width:420px}
+.glass-card label{color:rgba(255,255,255,0.5);font-size:12px;display:block;margin-bottom:6px}
+.glass-card input[type=text]{width:100%;padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#e0e0e0;border-radius:10px;font-size:13px;outline:none}
+.glass-card input[type=text]:focus{border-color:#00d4ff}
+.btn{display:inline-block;padding:10px 24px;background:linear-gradient(135deg,#00d4ff,#0090cc);color:#000;border:none;border-radius:12px;cursor:pointer;font-size:13px;font-weight:600;transition:all .2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,212,255,0.3)}
+.btn-outline{background:transparent;border:1px solid rgba(0,212,255,0.3);color:#00d4ff}
+.btn-outline:hover{background:rgba(0,212,255,0.08)}
+.btn-green{background:linear-gradient(135deg,#22c55e,#16a34a)}.btn-green:hover{box-shadow:0 6px 24px rgba(34,197,94,0.3)}
+.btn-purple{background:linear-gradient(135deg,#a855f7,#7c3aed)}.btn-purple:hover{box-shadow:0 6px 24px rgba(168,85,247,0.3)}
+#aifloat{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:linear-gradient(135deg,#00d4ff,#a855f7);border:none;border-radius:50%;cursor:pointer;font-size:26px;color:#000;box-shadow:0 4px 24px rgba(0,212,255,0.3);z-index:99;animation:pulse-ai 3s ease-in-out infinite}
+#aifloat:hover{transform:scale(1.15)}@keyframes pulse-ai{0%,100%{box-shadow:0 4px 24px rgba(0,212,255,0.3)}50%{box-shadow:0 4px 40px rgba(168,85,247,0.5)}}
+.back-link{color:rgba(255,255,255,0.3);cursor:pointer;font-size:12px;display:inline-block;margin-bottom:16px}.back-link:hover{color:#00d4ff}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}.status-online{background:#22c55e}.status-offline{background:#ef4444}
+.gbt-reveal{animation:revealIn .6s cubic-bezier(.16,1,.3,1) both}@keyframes revealIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.link{color:#00d4ff;text-decoration:none;font-size:12px}.link:hover{opacity:0.7}
+.brand{font-size:48px;margin-bottom:4px;text-shadow:0 0 40px rgba(0,212,255,0.3)}.brand-name{font-size:40px;font-weight:800;background:linear-gradient(135deg,#00d4ff 0%,#a855f7 50%,#ffd700 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.brand-sub{font-size:16px;color:#ffd700;font-weight:600;letter-spacing:3px}
+</style>
+</head>
+<body>
+<!-- ═══ 纯CSS粒子层 ═══ -->
+<div class="center-glow"></div>
+<div id="particles" style="position:fixed;top:50%;left:50%;z-index:0;pointer-events:none"></div>
+
+<div id="app">
+  <div id="sidebar">
+    <button id="btnBrowser" class="active">🌐</button>
+    <button id="btnStock">📈</button>
+    <button id="btnStore">🛒</button>
+    <button id="btnSettings">⚙</button>
+  </div>
+  <div id="main">
+    <div id="tabbar"><div class="tab active">GBT小土豆 · Nano Browser Pro</div></div>
+    <div id="urlbar"><input id="urlInput" placeholder="输入网址或搜索..."><button id="goBtn">→ 前往</button></div>
+    <div id="content"></div>
+  </div>
+</div>
+<button id="aifloat">🤖</button>
+
+<script>
+// ═══ 生成粒子 ═══
+(function(){
+  var rings=[{cls:'ring1',count:30},{cls:'ring2',count:24},{cls:'ring3',count:20},{cls:'ring4',count:16}];
+  var container=document.getElementById('particles');
+  rings.forEach(function(r){
+    for(var i=0;i<r.count;i++){
+      var d=document.createElement('div');
+      d.className='particle '+r.cls;
+      d.style.animationDelay=(i*-0.5)+'s';
+      container.appendChild(d);
+    }
+  });
+})();
+
+// ═══ App Logic ═══
+function go(){var u=document.getElementById('urlInput').value.trim();if(!u)return;var url=u.startsWith('http')?u:'https://'+u;document.getElementById('content').innerHTML='<div class=\"gbt-reveal\" style=\"text-align:center\"><p class=\"back-link\" onclick=\"switchView(\\'browser\\')\">← 返回主页</p><h2>🌐 正在打开</h2><p style=\"color:#00d4ff\">'+url+'</p></div>';try{window.GBT.openURL(url)}catch(e){window.open(url)}}
+
+function switchView(v){
+  document.querySelectorAll('#sidebar button').forEach(function(b,i){b.classList.toggle('active',['browser','stock','store','settings'][i]===v)});
+  var back='<p class=\"back-link\" onclick=\"switchView(\\'browser\\')\">← 返回主页</p>';
+  var h='';
+  if(v==='browser')h='<div class=\"gbt-reveal\" style=\"text-align:center\"><div class=\"brand\">🥔</div><div class=\"brand-name\">GBT小土豆</div><div class=\"brand-sub\">NANO BROWSER PRO</div><p style=\"color:rgba(255,255,255,0.35);margin-top:12px;font-size:13px\">AI全控 · 指纹隐身 · 2Captcha · 股票操盘</p><p style=\"color:rgba(255,255,255,0.2);margin-top:16px;font-size:11px\">Ctrl + Space 唤醒 AI 助手</p><div style=\"margin-top:28px;display:flex;gap:12px;justify-content:center\"><span class=\"btn btn-outline\" onclick=\"switchView(\\'stock\\')\">📈 股票操盘</span><span class=\"btn btn-outline\" onclick=\"switchView(\\'store\\')\">🛒 应用商店</span><span class=\"btn btn-outline\" onclick=\"switchView(\\'settings\\')\">⚙ 系统设置</span></div></div>';
+  if(v==='stock')h=back+'<div class=\"gbt-reveal\" style=\"text-align:center\"><h2>📈 A股割草引擎</h2><p style=\"color:rgba(255,255,255,0.4)\">心跳驱动 · AI全自动操盘 · 快进快出</p><div id=\"stockStatus\" style=\"margin-top:20px;color:rgba(255,255,255,0.4)\">检查引擎状态...</div><div style=\"margin-top:16px\"><span class=\"btn btn-green\" onclick=\"window.open(\\'http://localhost:8766\\')\">📊 打开看盘面板</span></div></div>';
+  if(v==='store')h=back+'<div class=\"gbt-reveal\" style=\"text-align:center\"><h2>🛒 应用商店</h2><p style=\"color:rgba(255,255,255,0.4)\">GBT AI 应用市场</p><div style=\"margin-top:20px\"><span class=\"btn btn-purple\" onclick=\"window.open(\\'http://localhost:8899\\')\">🏪 打开商店</span></div></div>';
+  if(v==='settings')h=back+'<div class=\"gbt-reveal\"><h2 style=\"text-align:center\">⚙ 系统设置</h2><div style=\"max-width:440px;margin:20px auto\"><div class=\"glass-card\"><label>🤖 DeepSeek API Key</label><input type=\"text\" id=\"apiKey\" placeholder=\"sk-...\"><div style=\"margin-top:8px\"><a class=\"link\" href=\"https://platform.deepseek.com\" target=\"_blank\">获取 →</a></div></div><div class=\"glass-card\"><label>🔑 2Captcha API Key</label><input type=\"text\" id=\"captchaKey\" placeholder=\"输入API Key\"><div style=\"margin-top:8px\"><a class=\"link\" href=\"https://2captcha.com\" target=\"_blank\">获取 →</a></div></div><div class=\"glass-card\"><label>🕶 隐身模式</label><label style=\"display:flex;align-items:center;gap:10px;margin-top:6px;color:#e0e0e0;font-size:13px;cursor:pointer\"><input type=\"checkbox\" id=\"stealthMode\" checked> 启用指纹隐身</label></div><span class=\"btn\" onclick=\"saveSettings()\" style=\"width:100%;text-align:center;margin-top:4px\">💾 保存设置</span></div></div>';
+  document.getElementById('content').innerHTML=h;
+  if(v==='stock')checkStockStatus();if(v==='settings')loadSettings();
+}
+
+function checkStockStatus(){
+  var el=document.getElementById('stockStatus');if(!el)return;
+  try{fetch('http://localhost:8766/api/status').then(function(r){return r.json()}).then(function(d){el.innerHTML='<div class=\"glass-card\" style=\"text-align:center\"><span class=\"status-dot '+(d.running?'status-online':'status-offline')+'\"></span>'+(d.running?'引擎运行中':'引擎未启动')+'<div style=\"margin-top:8px;font-size:12px;color:rgba(255,255,255,0.4)\">持仓: '+(d.position_count||0)+' | 盈亏: '+(d.daily_pnl||0).toFixed(2)+'%</div></div>'}).catch(function(){el.innerHTML='<div class=\"glass-card\" style=\"text-align:center\"><span class=\"status-dot status-offline\"></span>引擎离线</div>'})}catch(e){}
+}
+function saveSettings(){var s={apiKey:document.getElementById('apiKey').value,captchaKey:document.getElementById('captchaKey').value,stealth:document.getElementById('stealthMode').checked};localStorage.setItem('gbt_settings',JSON.stringify(s));alert('✅ 设置已保存')}
+function loadSettings(){try{var s=JSON.parse(localStorage.getItem('gbt_settings')||'{}');if(s.apiKey)document.getElementById('apiKey').value=s.apiKey;if(s.captchaKey)document.getElementById('captchaKey').value=s.captchaKey;if(s.stealth!==undefined)document.getElementById('stealthMode').checked=s.stealth}catch(e){}}
+
+document.getElementById('btnBrowser').onclick=function(){switchView('browser')};
+document.getElementById('btnStock').onclick=function(){switchView('stock')};
+document.getElementById('btnStore').onclick=function(){switchView('store')};
+document.getElementById('btnSettings').onclick=function(){switchView('settings')};
+document.getElementById('goBtn').onclick=go;
+document.getElementById('urlInput').onkeydown=function(e){if(e.key==='Enter')go()};
+document.getElementById('aifloat').onclick=function(){alert('🤖 GBT小土豆 AI 助手\n\n🌐 打开网页\n📈 股票操盘\n🛒 应用商店\n⚙ 系统设置\n💰 Pro版: gbtxiaotudou.com/pricing')};
+document.addEventListener('keydown',function(e){if(e.ctrlKey&&e.key==='t'){e.preventDefault();document.getElementById('urlInput').focus()}if(e.ctrlKey&&e.key===' '){e.preventDefault();document.getElementById('aifloat').click()}});
+switchView('browser');
+</script>
+</body>
+</html>

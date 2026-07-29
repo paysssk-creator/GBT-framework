@@ -1,0 +1,27 @@
+{
+  "name": "git_ops",
+  "version": "1.0.0",
+  "description": "Git原生操作 — 提交/推送/分支/标签/日志/差异/合并 (编程接口，不依赖shell)",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "代码",
+  "entry": { "program": "python", "args": ["run.py"] },
+  "triggers": {
+    "keywords": ["git", "提交", "commit", "推送", "push", "分支", "branch", "合并", "merge", "标签", "tag", "日志", "log", "diff"],
+    "intent": "git_ops",
+    "examples": ["提交代码", "创建分支", "查看日志"]
+  },
+  "actions": {
+    "status": { "description": "查看工作区状态", "args": ["--action", "status"], "timeout_ms": 10000, "output": "json" },
+    "commit": { "description": "提交更改 (自动生成规范中文commit message)", "args": ["--action", "commit"], "input": "stdin", "timeout_ms": 30000, "output": "json" },
+    "push": { "description": "推送到远程", "args": ["--action", "push"], "input": "stdin", "timeout_ms": 60000, "output": "json" },
+    "pull": { "description": "拉取远程更新", "args": ["--action", "pull"], "input": "stdin", "timeout_ms": 60000, "output": "json" },
+    "branch": { "description": "创建/列出/切换/删除分支", "args": ["--action", "branch"], "input": "stdin", "timeout_ms": 10000, "output": "json" },
+    "tag": { "description": "创建/列出标签", "args": ["--action", "tag"], "input": "stdin", "timeout_ms": 10000, "output": "json" },
+    "log": { "description": "查看提交日志", "args": ["--action", "log"], "input": "stdin", "timeout_ms": 10000, "output": "json" },
+    "diff": { "description": "查看文件差异", "args": ["--action", "diff"], "input": "stdin", "timeout_ms": 15000, "output": "json" },
+    "merge": { "description": "合并分支", "args": ["--action", "merge"], "input": "stdin", "timeout_ms": 30000, "output": "json" },
+    "clone": { "description": "克隆仓库", "args": ["--action", "clone"], "input": "stdin", "timeout_ms": 300000, "output": "json" }
+  }
+}

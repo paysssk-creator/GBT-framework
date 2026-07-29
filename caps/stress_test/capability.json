@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "stress_test",
+  "version": "1.0.0",
+  "description": "压力测试/性能测试",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "特殊域",
+  "tier": "ready",
+  "actions": {
+    "run": {
+      "description": "运行压力测试"
+    },
+    "report": {
+      "description": "生成测试报告"
+    }
+  },
+  "auto_exec": false
+}

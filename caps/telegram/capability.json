@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "telegram",
+  "version": "1.0.0",
+  "description": "Telegram Bot接口",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "信息域",
+  "tier": "ready",
+  "actions": {
+    "send": {
+      "description": "发送消息"
+    },
+    "read": {
+      "description": "读取消息"
+    },
+    "listen": {
+      "description": "监听频道"
+    }
+  },
+  "auto_exec": false
+}

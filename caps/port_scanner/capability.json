@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "port_scanner",
+  "version": "1.0.0",
+  "description": "TCP/UDP端口探测",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "侦察域",
+  "tier": "core",
+  "actions": {
+    "scan": {
+      "description": "扫描端口"
+    },
+    "tcp": {
+      "description": "TCP端口扫描"
+    },
+    "udp": {
+      "description": "UDP端口扫描"
+    }
+  },
+  "auto_exec": false
+}

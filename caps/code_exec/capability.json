@@ -1,0 +1,45 @@
+{
+  "name": "code_exec",
+  "version": "1.0.0",
+  "description": "代码执行 — 运行Python/Shell",
+  "language": "python",
+  "priority": 12,
+  "pipeline_role": "scout",
+  "depends_on": [],
+  "triggers": {
+    "intent": "exec_code",
+    "keywords": [
+      "执行",
+      "运行",
+      "代码",
+      "exec",
+      "run",
+      "python",
+      "shell",
+      "命令"
+    ],
+    "examples": [
+      "执行代码"
+    ]
+  },
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "actions": {
+    "run": {
+      "description": "执行代码",
+      "args": [
+        "run"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    }
+  },
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "代码"
+}

@@ -1,0 +1,66 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "dater",
+  "version": "1.0.0",
+  "description": "数据处理工具集：CSV↔JSON互转/统计分析/条件过滤/排序/多模式合并",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "数据处理",
+  "tier": "utility",
+  "actions": {
+    "csv2json": {
+      "description": "CSV文本转JSON数组",
+      "params": [
+        "csv",
+        "text",
+        "data"
+      ]
+    },
+    "json2csv": {
+      "description": "JSON数组转CSV文本",
+      "params": [
+        "json",
+        "data"
+      ]
+    },
+    "analyze": {
+      "description": "数值数组统计分析：均值/中位数/最大最小/标准差",
+      "params": [
+        "data",
+        "numbers"
+      ]
+    },
+    "filter": {
+      "description": "按条件筛选行（支持 eq/ne/gt/gte/lt/lte/in/contains/startswith/endswith/regex）",
+      "params": [
+        "data",
+        "conditions",
+        "cond",
+        "logic"
+      ]
+    },
+    "sort": {
+      "description": "数据排序（支持按字段排序）",
+      "params": [
+        "data",
+        "by",
+        "field",
+        "key",
+        "order"
+      ]
+    },
+    "merge": {
+      "description": "合并两个数据源（concat/inner/left/append）",
+      "params": [
+        "left",
+        "right",
+        "data_a",
+        "data_b",
+        "mode",
+        "on",
+        "key"
+      ]
+    }
+  },
+  "auto_exec": false
+}

@@ -1,0 +1,76 @@
+{
+  "name": "deep_scrape",
+  "version": "1.0.0",
+  "description": "深度爬虫 — 自适应Web抓取: JS渲染/反爬对抗/2Captcha验证码自动求解/分页/并发/结构化提取",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": false,
+  "category": "信息",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "爬虫",
+      "抓取",
+      "scrape",
+      "crawl",
+      "爬取",
+      "数据采集",
+      "JS渲染",
+      "反爬",
+      "captcha",
+      "验证码"
+    ],
+    "intent": "deep_scrape",
+    "examples": [
+      "爬取这个网站",
+      "抓取所有页面数据"
+    ]
+  },
+  "actions": {
+    "scrape": {
+      "description": "高级单页抓取 (JS渲染+结构化+验证码自动求解)",
+      "args": [
+        "--action",
+        "scrape"
+      ],
+      "input": "stdin",
+      "timeout_ms": 180000,
+      "output": "json"
+    },
+    "crawl": {
+      "description": "多页爬取 (分页+并发)",
+      "args": [
+        "--action",
+        "crawl"
+      ],
+      "input": "stdin",
+      "timeout_ms": 300000,
+      "output": "json"
+    },
+    "extract": {
+      "description": "结构化提取 (CSS选择器/XPath/自动检测)",
+      "args": [
+        "--action",
+        "extract"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "sitemap": {
+      "description": "自动发现站点地图和API端点",
+      "args": [
+        "--action",
+        "sitemap"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    }
+  }
+}

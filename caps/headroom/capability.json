@@ -1,0 +1,64 @@
+{
+  "name": "headroom",
+  "version": "1.0.0",
+  "description": "Headroom Token压缩 — 60-95% token节省/CacheAligner前缀对齐/CCR可逆压缩/跨Agent记忆 (56k stars, Rust+Rust)",
+  "language": "python",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "压缩",
+      "compress",
+      "headroom",
+      "token节省",
+      "省token",
+      "压缩输出",
+      "减小上下文"
+    ],
+    "intent": "token_compression",
+    "examples": [
+      "压缩这段输出",
+      "节省token",
+      "压缩日志"
+    ]
+  },
+  "actions": {
+    "compress": {
+      "description": "智能压缩 — 自动检测内容类型(JSON/代码/文本)选择最优压缩器, 60-95% token节省",
+      "args": [
+        "--action",
+        "compress"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "stats": {
+      "description": "压缩统计 — 节省token数/压缩比/缓存命中率",
+      "args": [
+        "--action",
+        "stats"
+      ],
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "info": {
+      "description": "Headroom状态 — 安装信息/压缩器/节省预估",
+      "args": [
+        "--action",
+        "info"
+      ],
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    }
+  },
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "优化"
+}

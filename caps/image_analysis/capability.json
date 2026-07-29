@@ -1,0 +1,52 @@
+{
+  "name": "image_analysis",
+  "version": "1.0.0",
+  "description": "图片分析域 — Florence-2深度理解/OCR/分类/综合分析/图片→代码转换",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "视觉",
+  "entry": { "program": "python", "args": ["run.py"] },
+  "triggers": {
+    "keywords": ["图片","图像","照片","分析图片","识别图片","看图","识图","截图转代码","设计稿转代码","vision","image","to code"],
+    "intent": "image_analysis",
+    "examples": ["分析这张图","图片里有什么","识别图中的文字","把截图转成HTML代码"]
+  },
+  "actions": {
+    "describe": {
+      "description": "深度描述图片内容 (Florence-2)",
+      "args": ["--action", "describe"],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "ocr": {
+      "description": "图片文字识别 (EasyOCR+Florence双引擎)",
+      "args": ["--action", "ocr"],
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "classify": {
+      "description": "图片分类 — 场景/物体/风格识别",
+      "args": ["--action", "classify"],
+      "input": "stdin",
+      "timeout_ms": 20000,
+      "output": "json"
+    },
+    "analyze": {
+      "description": "综合图片分析 — 描述+文字+分类+颜色+构图",
+      "args": ["--action", "analyze"],
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "to_code": {
+      "description": "图片→代码 — 截图/设计稿→HTML/CSS/JS/Python可运行代码",
+      "args": ["--action", "to_code"],
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    }
+  }
+}

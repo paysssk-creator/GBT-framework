@@ -1,0 +1,31 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "agent_reach",
+  "version": "1.0.0",
+  "description": "跨平台信息触达代理",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "信息域",
+  "tier": "core",
+  "actions": {
+    "broadcast_task": {
+      "description": "broadcast_task"
+    },
+    "heartbeat_check": {
+      "description": "heartbeat_check"
+    },
+    "reach": {
+      "description": "触达目标平台"
+    },
+    "relay_result": {
+      "description": "relay_result"
+    },
+    "scrape": {
+      "description": "抓取信息"
+    },
+    "transmit": {
+      "description": "传输数据"
+    }
+  },
+  "auto_exec": false
+}

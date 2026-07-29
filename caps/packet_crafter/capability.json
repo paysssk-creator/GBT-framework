@@ -1,0 +1,26 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "packet_crafter",
+  "version": "1.0.0",
+  "description": "网络包构造·自定义数据包生成与注入",
+  "language": "python",
+  "risk_level": "dangerous",
+  "auto_exec": false,
+  "category": "攻击域",
+  "actions": {
+    "craft": {
+      "description": "构造网络数据包"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "packet",
+      "craft",
+      "scapy",
+      "网络包",
+      "数据包",
+      "注入"
+    ],
+    "intent": "packet_crafter"
+  }
+}

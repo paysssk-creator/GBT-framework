@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "desktop_type",
+  "version": "1.0.0",
+  "description": "桌面输入自动化",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "桌面域",
+  "tier": "ready",
+  "actions": {
+    "type": {
+      "description": "自动输入"
+    },
+    "fill": {
+      "description": "自动填表"
+    }
+  },
+  "auto_exec": false
+}

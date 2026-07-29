@@ -1,0 +1,34 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "encryption_engine",
+  "version": "1.0.0",
+  "description": "加密/解密引擎·AES+哈希",
+  "language": "python",
+  "risk_level": "dangerous",
+  "auto_exec": false,
+  "category": "安全域",
+  "actions": {
+    "decrypt": {
+      "description": "解密数据"
+    },
+    "encrypt": {
+      "description": "加密数据"
+    },
+    "hash": {
+      "description": "hash"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "encrypt",
+      "decrypt",
+      "cipher",
+      "AES",
+      "RSA",
+      "加密",
+      "解密",
+      "密码"
+    ],
+    "intent": "encryption_engine"
+  }
+}

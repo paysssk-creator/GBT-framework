@@ -1,0 +1,24 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "_2captcha",
+  "version": "1.0.0",
+  "description": "2Captcha共享库 — 验证码识别·住宅代理·浏览器指纹·云端浏览器",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": false,
+  "category": "特殊域",
+  "tier": "core",
+  "entry": { "program": "python", "args": ["run.py"] },
+  "triggers": {
+    "keywords": ["captcha", "2captcha", "proxy", "fingerprint", "browser", "验证码"],
+    "intent": "_2captcha",
+    "examples": ["识别验证码", "获取代理", "生成指纹"]
+  },
+  "actions": {
+    "info": { "description": "查看模块信息和可用导出" },
+    "solve_captcha": { "description": "识别验证码" },
+    "get_proxy": { "description": "获取住宅代理" },
+    "get_fingerprint": { "description": "生成浏览器指纹" },
+    "get_browser": { "description": "获取云端CDP浏览器" }
+  }
+}

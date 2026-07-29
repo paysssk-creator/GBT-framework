@@ -1,0 +1,83 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "toolbox",
+  "version": "1.0.0",
+  "description": "多宝盒工具集：JSON格式化/Base64/URL编解码/哈希/时间戳/UUID/二维码/差异对比/正则测试",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "开发工具",
+  "tier": "utility",
+  "actions": {
+    "json_fmt": {
+      "description": "JSON 格式化/压缩/验证",
+      "params": [
+        "text",
+        "action(format/compact/validate)",
+        "indent"
+      ]
+    },
+    "base64": {
+      "description": "Base64 编解码",
+      "params": [
+        "text",
+        "action(encode/decode)"
+      ]
+    },
+    "url": {
+      "description": "URL 编解码和解析",
+      "params": [
+        "text",
+        "action(encode/decode/parse)"
+      ]
+    },
+    "hash": {
+      "description": "MD5/SHA1/SHA256 哈希计算",
+      "params": [
+        "text",
+        "algo(md5/sha1/sha256)"
+      ]
+    },
+    "timestamp": {
+      "description": "时间戳与日期互转",
+      "params": [
+        "action(to_date/from_date/now)",
+        "ts",
+        "date",
+        "fmt"
+      ]
+    },
+    "uuid": {
+      "description": "生成 UUID v4",
+      "params": [
+        "count"
+      ]
+    },
+    "qrcode": {
+      "description": "文本生成二维码(base64 PNG)",
+      "params": [
+        "text",
+        "box_size",
+        "border"
+      ]
+    },
+    "diff": {
+      "description": "文本差异对比",
+      "params": [
+        "text_a",
+        "text_b",
+        "format(unified/ndiff/html/inline)"
+      ]
+    },
+    "regex": {
+      "description": "正则表达式测试器",
+      "params": [
+        "pattern",
+        "text",
+        "action(match/replace/split/search/test)",
+        "flags",
+        "replacement"
+      ]
+    }
+  },
+  "auto_exec": false
+}

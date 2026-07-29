@@ -1,0 +1,52 @@
+{
+  "name": "osint_master",
+  "version": "1.0.0",
+  "description": "OSINT深度情报搜集 — 多源聚合(Shodan/HIBP/社交/DNS/邮箱)",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "OSINT",
+  "actions": {
+    "autonomous_recon": {
+      "description": "自主侦察(全维度)",
+      "timeout_ms": 60000
+    },
+    "breach": {
+      "description": "数据泄露查询(HIBP)",
+      "timeout_ms": 15000
+    },
+    "dns": {
+      "description": "DNS记录查询",
+      "timeout_ms": 15000
+    },
+    "email": {
+      "description": "邮箱情报分析",
+      "timeout_ms": 20000
+    },
+    "intel_fusion": {
+      "description": "intel_fusion"
+    },
+    "scheduled_scan": {
+      "description": "定时扫描任务",
+      "timeout_ms": 120000
+    },
+    "search": {
+      "description": "通用OSINT搜索",
+      "timeout_ms": 30000
+    },
+    "social": {
+      "description": "社交媒体情报",
+      "timeout_ms": 20000
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "osint",
+      "情报",
+      "侦察",
+      "信息搜集",
+      "社工"
+    ],
+    "intent": "osint_master"
+  }
+}

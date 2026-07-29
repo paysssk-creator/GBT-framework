@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "strix",
+  "version": "1.0.0",
+  "description": "综合渗透测试框架",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "攻击域",
+  "tier": "core",
+  "actions": {
+    "test": {
+      "description": "综合渗透测试"
+    },
+    "exploit": {
+      "description": "漏洞利用"
+    },
+    "deep": {
+      "description": "深度递归穿透·四脑巅峰运转"
+    }
+  },
+  "auto_exec": false
+}

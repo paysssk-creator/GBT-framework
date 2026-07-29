@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="GBT 法币入金 — 支付宝/微信/银行卡购买 USDT/USDC，秒到平台钱包">
+<meta name="theme-color" content="#000">
+<meta name="description" content="通过 Onramper 法币入金购买 USDT/USDC，资金直达平台钱包。平台不收法币，Onramper 负责合规。">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  :root { --bg:#000; --bg2:#08080c; --bg3:#111118; --fg:#f5f5f7; --dim:#86868b; --accent:#ff6b35; --green:#30d158; --border:rgba(255,255,255,.06); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--fg); font-family:Inter,system-ui,sans-serif; min-height:100vh; }
+  .container { max-width:520px; margin:0 auto; padding:40px 20px; }
+
+  /* Step indicator */
+  .steps { display:flex; gap:0; margin-bottom:32px; }
+  .step { flex:1; text-align:center; position:relative; padding:20px 0 0; }
+  .step::before { content:''; position:absolute; top:12px; left:50%; transform:translateX(-50%); width:24px; height:24px; border-radius:50%; background:var(--bg3); border:2px solid var(--border); z-index:1; }
+  .step.active::before { background:var(--accent); border-color:var(--accent); }
+  .step.done::before { background:var(--green); border-color:var(--green); content:'✓'; color:#fff; font-size:12px; line-height:24px; text-align:center; }
+  .step::after { content:''; position:absolute; top:23px; left:calc(50% + 14px); width:calc(100% - 28px); height:2px; background:var(--border); }
+  .step:last-child::after { display:none; }
+  .step-label { font-size:11px; color:var(--dim); margin-top:8px; }
+  .step.active .step-label { color:var(--accent); font-weight:600; }
+<title>GBT · 购买数字币 — Onramper 法币入金</title>
+
+  /* Cards */
+  .card { background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:24px; margin-bottom:16px; }
+
+  /* Payment method selector */
+  .pay-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+  .pay-option { 
+    background:var(--bg3); border:2px solid var(--border); border-radius:12px; padding:18px 14px; 
+    text-align:center; cursor:pointer; transition:all .2s; position:relative;
+  }
+  .pay-option:hover { border-color:rgba(255,255,255,.2); transform:translateY(-2px); }
+  .pay-option.selected { border-color:var(--accent); background:rgba(255,107,53,.08); }
+  .pay-option.recommended::after {
+    content:'推荐'; position:absolute; top:-8px; right:-8px;
+    background:var(--accent); color:#fff; font-size:9px; font-weight:700;
+    padding:3px 8px; border-radius:10px;
+  }
+  .pay-icon { font-size:28px; margin-bottom:6px; }
+  .pay-name { font-size:13px; font-weight:600; }
+  .pay-desc { font-size:10px; color:var(--dim); margin-top:4px; }
+
+  /* Onramper iframe */
+  .onramper-frame { width:100%; min-height:600px; border:none; border-radius:12px; background:var(--bg3); }
+  .onramper-loading { text-align:center; padding:60px 20px; color:var(--dim); }
+  .loading-spinner { width:40px; height:40px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin .8s linear infinite; margin:0 auto 16px; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+
+  /* Alipay specific styles */
+  .alipay-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; background:#1677FF; color:#fff; border-radius:20px; font-size:12px; font-weight:600; }
+  .alipay-badge svg { width:16px; height:16px; }
+
+  /* Deposit info */
+  .info-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:13px; }
+  .info-row:last-child { border-bottom:none; }
+  .info-label { color:var(--dim); }
+  .info-value { font-weight:600; }
+
+  /* Back */
+  .back-link { display:flex; align-items:center; gap:6px; color:var(--dim); text-decoration:none; font-size:13px; margin-bottom:24px; transition:color .2s; }
+  .back-link:hover { color:var(--fg); }
+</style>
+</head>
+<body>
+
+<script src="/nav-footer.js?v=2"></script>
+
+<main id="main-content" class="container">
+  <a href="/" class="back-link">← 返回首页</a>
+
+  <h1 style="font-size:24px;font-weight:800;margin-bottom:8px;">💱 法币入金</h1>
+  <p style="color:var(--dim);font-size:14px;margin-bottom:32px;">
+    支付宝 / 微信 / 银行卡 → 数字币 → 自动到平台钱包
+  </p>
+
+  <h1 style="font-size:24px;font-weight:800;margin-bottom:8px;">💱 购买数字币</h1>
+  <p style="color:var(--dim);font-size:14px;margin-bottom:4px;">
+    通过 Onramper 用法币购买 USDT/USDC · 资金直达平台钱包
+  </p>
+  <p style="color:var(--dim);font-size:11px;margin-bottom:32px;line-height:1.6;">
+    ⚠️ GBT 平台仅处理数字币，不触碰法币。<br>
+    法币支付由 <b>Onramper</b> 提供，用户自行完成开户和 KYC 验证。
+  </p>
+      <div class="step"><div class="step-label">完成购买</div></div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:14px;font-weight:600;margin-bottom:4px;">选择支付方式</div>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:16px;">支持 130+ 支付方式，自动匹配最优汇率</div>
+
+      <div class="pay-grid" id="payMethods">
+        <div class="pay-option recommended selected" data-method="alipay">
+          <div class="pay-icon">🔵</div>
+          <div class="pay-name">支付宝</div>
+          <div class="pay-desc">扫码支付 · 即时</div>
+        </div>
+        <div class="pay-option" data-method="wechat">
+          <div class="pay-icon">🟢</div>
+          <div class="pay-name">微信支付</div>
+          <div class="pay-desc">扫码支付 · 即时</div>
+        </div>
+        <div class="pay-option" data-method="card">
+          <div class="pay-icon">💳</div>
+          <div class="pay-name">银行卡</div>
+          <div class="pay-desc">Visa/MC/银联</div>
+        </div>
+        <div class="pay-option" data-method="bank">
+          <div class="pay-icon">🏦</div>
+          <div class="pay-name">银行转账</div>
+          <div class="pay-desc">SEPA/ACH/电汇</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:14px;font-weight:600;margin-bottom:4px;">购买信息</div>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:16px;">选择币种和金额</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <div>
+          <label style="font-size:11px;color:var(--dim);display:block;margin-bottom:4px;">购买币种</label>
+          <select id="cryptoSelect" style="width:100%;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--fg);font-size:13px;">
+            <option value="USDT_TRC20">USDT (TRC20)</option>
+            <option value="USDC_TRC20">USDC (TRC20)</option>
+            <option value="USDT_ERC20">USDT (ERC20)</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--dim);display:block;margin-bottom:4px;">法币金额</label>
+          <select id="fiatSelect" style="width:100%;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--fg);font-size:13px;">
+            <option value="CNY">CNY 人民币 ¥</option>
+            <option value="USD">USD 美元 $</option>
+            <option value="EUR">EUR 欧元 €</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:11px;color:var(--dim);display:block;margin-bottom:4px;">购买金额</label>
+        <div style="display:flex;gap:8px;">
+          <input id="amountInput" type="number" placeholder="100" value="100" min="10" max="10000" step="10" style="flex:1;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--fg);font-size:16px;font-weight:600;">
+          <button class="gbt-preset-btn" data-amt="100" style="padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--fg);font-size:13px;cursor:pointer;">¥100</button>
+          <button class="gbt-preset-btn" data-amt="500" style="padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--fg);font-size:13px;cursor:pointer;">¥500</button>
+          <button class="gbt-preset-btn" data-amt="1000" style="padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--fg);font-size:13px;cursor:pointer;">¥1000</button>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">预计收到</span>
+        <span class="info-value" id="estimateOutput">~13.5 USDT</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">网络费</span>
+        <span class="info-value" style="color:var(--dim);">~$1 (TRC20)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">到账时间</span>
+        <span class="info-value" style="color:var(--green);">秒到</span>
+      </div>
+
+      <button id="startOnramp" style="
+        width:100%; padding:16px; margin-top:16px;
+        background: linear-gradient(135deg, #1677FF, #4096FF);
+        border: none; border-radius: 12px; color: #fff;
+        font-size: 16px; font-weight: 700; cursor: pointer;
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+      ">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        支付宝购买
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══ Step 2: Onramper Widget ═══ -->
+  <div id="step2" style="display:none;">
+    <div class="steps">
+      <div class="step done"><div class="step-label">选择支付</div></div>
+      <div class="step active"><div class="step-label">输入金额</div></div>
+      <div class="step"><div class="step-label">完成购买</div></div>
+    </div>
+
+    <div class="card" style="padding:0; overflow:hidden;">
+      <div style="padding:16px 24px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:14px;font-weight:600;">完成购买</div>
+          <div style="font-size:11px;color:var(--dim);">Onramper · 130+ 支付方式</div>
+        </div>
+        <button onclick="goBack()" style="background:none;border:1px solid var(--border);border-radius:8px;color:var(--dim);font-size:12px;padding:6px 14px;cursor:pointer;">← 返回</button>
+      </div>
+      
+      <div id="onramperContainer">
+        <div class="onramper-loading">
+          <div class="loading-spinner"></div>
+          <div>加载支付网关...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 说明 -->
+    <div class="card" style="margin-top:16px;">
+      <div style="font-size:12px;color:var(--dim);line-height:1.8;">
+        <div style="font-weight:600;color:var(--fg);margin-bottom:6px;">💡 购买须知</div>
+        <div>· 支付完成后，数字币将自动发送到您的平台钱包地址</div>
+        <div>· 到账后可在资金账户中查看余额</div>
+        <div>· 支持支付宝/微信/银行卡等 130+ 支付方式</div>
+        <div>· 由 Onramper 提供法币入金服务，安全合规</div>
+        <div>· 如需帮助，联系客服 support@gbtxiaotudou.com</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Step 3: 完成 ═══ -->
+  <div id="step3" style="display:none;">
+    <div class="steps">
+      <div class="step done"><div class="step-label">选择支付</div></div>
+      <div class="step done"><div class="step-label">输入金额</div></div>
+      <div class="step done"><div class="step-label">完成购买</div></div>
+    </div>
+
+    <div class="card" style="text-align:center;">
+      <div style="font-size:48px;margin-bottom:12px;">✅</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:8px;">购买已提交</div>
+      <div style="color:var(--dim);font-size:13px;margin-bottom:20px;">
+        数字币将在链上确认后自动到账您的平台钱包
+      </div>
+      <a href="/" class="gbt-back-home" style="display:inline-block;padding:12px 32px;background:var(--accent);color:#fff;border-radius:10px;text-decoration:none;font-weight:600;">返回首页</a>
+    </div>
+  </div>
+</main>
+
+<!-- ═══ Onramper SDK ═══ -->
+<script>
+(function() {
+  'use strict';
+
+  // ═══ Onramper 配置 ═══
+  const ONRAMPER_CONFIG = {
+    // 生产环境需要替换为真实的 Onramper API Key
+    // 注册: https://onramper.com → 获取 publishable key
+    apiKey: 'pk_prod_01HETEQF46GSK6BS5JWKDF31BT', // ← 替换为你的 key
+    baseUrl: 'https://buy.onramper.com',
+    platformWallet: 'TPlatformMasterUSDTTRC20Address', // ← 平台 USDT TRC20 收款地址
+  };
+
+  // ═══ 状态 ═══
+  let selectedMethod = 'alipay';
+  let selectedCrypto = 'USDT_TRC20';
+  let selectedFiat = 'CNY';
+  let amount = 100;
+
+  // ═══ Step 1: 支付方式选择 ═══
+  document.querySelectorAll('.pay-option').forEach(opt => {
+    opt.addEventListener('click', function() {
+      document.querySelectorAll('.pay-option').forEach(o => o.classList.remove('selected'));
+      this.classList.add('selected');
+      selectedMethod = this.dataset.method;
+      updateEstimate();
+    });
+  });
+
+  // ═══ 币种/法币选择 ═══
+  document.getElementById('cryptoSelect').addEventListener('change', function() {
+    selectedCrypto = this.value;
+    updateEstimate();
+  });
+
+  document.getElementById('fiatSelect').addEventListener('change', function() {
+    selectedFiat = this.value;
+    updateEstimate();
+  });
+
+  // ═══ 金额输入 ═══
+  document.getElementById('amountInput').addEventListener('input', function() {
+    amount = parseFloat(this.value) || 100;
+    updateEstimate();
+  });
+    <!-- 说明 -->
+    <div class="card" style="margin-top:16px;">
+      <div style="font-size:12px;color:var(--dim);line-height:1.8;">
+        <div style="font-weight:600;color:var(--fg);margin-bottom:6px;">💡 资金流向说明</div>
+        <div>· <b>你的法币</b> → Onramper 处理支付和 KYC</div>
+        <div>· Onramper → 购买数字币 → <b style="color:var(--green)">平台钱包地址</b></div>
+        <div>· 平台收到数字币 → 自动记入你的资金账户</div>
+        <div>· GBT 平台<b>不触碰法币</b>，不持有用户法币</div>
+        <div>· 合规由 Onramper 负责（持牌支付机构）</div>
+        <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
+          Onramper 支持 130+ 支付方式：支付宝 · 微信 · 银行卡 · Apple Pay · Google Pay · SEPA · ACH
+        </div>
+      </div>
+    </div>
+
+  // ═══ 预估 ═══
+  function updateEstimate() {
+    const rate = selectedFiat === 'CNY' ? 0.135 : (selectedFiat === 'EUR' ? 1.05 : 1.0);
+    const output = (amount * rate).toFixed(2);
+    document.getElementById('estimateOutput').textContent = '~' + output + ' ' + (selectedCrypto.includes('USDT') ? 'USDT' : 'USDC');
+  }
+
+  // ═══ 启动 Onramper ═══
+  document.getElementById('startOnramp').addEventListener('click', function() {
+    // 显示 Step 2
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'block';
+    document.getElementById('step3').style.display = 'none';
+
+    loadOnramper();
+  });
+
+  // ═══ 加载 Onramper Widget ═══
+  function loadOnramper() {
+    const container = document.getElementById('onramperContainer');
+    if (!container) return;
+
+    // 解析币种和网络
+    const [coin, network] = selectedCrypto.split('_');
+    const cryptoNetwork = network ? network.toLowerCase() : 'trc20';
+
+    // 构建 Onramper URL
+    // 文档: https://docs.onramper.com/docs/widget
+    const params = new URLSearchParams({
+      apiKey: ONRAMPER_CONFIG.apiKey,
+      mode: 'buy',
+      defaultCrypto: coin || 'USDT',
+      defaultFiat: selectedFiat || 'CNY',
+      onlyCryptoNetworks: cryptoNetwork,
+      walletAddress: ONRAMPER_CONFIG.platformWallet,
+      // 支付宝优先
+      onlyPaymentMethods: selectedMethod === 'alipay' ? 'alipay' : 
+                         selectedMethod === 'wechat' ? 'wechat' : '',
+      // 主题
+      themeName: 'dark',
+      primaryColor: 'ff6b35',
+    });
+
+    // 移除空值
+    for (const [k, v] of params.entries()) {
+      if (!v) params.delete(k);
+    }
+
+    const widgetUrl = ONRAMPER_CONFIG.baseUrl + '/?' + params.toString();
+
+    // 渲染 iframe
+    container.innerHTML = '<iframe src="' + widgetUrl + '" class="onramper-frame" id="onramperFrame" allow="camera;payment" title="Onramper"></iframe>';
+
+    // 监听 iframe 加载完成
+    const frame = document.getElementById('onramperFrame');
+    if (frame) {
+      frame.onload = function() {
+        console.log('[Onramper] Widget loaded');
+      };
+    }
+
+    // 监听来自 Onramper 的消息 (交易状态)
+    window.addEventListener('message', function(event) {
+      if (!event.origin.includes('onramper.com')) return;
+
+      try {
+        const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+        console.log('[Onramper] Event:', data);
+
+        // 购买成功
+        if (data.type === 'PURCHASE_COMPLETED' || data.status === 'completed') {
+          handlePurchaseComplete(data);
+        }
+      } catch(e) {}
+    });
+  }
+
+  // ═══ 购买完成处理 ═══
+  function handlePurchaseComplete(data) {
+    document.getElementById('step2').style.display = 'none';
+    document.getElementById('step3').style.display = 'block';
+
+    // 通知后端: 法币入金已完成
+    fetch('/api/wallet/webhook/deposit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tx_hash: data.txHash || data.id || ('onramper_' + Date.now()),
+        amount: data.amount || amount,
+        coin: selectedCrypto.includes('USDT') ? 'USDT' : 'USDC',
+        network: (selectedCrypto.split('_')[1] || 'TRC20').toLowerCase(),
+        memo: 'GBT-' + (localStorage.getItem('gbt_user_id') || 'user'),
+        from_address: 'onramper',
+        provider: 'onramper',
+        payment_method: selectedMethod,
+      })
+    }).catch(console.error);
+
+    console.log('[Onramper] Purchase completed:', data);
+  }
+
+  // ═══ 返回 ═══
+  window.goBack = function() {
+    document.getElementById('step1').style.display = 'block';
+    document.getElementById('step2').style.display = 'none';
+    document.getElementById('step3').style.display = 'none';
+  };
+
+  // ═══ 初始预估 ═══
+  updateEstimate();
+
+})();
+</script>
+
+</body>
+</html>

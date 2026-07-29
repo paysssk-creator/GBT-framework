@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GBT · 开发者面板</title>
+<meta name="theme-color" content="#0a0a0f">
+<meta name="description" content="GBT小土豆开发者面板 — 管理项目、查看收益、一键部署">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<script src="/assets/gbt-3d.js" defer></script>
+<style>
+:root{--bg:#08080d;--card:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.06);--blue:#00d4ff;--gold:#ffd700;--green:#22c55e;--red:#ef4444;--purple:#a855f7}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:#e0e0e0;font-family:Inter,-apple-system,sans-serif;min-height:100vh}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;display:flex;justify-content:space-between;align-items:center;padding:0 24px;background:rgba(8,8,13,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+nav a{color:rgba(255,255,255,.5);text-decoration:none;font-size:13px;font-weight:500}
+nav a:hover{color:#fff}
+nav .logo{font-weight:800;font-size:15px;color:#fff}
+nav .logo em{font-style:normal;color:var(--blue);font-size:10px;background:rgba(0,212,255,.12);padding:2px 8px;border-radius:100px;margin-left:6px}
+.wrap{max-width:1100px;margin:0 auto;padding:80px 20px 40px}
+h1{font-size:28px;font-weight:800;margin-bottom:4px}
+h1 em{font-style:normal;color:var(--blue)}
+.sub{color:rgba(255,255,255,.35);font-size:14px;margin-bottom:32px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;backdrop-filter:blur(16px)}
+.card h3{font-size:14px;color:var(--blue);margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em}
+.stat-row{display:flex;gap:24px;margin-bottom:20px}
+.stat{text-align:center}.stat .n{font-size:32px;font-weight:900;color:#fff}.stat .l{font-size:11px;color:rgba(255,255,255,.25);margin-top:2px}
+.repo-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.repo-item:last-child{border-bottom:none}
+.repo-item .name{font-size:13px;font-weight:600}
+.repo-item .stars{font-size:11px;color:var(--gold)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:100px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.btn-blue{background:var(--blue);color:#000}.btn-blue:hover{box-shadow:0 4px 16px rgba(0,212,255,.3)}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.15)}
+.btn-outline:hover{border-color:rgba(255,255,255,.3)}
+.btn-green{background:var(--green);color:#000}
+.btn-sm{padding:6px 14px;font-size:11px}
+#github-status{display:flex;align-items:center;gap:8px;font-size:13px}
+#github-status .dot{width:8px;height:8px;border-radius:50%}
+.dot.connected{background:var(--green);box-shadow:0 0 8px var(--green)}
+.dot.disconnected{background:var(--red)}
+.deploy-box{background:rgba(0,212,255,.04);border:1px dashed rgba(0,212,255,.2);border-radius:12px;padding:20px;text-align:center}
+.deploy-box input{width:100%;padding:12px;border-radius:100px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:#fff;font-size:14px;margin-bottom:12px;outline:none}
+.deploy-box input:focus{border-color:var(--blue)}
+.earn-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+.earn-item .amount{color:var(--green);font-weight:700}
+.empty-state{text-align:center;padding:40px 20px;color:rgba(255,255,255,.2)}
+.empty-state .icon{font-size:48px;margin-bottom:12px}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">8号当铺<em>AI</em></a>
+  <div style="display:flex;gap:16px;align-items:center">
+    <a href="/deploy.html">Deploy</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <span id="github-status"><span class="dot disconnected"></span> 未连接</span>
+  </div>
+</nav>
+
+<div class="wrap">
+  <h1>开发者<em>面板</em></h1>
+  <p class="sub">管理你的开源项目 · 查看收益 · 一键部署</p>
+
+  <!-- 统计 -->
+  <div class="stat-row" style="margin-bottom:28px">
+    <div class="stat"><div class="n" id="stat-projects">0</div><div class="l">我的项目</div></div>
+    <div class="stat"><div class="n" id="stat-revenue">$0</div><div class="l">累计收益</div></div>
+    <div class="stat"><div class="n" id="stat-hours">0h</div><div class="l">在线时长</div></div>
+    <div class="stat"><div class="n" id="stat-users">0</div><div class="l">活跃用户</div></div>
+  </div>
+
+  <div class="grid">
+    <!-- GitHub连接 -->
+    <div class="card">
+      <h3>🔗 GitHub 连接</h3>
+      <div id="github-panel">
+        <p style="color:rgba(255,255,255,.35);font-size:13px;margin-bottom:16px">连接GitHub后自动同步你的开源仓库</p>
+        <button class="btn btn-blue" onclick="connectGitHub()">🔑 一键登录授权</button>
+      </div>
+    </div>
+
+    <!-- 快速部署 -->
+    <div class="card">
+      <h3>🚀 快速部署</h3>
+      <div class="deploy-box">
+        <input type="text" id="repoUrl" placeholder="粘贴 GitHub 仓库链接...">
+        <button class="btn btn-blue" onclick="quickDeploy()">⚡ 30秒上线</button>
+      </div>
+    </div>
+
+    <!-- 我的仓库 -->
+    <div class="card" style="grid-column:span 2">
+      <h3>📦 我的仓库</h3>
+      <div id="repo-list">
+        <div class="empty-state">
+          <div class="icon">📂</div>
+          <p>连接GitHub查看你的仓库</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 收益记录 -->
+    <div class="card">
+      <h3>💰 最近收益</h3>
+      <div id="earnings">
+        <div class="empty-state">
+          <div class="icon">💵</div>
+          <p>部署项目后开始赚取收益</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 快速操作 -->
+    <div class="card">
+      <h3>⚡ 快速操作</h3>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn btn-outline btn-sm" onclick="connectGitHub()">🔄 同步仓库</button>
+        <a href="/deploy.html" class="btn btn-outline btn-sm">📖 部署指南</a>
+        <a href="/pricing.html" class="btn btn-outline btn-sm">💳 查看定价</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function connectGitHub(){
+  var w=600,h=700;
+  var l=screen.width/2-w/2,t=screen.height/2-h/2;
+  var win=window.open('/api/oauth/login','github_oauth','width='+w+',height='+h+',left='+l+',top='+t);
+  var timer=setInterval(function(){
+    if(win.closed){clearInterval(timer);checkGitHubStatus();}
+  },500);
+}
+
+function checkGitHubStatus(){
+  fetch('/api/oauth/status').then(r=>r.json()).then(d=>{
+    var dot=document.querySelector('#github-status .dot');
+    var txt=document.querySelector('#github-status');
+    if(d.ok && d.sessions>0){
+      dot.className='dot connected';
+      txt.innerHTML='<span class="dot connected"></span> 已连接';
+      document.getElementById('github-panel').innerHTML=
+        '<p style="color:var(--green);font-size:13px;margin-bottom:12px">✅ GitHub已授权</p>'+
+        '<button class="btn btn-outline btn-sm" onclick="connectGitHub()">🔄 重新授权</button>';
+    }
+  }).catch(()=>{});
+}
+
+function quickDeploy(){
+  var url=document.getElementById('repoUrl').value.trim();
+  if(!url){alert('请粘贴GitHub链接');return;}
+  if(!url.includes('github.com')){alert('请输入GitHub仓库链接');return;}
+  window.location.href='/deploy.html?repo='+encodeURIComponent(url);
+}
+
+checkGitHubStatus();
+</script>
+</body>
+</html>

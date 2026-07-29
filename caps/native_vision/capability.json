@@ -1,0 +1,191 @@
+{
+  "name": "native_vision",
+  "version": "2.0.0",
+  "description": "原生视觉邻域 — GBT的眼睛和手, 直连宿主硬件零延迟, 所有邻域可随时调用",
+  "language": "python",
+  "priority": 1,
+  "pipeline_role": "perception",
+  "depends_on": [],
+  "triggers": {
+    "intent": "native_vision",
+    "keywords": [
+      "看",
+      "看见",
+      "看到",
+      "查看屏幕",
+      "截图",
+      "找",
+      "寻找",
+      "定位",
+      "识别文字",
+      "OCR",
+      "点击",
+      "移动",
+      "输入",
+      "按键",
+      "拖拽",
+      "滚动",
+      "眼睛",
+      "手",
+      "视觉",
+      "屏幕",
+      "look",
+      "see",
+      "find",
+      "click",
+      "type",
+      "press",
+      "vision",
+      "eye",
+      "hand",
+      "screen"
+    ],
+    "examples": [
+      "看看屏幕上有什么",
+      "找到登录按钮并点击",
+      "识别屏幕上的文字",
+      "移动到坐标500,300",
+      "输入hello world",
+      "按回车键"
+    ]
+  },
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "actions": {
+    "analyze": {
+      "description": "analyze"
+    },
+    "browse_and_interact": {
+      "description": "browse_and_interact"
+    },
+    "browse_feed": {
+      "description": "browse_feed"
+    },
+    "browse_screen": {
+      "description": "browse_screen"
+    },
+    "browse_scroll": {
+      "description": "browse_scroll"
+    },
+    "buffer_stats": {
+      "description": "buffer_stats"
+    },
+    "click": {
+      "description": "click"
+    },
+    "colors_at": {
+      "description": "colors_at"
+    },
+    "compare": {
+      "description": "compare"
+    },
+    "double_click": {
+      "description": "double_click"
+    },
+    "drag": {
+      "description": "drag"
+    },
+    "find": {
+      "description": "find"
+    },
+    "find_all": {
+      "description": "find_all"
+    },
+    "hotkey": {
+      "description": "hotkey"
+    },
+    "latest": {
+      "description": "latest"
+    },
+    "look_and_click": {
+      "description": "look_and_click"
+    },
+    "look_and_type": {
+      "description": "look_and_type"
+    },
+    "look_deep": {
+      "description": "look_deep"
+    },
+    "move": {
+      "description": "move"
+    },
+    "move_to_text": {
+      "description": "move_to_text"
+    },
+    "movie": {
+      "description": "movie"
+    },
+    "movie_analyze": {
+      "description": "movie_analyze"
+    },
+    "movie_record": {
+      "description": "movie_record"
+    },
+    "paste": {
+      "description": "paste"
+    },
+    "press": {
+      "description": "press"
+    },
+    "read": {
+      "description": "read"
+    },
+    "read_all": {
+      "description": "read_all"
+    },
+    "right_click": {
+      "description": "right_click"
+    },
+    "screenshot_region": {
+      "description": "screenshot_region"
+    },
+    "scroll": {
+      "description": "scroll"
+    },
+    "see": {
+      "description": "see"
+    },
+    "select_all_copy": {
+      "description": "select_all_copy"
+    },
+    "start_watching": {
+      "description": "start_watching"
+    },
+    "stop_watching": {
+      "description": "stop_watching"
+    },
+    "to_annotated": {
+      "description": "to_annotated"
+    },
+    "to_image": {
+      "description": "to_image"
+    },
+    "type": {
+      "description": "type"
+    },
+    "type_and_enter": {
+      "description": "type_and_enter"
+    },
+    "wait_for": {
+      "description": "wait_for"
+    },
+    "wait_for_async": {
+      "description": "wait_for_async"
+    },
+    "wait_for_stable": {
+      "description": "wait_for_stable"
+    },
+    "wait_until_gone": {
+      "description": "wait_until_gone"
+    }
+  },
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "感知",
+  "tier": "core",
+  "note": "原生视觉邻域 — 直连host_body, 不走子进程, 是所有视觉操作的唯一入口"
+}

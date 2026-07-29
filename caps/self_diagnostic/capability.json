@@ -1,0 +1,35 @@
+{
+  "name": "self_diagnostic",
+  "version": "1.0.0",
+  "description": "自诊断系统 — 全栈健康检测/依赖检查/配置验证/一键修复建议",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "运维",
+  "entry": { "program": "python", "args": ["run.py"] },
+  "triggers": {
+    "keywords": ["诊断", "检查", "doctor", "修复", "自检", "diagnostic", "体检"],
+    "intent": "self_diagnostic",
+    "examples": ["系统自检", "帮我看看有什么问题", "全面诊断"]
+  },
+  "actions": {
+    "full": {
+      "description": "全系统诊断 (环境/依赖/配置/caps/后端/安全)",
+      "args": ["--action", "full"],
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "quick": {
+      "description": "快速诊断 (仅关键项)",
+      "args": ["--action", "quick"],
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "fix": {
+      "description": "自动修复可修复的问题",
+      "args": ["--action", "fix"],
+      "timeout_ms": 120000,
+      "output": "json"
+    }
+  }
+}

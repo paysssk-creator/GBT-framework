@@ -1,0 +1,36 @@
+{
+  "id": "event_bus",
+  "name": "event_bus",
+  "version": "1.0.0",
+  "description": "事件总线 — 文件背板 pub/sub，基于 ~/.gbt/events/",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "基础设施",
+  "actions": {
+    "publish": {
+      "description": "发布事件到指定topic"
+    },
+    "subscribe": {
+      "description": "订阅topic的处理规则"
+    },
+    "unsubscribe": {
+      "description": "取消订阅"
+    },
+    "list_topics": {
+      "description": "列出所有topic及订阅者"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "event_bus",
+      "事件",
+      "pubsub",
+      "发布",
+      "订阅",
+      "topic",
+      "消息"
+    ],
+    "intent": "event_bus"
+  }
+}

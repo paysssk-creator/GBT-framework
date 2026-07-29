@@ -1,0 +1,25 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "sys_control",
+  "version": "1.0.0",
+  "description": "16类跨平台系统操控(键鼠/窗口/进程/防火墙)",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "桌面域",
+  "tier": "core",
+  "actions": {
+    "control": {
+      "description": "执行系统操控"
+    },
+    "keyboard": {
+      "description": "键盘操控"
+    },
+    "mouse": {
+      "description": "鼠标操控"
+    },
+    "window": {
+      "description": "窗口操控"
+    }
+  },
+  "auto_exec": false
+}

@@ -1,0 +1,32 @@
+{
+  "id": "tracer",
+  "name": "tracer",
+  "version": "1.0.0",
+  "description": "分布式追踪 — span级执行追踪·调用树还原·耗时统计",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "基础设施",
+  "actions": {
+    "start_trace": {
+      "description": "开启追踪span，返回trace_id"
+    },
+    "end_trace": {
+      "description": "结束span，记录耗时"
+    },
+    "get_trace": {
+      "description": "获取完整追踪树"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "trace",
+      "tracer",
+      "追踪",
+      "span",
+      "调用链",
+      "耗时"
+    ],
+    "intent": "tracer"
+  }
+}

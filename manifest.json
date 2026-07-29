@@ -1,0 +1,14 @@
+{
+  "name": "GBT 3D Showcase",
+  "short_name": "GBT3D",
+  "description": "GBT Brain Runtime - 3D智能展厅",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050510",
+  "theme_color": "#00d4ff",
+  "orientation": "any",
+  "icons": [
+    {"src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png"}
+  ]
+}

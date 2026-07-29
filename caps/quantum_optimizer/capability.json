@@ -1,0 +1,15 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "quantum_optimizer",
+  "version": "1.0.0",
+  "description": "量子优化(跨维度资源调度)",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "量子邻域",
+  "actions": {
+    "optimize": {
+      "description": "optimize"
+    }
+  }
+}

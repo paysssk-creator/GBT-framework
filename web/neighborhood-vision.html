@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GBT 触手邻域视觉 · 统一视觉中枢</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --panel-bg: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.08);
+  --accent: #00d4ff;
+  --gold: #ffd700;
+  --green: #22c55e;
+  --red: #ef4444;
+  --text: #e0e0e0;
+  --text-dim: #888;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { 
+  background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif;
+  height: 100vh; overflow: hidden; display: flex; flex-direction: column;
+}
+header {
+  padding: 8px 16px; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);
+}
+header h1 { font-size: 14px; color: var(--accent); font-weight: 600; }
+header .status { font-size: 11px; color: var(--text-dim); }
+header .status .dot { 
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 4px;
+}
+.dot.active { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.dot.inactive { background: var(--red); }
+.dot.refreshing { background: var(--gold); animation: pulse 0.8s infinite; }
+@keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:0.3 } }
+
+main {
+  flex: 1; display: grid; grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr; gap: 6px; padding: 6px; overflow: hidden;
+}
+.panel {
+  background: var(--panel-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px; overflow: auto;
+  display: flex; flex-direction: column;
+}
+.panel h2 {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--accent); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;
+}
+.panel h2 .icon { font-size: 14px; }
+.panel .content { flex:1; font-size: 11px; line-height: 1.5; overflow: auto; }
+.panel .content pre { 
+  white-space: pre-wrap; word-break: break-all; margin:0; font-family: 'Cascadia Code', 'Consolas', monospace; 
+  font-size: 10px; color: var(--text-dim);
+}
+
+/* Screen panel - spans 2 rows */
+.panel.screen { grid-row: span 2; }
+.panel.screen img { max-width: 100%; border-radius: 4px; border: 1px solid var(--border); }
+
+/* Debug panel - spans full width on bottom */
+.panel.debug { grid-column: span 2; }
+.panel.debug .log-line { 
+  padding: 2px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
+  font-family: 'Cascadia Code', 'Consolas', monospace; font-size: 10px;
+}
+.panel.debug .log-line .ts { color: var(--text-dim); margin-right: 8px; }
+.panel.debug .log-line .event { color: var(--accent); }
+
+/* Channels grid */
+.channels { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.channel-card {
+  background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+  border-radius: 4px; padding: 6px; font-size: 10px;
+}
+.channel-card .ch-name { color: var(--accent); font-weight: 600; }
+.channel-card .ch-status.ok { color: var(--green); }
+.channel-card .ch-status.err { color: var(--red); }
+
+.stats { display: flex; gap: 12px; font-size: 10px; color: var(--text-dim); }
+.stats span { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🥔 GBT 触手邻域视觉 · 统一视觉中枢</h1>
+  <div class="status">
+    <span class="dot inactive" id="statusDot"></span>
+    <span id="statusText">等待数据...</span>
+    &nbsp;|&nbsp; 快照: <span id="snapCount">0</span>
+    &nbsp;|&nbsp; 延迟: <span id="latency">-</span>ms
+  </div>
+</header>
+
+<main>
+  <!-- 面板1: 屏幕视觉 + OCR -->
+  <div class="panel screen" id="panelScreen">
+    <h2><span class="icon">📸</span> 屏幕视觉 · OCR</h2>
+    <div class="content" id="screenContent">
+      <div style="color:var(--text-dim)">等待邻域视觉数据...</div>
+    </div>
+  </div>
+
+  <!-- 面板2: 触手通道 -->
+  <div class="panel" id="panelTentacles">
+    <h2><span class="icon">🦑</span> 触手通道</h2>
+    <div class="content">
+      <div class="channels" id="channelsGrid">
+        <div class="channel-card"><span class="ch-name">等待数据...</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 面板3: 皮层分析 -->
+  <div class="panel" id="panelCortex">
+    <h2><span class="icon">🧠</span> 皮层分析</h2>
+    <div class="content" id="cortexContent">
+      <div style="color:var(--text-dim)">等待分析数据...</div>
+    </div>
+  </div>
+
+  <!-- 面板4: 视觉记忆 -->
+  <div class="panel" id="panelMemory">
+    <h2><span class="icon">💾</span> 视觉记忆</h2>
+    <div class="content" id="memoryContent">
+      <div style="color:var(--text-dim)">等待记忆数据...</div>
+    </div>
+  </div>
+
+  <!-- 面板5: 调试日志 -->
+  <div class="panel debug" id="panelDebug">
+    <h2><span class="icon">🔍</span> 排查日志 · 全程可追溯</h2>
+    <div class="content" id="debugContent">
+      <div style="color:var(--text-dim)">等待日志...</div>
+    </div>
+  </div>
+</main>
+
+<script>
+const STATE_URL = '/.gbt/neighborhood_vision_state.json';
+const REFRESH_MS = 1500;
+
+let lastSnapId = 0;
+let refreshTimer = null;
+
+async function fetchState() {
+  try {
+    const resp = await fetch(STATE_URL + '?t=' + Date.now());
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+    if (data.snapshot_id > lastSnapId) {
+      lastSnapId = data.snapshot_id;
+      render(data);
+    }
+    updateStatus(true, data);
+  } catch (e) {
+    updateStatus(false, null);
+  }
+}
+
+function updateStatus(ok, data) {
+  const dot = document.getElementById('statusDot');
+  const text = document.getElementById('statusText');
+  dot.className = 'dot ' + (ok ? 'active' : 'inactive');
+  text.textContent = ok ? '活跃' : '连接中断';
+  if (data) {
+    document.getElementById('snapCount').textContent = data.snapshot_id || 0;
+    document.getElementById('latency').textContent = data.elapsed_ms || '-';
+  }
+}
+
+function render(data) {
+  const panels = data.panels || {};
+
+  // 屏幕面板
+  if (panels.screen && !panels.screen.error) {
+    const sc = document.getElementById('screenContent');
+    let html = '';
+    if (panels.screen.image_b64 && panels.screen.image_b64.length > 50) {
+      html += `<img src="data:image/png;base64,${panels.screen.image_b64}" 
+                style="max-width:100%;border-radius:4px;margin-bottom:6px;" 
+                onerror="this.style.display='none'">`;
+    }
+    const ocr = panels.screen.ocr_text || '';
+    if (ocr) {
+      html += `<pre style="font-size:10px;max-height:200px;overflow:auto;">${escapeHtml(ocr)}</pre>`;
+    }
+    html += `<div class="stats">OCR字数: <span>${ocr.length}</span></div>`;
+    sc.innerHTML = html || '<div style="color:var(--text-dim)">无屏幕数据</div>';
+  } else {
+    document.getElementById('screenContent').innerHTML = 
+      `<div style="color:var(--red)">${panels.screen?.error || '屏幕采集失败'}</div>`;
+  }
+
+  // 触手通道面板
+  if (panels.tentacles && !panels.tentacles.error) {
+    const ch = panels.tentacles.channels || {};
+    let gridHtml = '';
+    for (const [name, info] of Object.entries(ch)) {
+      const cls = info.ok ? 'ok' : 'err';
+      const emoji = {screen:'📸',clipboard:'📋',camera:'📷'}[name] || '🔗';
+      gridHtml += `<div class="channel-card">
+        <span class="ch-name">${emoji} ${name}</span>
+        <span class="ch-status ${cls}">${info.ok ? '✅' : '❌'}</span>
+        ${info.error ? `<div style="color:var(--red);font-size:9px">${info.error}</div>` : ''}
+        ${info.image_size ? `<div style="font-size:9px;color:var(--text-dim)">${(info.image_size/1024).toFixed(1)}KB</div>` : ''}
+      </div>`;
+    }
+    document.getElementById('channelsGrid').innerHTML = gridHtml;
+  }
+
+  // 皮层分析面板
+  if (panels.cortex && !panels.cortex.error) {
+    const analysis = panels.cortex.analysis || {};
+    const summary = analysis.summary || analysis;
+    document.getElementById('cortexContent').innerHTML = 
+      `<pre>${escapeHtml(JSON.stringify(summary, null, 2).substring(0, 2000))}</pre>`;
+  }
+
+  // 记忆面板
+  if (panels.memory && !panels.memory.error) {
+    const mem = panels.memory;
+    document.getElementById('memoryContent').innerHTML = 
+      `<div class="stats">今天快照: <span>${mem.today?.snapshots || 0}</span></div>
+       <pre>${escapeHtml(JSON.stringify(mem.now || {}, null, 2).substring(0, 1000))}</pre>`;
+  }
+
+  // 调试日志面板
+  if (panels.debug) {
+    const logs = panels.debug.logs || [];
+    let logHtml = '';
+    for (const log of logs.slice(-30)) {
+      logHtml += `<div class="log-line">
+        <span class="ts">${(log.timestamp || '').substring(11,19)}</span>
+        <span class="event">${escapeHtml(log.event || log.type || '')}</span>
+      </div>`;
+    }
+    document.getElementById('debugContent').innerHTML = logHtml || '<div style="color:var(--text-dim)">无日志</div>';
+  }
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// 启动轮询
+function startPolling() {
+  fetchState();
+  refreshTimer = setInterval(fetchState, REFRESH_MS);
+  document.getElementById('statusDot').className = 'dot refreshing';
+}
+
+startPolling();
+</script>
+</body>
+</html>

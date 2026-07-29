@@ -1,0 +1,119 @@
+{
+  "name": "self_evolve",
+  "version": "1.0.0",
+  "description": "自进化引擎 — 6步闭环: 感知→分析→规划→执行→验证→吸收。让GBT越用越强,自动从每次任务中学习进化",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "进化",
+      "evolve",
+      "学习",
+      "优化",
+      "自改进",
+      "升级",
+      "迭代"
+    ],
+    "intent": "self_evolution",
+    "examples": [
+      "自我进化",
+      "学习这次的经验"
+    ]
+  },
+  "actions": {
+    "auto_evolve_cycle": {
+      "description": "auto_evolve_cycle"
+    },
+    "capture": {
+      "description": "capture",
+      "args": [
+        "--action",
+        "capture"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "cross_session_merge": {
+      "description": "cross_session_merge"
+    },
+    "evolve": {
+      "description": "evolve",
+      "args": [
+        "--action",
+        "evolve"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "insights": {
+      "description": "insights",
+      "args": [
+        "--action",
+        "insights"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "learn": {
+      "description": "learn",
+      "args": [
+        "--action",
+        "learn"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "metrics": {
+      "description": "metrics",
+      "args": [
+        "--action",
+        "metrics"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "recall": {
+      "description": "recall",
+      "args": [
+        "--action",
+        "recall"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "search": {
+      "description": "search",
+      "args": [
+        "--action",
+        "search"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "timeline": {
+      "description": "timeline",
+      "args": [
+        "--action",
+        "timeline"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    }
+  }
+}

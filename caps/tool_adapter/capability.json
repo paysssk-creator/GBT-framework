@@ -1,0 +1,39 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "tool_adapter",
+  "version": "1.0.0",
+  "description": "工具适配器 — 桥接HOST_BODY能力到可用OMP工具，按优先级路由：原生OMP工具 → 本地Python库 → 子进程cap调用",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "AI协作",
+  "tier": "ready",
+  "actions": {
+    "map_tool": {
+      "description": "将cap风格的动作名映射到最佳可用工具路由决策"
+    },
+    "list_available": {
+      "description": "扫描当前环境中实际可用的工具类型"
+    },
+    "call_tool": {
+      "description": "通过适配器路由执行工具调用"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "工具适配",
+      "tool adapter",
+      "路由",
+      "screenshot",
+      "桌面点击",
+      "OCR",
+      "desktop click"
+    ],
+    "intent": "tool_routing",
+    "examples": [
+      "截图用什么工具",
+      "有哪些可用工具",
+      "调用screenshot工具"
+    ]
+  },
+  "auto_exec": false
+}

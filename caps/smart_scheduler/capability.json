@@ -1,0 +1,46 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "smart_scheduler",
+  "version": "1.0.0",
+  "description": "智能任务调度",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "运维域",
+  "tier": "ready",
+  "actions": {
+    "cancel": {
+      "description": "cancel"
+    },
+    "chain_tasks": {
+      "description": "chain_tasks"
+    },
+    "cron_schedule": {
+      "description": "cron_schedule"
+    },
+    "list": {
+      "description": "列出调度"
+    },
+    "persist_queue": {
+      "description": "Save full task queue to ~/.gbt/schedule_persist.json"
+    },
+    "restore_queue": {
+      "description": "Restore task queue from ~/.gbt/schedule_persist.json"
+    },
+    "results": {
+      "description": "results"
+    },
+    "schedule": {
+      "description": "调度任务"
+    },
+    "self_start": {
+      "description": "self_start"
+    },
+    "start_worker": {
+      "description": "start_worker"
+    },
+    "stop_worker": {
+      "description": "stop_worker"
+    }
+  },
+  "auto_exec": false
+}

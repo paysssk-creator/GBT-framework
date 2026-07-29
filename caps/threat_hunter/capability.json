@@ -1,0 +1,25 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "threat_hunter",
+  "version": "1.0.0",
+  "description": "威胁狩猎·主动威胁搜索与IOC匹配",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": false,
+  "category": "特殊域",
+  "actions": {
+    "hunt": {
+      "description": "主动搜索威胁"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "threat hunt",
+      "威胁狩猎",
+      "IOC",
+      "APT",
+      "威胁"
+    ],
+    "intent": "threat_hunter"
+  }
+}

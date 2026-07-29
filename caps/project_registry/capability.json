@@ -1,0 +1,41 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "project_registry",
+  "version": "1.0.0",
+  "description": "项目注册中心·平台项目全生命周期·13个种子项目·注册·部署·上下架",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI协作",
+  "actions": {
+    "deploy": {
+      "description": "部署/上下架项目",
+      "timeout_ms": 10000
+    },
+    "list": {
+      "description": "列出所有项目",
+      "timeout_ms": 5000
+    },
+    "register": {
+      "description": "注册新项目",
+      "timeout_ms": 5000
+    },
+    "run": {
+      "description": "run"
+    },
+    "stats": {
+      "description": "项目统计",
+      "timeout_ms": 5000
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "项目",
+      "project",
+      "部署",
+      "上下架",
+      "注册项目"
+    ],
+    "intent": "project_registry"
+  }
+}

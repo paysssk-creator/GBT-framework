@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "waf_bypass",
+  "version": "1.0.0",
+  "description": "WAF绕过(大小写/编码/分块)",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "攻击域",
+  "tier": "core",
+  "actions": {
+    "bypass": {
+      "description": "尝试绕过WAF"
+    },
+    "encode": {
+      "description": "编码变形绕过"
+    },
+    "chunk": {
+      "description": "分块传输绕过"
+    }
+  },
+  "auto_exec": false
+}

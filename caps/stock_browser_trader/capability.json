@@ -1,0 +1,70 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "stock_browser_trader",
+  "version": "1.0.0",
+  "description": "A股AI量化操盘融合引擎 — 指纹浏览器 + AI推理 + 实时行情 + 屏幕视觉",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": true,
+  "category": "金融域",
+  "engines": {
+    "python": "caps/stock_browser_trader/run.py"
+  },
+  "actions": {
+    "ai_browser_scan": {
+      "description": "ai_browser_scan"
+    },
+    "ai_browser_trade": {
+      "description": "ai_browser_trade"
+    },
+    "alert_on_signal": {
+      "description": "alert_on_signal"
+    },
+    "analyze_chart": "K线图AI分析",
+    "analyze_stock": "个股深度分析+AI推理",
+    "auto_trade": "一键自动操盘流水线",
+    "autonomous_patrol": {
+      "description": "autonomous_patrol"
+    },
+    "browse_market": {
+      "description": "browse_market"
+    },
+    "capture_screen": "截图(base64)",
+    "daily_report": {
+      "description": "daily_report"
+    },
+    "daily_review": "每日复盘",
+    "engine_status": "引擎状态",
+    "knowledge": "查询A股知识库",
+    "launch_browser": {
+      "description": "launch_browser"
+    },
+    "look_and_trade": {
+      "description": "look_and_trade"
+    },
+    "market_sentiment": {
+      "description": "market_sentiment"
+    },
+    "ocr_screen": "OCR+AI解读",
+    "place_order": "模拟下单+AI审核",
+    "risk_check": "风控检查",
+    "scan_hot_sectors": "热门板块扫描",
+    "scan_market": "全市场扫描+AI筛选",
+    "setup_platform": "创建指纹浏览器配置文件",
+    "watch_market": {
+      "description": "watch_market"
+    }
+  },
+  "ai_engine": "deepseek-v4-pro",
+  "data_source": [
+    "sina",
+    "tencent",
+    "eastmoney"
+  ],
+  "platforms": [
+    "eastmoney",
+    "10jqka",
+    "xueqiu",
+    "sina"
+  ]
+}

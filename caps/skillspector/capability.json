@@ -1,0 +1,55 @@
+{
+  "name": "skillspector",
+  "version": "1.0.0",
+  "description": "NVIDIA SkillSpector安全扫描 — 5条核心YARA规则(Python实现): 凭据泄露/远程执行/Prompt注入/MCP中毒/自主破坏",
+  "language": "python",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "安全扫描",
+      "skillspector",
+      "nvidia",
+      "漏洞扫描",
+      "安全检查",
+      "yara",
+      "审计skill",
+      "扫描skill"
+    ],
+    "intent": "security_audit",
+    "examples": [
+      "扫描skill安全",
+      "检查caps模块",
+      "NVIDIA安全审计"
+    ]
+  },
+  "actions": {
+    "scan": {
+      "description": "SkillSpector安全扫描 — 5条规则: 凭据外传/远程执行/Prompt注入/MCP中毒/自主破坏 + 风险评分",
+      "args": [
+        "--action",
+        "scan"
+      ],
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "quick": {
+      "description": "快速扫描 — 仅高风险规则",
+      "args": [
+        "--action",
+        "quick"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    }
+  },
+  "risk_level": "medium",
+  "auto_exec": true,
+  "category": "安全"
+}

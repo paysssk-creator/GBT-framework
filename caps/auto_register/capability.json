@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "auto_register",
+  "version": "1.0.0",
+  "description": "批量账号注册(钱包/社交/直播/论坛/电商)",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "运维域",
+  "tier": "ready",
+  "actions": {
+    "register": {
+      "description": "注册账号"
+    },
+    "batch": {
+      "description": "批量注册"
+    }
+  },
+  "auto_exec": false
+}

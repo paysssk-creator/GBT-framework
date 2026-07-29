@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "jwt_tester",
+  "version": "1.0.0",
+  "description": "JWT令牌安全测试",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "攻击域",
+  "tier": "ready",
+  "actions": {
+    "test": {
+      "description": "测试JWT安全性"
+    },
+    "forge": {
+      "description": "尝试伪造JWT"
+    }
+  },
+  "auto_exec": false
+}

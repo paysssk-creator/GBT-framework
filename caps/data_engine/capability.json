@@ -1,0 +1,94 @@
+{
+  "name": "data_engine",
+  "version": "1.0.0",
+  "description": "数据引擎 — CSV/JSON/Excel读写/数据清洗/聚合分析/可视化/ETL管道",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "信息",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "数据",
+      "data",
+      "CSV",
+      "Excel",
+      "JSON",
+      "分析",
+      "统计",
+      "图表",
+      "清洗",
+      "ETL",
+      "pandas"
+    ],
+    "intent": "data_processing",
+    "examples": [
+      "分析CSV数据",
+      "读取Excel文件",
+      "数据清洗"
+    ]
+  },
+  "actions": {
+    "analyze": {
+      "description": "数据分析: 统计/分组/聚合/排序",
+      "args": [
+        "--action",
+        "analyze"
+      ],
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "auto_etl": {
+      "description": "auto_etl"
+    },
+    "clean": {
+      "description": "数据清洗: 去重/填缺/格式化/过滤",
+      "args": [
+        "--action",
+        "clean"
+      ],
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "export": {
+      "description": "导出为CSV/JSON/Excel",
+      "args": [
+        "--action",
+        "export"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "pipeline_watch": {
+      "description": "pipeline_watch"
+    },
+    "query": {
+      "description": "SQL风格查询 (SELECT/WHERE/GROUP BY/ORDER BY)",
+      "args": [
+        "--action",
+        "query"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "read": {
+      "description": "读取CSV/JSON/Excel文件返回摘要",
+      "args": [
+        "--action",
+        "read"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    }
+  }
+}

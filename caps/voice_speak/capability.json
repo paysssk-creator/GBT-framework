@@ -1,0 +1,51 @@
+{
+  "name": "voice_speak",
+  "version": "1.0.0",
+  "description": "语音播报 — TTS文字转语音",
+  "language": "python",
+  "priority": 8,
+  "pipeline_role": "scout",
+  "depends_on": [],
+  "triggers": {
+    "intent": "speak",
+    "keywords": [
+      "说话",
+      "语音",
+      "播报",
+      "speak",
+      "tts",
+      "朗读",
+      "念"
+    ],
+    "examples": [
+      "说句话",
+      "朗读这段文字"
+    ]
+  },
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "actions": {
+    "list_engines": {
+      "description": "list_engines"
+    },
+    "speak": {
+      "description": "播报文字",
+      "args": [
+        "speak"
+      ],
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "speak_kokoro": {
+      "description": "speak_kokoro"
+    }
+  },
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "桌面"
+}

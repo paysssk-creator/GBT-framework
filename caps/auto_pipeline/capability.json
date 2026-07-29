@@ -1,0 +1,28 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "auto_pipeline",
+  "version": "1.0.0",
+  "description": "多步骤任务自动编排",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "运维域",
+  "tier": "core",
+  "actions": {
+    "auto_chain": {
+      "description": "auto_chain"
+    },
+    "define": {
+      "description": "定义流水线"
+    },
+    "run": {
+      "description": "运行流水线"
+    },
+    "schedule_recurring": {
+      "description": "schedule_recurring"
+    },
+    "status": {
+      "description": "查看状态"
+    }
+  },
+  "auto_exec": false
+}

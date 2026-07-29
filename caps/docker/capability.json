@@ -1,0 +1,45 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "docker",
+  "version": "1.0.0",
+  "description": "容器管理(Docker)",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "运维域",
+  "tier": "ready",
+  "actions": {
+    "run": {
+      "description": "运行容器"
+    },
+    "stop": {
+      "description": "停止容器"
+    },
+    "build": {
+      "description": "构建镜像"
+    },
+    "ps": {
+      "description": "列出容器"
+    },
+    "compose_up": {
+      "description": "读取docker-compose.yml启动整个栈",
+      "params": {
+        "file": "compose文件路径",
+        "project": "项目名"
+      }
+    },
+    "health_check": {
+      "description": "健康检查所有受管容器",
+      "params": {
+        "containers": "容器名列表,空=全部"
+      }
+    },
+    "auto_orchestrate": {
+      "description": "自动编排容器生命周期(start/stop/restart/status)",
+      "params": {
+        "op": "操作类型",
+        "containers": "容器名列表"
+      }
+    }
+  },
+  "auto_exec": false
+}

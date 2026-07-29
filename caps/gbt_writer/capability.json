@@ -1,0 +1,53 @@
+{
+  "name": "gbt_writer",
+  "version": "1.0.0",
+  "description": "GBT小土豆 纯代码编写工具 — 直连 programming/generate（DeepSeek/Kimi），不拒绝不干预不反问只输出代码",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "编程工具",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "写代码",
+      "gbt",
+      "编写",
+      "生成代码",
+      "coding",
+      "code gen"
+    ],
+    "intent": "code_writing",
+    "examples": [
+      "帮我写一个Python脚本",
+      "写一个HTML页面"
+    ]
+  },
+  "actions": {
+    "write": {
+      "description": "调用GBT纯编写模式生成代码",
+      "args": [
+        "write"
+      ],
+      "input": {
+        "instruction": "string",
+        "lang": "string"
+      },
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "status": {
+      "description": "查看gbt_writer状态",
+      "args": [
+        "status"
+      ],
+      "input": {},
+      "timeout_ms": 5000,
+      "output": "json"
+    }
+  }
+}

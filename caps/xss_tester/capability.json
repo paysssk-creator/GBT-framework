@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "xss_tester",
+  "version": "1.0.0",
+  "description": "XSS跨站脚本检测",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "攻击域",
+  "tier": "core",
+  "actions": {
+    "test": {
+      "description": "测试XSS注入点"
+    },
+    "reflected": {
+      "description": "反射型XSS检测"
+    },
+    "stored": {
+      "description": "存储型XSS检测"
+    }
+  },
+  "auto_exec": false
+}

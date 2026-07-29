@@ -1,0 +1,58 @@
+# GBT小土豆 v5.0 — Python依赖
+# 由自由的风开发 · 128个AI能力模块
+# pip install -r requirements.txt
+
+# ═══════════════ 核心运行时 (必需) ═══════════════
+psutil>=5.9.0          # 系统监控: CPU/内存/磁盘/网络/进程
+pyautogui>=0.9.50      # 桌面操控: 键鼠模拟
+mss>=9.0.0             # 屏幕截图: 跨平台高性能
+Pillow>=10.0.0         # 图像处理: 截图/OFF分析
+pytesseract>=0.3.10    # OCR文字识别 (需要系统安装Tesseract)
+uiautomation>=2.0      # Windows UI Automation树遍历
+requests>=2.31.0       # HTTP客户端
+urllib3>=2.0.0         # HTTP底层
+
+# ═══════════════ LLM/AI引擎 ═══════════════
+# DeepSeek/Kimi API (自动检测环境变量, 无额外依赖)
+# openai>=1.0.0        # OpenAI API (可选)
+
+# ═══════════════ 安全/攻击工具 ═══════════════
+scapy>=2.5.0           # 网络包嗅探/构造
+cryptography>=41.0.0   # 加密算法
+
+# ═══════════════ 声音/语音 ═══════════════
+edge-tts>=6.1.0        # Microsoft Edge TTS (免费)
+pyttsx3>=2.90          # 离线TTS回退
+kokoro>=0.1.0          # Kokoro-82M SOTA开源TTS (MIT, 可选)
+soundfile>=0.12.0      # 音频文件读写
+pyaudio>=0.2.11        # 麦克风录音 (可选)
+# coqui-tts>=0.22.0    # XTTS v2语音克隆 (可选, 需要torch)
+
+# ═══════════════ 视觉/视频 ═══════════════
+opencv-python>=4.8.0   # 摄像头捕获/图像处理
+# torch>=2.1.0          # 深度学习框架 (HunyuanVideo本地需要)
+# diffusers>=0.25.0     # HuggingFace扩散模型 (可选)
+# transformers>=4.36.0  # HuggingFace Transformers (Florence-2/AI视觉)
+# imageio>=2.33.0       # 视频帧写入
+
+# ═══════════════ 应用特定 ═══════════════
+telethon>=1.36.0        # Telegram MTProto客户端
+python-dotenv>=1.0.0    # .env环境变量加载
+openpyxl>=3.1.0         # Excel读写
+pynput>=1.7.0           # 键盘/鼠标监听
+pyperclip>=1.8.0        # 剪贴板访问
+
+# ═══════════════ 可选增强 ═══════════════
+# mem0ai>=0.1.0         # Mem0 Agent记忆系统 (可选)
+# qiskit>=1.0.0         # IBM Quantum量子计算 (可选)
+# qiskit-aer>=0.14.0    # 量子模拟器 (可选)
+# qiskit-ibm-runtime    # IBM Quantum云端 (可选)
+# semgrep>=1.0.0        # AST级代码安全分析 (可选)
+# headroom-ai>=0.1.0    # Token压缩60-95% (可选)
+# dnspython>=2.6.0      # DNS全记录查询 (可选)
+# tiktoken>=0.5.0       # OpenAI token计数 (可选)
+
+# ═══════════════ 2Captcha 反反爬四件套 ═══════════════
+# 自带上层Python SDK (caps/_2captcha/), 纯标准库, 零额外pip依赖
+# 配置: 在.env中设置 CAPTCHA_API_KEY=your_32char_key
+# 能力: captcha_solver | proxy_network | browser_fingerprint | cloud_browser

@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "bounty_hunter",
+  "version": "1.0.0",
+  "description": "漏洞赏金全链路自动化",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "攻击域",
+  "tier": "core",
+  "actions": {
+    "hunt": {
+      "description": "启动赏金狩猎"
+    },
+    "report": {
+      "description": "生成漏洞报告"
+    }
+  },
+  "auto_exec": false
+}

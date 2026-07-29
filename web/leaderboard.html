@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GBT 排行榜 · GitHub Trending 实时</title>
+<style>/* ══════════════════════════════════════════════
+   GBT小土豆 · Shared Design System v5.0
+   ══════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap');
+:root {
+  /* Palette */
+  --bg: #000;
+  --bg2: #08080c;
+  --bg3: #111118;
+  --fg: #f5f5f7;
+  --dim: #86868b;
+  --accent: #ff6b35;
+  --accent2: #ff9a56;
+  --blue: #2997ff;
+  --blue2: #3b82f6;
+  --purple: #7c3aed;
+  --teal: #0d9488;
+  --green: #30d158;
+  --red: #ff4757;
+  --cyan: #06b6d4;
+  --amber: #f59e0b;
+  --violet: #8b5cf6;
+  --pink: #ec4899;
+  --indigo: #6366f1;
+  --emerald: #10b981;
+  --rose: #f43f5e;
+
+  /* Borders & Surfaces */
+  --border: rgba(255, 255, 255, .06);
+  --border-strong: rgba(255, 255, 255, .10);
+  --glass-bg: rgba(255, 255, 255, .02);
+  --glass-border: rgba(255, 255, 255, .06);
+
+  /* Radii */
+  --radius: 18px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.25);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-md: 0 4px 24px rgba(0,0,0,.4);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,.5);
+  --shadow-lift: 0 8px 32px rgba(0,0,0,.5);
+  --shadow-lift-sm: 0 8px 32px rgba(0,0,0,.3);
+  --shadow-lift-md: 0 8px 32px rgba(0,0,0,.4);
+  --shadow-card-hover: 0 12px 40px rgba(0,0,0,.4);
+  --shadow-xl: 0 16px 48px rgba(0,0,0,.45);
+  --shadow-2xl: 0 20px 60px rgba(0,0,0,.35);
+  --shadow-glow-orange: 0 0 30px rgba(255,107,53,.15);
+  --shadow-glow-teal: 0 0 30px rgba(13,148,136,.15);
+  --shadow-glow-purple: 0 0 30px rgba(124,58,237,.15);
+  --shadow-glow-blue: 0 0 30px rgba(41,151,255,.15);
+  --shadow-glow-green: 0 0 30px rgba(48,209,88,.12);
+
+  /* Typography */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Spacing Scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --space-5xl: 128px;
+
+  /* Section Rhythm */
+  --section-sm: 80px;
+  --section-md: 120px;
+  --section-lg: 160px;
+  --section-xl: 200px;
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --ease-out-quint: cubic-bezier(.22,1,.36,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-glacial: 700ms;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(circle, rgba(255,255,255,.03) 1px, transparent 1px),
+    var(--bg);
+  background-size: 20px 20px;
+  color: var(--fg);
+  font-family: var(--font);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'ss01', 'ss02';
+  letter-spacing: -.01em;
+  animation: pageIn .5s var(--ease-out-expo) both;
+}
+
+
+/* ── Skip-to-Content ─────────────── */
+.skip-link { position: absolute; top: -100px; left: 8px; z-index: 9999; }
+.skip-link:focus { top: 8px; }
+/* ── Typography ───────────────────── */
+h1, .h1 { font-size: clamp(36px, 5.5vw, 56px); font-weight: 800; letter-spacing: -.05em; line-height: 1.08; margin: 0.8em 0 0.3em; }
+h2, .h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -.025em; line-height: 1.12; margin: 0.7em 0 0.25em; }
+h3, .h3 { font-size: clamp(20px, 2.5vw, 28px); font-weight: 600; letter-spacing: -.015em; line-height: 1.25; margin: 0.6em 0 0.2em; }
+h4, .h4 { font-size: 18px; font-weight: 600; letter-spacing: -.01em; line-height: 1.35; margin: 0.5em 0 0.15em; }
+body, p, .body { font-size: 15px; color: var(--dim); line-height: 1.65; }
+
+/* ── Typography Scale ─────────────── */
+.text-xs  { font-size: 11px; line-height: 1.5; }
+.text-sm  { font-size: 13px; line-height: 1.55; }
+.text-base { font-size: 15px; line-height: 1.65; }
+.text-lg  { font-size: 17px; line-height: 1.55; }
+.text-xl  { font-size: 20px; line-height: 1.45; }
+.text-2xl { font-size: 24px; line-height: 1.35; }
+.text-3xl { font-size: 32px; line-height: 1.2; letter-spacing: -.02em; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.text-dim { color: var(--dim); }
+.text-accent { color: var(--accent); }
+.text-teal { color: var(--teal); }
+.text-purple { color: var(--purple); }
+.text-blue { color: var(--blue); }
+.text-green { color: var(--green); }
+.tracking-tight { letter-spacing: -.02em; }
+.tracking-wide { letter-spacing: .04em; text-transform: uppercase; }
+.leading-relaxed { line-height: 1.75; }
+.leading-snug { line-height: 1.35; }
+.text-balance { text-wrap: balance; }
+
+::selection { background: var(--accent); color: #fff; }
+
+
+/* ── Scrollbar ─────────────────────── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.10); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.18); }
+::-webkit-scrollbar-corner { background: transparent; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ── Nav ─────────────────────────── */
+.gbt-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(0,0,0,.82);
+  backdrop-filter: saturate(180%) blur(30px);
+  -webkit-backdrop-filter: saturate(180%) blur(30px);
+  border-bottom: 1px solid;
+  border-image: linear-gradient(90deg, transparent, rgba(255,107,53,.2), transparent) 1;
+  transition: border-image .4s ease, box-shadow .4s ease;
+}
+.gbt-nav.scrolled {
+  border-image: linear-gradient(90deg, transparent, var(--accent), transparent) 1;
+  box-shadow: 0 1px 20px rgba(255,107,53,.08);
+}
+.gbt-nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 48px; max-width: 1200px; margin: 0 auto; padding: 0 24px;
+}
+.gbt-nav-brand {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--fg); font-weight: 600; font-size: 15px;
+}
+.gbt-nav-brand svg { height: 24px; width: 24px; border-radius: 6px; }
+.gbt-nav-links { display: flex; gap: 14px; }
+.gbt-nav-links a {
+  color: var(--dim); text-decoration: none; font-size: 12px; font-weight: 500;
+  transition: color .2s;
+}
+.gbt-nav-links a:hover, .gbt-nav-links a.active { color: var(--fg); }
+
+/* ── Buttons ──────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 30px; border-radius: 28px; font-size: 15px; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all .3s cubic-bezier(.16,1,.3,1);
+  letter-spacing: -.01em; white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+  box-shadow: 0 0 20px rgba(255,107,53,.15);
+}
+.btn-primary:hover {
+  background: var(--accent2); transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(255,107,53,.3);
+}
+.btn-outline {
+  background: transparent; color: var(--fg);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(8px);
+}
+.btn-outline:hover {
+  border-color: rgba(255,255,255,.25);
+  background: rgba(255,255,255,.04);
+}
+.btn-sm {
+  padding: 8px 18px; border-radius: var(--radius); font-size: 13px; font-weight: 600;
+  text-decoration: none; background: var(--accent); color: #fff;
+  transition: all .25s cubic-bezier(.16,1,.3,1); border: none; cursor: pointer;
+}
+.btn-sm:hover { background: var(--accent2); transform: translateY(-1px); }
+.btn-green {
+  background: var(--green); color: #000;
+}
+.btn-green:hover { background: #34e062; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(48,209,88,.3); }
+.btn-teal {
+  background: var(--teal); color: #fff;
+  box-shadow: 0 0 20px rgba(13,148,136,.15);
+}
+.btn-teal:hover {
+  background: #0fb9a8; transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(13,148,136,.3);
+}
+.btn-purple {
+  background: var(--purple); color: #fff;
+  box-shadow: 0 0 20px rgba(124,58,237,.15);
+}
+.btn-purple:hover {
+  background: #8b5cf6; transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(124,58,237,.3);
+}
+.btn-lg {
+  padding: 16px 36px; border-radius: 32px; font-size: 16px;
+}
+.btn-xs {
+  padding: 6px 14px; border-radius: var(--radius); font-size: 12px;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,107,53,.2); }
+  50% { box-shadow: 0 0 40px rgba(255,107,53,.4), 0 0 80px rgba(255,107,53,.1); }
+}
+
+/* ── Animations ───────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(.9); opacity: .6; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes pageIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-in-up  { animation: fadeInUp   .7s var(--ease-out-expo) both; }
+.animate-fade-in     { animation: fadeIn      .5s var(--ease-out-expo) both; }
+.animate-slide-right { animation: slideInRight .6s var(--ease-out-expo) both; }
+.animate-scale-in    { animation: scaleIn     .5s var(--ease-out-expo) both; }
+.animate-float       { animation: float       4s ease-in-out infinite; }
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,.06) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+.stagger-1 { animation-delay: .1s; }
+.stagger-2 { animation-delay: .2s; }
+.stagger-3 { animation-delay: .3s; }
+.stagger-4 { animation-delay: .4s; }
+.stagger-5 { animation-delay: .5s; }
+
+/* ── Layout ───────────────────────── */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.section { padding: var(--section-lg) 0; }
+.section-sm  { padding: var(--section-sm) 0; }
+.section-md  { padding: var(--section-md) 0; }
+.section-lg  { padding: var(--section-lg) 0; }
+.section-xl  { padding: var(--section-xl) 0; }
+.section-label {
+  font-size: 12px; font-weight: 600; letter-spacing: 3px;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 16px;
+}
+.section h2 {
+  font-size: clamp(32px, 5vw, 52px); font-weight: 700;
+  letter-spacing: -.03em; margin-bottom: 16px; line-height: 1.1;
+}
+.section-sub {
+  color: var(--dim); font-size: 16px; max-width: 480px;
+  margin-bottom: 48px; line-height: 1.6;
+}
+.hl { color: var(--accent); }
+
+/* Utility: gradient text via background-clip */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-teal {
+  background: linear-gradient(135deg, var(--accent), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Cards ────────────────────────── */
+.card {
+  position: relative; background: rgba(255,255,255,.01);
+  border: 1px solid var(--glass-border);
+  border-top: 1px solid rgba(255,255,255,.04);
+  border-radius: var(--radius); padding: 28px;
+  transition: all .35s cubic-bezier(.16,1,.3,1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--purple), transparent);
+  border-radius: var(--radius) var(--radius) 0 0; opacity: .5;
+}
+.card:hover {
+  border-color: var(--border-strong); transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-lift);
+}
+.card:hover::before { opacity: 1; }
+
+/* Card Accent Variants */
+.card-accent::before  { background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+.card-teal::before    { background: linear-gradient(90deg, transparent, var(--teal), transparent); }
+.card-purple::before  { background: linear-gradient(90deg, transparent, var(--purple), transparent); }
+.card-blue::before    { background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+.card-green::before   { background: linear-gradient(90deg, transparent, var(--green), transparent); }
+.card-accent:hover  { box-shadow: var(--shadow-glow-orange); }
+.card-teal:hover    { box-shadow: var(--shadow-glow-teal); }
+.card-purple:hover  { box-shadow: var(--shadow-glow-purple); }
+.card-blue:hover    { box-shadow: var(--shadow-glow-blue); }
+.card-green:hover   { box-shadow: var(--shadow-glow-green); }
+
+.card-sm { padding: 20px; border-radius: var(--radius-sm); }
+.card-lg { padding: 36px; border-radius: var(--radius-lg); }
+.card-interactive { cursor: pointer; }
+.card-interactive:hover { border-color: var(--border-strong); transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-lift); }
+.card-interactive:hover::before { opacity: 1; }
+
+/* ── Footer ───────────────────────── */
+.gbt-footer {
+  padding: 64px 0 40px;
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(90deg, rgba(255,107,53,.35), rgba(41,151,255,.35), rgba(48,209,88,.35)) 1;
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(10,10,18,.97) 100%);
+}
+.gbt-footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+  margin-bottom: 40px;
+}
+.gbt-footer h5 {
+  font-size: 12px; font-weight: 600; letter-spacing: 1px;
+  color: var(--fg); margin-bottom: 12px; text-transform: uppercase;
+}
+.gbt-footer a {
+  color: var(--dim); text-decoration: none; font-size: 13px;
+  display: block; margin-bottom: 6px; line-height: 1.8;
+}
+.gbt-footer a:hover { color: var(--accent); }
+.gbt-footer-bottom {
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; justify-content: space-between; color: var(--dim);
+  font-size: 12px; flex-wrap: wrap; gap: 12px;
+}
+
+/* Back to top */
+.gbt-back-to-top {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--dim); cursor: pointer;
+  transition: all .25s ease; padding: 6px 12px;
+  border-radius: var(--radius); background: transparent;
+  border: 1px solid transparent; text-decoration: none;
+  margin-bottom: 12px;
+}
+.gbt-back-to-top svg { width: 14px; height: 14px; transition: transform .25s ease; }
+.gbt-back-to-top:hover { color: var(--accent); border-color: rgba(255,107,53,.15); }
+.gbt-back-to-top:hover svg { transform: translateY(-2px); }
+.gbt-footer-badges { display: flex; gap: 16px; flex-wrap: wrap; }
+.trust-badge {
+  font-size: 11px; padding: 5px 12px; border-radius: var(--radius);
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+  color: var(--dim); letter-spacing: .3px;
+  transition: all .25s ease; white-space: nowrap;
+}
+.trust-badge:hover {
+  border-color: rgba(48,209,88,.25);
+  color: var(--fg);
+  background: rgba(48,209,88,.06);
+}
+
+/* ── Stats Bar ────────────────────── */
+.stats { display: flex; justify-content: center; gap: 0; padding: 48px 0; flex-wrap: wrap; }
+.stat { text-align: center; padding: 0 48px; border-left: 1px solid rgba(255,255,255,.06); transition: transform .35s cubic-bezier(.16,1,.3,1); position: relative; }
+.stat:first-child { border-left: none; }
+.stat:hover { transform: translateY(-3px); }
+.stat-num { font-size: 48px; font-weight: 800; line-height: 1; transition: all .35s cubic-bezier(.16,1,.3,1); position: relative; }
+.stat-num.g { color: var(--green); text-shadow: 0 0 20px rgba(48,209,88,.15); }
+.stat-num.o { color: var(--accent); text-shadow: 0 0 20px rgba(255,107,53,.15); }
+.stat-num.b { color: var(--blue); text-shadow: 0 0 20px rgba(41,151,255,.15); }
+.stat-num.t { color: var(--teal); text-shadow: 0 0 20px rgba(13,148,136,.15); }
+.stat:hover .stat-num.g { text-shadow: 0 0 32px rgba(48,209,88,.3); }
+.stat:hover .stat-num.o { text-shadow: 0 0 32px rgba(255,107,53,.3); }
+.stat:hover .stat-num.b { text-shadow: 0 0 32px rgba(41,151,255,.3); }
+.stat:hover .stat-num.t { text-shadow: 0 0 32px rgba(13,148,136,.3); }
+.stat-label { font-size: 11px; font-weight: 500; color: var(--dim); margin-top: 8px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* ── Utility ──────────────────────── */
+.reveal { opacity: 1; transform: translateY(40px); transition: all .7s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+/* Stagger delays for card grids — 0.1s per sibling */
+.card.reveal:nth-child(1)  { transition-delay: 0s; }
+.card.reveal:nth-child(2)  { transition-delay: .1s; }
+.card.reveal:nth-child(3)  { transition-delay: .2s; }
+.card.reveal:nth-child(4)  { transition-delay: .3s; }
+.card.reveal:nth-child(5)  { transition-delay: .4s; }
+.card.reveal:nth-child(6)  { transition-delay: .5s; }
+.card.reveal:nth-child(7)  { transition-delay: .6s; }
+.card.reveal:nth-child(8)  { transition-delay: .7s; }
+.card.reveal:nth-child(9)  { transition-delay: .8s; }
+.card.reveal:nth-child(10) { transition-delay: .9s; }
+.text-center { text-align: center; }
+.mt-48 { margin-top: 48px; }
+
+/* Spacing Helpers */
+.mt-0  { margin-top: 0; }
+.mt-8  { margin-top: var(--space-sm); }
+.mt-16 { margin-top: var(--space-md); }
+.mt-24 { margin-top: var(--space-lg); }
+.mt-32 { margin-top: var(--space-xl); }
+.mt-64 { margin-top: var(--space-3xl); }
+.mb-0  { margin-bottom: 0; }
+.mb-8  { margin-bottom: var(--space-sm); }
+.mb-16 { margin-bottom: var(--space-md); }
+.mb-24 { margin-bottom: var(--space-lg); }
+.mb-32 { margin-bottom: var(--space-xl); }
+.mb-48 { margin-bottom: var(--space-2xl); }
+.mb-64 { margin-bottom: var(--space-3xl); }
+.pt-0  { padding-top: 0; }
+.pt-16 { padding-top: var(--space-md); }
+.pt-32 { padding-top: var(--space-xl); }
+.pb-0  { padding-bottom: 0; }
+.pb-16 { padding-bottom: var(--space-md); }
+.pb-32 { padding-bottom: var(--space-xl); }
+.gap-8  { gap: var(--space-sm); }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: var(--space-md); }
+.gap-24 { gap: var(--space-lg); }
+.gap-32 { gap: var(--space-xl); }
+.gap-48 { gap: var(--space-2xl); }
+
+/* Flex & Grid Helpers */
+.flex       { display: flex; }
+.flex-col   { display: flex; flex-direction: column; }
+.flex-wrap  { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); }
+
+/* Visibility */
+.hidden-mobile { }
+.hidden-desktop { }
+
+/* Misc */
+.w-full { width: 100%; }
+.relative { position: relative; }
+.overflow-hidden { overflow: hidden; }
+.rounded { border-radius: var(--radius); }
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-full { border-radius: var(--radius-full); }
+.divider { width: 100%; height: 1px; background: var(--border); margin: 48px 0; }
+
+/* ── Glass Utility ─────────────────── */
+.glass {
+  background: rgba(255, 255, 255, .006);
+  border: 1px solid rgba(255, 255, 255, .05);
+  border-top: 1px solid rgba(255,255,255,.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius);
+}
+
+/* ── Responsive ───────────────────── */
+/* ≥1200px → xl (desktop-wide) */
+/* ≥1024px → lg (desktop) */
+/* ≥768px  → md (tablet) */
+/* ≥480px  → sm (phablet) */
+/* <480px  → default (mobile-first) */
+
+/* ── Desktop-wide ── */
+@media (min-width: 1200px) {
+  .container { max-width: 1280px; }
+}
+
+/* ── Desktop (lg) ── */
+@media (max-width: 1024px) {
+  .container { padding: 0 20px; }
+  .section { padding: var(--section-md) 0; }
+  .section-xl { padding: 140px 0; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .hidden-desktop { display: none; }
+}
+
+/* ── Tablet (md) ── */
+@media (max-width: 768px) {
+  .gbt-nav-links { display: none; }
+  .gbt-footer-grid { grid-template-columns: 1fr 1fr; }
+  .stats { gap: 24px; }
+  .stat { padding: 0 24px; }
+  .section { padding: var(--section-sm) 0; }
+  .section-xl { padding: 100px 0; }
+  .container { padding: 0 16px; }
+  h1, .h1 { font-size: clamp(30px, 7vw, 38px); }
+  h2, .h2 { font-size: clamp(24px, 5.5vw, 30px); }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ── Phablet (sm) ── */
+@media (max-width: 480px) {
+  .stats { gap: 16px; }
+  .stat { padding: 0 16px; border-left: none; }
+  .section { padding: 60px 0; }
+  .section-xl { padding: 80px 0; }
+  .card { padding: 20px; }
+  .card-lg { padding: 24px; }
+  .hidden-mobile { display: none; }
+}
+
+/* ── Legal Pages ───────────────────── */
+.legal-content { max-width: 800px; margin: 0 auto; padding: 100px 24px 80px; }
+.legal-content h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 700; letter-spacing: -.02em; margin-bottom: 8px; }
+.legal-content .last-updated { color: var(--dim); font-size: 13px; margin-bottom: 40px; }
+.legal-content h2 { font-size: 22px; font-weight: 600; margin-top: 44px; margin-bottom: 14px; padding-top: 16px; border-top: 1px solid var(--border); }
+.legal-content h3 { font-size: 17px; font-weight: 600; margin-top: 28px; margin-bottom: 10px; color: var(--accent2); }
+.legal-content p { color: var(--dim); font-size: 14px; margin-bottom: 12px; line-height: 1.7; }
+.legal-content li { color: var(--dim); font-size: 14px; margin-bottom: 8px; line-height: 1.7; }
+.legal-content ul, .legal-content ol { padding-left: 24px; margin-bottom: 16px; }
+.legal-content strong { color: var(--fg); }
+.legal-content a { color: var(--accent); text-decoration: none; }
+.legal-content a:hover { text-decoration: underline; }
+.legal-content table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+.legal-content th { padding: 12px 16px; text-align: left; color: var(--fg); font-weight: 600; background: var(--bg2); border-bottom: 1px solid var(--border); }
+.legal-content td { padding: 12px 16px; color: var(--dim); border-bottom: 1px solid var(--border); }
+.legal-content code { background: var(--bg3); padding: 2px 6px; border-radius: 4px; font-size: 13px; color: var(--accent2); }
+.highlight { background: rgba(255,107,53,.08); border-left: 3px solid var(--accent); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+.highlight p { color: var(--fg); margin: 0; }
+.guarantee-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; text-align: center; margin: 32px 0; }
+.guarantee-box .g-icon { font-size: 48px; margin-bottom: 12px; }
+.guarantee-box h3 { color: var(--green); font-size: 20px; margin-top: 0; border: none; padding: 0; }
+.subtle { font-size: 12px; color: var(--dim); }
+
+@media (max-width: 768px) {
+  .legal-content { padding: 80px 20px 60px; }
+}
+
+/* ═══════════════════════════════════════════════
+   GBT Enterprise + Sci-Fi Design Extensions v5.0
+   对标 Strikingly / Vercel / Linear 设计水准
+   ═══════════════════════════════════════════════ */
+
+/* ── Glass Morphism Card ─── */
+.glass-card {
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all .3s cubic-bezier(.16,1,.3,1);
+}
+.glass-card:hover {
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.12);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 48px rgba(0,0,0,.4), 0 0 0 1px rgba(124,58,237,.1);
+}
+
+/* ── Glow Border ─── */
+.glow-border {
+  position: relative;
+}
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(124,58,237,.3), rgba(6,182,212,.3), rgba(255,107,53,.2));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity .4s cubic-bezier(.16,1,.3,1);
+}
+.glow-border:hover::after { opacity: 1; }
+
+/* ── Scan Line Overlay ─── */
+.scan-lines {
+  position: relative;
+  overflow: hidden;
+}
+.scan-lines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,.008) 2px,
+    rgba(255,255,255,.008) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Tech Grid Background ─── */
+.tech-grid {
+  background-image:
+    linear-gradient(rgba(124,58,237,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Pulsing Dot ─── */
+.pulse-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(48,209,88,.6);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(1.5); }
+}
+
+/* ── Gradient Text ─── */
+.text-gradient {
+  background: linear-gradient(135deg, #a78bfa, #06b6d4, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animated Counter ─── */
+.count-up { font-variant-numeric: tabular-nums; }
+
+/* ── Divider Glow ─── */
+.divider-glow {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124,58,237,.3), rgba(6,182,212,.3), transparent);
+  border: none;
+  margin: var(--space-16) 0;
+}
+
+/* ── Hover Lift ─── */
+.hover-lift {
+  transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Floating Animation ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.float { animation: float 6s ease-in-out infinite; }
+
+/* ── Neon Glow Text ─── */
+.neon-glow {
+  text-shadow: 0 0 20px rgba(124,58,237,.5), 0 0 40px rgba(124,58,237,.2);
+}
+
+/* ═══════════════════════════════════════════════
+   Global Enterprise Skin — 自动覆盖所有页面
+   ═══════════════════════════════════════════════ */
+
+/* 所有容器统一间距 */
+.container, .kb-wrapper, main, section > div {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 所有卡片统一样式 */
+.card, [class*="-card"], .kb-card, .faq-item, .step-card {
+  background: var(--bg-card, #111118);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  transition: all .25s cubic-bezier(.16,1,.3,1);
+}
+
+/* 所有按钮统一样式 */
+button, .btn, [class*="-btn"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+}
+
+/* 所有输入框统一 */
+input, textarea, select {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 所有标题统一 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Section 间距统一 */
+section, .section, [class*="-section"] {
+  padding: 80px 0;
+}
+@media (max-width: 768px) {
+  section, .section, [class*="-section"] { padding: 48px 0; }
+}
+
+/* 链接统一 */
+a { transition: color .15s; }
+a:hover { opacity: .85; }
+</style>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #12121a;
+  --border: #1e1e2e;
+  --gold: #f0c040;
+  --silver: #a0a8c0;
+  --bronze: #c08050;
+  --green: #00d4aa;
+  --blue: #60a5fa;
+  --text: #c8ccd4;
+  --muted: #6b7280;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height:100vh; }
+.container { max-width:900px; margin:0 auto; padding:2rem 1rem; }
+.header { text-align:center; margin-bottom:2rem; }
+.header h1 { font-size:2.2rem; background:linear-gradient(135deg, var(--gold), #ff6b35); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.header .sub { color:var(--muted); margin-top:0.5rem; font-size:0.95rem; }
+.updated { text-align:center; color:var(--muted); font-size:0.8rem; margin-bottom:1.5rem; }
+.updated span { color:var(--green); }
+/* Tabs */
+.tabs { display:flex; gap:0.5rem; margin-bottom:1.5rem; flex-wrap:wrap; justify-content:center; }
+.tab { padding:0.4rem 1rem; border-radius:20px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; transition:all 0.2s; font-size:0.85rem; }
+.tab:hover { border-color:var(--blue); color:var(--text); }
+.tab.active { background:var(--blue); color:#fff; border-color:var(--blue); }
+/* Board */
+.board { display:flex; flex-direction:column; gap:0.5rem; }
+.rank-card { display:flex; align-items:center; gap:1rem; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1rem 1.2rem; transition:all 0.2s; animation:fadeIn 0.5s ease both; }
+.rank-card:hover { border-color:var(--blue); transform:translateX(4px); }
+.rank-num { font-size:1.5rem; font-weight:800; min-width:2.5rem; text-align:center; }
+.rank-1 .rank-num { color:var(--gold); }
+.rank-2 .rank-num { color:var(--silver); }
+.rank-3 .rank-num { color:var(--bronze); }
+.rank-info { flex:1; min-width:0; }
+.rank-name { font-weight:600; font-size:1.05rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rank-name a { color:var(--text); text-decoration:none; }
+.rank-name a:hover { color:var(--blue); }
+.rank-desc { color:var(--muted); font-size:0.82rem; margin-top:2px; display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+.rank-tags { display:flex; gap:0.3rem; flex-wrap:wrap; margin-top:4px; }
+.rank-tag { padding:1px 8px; border-radius:10px; font-size:0.7rem; background:var(--border); color:var(--muted); }
+.rank-tag.lang { background:rgba(96,165,250,0.15); color:var(--blue); }
+.rank-stats { text-align:right; min-width:100px; }
+.rank-stars { font-size:1.2rem; font-weight:700; color:var(--gold); }
+.rank-stars-sm { font-size:0.75rem; color:var(--muted); }
+.rank-score { font-size:0.8rem; color:var(--green); margin-top:2px; }
+/* Loading */
+.loading { text-align:center; padding:3rem; color:var(--muted); }
+.spinner { display:inline-block; width:30px; height:30px; border:3px solid var(--border); border-top-color:var(--blue); border-radius:50%; animation:spin 0.8s linear infinite; }
+.error { text-align:center; padding:2rem; color:#f87171; }
+.empty { text-align:center; padding:3rem; color:var(--muted); }
+/* Animations */
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+@keyframes spin { to { transform:rotate(360deg); } }
+/* Responsive */
+@media (max-width:600px) {
+  .rank-card { flex-wrap:wrap; gap:0.5rem; }
+  .rank-stats { text-align:left; min-width:auto; }
+  .header h1 { font-size:1.5rem; }
+}
+.rank-1 { animation-delay:0.05s; }
+.rank-2 { animation-delay:0.1s; }
+.rank-3 { animation-delay:0.15s; }
+
+/* Payment Modal */
+.modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center; }
+.modal-overlay.show { display:flex; }
+.modal-box { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:2rem; max-width:480px; width:90%; }
+.modal-box h3 { font-size:1.3rem; margin-bottom:1rem; }
+.modal-box .price { font-size:2rem; font-weight:800; color:var(--green); margin:1rem 0; }
+.modal-box .repo-name { color:var(--muted); font-size:0.9rem; margin-bottom:1rem; word-break:break-all; }
+.btn-pay { display:block; width:100%; padding:0.8rem; border:none; border-radius:10px; background:linear-gradient(135deg, var(--green), #0a8); color:#000; font-size:1.1rem; font-weight:700; cursor:pointer; margin-top:0.5rem; }
+.btn-pay:hover { opacity:0.9; }
+.btn-close { display:block; width:100%; padding:0.6rem; border:1px solid var(--border); border-radius:10px; background:transparent; color:var(--muted); cursor:pointer; margin-top:0.5rem; }
+.btn-deploy-leader { padding:0.5rem 0.8rem; border:1px solid var(--green); border-radius:8px; background:transparent; color:var(--green); cursor:pointer; font-size:0.8rem; transition:all 0.2s; }
+.btn-deploy-leader:hover { background:var(--green); color:#000; }
+/* Status dots */
+.status-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:4px; }
+.status-dot.done { background:var(--green); }
+.status-dot.fail { background:#f87171; }
+.status-dot.running { background:var(--gold); animation:pulse 1s infinite; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+
+.btn-oauth { padding:0.5rem 1.2rem; border:1px solid #6e40c9; border-radius:20px; background:rgba(110,64,201,0.1); color:#a78bfa; cursor:pointer; font-size:0.85rem; transition:all 0.2s; }
+.btn-oauth:hover { background:rgba(110,64,201,0.2); }
+.btn-oauth.connected { border-color:var(--green); background:rgba(0,212,170,0.1); color:var(--green); }
+
+/* Code viewer */
+.code-viewer { max-height:60vh; overflow:auto; background:#0a0a0f; border-radius:8px; padding:0.5rem; font-size:0.8rem; }
+.code-viewer pre { margin:0; white-space:pre-wrap; word-break:break-all; }
+.file-tree { max-height:50vh; overflow:auto; }
+.file-tree .dir { color:var(--blue); cursor:pointer; padding:2px 0; }
+.file-tree .file { color:var(--text); cursor:pointer; padding:2px 0 2px 1rem; font-size:0.8rem; }
+.file-tree .file:hover, .file-tree .dir:hover { background:rgba(96,165,250,0.1); }
+.btn-browse-repo:hover { border-color:var(--blue) !important; color:var(--blue) !important; }
+
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🏆 GBT 开源排行榜</h1>
+    <p class="sub">GitHub Trending · AI 自动评估 · 每日更新</p>
+    <div style="margin-top:1rem">
+      <button class="btn-oauth" id="btnGitHubLogin" onclick="startOAuth()">🔐 登录GitHub授权</button>
+      <span id="oauthStatus" style="margin-left:0.8rem;font-size:0.85rem;color:var(--muted)"></span>
+    </div>
+  </div>
+  <div class="updated" id="updated"></div>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-lang="">🔥 综合</button>
+    <button class="tab" data-lang="Python">🐍 Python</button>
+    <button class="tab" data-lang="JavaScript">💛 JavaScript</button>
+    <button class="tab" data-lang="TypeScript">💙 TypeScript</button>
+    <button class="tab" data-lang="Go">🔷 Go</button>
+    <button class="tab" data-lang="Rust">🦀 Rust</button>
+    <button class="tab" data-lang="Java">☕ Java</button>
+  </div>
+
+  <div class="board" id="board">
+    <div class="loading"><div class="spinner"></div><p style="margin-top:1rem">正在拉取 GitHub Trending...</p></div>
+  </div>
+</div>
+<script>
+const LEADERBOARD_API = 'https://api.gbtxiaotudou.com/api/leaderboard';
+const API = 'https://api.gbtxiaotudou.com/api/deploy/oneclick';
+let currentLang = '';
+
+function rankClass(i) {
+  if (i === 0) return 'rank-1';
+  if (i === 1) return 'rank-2';
+  if (i === 2) return 'rank-3';
+  return '';
+}
+
+function numIcon(i) {
+  if (i === 0) return '🥇';
+  if (i === 1) return '🥈';
+  if (i === 2) return '🥉';
+  return String(i + 1);
+}
+
+function render(data) {
+  var board = document.getElementById('board');
+  var updated = document.getElementById('updated');
+
+  if (!data || !data.ok || !data.leaderboard || !data.leaderboard.length) {
+    board.innerHTML = '<div class="empty">📭 暂无数据，请稍后刷新</div>';
+    updated.innerHTML = '';
+    return;
+  }
+
+  updated.innerHTML = '🕐 更新于 <span>' + (data.updated || '刚刚').replace('T',' ').slice(0,19) + '</span> · 共 ' + data.total + ' 个项目';
+
+  board.innerHTML = data.leaderboard.map(function(r, i) {
+    var langClass = r.language && r.language !== '?' ? ' lang' : '';
+    var tags = (r.topics || []).slice(0,3).map(function(t) {
+      return '<span class="rank-tag">' + t + '</span>';
+    }).join('');
+    if (r.language && r.language !== '?') {
+      tags = '<span class="rank-tag' + langClass + '">' + r.language + '</span>' + tags;
+    }
+    return '<div class="rank-card ' + rankClass(i) + '">' +
+      '<div class="rank-num">' + numIcon(i) + '</div>' +
+      '<div class="rank-info">' +
+        '<div class="rank-name"><a href="' + (r.url || '#') + '" target="_blank">' + r.name + '</a></div>' +
+        '<div class="rank-desc">' + (r.description || '') + '</div>' +
+        '<div class="rank-tags">' + tags + '</div>' +
+      '</div>' +
+      '<div class="rank-stats">' +
+        '<div class="rank-stars">⭐ ' + (r.stars || 0).toLocaleString() + '</div>' +
+        '<div class="rank-stars-sm">🔀 ' + (r.forks || 0).toLocaleString() + '</div>' +
+        '<div class="rank-score">📈 +' + (r.score || 0).toLocaleString() + '</div>' +
+      '<button class="btn-deploy-leader" data-repo="' + r.name + '" data-url="' + (r.url || '') + '">⚡ 一键部署</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function fetchBoard(lang, force) {
+  var board = document.getElementById('board');
+  board.innerHTML = '<div class="loading"><div class="spinner"></div><p style="margin-top:1rem">正在拉取 GitHub Trending...</p></div>';
+
+  var url = LEADERBOARD_API;
+  var params = [];
+  if (lang) params.push('language=' + encodeURIComponent(lang));
+  if (force) params.push('refresh=1');
+  if (params.length) url += '?' + params.join('&');
+
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      render(data);
+      // 如果数据超过2小时，后台触发刷新
+      if (data && data.updated) {
+        var age = (Date.now() - new Date(data.updated).getTime()) / 1000;
+        if (age > 7200 && !force) {
+          setTimeout(function() { fetchBoard(lang, true); }, 5000);
+        }
+      }
+    })
+    .catch(function(e) {
+      board.innerHTML = '<div class="error">⚠️ 加载失败: ' + e.message + '<br><small>正在重试...</small></div>';
+      setTimeout(function() { fetchBoard(lang, true); }, 3000);
+    });
+}
+
+// Tab switching
+document.getElementById('tabs').addEventListener('click', function(e) {
+  if (!e.target.classList.contains('tab')) return;
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  e.target.classList.add('active');
+  currentLang = e.target.dataset.lang;
+  fetchBoard(currentLang);
+});
+
+
+// ── Payment + Deploy Flow ────────────────────────
+var deployRepo = null;
+var deployUrl = null;
+
+function openPayModal(repo, url) {
+  deployRepo = repo;
+  deployUrl = url;
+  document.getElementById('modalRepo').textContent = repo;
+  document.getElementById('btnConfirm').textContent = '💳 确认支付 .00';
+  document.getElementById('payModal').classList.add('show');
+}
+
+function closePayModal() {
+  document.getElementById('payModal').classList.remove('show');
+}
+
+function closeStatusModal() {
+  document.getElementById('deployStatus').classList.remove('show');
+}
+
+document.getElementById('btnConfirm').addEventListener('click', function() {
+  closePayModal();
+  startDeploy(deployRepo, deployUrl, 'local');
+});
+
+document.getElementById('btnRemote').addEventListener('click', function() {
+  closePayModal();
+  startRemoteDeploy(deployRepo, deployUrl);
+});
+
+function startRemoteDeploy(repo, url) {
+  var sessionId = 'gbt-' + Math.random().toString(36).slice(2, 10);
+  var statusModal = document.getElementById('deployStatus');
+  var stepsEl = document.getElementById('statusSteps');
+  var resultEl = document.getElementById('statusResult');
+  var titleEl = document.getElementById('statusTitle');
+
+  statusModal.classList.add('show');
+  titleEl.textContent = '🖥️ 部署到你的机器';
+  stepsEl.innerHTML =
+    '<p><strong>请在你的电脑上运行以下命令:</strong></p>' +
+    '<div style="background:#0a0a0f;padding:1rem;border-radius:8px;margin:0.5rem 0;font-family:monospace;font-size:0.85rem;overflow-x:auto">' +
+    '<p style="color:var(--green);margin:0">Windows (PowerShell):</p>' +
+    '<code style="color:var(--text)">irm https://gbtxiaotudou.com/deploy-agent.bat | iex</code>' +
+    '<p style="color:var(--green);margin:1rem 0 0 0">Mac/Linux:</p>' +
+    '<code style="color:var(--text)">curl -sSL https://gbtxiaotudou.com/deploy-agent.sh | bash</code>' +
+    '</div>' +
+    '<p style="color:var(--muted);font-size:0.8rem;margin-top:0.5rem">运行后GBT会自动连接并部署 <strong>' + repo + '</strong> 到你的机器</p>' +
+    '<p><span class="status-dot running"></span> 等待客户连接... (会话: ' + sessionId + ')</p>';
+
+  resultEl.innerHTML = '';
+
+  // Poll for tunnel handshake
+  var pollTimer = setInterval(function() {
+    fetch(API.replace('/deploy/oneclick', '/deploy/tunnel-handshake') + '?session=' + sessionId)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.ok && data.tunnel_url) {
+          clearInterval(pollTimer);
+          stepsEl.innerHTML += '<p><span class="status-dot done"></span> 客户已连接! 开始部署...</p>';
+          // Trigger remote deploy
+          fetch(API, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({repo_url: url || 'https://github.com/' + repo, mode: 'remote'})
+          }).then(function(r) { return r.json(); }).then(function(d) {
+            if (d && d.ok) {
+              titleEl.textContent = '✅ 远程部署完成!';
+              resultEl.innerHTML = '<div style="background:rgba(0,212,170,0.1);padding:1rem;border-radius:10px;margin-top:1rem">' +
+                '<strong>' + repo + '</strong> 已部署到客户机器<br>' +
+                '<small style="color:var(--muted)">' + (d.output || '').slice(-500) + '</small></div>';
+            }
+          }).catch(function() {});
+        }
+      }).catch(function() {});
+  }, 3000);
+}
+
+function startDeploy(repo, url, mode) {
+  var statusModal = document.getElementById('deployStatus');
+  var stepsEl = document.getElementById('statusSteps');
+  var resultEl = document.getElementById('statusResult');
+  var titleEl = document.getElementById('statusTitle');
+
+  statusModal.classList.add('show');
+  titleEl.textContent = '🚀 部署中... ' + repo;
+  stepsEl.innerHTML = '<p><span class="status-dot running"></span> 正在克隆仓库...</p>';
+  resultEl.innerHTML = '';
+
+  var pollTimer = setInterval(function() {
+    fetch(API + '?action=status&repo=' + encodeURIComponent(repo))
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.steps) {
+          stepsEl.innerHTML = data.steps.map(function(s) {
+            var dot = s.ok ? 'done' : 'fail';
+            if (!s.ok && s.step !== 'error') dot = 'running';
+            return '<p><span class="status-dot ' + dot + '"></span> ' + s.step + ': ' + (s.detail || '') + '</p>';
+          }).join('');
+        }
+        if (data && data.ok && data.url) {
+          clearInterval(pollTimer);
+          titleEl.textContent = '✅ 部署完成!';
+          resultEl.innerHTML = '<div style="background:rgba(0,212,170,0.1);padding:1rem;border-radius:10px;margin-top:1rem">' +
+            '<strong>访问地址:</strong><br>' +
+            '<a href="' + data.url + '" target="_blank" style="color:var(--green);font-size:1.2rem">' + data.url + '</a>' +
+            (data.audit ? '<br><small style="color:var(--muted)">安全审计: ' + data.audit.findings + '个发现, 风险:' + data.audit.risk + '</small>' : '') +
+            '</div>';
+        }
+        if (data && !data.ok && data.error) {
+          clearInterval(pollTimer);
+          titleEl.textContent = '❌ 部署失败';
+          stepsEl.innerHTML += '<p style="color:#f87171">' + data.error + '</p>';
+        }
+      })
+      .catch(function() {});
+  }, 2000);
+
+  // Actually trigger deploy via API
+  fetch(API + '?action=deploy', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({repo_url: url || 'https://github.com/' + repo})
+  }).catch(function() {});
+}
+
+// Wire deploy buttons
+document.getElementById('board').addEventListener('click', function(e) {
+  if (!e.target.classList.contains('btn-deploy-leader')) return;
+  var repo = e.target.dataset.repo;
+  var url = e.target.dataset.url;
+  openPayModal(repo, url);
+});
+
+
+// ── GitHub OAuth Flow ────────────────────────────
+var GITHUB_TOKEN = localStorage.getItem('gbt_github_token') || '';
+var GITHUB_USER = localStorage.getItem('gbt_github_user') || '';
+var GH_API = 'https://api.github.com';
+
+function updateOAuthUI() {
+  var btn = document.getElementById('btnGitHubLogin');
+  var status = document.getElementById('oauthStatus');
+  if (GITHUB_TOKEN) {
+    btn.textContent = '✅ ' + GITHUB_USER;
+    btn.classList.add('connected');
+    status.textContent = '已授权 · 可部署你的私有仓库';
+    // Add My Repos tab
+    var tabs = document.getElementById('tabs');
+    if (!document.getElementById('tabMyRepos')) {
+      var myTab = document.createElement('button');
+      myTab.className = 'tab'; myTab.id = 'tabMyRepos';
+      myTab.dataset.lang = '__myrepos__';
+      myTab.textContent = '📂 我的仓库';
+      tabs.appendChild(myTab);
+    }
+  } else {
+    status.textContent = '';
+  }
+}
+
+function startOAuth() {
+  if (GITHUB_TOKEN) {
+    // Already logged in — refresh repo list
+    fetchMyRepos();
+    return;
+  }
+  // Generate login URL via API
+  fetch('https://api.gbtxiaotudou.com/api/oauth/login', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({})})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if (d.login_url) {
+        // Store state and redirect
+        var state = Math.random().toString(36).slice(2);
+        localStorage.setItem('gbt_oauth_state', state);
+        window.open(d.login_url + '&state=' + state, '_blank');
+        // Start polling for token
+        pollOAuthToken(state);
+      } else {
+        alert('GitHub OAuth未配置: ' + (d.error || ''));
+      }
+    });
+}
+
+function pollOAuthToken(state) {
+  var attempts = 0;
+  var timer = setInterval(function() {
+    attempts++;
+    fetch('https://api.gbtxiaotudou.com/api/oauth/status')
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if (d.token && d.user) {
+          clearInterval(timer);
+          GITHUB_TOKEN = d.token;
+          GITHUB_USER = d.user;
+          localStorage.setItem('gbt_github_token', d.token);
+          localStorage.setItem('gbt_github_user', d.user);
+          updateOAuthUI();
+          fetchMyRepos();
+        }
+      }).catch(function(){});
+    if (attempts > 120) clearInterval(timer); // 2 min timeout
+  }, 2000);
+}
+
+
+// ── Browse repo code ──────────────────────────
+function browseRepo(repo) {
+  var modal = document.getElementById('deployStatus');
+  var title = document.getElementById('statusTitle');
+  var steps = document.getElementById('statusSteps');
+  var result = document.getElementById('statusResult');
+
+  modal.classList.add('show');
+  title.textContent = '📂 ' + repo;
+  steps.innerHTML = '<p>正在加载文件树...</p>';
+  result.innerHTML = '';
+
+  // Fetch file tree
+  fetch('https://api.gbtxiaotudou.com/api/oauth/repos', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({action: 'browse', repo: repo})
+  })
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if (!d.ok) { steps.innerHTML = '<p style="color:#f87171">加载失败: ' + (d.error||'') + '</p>'; return; }
+      var html = '<div class="file-tree">';
+      html += '<p style="color:var(--muted);font-size:0.8rem">共 ' + d.total_files + ' 个文件</p>';
+      var dirs = Object.keys(d.tree||{}).sort();
+      dirs.forEach(function(dir){
+        html += '<details><summary class="dir">📁 ' + dir + ' <span style="color:var(--muted);font-size:0.7rem">(' + d.tree[dir].count + ')</span></summary>';
+        (d.tree[dir].files||[]).forEach(function(f){
+          html += '<div class="file" onclick="viewFile(\'' + repo + '\',\'' + f.path + '\')">📄 ' + f.path.split('/').pop() + ' <span style="color:var(--muted);font-size:0.7rem">' + (f.size||0) + 'B</span></div>';
+        });
+        html += '</details>';
+      });
+      html += '</div>';
+      steps.innerHTML = html;
+    })
+    .catch(function(e){ steps.innerHTML = '<p style="color:#f87171">加载失败</p>'; });
+}
+
+function viewFile(repo, path) {
+  var result = document.getElementById('statusResult');
+  result.innerHTML = '<p style="color:var(--muted);font-size:0.8rem">📄 ' + path + ' 加载中...</p>';
+
+  fetch('https://api.gbtxiaotudou.com/api/oauth/repos', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({action: 'read_file', repo: repo, path: path})
+  })
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if (d.type === 'dir') {
+        result.innerHTML = '<div class="file-tree">' + (d.entries||[]).map(function(e){
+          var icon = e.type==='dir'?'📁':'📄';
+          return '<div class="' + e.type + '" onclick="' + (e.type==='dir'?'viewFile(\''+repo+'\',\''+path+'/'+e.name+'\')':'viewFile(\''+repo+'\',\''+path+'/'+e.name+'\')') + '">' + icon + ' ' + e.name + '</div>';
+        }).join('') + '</div>';
+      } else {
+        var lang = path.endsWith('.py') ? 'python' : path.endsWith('.js') ? 'javascript' : path.endsWith('.html') ? 'html' : '';
+        result.innerHTML = '<div class="code-viewer"><pre><code class="' + lang + '">' + (d.content||'').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</code></pre></div>';
+      }
+    })
+    .catch(function(){ result.innerHTML = '<p style="color:#f87171">读取失败</p>'; });
+}
+
+function fetchMyRepos() {
+  if (!GITHUB_TOKEN) return;
+  var board = document.getElementById('board');
+  board.innerHTML = '<div class="loading"><div class="spinner"></div><p style="margin-top:1rem">正在拉取你的仓库...</p></div>';
+
+  // Fetch repos from GBT API which proxies through stored token
+  fetch('https://api.gbtxiaotudou.com/api/oauth/repos', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GITHUB_TOKEN},
+    body: JSON.stringify({})
+  })
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if (d.repos) {
+        renderMyRepos(d.repos);
+      } else {
+        board.innerHTML = '<div class="empty">未获取到仓库列表</div>';
+      }
+    })
+    .catch(function(e){
+      board.innerHTML = '<div class="error">加载失败</div>';
+    });
+}
+
+function renderMyRepos(repos) {
+  var board = document.getElementById('board');
+  var updated = document.getElementById('updated');
+  updated.innerHTML = '📂 <span>' + GITHUB_USER + '</span> 的仓库 · 共 ' + repos.length + ' 个';
+
+  board.innerHTML = repos.map(function(r, i) {
+    return '<div class="rank-card" style="animation-delay:' + (i*0.03) + 's">' +
+      '<div class="rank-num" style="font-size:1rem;min-width:2rem">' +
+        (r.fork ? '🔀' : '📦') +
+      '</div>' +
+      '<div class="rank-info">' +
+        '<div class="rank-name"><a href="' + r.html_url + '" target="_blank">' + r.full_name + '</a></div>' +
+        '<div class="rank-desc">' + (r.description || '无描述') + '</div>' +
+        '<div class="rank-tags">' +
+          (r.language ? '<span class="rank-tag lang">' + r.language + '</span>' : '') +
+          '<span class="rank-tag">⭐ ' + (r.stargazers_count || 0) + '</span>' +
+          (r.private ? '<span class="rank-tag" style="background:rgba(248,180,0,0.15);color:#f8b400">🔒 私有</span>' : '') +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;flex-direction:column;gap:0.3rem">' +
+        '<button class="btn-deploy-leader" data-repo="' + r.full_name + '" data-url="' + r.clone_url + '">⚡ 一键部署</button>' +
+        '<button class="btn-browse-repo" data-repo="' + r.full_name + '" style="padding:0.4rem 0.6rem;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--muted);cursor:pointer;font-size:0.75rem">📂 浏览代码</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  // Re-wire buttons
+  document.querySelectorAll('.btn-deploy-leader').forEach(function(b) {
+    b.addEventListener('click', function(e) {
+      e.stopPropagation();
+      deployRepo = b.dataset.repo;
+      deployUrl = b.dataset.url;
+      document.getElementById('modalRepo').textContent = deployRepo;
+      document.getElementById('payModal').classList.add('show');
+    });
+  });
+
+  // Wire browse buttons
+  document.querySelectorAll('.btn-browse-repo').forEach(function(b) {
+    b.addEventListener('click', function(e) {
+      e.stopPropagation();
+      browseRepo(b.dataset.repo);
+    });
+  });
+}
+
+// Tab click: handle 'my repos' tab
+document.getElementById('tabs').addEventListener('click', function(e) {
+  var lang = e.target.dataset.lang;
+  if (lang === '__myrepos__') {
+    if (!GITHUB_TOKEN) { startOAuth(); return; }
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+    e.target.classList.add('active');
+    fetchMyRepos();
+  }
+});
+
+// Init
+updateOAuthUI();
+
+// Initial load
+fetchBoard(currentLang);
+
+// Auto-refresh every 30 minutes
+setInterval(function() { fetchBoard(currentLang); }, 30 * 60 * 1000);
+</script>
+
+<div class="modal-overlay" id="payModal">
+  <div class="modal-box">
+    <h3>⚡ 一键部署</h3>
+    <div class="repo-name" id="modalRepo"></div>
+    <div class="price" id="modalPrice">.00</div>
+    <p style="color:var(--muted);font-size:0.85rem">AI自动: 克隆→检测→Docker化→安全审计→上线</p>
+    <button class="btn-pay" id="btnConfirm">💳 部署到GBT云服务器 (.00)</button>
+    <button class="btn-pay" id="btnRemote" style="background:linear-gradient(135deg, #60a5fa, #3b82f6);color:#fff">🖥️ 部署到我的机器 (免费)</button>
+    <button class="btn-close" onclick="closePayModal()">取消</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="deployStatus">
+  <div class="modal-box">
+    <h3 id="statusTitle">🚀 部署中...</h3>
+    <div id="statusSteps" style="margin:1rem 0"></div>
+    <div id="statusResult" style="margin-top:1rem"></div>
+    <button class="btn-close" onclick="closeStatusModal()">关闭</button>
+  </div>
+</div>
+
+<script src="/nav-footer.js?v=2"></script>
+</body>
+</html>

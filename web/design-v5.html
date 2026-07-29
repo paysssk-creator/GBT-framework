@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI界的8号当铺 · GBT小土豆</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{overflow-x:hidden;background:#050510;color:#c8ccd4;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+canvas#bg{position:fixed;top:0;left:0;z-index:0}
+.content{position:relative;z-index:1}
+/* Nav */
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(5,5,16,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,.1);position:sticky;top:0;z-index:100}
+nav .logo{font-size:22px;font-weight:800;background:linear-gradient(135deg,#00d4ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+nav .links{display:flex;gap:24px}
+nav .links a{color:#8892b0;text-decoration:none;font-size:14px;transition:color .2s}
+nav .links a:hover{color:#00d4ff}
+nav .btn{padding:8px 20px;border-radius:20px;background:linear-gradient(135deg,#00d4ff,#a855f7);color:#fff;font-weight:600;border:none;cursor:pointer;font-size:14px}
+/* Hero */
+.hero{display:flex;align-items:center;justify-content:center;min-height:90vh;text-align:center;position:relative}
+.hero h1{font-size:clamp(40px,8vw,80px);font-weight:900;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,#ffd700,#00d4ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s ease infinite}
+@keyframes shimmer{0%,100%{filter:hue-rotate(0deg)}50%{filter:hue-rotate(30deg)}}
+.hero p{font-size:clamp(16px,3vw,22px);color:#8892b0;max-width:600px;margin:0 auto 32px;line-height:1.6}
+.hero .cta{display:inline-block;padding:14px 40px;border-radius:30px;background:linear-gradient(135deg,#ffd700,#ff8c00);color:#050510;font-weight:800;font-size:18px;text-decoration:none;box-shadow:0 0 40px rgba(255,215,0,.3);transition:transform .2s,box-shadow .2s}
+.hero .cta:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(255,215,0,.5)}
+/* Stats */
+.stats{display:flex;justify-content:center;gap:60px;padding:60px 20px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat .num{font-size:clamp(32px,6vw,56px);font-weight:900}
+.stat .num.gold{color:#ffd700}
+.stat .num.blue{color:#00d4ff}
+.stat .num.purple{color:#a855f7}
+.stat .label{color:#8892b0;font-size:14px;margin-top:4px;letter-spacing:2px}
+/* Cards — 3D倾斜 + 流光边框 */
+.section{padding:80px 40px;max-width:1200px;margin:0 auto;perspective:1200px}
+.section h2{font-size:clamp(28px,5vw,44px);font-weight:800;text-align:center;margin-bottom:48px;background:linear-gradient(135deg,#ffd700,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+.card{position:relative;background:rgba(10,10,30,.6);border-radius:20px;padding:32px 24px;cursor:pointer;transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s;transform-style:preserve-3d;backdrop-filter:blur(20px);overflow:hidden}
+.card::after{content:'';position:absolute;inset:0;border-radius:20px;padding:1.5px;background:linear-gradient(135deg,#00d4ff,transparent 40%,#a855f7 70%,#ffd700);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.4;transition:opacity .4s}
+.card:hover::after{opacity:1}
+.card::before{content:'';position:absolute;inset:-1px;border-radius:20px;background:linear-gradient(45deg,#00d4ff,#a855f7,#ffd700,#00d4ff);background-size:400% 400%;z-index:-1;animation:borderFlow 3s ease infinite;opacity:0;transition:opacity .4s}
+.card:hover::before{opacity:.6}
+@keyframes borderFlow{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+.card:hover{transform:translateY(-8px) rotateX(2deg) rotateY(-2deg);box-shadow:0 30px 80px rgba(0,212,255,.12),0 0 40px rgba(168,85,247,.08),inset 0 1px 0 rgba(255,255,255,.05)}
+.card .shine{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.03),transparent);transform:skewX(-15deg);transition:left .6s}
+.card:hover .shine{left:120%}
+.card .icon{font-size:40px;margin-bottom:16px;filter:drop-shadow(0 0 12px rgba(0,212,255,.3))}
+.card h3{font-size:20px;font-weight:700;margin-bottom:8px;color:#e6e6fa;position:relative;z-index:1}
+.card p{color:#8892b0;font-size:14px;line-height:1.6;position:relative;z-index:1}
+.card .price{margin-top:16px;font-size:26px;font-weight:900;background:linear-gradient(135deg,#ffd700,#ff8c00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:1}
+.card .tags{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;position:relative;z-index:1}
+.card .tag{padding:5px 14px;border-radius:14px;font-size:11px;font-weight:600;letter-spacing:.5px;background:rgba(0,212,255,.08);color:#00d4ff;border:1px solid rgba(0,212,255,.15);transition:all .2s}
+.card:hover .tag{background:rgba(0,212,255,.12);border-color:rgba(0,212,255,.3)}
+/* CTA */
+.cta-section{text-align:center;padding:100px 20px;background:linear-gradient(180deg,transparent,rgba(168,85,247,.05),transparent)}
+.cta-section h2{font-size:clamp(32px,6vw,52px);font-weight:900;margin-bottom:16px}
+.cta-section p{color:#8892b0;font-size:18px;margin-bottom:32px}
+.cta-section .btn-lg{padding:16px 48px;border-radius:30px;background:linear-gradient(135deg,#00d4ff,#a855f7);color:#fff;font-weight:800;font-size:18px;border:none;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 0 50px rgba(0,212,255,.25)}
+/* Footer */
+footer{padding:40px;text-align:center;border-top:1px solid rgba(255,255,255,.04);color:#8892b0;font-size:13px}
+/* Responsive */
+@media(max-width:768px){nav{padding:12px 20px;flex-wrap:wrap;gap:12px}.links{display:none}.stats{gap:30px}.section{padding:40px 16px}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="content">
+<nav>
+  <div class="logo">8号当铺</div>
+  <div class="links"><a href="#">首页</a><a href="#">项目市场</a><a href="#">定价</a><a href="#">文档</a></div>
+  <a class="btn" href="#">开始赚钱</a>
+</nav>
+
+<section class="hero">
+  <div>
+    <h1>贴个链接<br>AI替你打工</h1>
+    <p>把你的开源项目变成能赚钱的在线服务。不用写Dockerfile，不用配服务器，30秒上线，80%收益归你。</p>
+    <a class="cta" href="#">立即部署你的项目</a>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="num gold" id="count">4,200+</div><div class="label">开源项目已上架</div></div>
+  <div class="stat"><div class="num blue">$2.8M+</div><div class="label">开发者总收益</div></div>
+  <div class="stat"><div class="num purple">99.9%</div><div class="label">服务可用性 SLA</div></div>
+</div>
+
+<section class="section">
+  <h2>热门 AI 开源项目</h2>
+  <div class="grid">
+    <div class="card"><div class="shine"></div><div class="icon">🧠</div><h3>LangGraph</h3><p>Agent编排框架 · 多智能体协作</p><div class="price">$2/h</div><div class="tags"><span class="tag">AI Agent</span><span class="tag">工作流</span></div></div>
+    <div class="card"><div class="shine"></div><div class="icon">🤖</div><h3>Qwen3-235B</h3><p>开源Agent模型 · 对标GPT-4</p><div class="price">$5/h</div><div class="tags"><span class="tag">LLM</span><span class="tag">Agent</span></div></div>
+    <div class="card"><div class="shine"></div><div class="icon">💻</div><h3>OpenCode</h3><p>AI编程Agent · 自动写代码</p><div class="price">$3/h</div><div class="tags"><span class="tag">代码生成</span><span class="tag">AI</span></div></div>
+    <div class="card"><div class="shine"></div><div class="icon">⚡</div><h3>N8N</h3><p>自动化工作流引擎 · 200+集成</p><div class="price">$0.5/h</div><div class="tags"><span class="tag">工作流</span><span class="tag">自动化</span></div></div>
+    <div class="card"><div class="shine"></div><div class="icon">🗄️</div><h3>Supabase</h3><p>开源Firebase替代 · BaaS</p><div class="price">$1/h</div><div class="tags"><span class="tag">数据库</span><span class="tag">BaaS</span></div></div>
+    <div class="card"><div class="shine"></div><div class="icon">🔐</div><h3>Captcha Solver</h3><p>AI验证码识别 · 40+类型</p><div class="price">$1.5/千次</div><div class="tags"><span class="tag">AI</span><span class="tag">验证码</span></div></div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>今天部署，明天收租</h2>
+  <p>新用户赠送 10 小时免费额度 · 无需信用卡</p>
+  <a class="btn-lg" href="#">立即部署你的项目</a>
+</section>
+
+<footer>
+  © 2026 GBT · AI界的8号当铺 · Created by 自由的风 · 4200+ Projects · $2.8M+ Paid Out
+</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+// 3D粒子背景
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,.1,1000);
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('bg'),antialias:true,alpha:true});
+renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+camera.position.z=30;
+
+// 粒子星系
+const particlesGeo=new THREE.BufferGeometry();
+const count=2000;
+const pos=new Float32Array(count*3);
+const colors=new Float32Array(count*3);
+for(let i=0;i<count*3;i+=3){
+  const r=8+Math.random()*25;
+  const theta=Math.random()*Math.PI*2;
+  const phi=Math.random()*Math.PI;
+  pos[i]=r*Math.sin(phi)*Math.cos(theta);
+  pos[i+1]=r*Math.sin(phi)*Math.sin(theta)*.5;
+  pos[i+2]=r*Math.cos(phi);
+  const c=new THREE.Color().setHSL(.55+Math.random()*.15,.8,.5+Math.random()*.3);
+  colors[i]=c.r;colors[i+1]=c.g;colors[i+2]=c.b;
+}
+particlesGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+particlesGeo.setAttribute('color',new THREE.BufferAttribute(colors,3));
+const particlesMat=new THREE.PointsMaterial({size:.08,vertexColors:true,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.8});
+const particles=new THREE.Points(particlesGeo,particlesMat);
+scene.add(particles);
+
+// 光晕环
+const ringGeo=new THREE.TorusGeometry(12,.02,16,100);
+const ringMat=new THREE.MeshBasicMaterial({color:0x00d4ff,transparent:true,opacity:.3});
+const ring=new THREE.Mesh(ringGeo,ringMat);
+ring.rotation.x=Math.PI/3;
+scene.add(ring);
+
+const ring2=new THREE.Mesh(new THREE.TorusGeometry(16,.015,16,100),new THREE.MeshBasicMaterial({color:0xa855f7,transparent:true,opacity:.2}));
+ring2.rotation.x=-Math.PI/4;
+scene.add(ring2);
+
+// 中心发光球
+const glowGeo=new THREE.SphereGeometry(1.5,32,32);
+const glowMat=new THREE.ShaderMaterial({
+  uniforms:{time:{value:0}},
+  vertexShader:`varying vec3 vNormal;varying vec3 vPos;void main(){vNormal=normalize(normalMatrix*normal);vPos=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+  fragmentShader:`varying vec3 vNormal;varying vec3 vPos;uniform float time;void main(){float s=sin(time*2.)*.5+.5;vec3 c=mix(vec3(0.,.83,.96),vec3(.66,.13,.97),s);float glow=pow(.7-dot(vNormal,vec3(0,0,1)),3.);gl_FragColor=vec4(c*glow*2.,glow);}`,
+  transparent:true,depthWrite:false
+});
+const glow=new THREE.Mesh(glowGeo,glowMat);
+scene.add(glow);
+
+function animate(t){
+  requestAnimationFrame(animate);
+  particles.rotation.y+=.0003;
+  particles.rotation.x+=.0001;
+  ring.rotation.z+=.002;
+  ring2.rotation.z-=.0015;
+  glowMat.uniforms.time.value=t*.001;
+  renderer.render(scene,camera);
+}
+requestAnimationFrame(animate);
+
+window.addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+
+// 卡片3D鼠标跟踪倾斜
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const rect=card.getBoundingClientRect();
+    const x=e.clientX-rect.left;
+    const y=e.clientY-rect.top;
+    const cx=rect.width/2,cy=rect.height/2;
+    const rx=(y-cy)/cy*12;
+    const ry=(cx-x)/cx*12;
+    card.style.transform=`translateY(-8px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='translateY(0) rotateX(0) rotateY(0)';
+  });
+});
+</script>
+</body>
+</html>

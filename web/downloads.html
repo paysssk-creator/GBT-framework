@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="GBT小土豆 免费下载中心 — OMP原生控制包、股票量化工具、浏览器自动化等免费工具">
+<meta name="theme-color" content="#000">
+<meta property="og:title" content="GBT小土豆 · 免费下载中心">
+<meta property="og:description" content="GBT小土豆 OMP原生控制包·一键部署·全平台支持">
+<meta property="og:image" content="/logo.svg">
+<title>GBT小土豆 · 免费下载中心</title>
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.download-hero {
+  text-align: center;
+  padding: 120px 24px 60px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,107,53,.08) 0%, transparent 60%);
+}
+.download-hero h1 { font-size: clamp(36px,5vw,56px); margin-bottom: 12px; }
+.download-hero p { font-size: 17px; color: var(--dim); max-width: 600px; margin: 0 auto; }
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+.download-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  transition: all .3s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+}
+.download-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+.download-card.featured {
+  border-color: rgba(255,107,53,.25);
+  background: linear-gradient(135deg, rgba(255,107,53,.06), rgba(255,107,53,.02));
+}
+.download-card.featured::before {
+  content: '🔥 热门';
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.card-icon { font-size: 36px; margin-bottom: 16px; }
+.card-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.card-desc { font-size: 14px; color: var(--dim); margin-bottom: 20px; line-height: 1.6; }
+.card-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--dim);
+  margin-bottom: 20px;
+}
+.card-meta span { display: flex; align-items: center; gap: 4px; }
+.install-steps {
+  background: rgba(0,0,0,.3);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+.install-steps code {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--teal);
+  padding: 4px 0;
+}
+.install-steps code::before { content: '$ '; color: var(--dim); }
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.tech-tag {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.05);
+  color: var(--dim);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.faq-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+.faq-section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+}
+.faq-q {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.faq-a {
+  font-size: 14px;
+  color: var(--dim);
+  line-height: 1.7;
+}
+</style>
+</head>
+<body>
+
+<nav class="gbt-nav" id="nav">
+  <div class="gbt-nav-inner">
+    <a href="/" class="gbt-nav-brand">
+      <img src="/logo.svg" alt="GBT" style="height:24px;width:24px;border-radius:6px">
+      <span>GBT小土豆</span>
+    </a>
+    <div class="gbt-nav-links">
+      <a href="/">首页</a>
+      <a href="/pricing.html">定价</a>
+      <a href="/deploy.html">部署</a>
+      <a href="/docs/">文档</a>
+      <a href="/downloads.html" class="active">下载</a>
+    </div>
+  </div>
+</nav>
+
+<section class="download-hero">
+  <h1>📦 免费下载中心</h1>
+  <p>GBT小土豆 所有免费工具和安装包 — 开源、免费、一键部署</p>
+</section>
+
+<div class="download-grid">
+
+  <!-- Featured: OMP Native Control Pack -->
+  <div class="download-card featured">
+    <div class="card-icon">🧠</div>
+    <div class="card-title">OMP 原生控制包</div>
+    <div class="card-desc">
+      最完整的 GBT 大脑安装包。一键部署 Python + 桌面视觉 + Tesseract OCR + OMP Shell + 190+ 能力模块。下载→解压→双击安装。
+    </div>
+    <div class="card-meta">
+      <span>🖥️ Win/Mac/Linux</span>
+      <span>📦 ~8KB</span>
+      <span>⭐ v5.0</span>
+    </div>
+    <div class="install-steps">
+      <div style="font-size:12px;color:var(--dim);margin-bottom:8px">Windows 一键安装：</div>
+      <code>下载 → 解压 → 双击 install.bat</code>
+      <div style="font-size:12px;color:var(--dim);margin:8px 0">Mac / Linux：</div>
+      <code>unzip gbt-omp-control-pack.zip</code>
+      <code>bash install.sh</code>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:16px">
+      <a href="/downloads/gbt-omp-control-pack.zip" class="btn btn-primary" style="flex:1">⬇ 免费下载 (Win)</a>
+    </div>
+    <div class="tech-tags">
+      <span class="tech-tag">Python 3.12</span>
+      <span class="tech-tag">OMP Shell</span>
+      <span class="tech-tag">Tesseract OCR</span>
+      <span class="tech-tag">190+ Caps</span>
+      <span class="tech-tag">DeepSeek AI</span>
+    </div>
+  </div>
+
+  <!-- Stock Scalper -->
+  <div class="download-card">
+    <div class="card-icon">📈</div>
+    <div class="card-title">GBT 股票量化工具</div>
+    <div class="card-desc">
+      实时 A 股行情监控 + 技术指标扫描 + 浏览器自动化交易。支持东方财富、同花顺等平台。
+    </div>
+    <div class="card-meta">
+      <span>🖥️ Windows</span>
+      <span>📦 4.4KB</span>
+    </div>
+    <a href="/downloads/gbt-stock-scalper.zip" class="btn btn-outline" style="width:100%">⬇ 免费下载</a>
+    <div class="tech-tags">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">Selenium</span>
+      <span class="tech-tag">A股</span>
+    </div>
+  </div>
+
+  <!-- Coming Soon Placeholders -->
+  <div class="download-card" style="opacity:.5">
+    <div class="card-icon">🌐</div>
+    <div class="card-title">GBT 浏览器自动化包</div>
+    <div class="card-desc">Playwright 驱动的智能浏览器操作工具包。支持多标签、反检测、验证码自动解决、云端浏览器。</div>
+    <div class="card-meta"><span>🚧 即将发布</span></div>
+    <a class="btn btn-outline" style="width:100%;pointer-events:none;opacity:.5">即将上线</a>
+  </div>
+
+  <div class="download-card" style="opacity:.5">
+    <div class="card-icon">🔐</div>
+    <div class="card-title">GBT 安全测试套件</div>
+    <div class="card-desc">渗透测试、SQL注入检测、XSS扫描、WAF绕过、子域名枚举等安全工具合集。</div>
+    <div class="card-meta"><span>🚧 即将发布</span></div>
+    <a class="btn btn-outline" style="width:100%;pointer-events:none;opacity:.5">即将上线</a>
+  </div>
+
+</div>
+
+<section class="faq-section">
+  <h2>❓ 常见问题</h2>
+  <div class="faq-item">
+    <div class="faq-q">OMP 是什么？</div>
+    <div class="faq-a">OMP (Oh My Pi) 是一个 AI 驱动的命令行外壳，类似 Claude Code / Cursor 终端。它让 AI 可以直接操控你的电脑——读写文件、运行命令、操控浏览器。OMP 原生控制包将 OMP + GBT大脑 打包成一键安装。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">需要什么系统要求？</div>
+    <div class="faq-a">Windows 10/11、macOS 12+、Ubuntu 20.04+。需要 Python 3.10+（安装包会自动检测并安装）。推荐 8GB+ 内存以获得流畅的 AI 视觉分析体验。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">需要付费吗？</div>
+    <div class="faq-a">GBT小土豆本身完全免费开源。AI 功能需要 DeepSeek API Key（新用户免费 500 万 tokens），OMP Shell 基础版免费。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">安装后如何启动？</div>
+    <div class="faq-a">安装完成后，打开终端进入 GBTxiaotudouV5 目录，输入 <code>omp</code> 即可启动 AI 对话。输入 <code>omp --mode rpc</code> 可启动 API 模式供外部程序调用。</div>
+  </div>
+</section>
+
+<script src="/assets/gbt-3d.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+});
+</script>
+</body>
+</html>

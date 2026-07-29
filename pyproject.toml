@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "gbt-xiaotudou"
+version = "5.0.0"
+description = "GBT小土豆 · 智能大脑 v5.0 — 190个AI能力模块 · 18域 · 四层认知闭环"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [{name = "自由的风"}]
+keywords = ["ai-agent", "autonomous", "pentest", "multi-agent", "llm", "computer-use"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "psutil>=5.9.0",
+    "pyautogui>=0.9.50",
+    "mss>=9.0.0",
+    "Pillow>=10.0.0",
+    "requests>=2.31.0",
+    "urllib3>=2.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+full = [
+    "pytesseract>=0.3.10",
+    "uiautomation>=2.0",
+    "scapy>=2.5.0",
+    "edge-tts>=6.1.0",
+    "pyttsx3>=2.90",
+    "kokoro>=0.1.0",
+    "pyaudio>=0.2.11",
+    "bettercam",
+    "telethon>=1.36.0",
+    "opencv-python>=4.8.0",
+    "pynput>=1.7.0",
+    "pyperclip>=1.8.0",
+    "openpyxl>=3.1.0",
+    "soundfile>=0.12.0",
+    "cryptography>=41.0.0",
+]
+gpu = ["torch>=2.1.0", "diffusers>=0.25.0", "transformers>=4.36.0", "imageio>=2.33.0"]
+quantum = ["qiskit>=1.0.0", "qiskit-aer>=0.14.0"]
+dev = ["pytest>=7.0", "pytest-cov", "ruff", "mypy", "pre-commit"]
+
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+exclude = ["__pycache__", ".git", ".venv", "node_modules", "dist"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+check_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-v --tb=short"
+timeout = 30
+
+[tool.coverage.run]
+source = ["caps", "brain"]
+omit = ["*/__pycache__/*", "*/test_*"]
+
+[tool.coverage.report]
+exclude_lines = ["pragma: no cover", "if __name__ == .__main__.:"]

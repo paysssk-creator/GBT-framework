@@ -1,0 +1,28 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "cloud_browser",
+  "version": "1.0.0",
+  "description": "2Captcha云端CDP浏览器 — 远程Chrome直连 · Playwright/Puppeteer · 国家选择 · 代理内置 · 验证码自动求解",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "自动化",
+  "entry": {"program": "python", "args": ["run.py"]},
+  "triggers": {
+    "keywords": ["云浏览器", "cloud browser", "远程浏览器", "CDP", "playwright远程", "puppeteer远程", "浏览器农场"],
+    "intent": "cloud_browser",
+    "examples": ["创建一个美国云端浏览器", "获取CDP连接URL", "启动云浏览器会话"]
+  },
+  "actions": {
+    "create_session": {"description": "一键创建完整浏览器会话(账户+Profile+CDP URL)", "input": "stdin", "timeout_ms": 30000, "output": "json"},
+    "get_connection": {"description": "获取CDP WebSocket连接URL", "input": "stdin", "timeout_ms": 15000, "output": "json"},
+    "account_status": {"description": "获取Browser API账户状态(流量/限制)", "input": "stdin", "timeout_ms": 10000, "output": "json"},
+    "list_accounts": {"description": "列出浏览器账户", "input": "stdin", "timeout_ms": 15000, "output": "json"},
+    "create_account": {"description": "创建浏览器账户", "input": "stdin", "timeout_ms": 15000, "output": "json"},
+    "delete_account": {"description": "删除浏览器账户", "input": "stdin", "timeout_ms": 10000, "output": "json"},
+    "list_profiles": {"description": "列出浏览器Profiles", "input": "stdin", "timeout_ms": 15000, "output": "json"},
+    "create_profile": {"description": "创建浏览器Profile", "input": "stdin", "timeout_ms": 15000, "output": "json"},
+    "get_statistics": {"description": "获取流量统计", "input": "stdin", "timeout_ms": 10000, "output": "json"}
+  },
+  "depends_on": ["_2captcha", "browser_automation"]
+}

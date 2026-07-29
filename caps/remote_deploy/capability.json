@@ -1,0 +1,96 @@
+{
+  "name": "remote_deploy",
+  "version": "1.0.0",
+  "description": "远程操控部署 — SSH连接/远程命令/文件传输/一键部署到远程生产环境",
+  "language": "python",
+  "risk_level": "dangerous",
+  "auto_exec": true,
+  "category": "运维",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "远程",
+      "部署",
+      "SSH",
+      "remote",
+      "deploy",
+      "上传",
+      "服务器",
+      "scp",
+      "生产环境",
+      "远程操控"
+    ],
+    "intent": "remote_deploy",
+    "examples": [
+      "部署到远程服务器",
+      "SSH连接服务器",
+      "上传文件到服务器"
+    ]
+  },
+  "actions": {
+    "connect": {
+      "description": "测试SSH连接",
+      "args": [
+        "--action",
+        "connect"
+      ],
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "exec": {
+      "description": "远程执行命令",
+      "args": [
+        "--action",
+        "exec"
+      ],
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "upload": {
+      "description": "上传文件到远程服务器",
+      "args": [
+        "--action",
+        "upload"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "download": {
+      "description": "从远程服务器下载文件",
+      "args": [
+        "--action",
+        "download"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "deploy": {
+      "description": "一键部署: 镜像空间打包 → 上传 → 远程解压 → 重启服务",
+      "args": [
+        "--action",
+        "deploy"
+      ],
+      "input": "stdin",
+      "timeout_ms": 300000,
+      "output": "json"
+    },
+    "hosts": {
+      "description": "列出已配置的远程主机",
+      "args": [
+        "--action",
+        "hosts"
+      ],
+      "timeout_ms": 5000,
+      "output": "json"
+    }
+  }
+}

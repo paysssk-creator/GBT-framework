@@ -1,0 +1,87 @@
+{
+  "name": "auto_resolver",
+  "version": "2.0.0",
+  "description": "自主解析引擎 — 零追问。任何卡点/阻塞/未知/失败→四脑分析→全网搜索→多方案对比→镜像验证→继续执行→吸收教训。字典里没有'叫用户帮忙'。",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI推理",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "actions": {
+    "analyze": {
+      "description": "四脑分析 — 推理脑分析根因+编程脑生成多方案",
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "decide": {
+      "description": "决策 — 多方案对比，选最优",
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "escalation_policy": {
+      "description": "escalation_policy"
+    },
+    "learn": {
+      "description": "吸收 — 将解决方案写入自进化记忆",
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "learn_from_resolution": {
+      "description": "learn_from_resolution"
+    },
+    "resolve": {
+      "description": "核心: 遇到卡点→四脑分析→全网搜索→多方案→选最优→返回方案",
+      "input": "stdin",
+      "timeout_ms": 180000,
+      "output": "json"
+    },
+    "resolve_loop": {
+      "description": "resolve_loop"
+    },
+    "search": {
+      "description": "全网搜索 — 搜索文档/StackOverflow/GitHub Issues/源码",
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "verify": {
+      "description": "验证 — 在镜像空间验证方案可行性",
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "卡住了",
+      "不知道",
+      "怎么办",
+      "求助",
+      "不会",
+      "失败",
+      "报错",
+      "阻塞",
+      "blocked",
+      "stuck",
+      "怎么解决",
+      "帮我",
+      "resolve",
+      "fix"
+    ],
+    "intent": "auto_resolve",
+    "examples": [
+      "这个错误怎么解决",
+      "我不知道这个库怎么用",
+      "这里卡住了怎么办"
+    ]
+  },
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除"
+}

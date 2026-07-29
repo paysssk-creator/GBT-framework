@@ -1,0 +1,78 @@
+{
+  "name": "health_dashboard",
+  "version": "1.0.0",
+  "description": "健康聚合面板 — 全系统53cap状态一览/资源监控/告警",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "运维",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "健康",
+      "状态",
+      "面板",
+      "dashboard",
+      "health",
+      "诊断",
+      "概览"
+    ],
+    "intent": "health_check",
+    "examples": [
+      "系统健康检查",
+      "看看所有模块状态"
+    ]
+  },
+  "actions": {
+    "caps": {
+      "description": "列出所有能力模块状态",
+      "args": [
+        "--action",
+        "caps"
+      ],
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "check": {
+      "description": "全系统健康检查 (53caps + 资源 + 后端)",
+      "args": [
+        "--action",
+        "check"
+      ],
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "help": {
+      "description": "help"
+    },
+    "list": {
+      "description": "list"
+    },
+    "live_check": {
+      "description": "实时健康扫描 (nexus邻域+语法验证+缓存60s)",
+      "args": [
+        "--action",
+        "live_check"
+      ],
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "quick": {
+      "description": "快速检查 (仅资源+后端)",
+      "args": [
+        "--action",
+        "quick"
+      ],
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "self_test": {
+      "description": "self_test"
+    }
+  }
+}

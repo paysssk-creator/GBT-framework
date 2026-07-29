@@ -1,0 +1,18 @@
+{
+  "name": "reverse_scrape",
+  "version": "1.0.0",
+  "category": "侦察域",
+  "risk_level": "medium",
+  "tier": "core",
+  "description": "反向抓取 — 从目标数据反向追踪来源、逆向API抓取、反向代理采集、指纹反溯源",
+  "actions": [
+    {"name": "reverse_trace", "desc": "反向追踪: 从数据片段反向定位原始来源", "input": {"url": "string", "data_snippet": "string"}, "output": "source_map"},
+    {"name": "api_reverse", "desc": "API逆向: 从未公开接口反推API端点并抓取", "input": {"domain": "string", "pattern": "string"}, "output": "api_endpoints"},
+    {"name": "proxy_scrape", "desc": "反向代理采集: 通过住宅代理+指纹伪装反向抓取", "input": {"url": "string", "depth": "int"}, "output": "scraped_data"},
+    {"name": "fingerprint_reverse", "desc": "指纹反溯源: 分析目标站的反爬策略并生成绕过指纹", "input": {"url": "string"}, "output": "bypass_profile"},
+    {"name": "chain_trace", "desc": "链路追踪: 追踪数据在多个跳转中的完整路径", "input": {"start_url": "string", "max_hops": "int"}, "output": "trace_chain"}
+  ],
+  "triggers": ["反向抓取", "逆向采集", "来源追踪", "API逆向", "反溯源", "reverse scrape", "trace back"],
+  "auto_exec": false,
+  "_stamp": "2026-07-29T10:00:00Z"
+}

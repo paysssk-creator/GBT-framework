@@ -1,0 +1,112 @@
+{
+  "name": "sub_agent_mgr",
+  "version": "1.0.0",
+  "description": "无限制子代理隔离执行层 — 独立进程+思维导图+证据链",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "调度编排",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "子代理",
+      "spawn",
+      "多步任务",
+      "隔离执行",
+      "agent",
+      "思维导图"
+    ],
+    "intent": "sub_agent",
+    "examples": [
+      "生成子代理执行任务",
+      "查看子代理状态"
+    ]
+  },
+  "actions": {
+    "__worker_loop": {
+      "description": "__worker_loop"
+    },
+    "auto_scale": {
+      "description": "auto_scale"
+    },
+    "evidence": {
+      "description": "获取完整证据链（每步输出）",
+      "args": [
+        "evidence"
+      ],
+      "input": {
+        "agent_id": "string"
+      },
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "execute": {
+      "description": "执行已生成的代理（断点续跑）",
+      "args": [
+        "execute"
+      ],
+      "input": {
+        "agent_id": "string"
+      },
+      "timeout_ms": 300000,
+      "output": "json"
+    },
+    "kill": {
+      "description": "终止指定子代理",
+      "args": [
+        "kill"
+      ],
+      "input": {
+        "agent_id": "string"
+      },
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "mindmap_preview": {
+      "description": "只预览思维导图，不执行",
+      "args": [
+        "mindmap_preview"
+      ],
+      "input": {
+        "task": "string"
+      },
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "persistent_pool": {
+      "description": "persistent_pool"
+    },
+    "spawn": {
+      "description": "生成子代理+LLM生成思维导图+立即执行",
+      "args": [
+        "spawn"
+      ],
+      "input": {
+        "task": "string",
+        "caps": "array"
+      },
+      "timeout_ms": 300000,
+      "output": "json"
+    },
+    "spawn_dag": {
+      "description": "spawn_dag"
+    },
+    "status": {
+      "description": "查询所有子代理状态",
+      "args": [
+        "status"
+      ],
+      "input": {},
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "task_queue": {
+      "description": "task_queue"
+    }
+  }
+}

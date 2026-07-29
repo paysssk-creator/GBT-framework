@@ -1,0 +1,21 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "simulation_env",
+  "version": "1.0.0",
+  "description": "模拟/游戏环境 — OpenAI Gym + 自定义RL训练环境",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "AI协作",
+  "entry": { "program": "python", "args": ["run.py"] },
+  "triggers": {
+    "keywords": ["simulation", "game", "gym", "environment", "rl", "模拟", "游戏"],
+    "intent": "simulation_env",
+    "examples": ["列出模拟环境", "运行CartPole", "RL训练"]
+  },
+  "actions": {
+    "list": { "description": "列出可用模拟环境" },
+    "run": { "description": "运行指定的模拟环境" },
+    "status": { "description": "查看模块状态" }
+  }
+}

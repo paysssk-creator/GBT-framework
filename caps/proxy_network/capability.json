@@ -1,0 +1,26 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "proxy_network",
+  "version": "1.0.0",
+  "description": "2Captcha住宅代理网络 — 220+国家真实住宅IP · 自动轮换 · SOCKS5 · 按国家/城市/ASN筛选",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "网络",
+  "entry": {"program": "python", "args": ["run.py"]},
+  "triggers": {
+    "keywords": ["代理", "proxy", "住宅IP", "residential", "IP池", "代理网络", "翻墙"],
+    "intent": "proxy_network",
+    "examples": ["给我一个美国住宅代理", "列出代理可用国家", "查代理余额"]
+  },
+  "actions": {
+    "account_info": {"description": "获取代理账户信息(流量/白名单)", "input": "stdin", "timeout_ms": 15000, "output": "json"},
+    "balance": {"description": "查询代理余额", "input": "stdin", "timeout_ms": 10000, "output": "json"},
+    "list_countries": {"description": "列出208个可用国家", "input": "stdin", "timeout_ms": 15000, "output": "json"},
+    "list_regions": {"description": "列出967个可用地区", "input": "stdin", "timeout_ms": 15000, "output": "json"},
+    "list_cities": {"description": "列出3145个可用城市", "input": "stdin", "timeout_ms": 15000, "output": "json"},
+    "list_asns": {"description": "列出可用ASN(运营商)", "input": "stdin", "timeout_ms": 15000, "output": "json"},
+    "generate_whitelist": {"description": "生成白名单连接IP", "input": "stdin", "timeout_ms": 15000, "output": "json"}
+  },
+  "depends_on": ["_2captcha"]
+}

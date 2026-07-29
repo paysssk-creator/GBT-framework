@@ -1,0 +1,106 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "browser_fingerprint",
+  "version": "2.0.0",
+  "description": "2Captcha浏览器指纹 · 全维度 — screen/UA/navigator/webgl/webgpu/voices/intl/canvas/fonts/visitor_id · Playwright/Puppeteer/Selenium/CDP隐身配置",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "自动化",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "指纹",
+      "fingerprint",
+      "浏览器指纹",
+      "反检测",
+      "隐身",
+      "stealth",
+      "browser profile",
+      "canvas指纹",
+      "webgl指纹",
+      "字体指纹",
+      "语音指纹"
+    ],
+    "intent": "browser_fingerprint",
+    "examples": [
+      "生成Windows浏览器指纹",
+      "美国Chrome指纹",
+      "Playwright隐身上下文",
+      "完整隐身配置"
+    ]
+  },
+  "actions": {
+    "browser_headers": {
+      "description": "生成真实浏览器HTTP请求头(UA/Accept-Language/Sec-CH-UA等)",
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "complete_profile": {
+      "description": "全维度指纹档案: 所有字段汇总输出",
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "extract_platform": {
+      "description": "提取操作系统平台",
+      "input": "stdin",
+      "timeout_ms": 5000,
+      "output": "json"
+    },
+    "extract_ua": {
+      "description": "提取User-Agent",
+      "input": "stdin",
+      "timeout_ms": 5000,
+      "output": "json"
+    },
+    "generate": {
+      "description": "按参数生成定制浏览器指纹(原始)",
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "headers": {
+      "description": "headers"
+    },
+    "playwright_context": {
+      "description": "生成Playwright browser.new_context()完整参数",
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "profile": {
+      "description": "profile"
+    },
+    "puppeteer_context": {
+      "description": "生成Puppeteer launch()+createIncognitoBrowserContext()参数",
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "random": {
+      "description": "获取随机真实浏览器指纹(原始)",
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "stealth": {
+      "description": "stealth"
+    },
+    "stealth_config": {
+      "description": "完整隐身配置: launch_args+context+headers+cdp_scripts",
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    }
+  },
+  "depends_on": [
+    "_2captcha"
+  ]
+}

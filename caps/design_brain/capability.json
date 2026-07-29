@@ -1,0 +1,28 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "design_brain",
+  "version": "3.1.0",
+  "description": "设计大脑 — AI驱动3D渲染+Web 3D展示: 建筑设计/室内装修/ControlNet深度估计+5风格批量/美观渲染 + 3D网页生成(粒子·地球·光效)",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI创作",
+  "entry": { "program": "python", "args": ["run.py"] },
+  "actions": {
+    "architect": { "description": "建筑设计3D效果图", "timeout_ms": 120000 },
+    "interior": { "description": "室内装修3D效果图", "timeout_ms": 120000 },
+    "renovate": { "description": "翻新改造前后对比", "timeout_ms": 120000 },
+    "deploy_layout": { "description": "空间规划布局3D图", "timeout_ms": 120000 },
+    "aesthetic": { "description": "美观渲染增强", "timeout_ms": 60000 },
+    "prompt_builder": { "description": "专业3D渲染prompt构建器", "timeout_ms": 30000 },
+    "style_guide": { "description": "建筑/装修风格百科(20+10风格)", "timeout_ms": 10000 },
+    "controlnet_render": { "description": "ControlNet真实渲染 — DepthAnythingV2+ControlNet+SD批量5风格", "timeout_ms": 300000 },
+    "controlnet_guide": { "description": "ControlNet调优指南 — 参数+常见错误修复", "timeout_ms": 30000 },
+    "web3d_showcase": { "description": "生成3D粒子网页 — 地球·光效·滚动入场", "timeout_ms": 30000 },
+    "web3d_prompt": { "description": "LLM智能生成3D网页设计 + 代码", "timeout_ms": 60000 }
+  },
+  "triggers": {
+    "keywords": ["设计","装修","3D","渲染","ControlNet","深度估计","效果图","网页设计","3D网页","粒子","科技感页面","数据可视化"],
+    "intent": "design_visualize"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "nexus_monitor",
+  "version": "2.0.0",
+  "description": "全局邻域感知监控·操作前检查·问题诊断·自动修复·持续watch·event_bus告警",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI记忆",
+  "actions": {
+    "auto_heal": {
+      "description": "自动修复常见问题(__pycache__/corrupt JSON)",
+      "timeout_ms": 30000
+    },
+    "check": {
+      "description": "快速邻域健康检查",
+      "timeout_ms": 5000
+    },
+    "continuous": {
+      "description": "启动持续监控守护",
+      "timeout_ms": 0
+    },
+    "deep_check": {
+      "description": "深度检查+修复建议",
+      "timeout_ms": 10000
+    },
+    "pre_flight": {
+      "description": "起飞前完整检查(部署/支付前)",
+      "timeout_ms": 10000
+    },
+    "run": {
+      "description": "run"
+    },
+    "watch": {
+      "description": "持续监控+event_bus告警·start/stop/once/status",
+      "timeout_ms": 0
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "监控",
+      "nexus",
+      "健康",
+      "health",
+      "检查",
+      "diagnose",
+      "修复",
+      "heal"
+    ],
+    "intent": "nexus_monitor"
+  }
+}

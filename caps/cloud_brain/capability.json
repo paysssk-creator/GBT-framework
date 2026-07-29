@@ -1,0 +1,126 @@
+{
+  "name": "cloud_brain",
+  "version": "1.0.0",
+  "description": "云端大脑 · 云端LLM推理集群/分布式知识库/云端同步/远程GPU推理/云端存储KV。本地+云端双模无缝切换",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "云端",
+      "cloud",
+      "远程推理",
+      "GPU",
+      "分布式",
+      "云端存储",
+      "云同步",
+      "cloud brain",
+      "集群"
+    ],
+    "intent": "cloud_brain",
+    "examples": [
+      "云端推理",
+      "同步到云端",
+      "使用云端GPU"
+    ]
+  },
+  "actions": {
+    "reason": {
+      "description": "reason",
+      "args": [
+        "--action",
+        "reason"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "ask": {
+      "description": "ask",
+      "args": [
+        "--action",
+        "ask"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "query": {
+      "description": "query",
+      "args": [
+        "--action",
+        "query"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "sync": {
+      "description": "sync",
+      "args": [
+        "--action",
+        "sync"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "pull": {
+      "description": "pull",
+      "args": [
+        "--action",
+        "pull"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "kv": {
+      "description": "kv",
+      "args": [
+        "--action",
+        "kv"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "models": {
+      "description": "models",
+      "args": [
+        "--action",
+        "models"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "status": {
+      "description": "status",
+      "args": [
+        "--action",
+        "status"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "deploy": {
+      "description": "deploy",
+      "args": [
+        "--action",
+        "deploy"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    }
+  }
+}

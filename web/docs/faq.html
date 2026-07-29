@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>常见问题 · GBT Docs</title><link rel="stylesheet" href="/styles.css"><style>:root{--sidebar-w:260px}body{display:flex;min-height:100vh;font-family:'Inter',-apple-system,sans-serif}.sidebar{width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);padding:20px;position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:10}.sidebar h2{font-size:14px;font-weight:700;margin-bottom:16px;color:var(--accent)}.sidebar nav{display:flex;flex-direction:column;gap:4px}.sidebar a{color:var(--dim);text-decoration:none;font-size:13px;padding:6px 10px;border-radius:6px;transition:all .15s;display:block}.sidebar a:hover,.sidebar a.active{color:var(--text);background:rgba(255,255,255,.04)}.sidebar .section{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-top:20px;margin-bottom:8px;padding-left:10px}.main{margin-left:var(--sidebar-w);flex:1;padding:40px 60px;max-width:900px}.main h1{font-size:32px;font-weight:800;margin-bottom:8px}.main h2{font-size:22px;font-weight:700;margin:40px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}.main h3{font-size:17px;font-weight:600;margin:24px 0 8px}.main p{font-size:15px;color:var(--dim);line-height:1.8;margin-bottom:16px}.main ul{padding-left:24px;margin-bottom:16px}.main li{font-size:15px;color:var(--dim);line-height:2}.main .qa{margin-bottom:28px}.main .qa h3{color:var(--text)}.main .qa h3::before{content:'Q: ';color:var(--accent)}@media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:24px 20px}}</style></head><body>
+<aside class="sidebar"><h2>📖 GBT Docs</h2><nav><a href="/docs/">首页</a><div class="section">快速开始</div><a href="/docs/quickstart.html">5分钟部署第一个项目</a><div class="section">核心</div><a href="/docs/pricing.html">定价与分成</a><a href="/docs/faq.html" class="active">常见问题</a></nav></aside>
+<main class="main">
+<h1>常见问题</h1>
+
+<div class="qa"><h3>部署失败了怎么办？</h3><p>常见原因：① 仓库不是公开的 → 设为 Public；② 缺少依赖声明文件（requirements.txt / package.json）→ 补充；③ 端口未正确暴露 → 确认项目监听 <code>0.0.0.0</code> 而非 <code>127.0.0.1</code>。查看部署日志：登录面板 → 项目 → 构建日志。</p></div>
+
+<div class="qa"><h3>支持哪些项目类型？</h3><p>Python（Flask/FastAPI/Django/Streamlit/Gradio）、Node.js（Express/Next.js）、Go、静态网站、ComfyUI、Stable Diffusion WebUI、Ollama 等。只要是能通过 HTTP 访问的服务都支持。</p></div>
+
+<div class="qa"><h3>项目租不出去怎么办？</h3><p>① 检查定价是否合理（参考同类项目）；② 完善项目描述和截图；③ 在社交媒体分享你的项目链接；④ 加入 GBT 开发者社区获取推广支持。</p></div>
+
+<div class="qa"><h3>收益如何提现到国内银行卡？</h3><p>推荐路径：GBT 钱包 → TRC20 USDT → 币安/OKX → C2C 卖出 → 银行卡。全程手续费极低。或直接使用 Stripe 提现到支持的国际银行卡。</p></div>
+
+<div class="qa"><h3>如何联系技术支持？</h3><p>📧 邮件：support@gbtxiaotudou.com<br>💬 社区：<a href="https://discord.gg/gbtxiaotudou">Discord</a><br>📖 文档：docs.gbtxiaotudou.com</p></div>
+
+<div class="qa"><h3>代码安全吗？会被别人看到吗？</h3><p>你的源代码经过 AES-256 加密存储，运行在隔离的 Docker 沙盒中。租户只能通过 HTTP 接口使用你的服务，无法访问源代码和内部文件。</p></div>
+
+<div class="qa"><h3>可以自定义域名吗？</h3><p>可以。在项目设置中添加你的域名，配置 CNAME 记录指向 <code>tunnel.gbtxiaotudou.com</code> 即可。</p></div>
+
+<div class="qa"><h3>收益什么时候到账？</h3><p>每周一自动结算上周收益到你的 GBT 钱包余额。可以随时提现（TRC20 USDT 即时到账，Stripe 1-3个工作日）。</p></div>
+</main></body></html>

@@ -1,0 +1,59 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "captcha_solver",
+  "version": "1.0.0",
+  "description": "2Captcha验证码求解 — 40+种验证码AI识别: reCAPTCHA/Turnstile/FunCaptcha/GeeTest/hCaptcha/图片/音频/坐标",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "自动化",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "验证码",
+      "captcha",
+      "recaptcha",
+      "turnstile",
+      "funcaptcha",
+      "geetest",
+      "hcaptcha",
+      "识别",
+      "绕过",
+      "bypass"
+    ],
+    "intent": "solve_captcha",
+    "examples": [
+      "求解这个验证码",
+      "绕过recaptcha",
+      "识别图片验证码"
+    ]
+  },
+  "actions": {
+    "hcaptcha": {
+      "description": "hcaptcha"
+    },
+    "help": {
+      "description": "help"
+    },
+    "list": {
+      "description": "list"
+    },
+    "recaptcha": {
+      "description": "recaptcha"
+    },
+    "run": {
+      "description": "run"
+    },
+    "self_test": {
+      "description": "self_test"
+    }
+  },
+  "depends_on": [
+    "_2captcha"
+  ]
+}

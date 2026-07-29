@@ -1,0 +1,63 @@
+{
+  "name": "collab_dispatch",
+  "version": "1.0.0",
+  "description": "协作执行智能调度 · 铁律版 — design_brain→思维导图→严格执行→LLM汇总",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "调度编排",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "协作",
+      "调度",
+      "dispatch",
+      "执行链",
+      "设计大脑",
+      "collab"
+    ],
+    "intent": "collab_dispatch",
+    "examples": [
+      "协作执行设计任务",
+      "铁律模式执行"
+    ]
+  },
+  "actions": {
+    "coordinate_parallel": {
+      "description": "coordinate_parallel"
+    },
+    "dependency_graph": {
+      "description": "dependency_graph"
+    },
+    "merge_results": {
+      "description": "merge_results"
+    },
+    "preview": {
+      "description": "预览执行计划（不实际执行）",
+      "args": [
+        "preview"
+      ],
+      "input": {
+        "instruction": "string"
+      },
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "run": {
+      "description": "完整执行链: Phase1设计大脑→Phase2导图→Phase3严格执行→Phase4汇总",
+      "args": [
+        "run"
+      ],
+      "input": {
+        "instruction": "string"
+      },
+      "timeout_ms": 300000,
+      "output": "json"
+    }
+  }
+}

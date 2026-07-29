@@ -1,0 +1,27 @@
+{
+  "name": "ecommerce",
+  "label": "电商商城",
+  "description": "电商小程序模板，含首页轮播图、商品列表、商品详情、购物车、会员中心",
+  "version": "1.0.0",
+  "author": "GBT",
+  "pages": ["index", "goods", "cart", "member"],
+  "features": ["轮播图", "商品网格", "购物车", "会员中心", "搜索"],
+  "default_config": {
+    "colors": {
+      "primary": "#ff6b35",
+      "bg": "#f5f5f5"
+    },
+    "shop_name": "我的小店",
+    "banners": [
+      {"id": 1, "image": "https://via.placeholder.com/750x300/ff6b35/fff?text=新品上市", "link": ""},
+      {"id": 2, "image": "https://via.placeholder.com/750x300/2ecc71/fff?text=限时特惠", "link": ""},
+      {"id": 3, "image": "https://via.placeholder.com/750x300/3498db/fff?text=会员专享", "link": ""}
+    ],
+    "categories": [
+      {"name": "热销", "icon": "🔥"},
+      {"name": "新品", "icon": "✨"},
+      {"name": "特价", "icon": "💎"},
+      {"name": "推荐", "icon": "🎯"}
+    ]
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "name": "codebase_memory",
+  "version": "2.0.0",
+  "description": "Codebase Memory MCP v0.8.1 — 158语言代码知识图谱: 子毫秒查询/语义搜索/调用链/架构/死代码/影响分析/HTTP路由/3D可视化 (纯C,零依赖)",
+  "language": "python",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "索引",
+      "index",
+      "代码库",
+      "codebase",
+      "知识图谱",
+      "符号搜索",
+      "调用链",
+      "架构",
+      "死代码",
+      "impact",
+      "语义",
+      "Cypher",
+      "graph",
+      "路由"
+    ],
+    "intent": "codebase_analysis",
+    "examples": [
+      "索引项目",
+      "搜索函数",
+      "追踪调用链",
+      "分析架构",
+      "检测死代码",
+      "语义搜索"
+    ]
+  },
+  "actions": {
+    "analyze": {
+      "description": "analyze"
+    },
+    "architecture": {
+      "description": "架构全景 — 语言/包/入口/热点/边界/分层",
+      "args": [
+        "--action",
+        "architecture"
+      ],
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "auto_index": {
+      "description": "auto_index"
+    },
+    "changes": {
+      "description": "变更影响分析 — git diff→影响符号",
+      "args": [
+        "--action",
+        "changes"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "cypher": {
+      "description": "Cypher图查询",
+      "args": [
+        "--action",
+        "cypher"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "deadcode": {
+      "description": "死代码检测",
+      "args": [
+        "--action",
+        "deadcode"
+      ],
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "find_pattern": {
+      "description": "find_pattern"
+    },
+    "graph": {
+      "description": "打开3D图谱可视化 :9749",
+      "args": [
+        "--action",
+        "graph"
+      ],
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "impact_analysis": {
+      "description": "impact_analysis"
+    },
+    "index": {
+      "description": "强制重新索引项目",
+      "args": [
+        "--action",
+        "index"
+      ],
+      "input": "stdin",
+      "timeout_ms": 300000,
+      "output": "json"
+    },
+    "info": {
+      "description": "CBM状态/索引统计",
+      "args": [
+        "--action",
+        "info"
+      ],
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "routes": {
+      "description": "HTTP路由发现 — 路由↔调用匹配",
+      "args": [
+        "--action",
+        "routes"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "search": {
+      "description": "符号搜索 — 函数/类/变量",
+      "args": [
+        "--action",
+        "search"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "semantic": {
+      "description": "语义搜索 — 向量相似度",
+      "args": [
+        "--action",
+        "semantic"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "snippet": {
+      "description": "代码片段 — 按函数/类名读取源码",
+      "args": [
+        "--action",
+        "snippet"
+      ],
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "trace": {
+      "description": "调用链追踪 — 入站/出站",
+      "args": [
+        "--action",
+        "trace"
+      ],
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    }
+  },
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "代码"
+}

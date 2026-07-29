@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "screenpipe_monitor",
+  "version": "1.0.0",
+  "description": "持续屏幕变化感知，实时监控",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "感知域",
+  "tier": "ready",
+  "actions": {
+    "start": {
+      "description": "开始监控"
+    },
+    "stop": {
+      "description": "停止监控"
+    },
+    "status": {
+      "description": "查看状态"
+    }
+  },
+  "auto_exec": false
+}

@@ -1,0 +1,27 @@
+{
+  "name": "fund_pool",
+  "version": "1.0.0",
+  "description": "GBT 用户资金池系统 · 内部虚拟账本 + 管理员面板",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "Finance",
+  "entry": {
+    "program": "python",
+    "args": ["run.py"]
+  },
+  "actions": {
+    "user_create":    {"params": ["name", "currency", "email"], "desc": "创建用户虚拟账户"},
+    "user_balance":   {"params": ["user_id"], "desc": "查询用户余额"},
+    "deposit":        {"params": ["user_id", "amount", "tx_hash", "note"], "desc": "用户充值"},
+    "withdraw":       {"params": ["user_id", "amount", "tx_hash", "note"], "desc": "用户提现"},
+    "transfer":       {"params": ["from_user_id", "to_user_id", "amount", "note"], "desc": "用户间转账"},
+    "pool_status":    {"params": [], "desc": "资金池总览"},
+    "tx_history":     {"params": ["user_id", "limit", "offset"], "desc": "交易记录"},
+    "admin_list":     {"params": [], "desc": "所有用户列表"},
+    "freeze":         {"params": ["user_id"], "desc": "冻结用户"},
+    "unfreeze":       {"params": ["user_id"], "desc": "解冻用户"},
+    "withdraw_approve": {"params": ["tx_id"], "desc": "批准提现"},
+    "withdraw_reject":  {"params": ["tx_id"], "desc": "拒绝提现并退回"}
+  }
+}

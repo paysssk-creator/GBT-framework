@@ -1,0 +1,204 @@
+/* ═══════════════════════════════════════════
+ *  GBT Animations v3 — CSS Scroll-Driven + Reusable Keyframes
+ *  
+ *  开源替代:
+ *    CSS Scroll-Driven Animations → 替代 GSAP ScrollTrigger
+ *    CSS @keyframes → 替代 anime.js
+ *    Framer Motion → 替代 GSAP (React用)
+ *  
+ *  用法: <link rel="stylesheet" href="/assets/gbt-animations.css">
+ * ═══════════════════════════════════════════ */
+
+/* ── 设计 Token ── */
+:root {
+  --gbt-blue: #00d4ff;
+  --gbt-gold: #ffd700;
+  --gbt-purple: #a855f7;
+  --gbt-green: #22c55e;
+  --gbt-red: #ff4444;
+  --gbt-bg: #0a0a0f;
+  --gbt-card: rgba(255,255,255,0.04);
+  --gbt-border: rgba(255,255,255,0.08);
+  --gbt-radius: 16px;
+  --gbt-blur: 16px;
+  --gbt-ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --gbt-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ═══════════════════════════════════════════
+   1. 滚动驱动动画 (CSS Scroll-Driven, 零JS)
+   浏览器原生支持: Chrome 115+, Edge 115+
+   不支持时回退到 IntersectionObserver (gbt-3d.js 自动处理)
+   ═══════════════════════════════════════════ */
+
+/* 元素从下方淡入 */
+@keyframes gbt-fade-up {
+  from { opacity: 0; transform: translateY(40px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 从左侧滑入 */
+@keyframes gbt-slide-left {
+  from { opacity: 0; transform: translateX(-60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* 从右侧滑入 */
+@keyframes gbt-slide-right {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* 缩放弹入 */
+@keyframes gbt-scale-in {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* 3D 物体随滚动旋转 (用于粒子环/地球) */
+@keyframes gbt-scroll-rotate {
+  from { transform: rotateY(0deg) rotateX(10deg); }
+  to   { transform: rotateY(360deg) rotateX(10deg); }
+}
+
+/* ── 应用滚动动画 ── */
+.gbt-reveal {
+  animation: gbt-fade-up linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 100%;
+}
+
+.gbt-reveal-left {
+  animation: gbt-slide-left linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 100%;
+}
+
+.gbt-reveal-right {
+  animation: gbt-slide-right linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 100%;
+}
+
+.gbt-reveal-scale {
+  animation: gbt-scale-in linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 100%;
+}
+
+/* Stagger delay via CSS custom property */
+.gbt-reveal:nth-child(1) { animation-delay: 0s; }
+.gbt-reveal:nth-child(2) { animation-delay: 0.1s; }
+.gbt-reveal:nth-child(3) { animation-delay: 0.2s; }
+.gbt-reveal:nth-child(4) { animation-delay: 0.3s; }
+.gbt-reveal:nth-child(5) { animation-delay: 0.4s; }
+.gbt-reveal:nth-child(6) { animation-delay: 0.5s; }
+.gbt-reveal:nth-child(7) { animation-delay: 0.6s; }
+.gbt-reveal:nth-child(8) { animation-delay: 0.7s; }
+
+/* ── 不支持 CSS Scroll-Driven 时回退 ── */
+@supports not (animation-timeline: view()) {
+  .gbt-reveal,
+  .gbt-reveal-left,
+  .gbt-reveal-right,
+  .gbt-reveal-scale {
+    animation: none;
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+    transition: opacity 0.6s var(--gbt-ease-out), transform 0.6s var(--gbt-ease-out);
+  }
+  .gbt-reveal.visible,
+  .gbt-reveal-left.visible,
+  .gbt-reveal-right.visible,
+  .gbt-reveal-scale.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   2. 常用 @keyframes (可在任何元素上使用)
+   ═══════════════════════════════════════════ */
+
+/* 浮动效果 */
+@keyframes gbt-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* 脉冲发光 */
+@keyframes gbt-pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px var(--gbt-blue), 0 0 20px rgba(0,212,255,0.2); }
+  50%      { box-shadow: 0 0 15px var(--gbt-blue), 0 0 40px rgba(0,212,255,0.4); }
+}
+
+/* 旋转光环 */
+@keyframes gbt-spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* 渐变文字流光 */
+@keyframes gbt-gradient-flow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 打字机光标闪烁 */
+@keyframes gbt-cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════
+   3. 工具类
+   ═══════════════════════════════════════════ */
+
+.gbt-float      { animation: gbt-float 3s ease-in-out infinite; }
+.gbt-pulse-glow { animation: gbt-pulse-glow 2s ease-in-out infinite; }
+.gbt-spin-slow  { animation: gbt-spin-slow 20s linear infinite; }
+
+.gbt-gradient-text {
+  background: linear-gradient(135deg, var(--gbt-blue), var(--gbt-purple), var(--gbt-gold), var(--gbt-blue));
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gbt-gradient-flow 4s ease infinite;
+}
+
+/* ═══════════════════════════════════════════
+   4. Glass Card 组件 (纯CSS, 无依赖)
+   ═══════════════════════════════════════════ */
+
+.gbt-card {
+  background: var(--gbt-card);
+  border: 1px solid var(--gbt-border);
+  border-radius: var(--gbt-radius);
+  backdrop-filter: blur(var(--gbt-blur));
+  -webkit-backdrop-filter: blur(var(--gbt-blur));
+  padding: 24px;
+  transition: all 0.3s var(--gbt-ease-out);
+}
+
+.gbt-card:hover {
+  border-color: rgba(0,212,255,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,212,255,0.08);
+}
+
+/* ═══════════════════════════════════════════
+   5. 颜色方案工具类
+   ═══════════════════════════════════════════ */
+
+.gbt-text-blue   { color: var(--gbt-blue); }
+.gbt-text-gold   { color: var(--gbt-gold); }
+.gbt-text-purple { color: var(--gbt-purple); }
+.gbt-text-green  { color: var(--gbt-green); }
+
+.gbt-border-blue   { border-color: var(--gbt-blue); }
+.gbt-border-gold   { border-color: var(--gbt-gold); }
+
+.gbt-bg-blue   { background: var(--gbt-blue); }
+.gbt-bg-purple { background: var(--gbt-purple); }

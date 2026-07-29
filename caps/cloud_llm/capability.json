@@ -1,0 +1,26 @@
+{
+  "name": "cloud_llm",
+  "version": "1.0.0",
+  "description": "GBT云端LLM — 三层自知框架(L1/L2/L3) + 智能搜索引擎 + 精准调度",
+  "language": "python",
+  "priority": 20,
+  "pipeline_role": "analyze",
+  "depends_on": [],
+  "triggers": {
+    "intent": "llm",
+    "keywords": ["AI","LLM","大模型","推理","DeepSeek","Kimi","OpenAI"],
+    "examples": ["问问AI","调用大模型","dispatch精准调度"]
+  },
+  "entry": {"program": "python", "args": ["run.py"]},
+  "actions": {
+    "ask": {"description": "LLM问答（自动注入自我认知+智能搜索）", "args": ["ask"], "input": {"prompt":"string","system":"string"}, "timeout_ms": 120000, "output": "json"},
+    "code": {"description": "代码生成/审查", "args": ["code"], "input": {"prompt":"string","lang":"string"}, "timeout_ms": 60000, "output": "json"},
+    "analyze": {"description": "深度分析（触发智能搜索增强）", "args": ["analyze"], "input": {"prompt":"string","context":"string"}, "timeout_ms": 120000, "output": "json"},
+    "search_test": {"description": "测试智能搜索引擎匹配", "args": ["search_test"], "input": {"prompt":"string"}, "timeout_ms": 30000, "output": "json"},
+    "dispatch": {"description": "Layer3精准调度 cap+action路由", "args": ["dispatch"], "input": {"cap":"string","action":"string","params":"object"}, "timeout_ms": 30000, "output": "json"},
+    "list_caps": {"description": "能力注册表查询", "args": ["list_caps"], "input": {"domain":"string"}, "timeout_ms": 15000, "output": "json"}
+  },
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI推理"
+}

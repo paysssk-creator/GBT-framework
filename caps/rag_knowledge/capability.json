@@ -1,0 +1,22 @@
+{
+  "name": "rag_knowledge",
+  "version": "1.0.0",
+  "description": "本地轻量知识库 — DuckDB向量搜索 + RAG问答 (吸收RAGLite)",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI",
+  "entry": { "program": "python", "args": ["run.py"] },
+  "triggers": {
+    "keywords": ["知识库","搜索","问答","索引","RAG","查找","检索"],
+    "intent": "knowledge_search",
+    "examples": ["搜索项目文档","索引代码","问答"]
+  },
+  "actions": {
+    "ingest": { "description": "导入文档/代码到知识库", "args": ["--action","ingest"], "input":"stdin", "timeout_ms":120000, "output":"json" },
+    "search": { "description": "搜索相关知识", "args": ["--action","search"], "input":"stdin", "timeout_ms":30000, "output":"json" },
+    "ask": { "description": "RAG问答", "args": ["--action","ask"], "input":"stdin", "timeout_ms":60000, "output":"json" },
+    "learn": { "description": "自动索引项目代码", "args": ["--action","learn"], "input":"stdin", "timeout_ms":120000, "output":"json" },
+    "status": { "description": "知识库状态", "args": ["--action","status"], "timeout_ms":5000, "output":"json" }
+  }
+}

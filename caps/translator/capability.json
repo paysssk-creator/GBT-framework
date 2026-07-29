@@ -1,0 +1,37 @@
+{
+  "name": "translator",
+  "version": "1.0.0",
+  "description": "AI翻译引擎 — DeepL API + LibreTranslate 双引擎翻译/语言检测/语言列表",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "信息",
+  "entry": { "program": "python", "args": ["run.py"] },
+  "triggers": {
+    "keywords": ["翻译", "translate", "deepl", "libretranslate", "语言检测", "多语言", "translator"],
+    "intent": "translator",
+    "examples": ["翻译这段文字", "检测语言", "支持哪些语言"]
+  },
+  "actions": {
+    "translate": {
+      "description": "翻译文本 (DeepL → LibreTranslate)",
+      "args": ["--action", "translate"],
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "detect_language": {
+      "description": "检测文本语言",
+      "args": ["--action", "detect_language"],
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "list_languages": {
+      "description": "列出支持的翻译语言",
+      "args": ["--action", "list_languages"],
+      "timeout_ms": 10000,
+      "output": "json"
+    }
+  }
+}

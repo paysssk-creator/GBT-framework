@@ -1,0 +1,43 @@
+{
+  "name": "miniapp",
+  "version": "1.0.0",
+  "description": "微信小程序一键生成部署 · 多行业模板 · 零代码",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "部署发布",
+  "tier": "core",
+  "actions": {
+    "create": {
+      "description": "脚手架新小程序项目(复制模板+替换变量)"
+    },
+    "deploy": {
+      "description": "生成部署指南+微信开发者工具CLI命令"
+    },
+    "info": {
+      "description": "查看模板详情(页面结构/变量)"
+    },
+    "list": {
+      "description": "列出所有可用模板"
+    },
+    "run": {
+      "description": "run"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "小程序",
+      "miniapp",
+      "微信小程序",
+      "wechat",
+      "部署小程序",
+      "发布小程序"
+    ],
+    "intent": "miniapp_deploy",
+    "examples": [
+      "创建一个电商小程序",
+      "微信小程序怎么部署",
+      "生成一个小程序"
+    ]
+  }
+}

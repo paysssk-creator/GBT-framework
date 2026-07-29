@@ -1,0 +1,73 @@
+{
+  "name": "tentacle_transmission",
+  "version": "1.0.0",
+  "category": "多脑域",
+  "risk_level": "safe",
+  "tier": "core",
+  "description": "触手穿透传输 — 画面数据直接传到视觉皮层分析，跳过OCR中间层，皮层直接看懂画面",
+  "actions": [
+    {
+      "name": "transmit_visual",
+      "desc": "视觉传输: 截图/摄像头→直接传视觉皮层(无OCR)",
+      "input": {
+        "source": "string",
+        "data": "string",
+        "analysis": "string"
+      },
+      "output": "cortex_result"
+    },
+    {
+      "name": "transmit_file",
+      "desc": "文件传输: 任意文件/档案→大脑解析推理",
+      "input": {
+        "file_path": "string",
+        "analysis_type": "string"
+      },
+      "output": "analysis_result"
+    },
+    {
+      "name": "transmit_stream",
+      "desc": "流式传输: 实时视频流/音频流→持续分析",
+      "input": {
+        "stream_url": "string",
+        "duration": "int"
+      },
+      "output": "stream_analysis"
+    },
+    {
+      "name": "transmit_all",
+      "desc": "全量传输: 所有触手采集数据→大脑并行分析",
+      "input": {},
+      "output": "full_analysis"
+    },
+    {
+      "name": "pulse_transmit",
+      "desc": "脉冲传输: 触手穿透扫描结果→瞬时传输到执行层",
+      "input": {
+        "scan_depth": "string"
+      },
+      "output": "pulse_result"
+    },
+    {
+      "name": "route_to_brain",
+      "desc": "智能路由: 根据数据类型自动路由到对应脑区",
+      "input": {
+        "data": "object",
+        "data_type": "string"
+      },
+      "output": "brain_result"
+    }
+  ],
+  "triggers": [
+    "传输到大脑",
+    "触手传输",
+    "穿透传输",
+    "瞬时分析",
+    "transmit",
+    "route to brain",
+    "pulse transmit",
+    "send to cortex"
+  ],
+  "auto_exec": false,
+  "_stamp": "2026-07-29T10:15:00Z"
+}

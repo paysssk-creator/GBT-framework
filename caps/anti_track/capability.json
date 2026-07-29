@@ -1,0 +1,67 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "anti_track",
+  "version": "1.0.0",
+  "description": "反追踪隐身+反向猎取引擎 每根触手内置 隐身(20UA池+2Captcha真实指纹+住宅代理+延迟+反蜜罐) + 反击(IP定位+威胁情报+攻击者指纹捕获+WHOIS溯源)",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "攻击域",
+  "tier": "core",
+  "actions": {
+    "capture": {
+      "description": "capture"
+    },
+    "capture_attacker": {
+      "description": "capture_attacker"
+    },
+    "check_honeypot": {
+      "description": "check_honeypot"
+    },
+    "clean": {
+      "description": "clean"
+    },
+    "clean_tracks": {
+      "description": "clean_tracks"
+    },
+    "fingerprint": {
+      "description": "fingerprint"
+    },
+    "honeypot": {
+      "description": "honeypot"
+    },
+    "proxy_info": {
+      "description": "proxy_info"
+    },
+    "real_fingerprint": {
+      "description": "real_fingerprint"
+    },
+    "real_identity": {
+      "description": "real_identity"
+    },
+    "reverse": {
+      "description": "reverse"
+    },
+    "reverse_trace": {
+      "description": "reverse_trace"
+    },
+    "rotate": {
+      "description": "rotate"
+    },
+    "rotate_identity": {
+      "description": "rotate_identity"
+    },
+    "stealth": {
+      "description": "stealth"
+    },
+    "stealth_request": {
+      "description": "stealth_request"
+    },
+    "trace": {
+      "description": "trace"
+    },
+    "trace_ip": {
+      "description": "trace_ip"
+    }
+  },
+  "auto_exec": false
+}

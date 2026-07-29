@@ -1,0 +1,16 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "dev_gpu",
+  "version": "1.0.0",
+  "description": "GPU实时状态传感器",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "设备感知层",
+  "tier": "ready",
+  "actions": {
+    "status": {
+      "description": "获取GPU状态"
+    }
+  },
+  "auto_exec": false
+}

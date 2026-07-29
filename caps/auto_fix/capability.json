@@ -1,0 +1,48 @@
+{
+  "name": "auto_fix",
+  "version": "1.0.0",
+  "description": "自动修复 — 根据审计结果自动修复代码问题",
+  "language": "python",
+  "priority": 30,
+  "pipeline_role": "analyze",
+  "depends_on": [
+    "security_scan"
+  ],
+  "triggers": {
+    "intent": "fix_code",
+    "keywords": [
+      "修复",
+      "fix",
+      "自动修复",
+      "修",
+      "改bug",
+      "修补",
+      "auto-fix"
+    ],
+    "examples": [
+      "自动修复代码",
+      "修复这些问题",
+      "修bug"
+    ]
+  },
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "actions": {
+    "fix": {
+      "description": "自动修复项目中的已知问题",
+      "args": [
+        "fix"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    }
+  },
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "代码"
+}

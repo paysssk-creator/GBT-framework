@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GBT Brain Runtime V17 — 90KB 3D 引擎能力秀</title>
+<style>
+:root{--bg:#050510;--card:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:#ddd;font-family:system-ui,sans-serif;overflow-x:hidden}
+canvas{position:fixed;top:0;left:0;z-index:0;pointer-events:none}
+.main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:20px}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.1}
+.grad{background:linear-gradient(135deg,#00d4ff,#a855f7,#ffd700);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:grad 4s ease infinite}
+@keyframes grad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.sub{color:#666;font-size:1.1rem;margin-top:12px;letter-spacing:2px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:20px 0}
+.badge{padding:5px 16px;border-radius:20px;font-size:0.75rem;font-weight:600;border:1px solid;backdrop-filter:blur(8px)}
+.b1{color:#00d4ff;border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.08)}
+.b2{color:#a855f7;border-color:rgba(168,85,247,0.3);background:rgba(168,85,247,0.08)}
+.b3{color:#ffd700;border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.08)}
+.b4{color:#22c55e;border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.08)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:40px 0}
+.stat{text-align:center;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(12px);opacity:0;transform:translateY(30px);transition:all 0.6s}
+.stat.show{opacity:1;transform:translateY(0)}
+.stat .n{font-size:2.2rem;font-weight:900}
+.stat .l{font-size:0.75rem;color:#888;margin-top:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;padding:40px 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;backdrop-filter:blur(12px);opacity:0;transform:translateY(30px);transition:all 0.5s}
+.card.show{opacity:1;transform:translateY(0)}
+.card:hover{border-color:rgba(0,212,255,0.3);transform:translateY(-4px)!important}
+.card .v{font-size:0.7rem;color:#00d4ff;font-weight:700;margin-bottom:6px}
+.card h3{font-size:1rem;margin-bottom:6px}
+.card p{font-size:0.8rem;color:#888;line-height:1.6}
+.card .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.card .t{font-size:0.65rem;padding:2px 8px;border-radius:10px;background:rgba(0,212,255,0.08);color:#00d4ff}
+.footer{text-align:center;padding:60px 20px;color:#444;font-size:0.8rem}
+.footer a{color:#00d4ff;text-decoration:none}
+.pulse{display:inline-block;padding:14px 40px;border-radius:14px;color:#00d4ff;border:1px solid rgba(0,212,255,0.3);background:rgba(0,212,255,0.06);text-decoration:none;font-weight:600;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 5px rgba(0,212,255,0.1)}50%{box-shadow:0 0 25px rgba(0,212,255,0.25)}}
+@media(max-width:768px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="main">
+  <section class="hero">
+    <h1 class="grad">GBT Brain<br>Runtime V17</h1>
+    <p class="sub">90KB · 17代进化 · 全声明式3D引擎</p>
+    <div class="badges">
+      <span class="badge b1">data-gbt3d="..."</span>
+      <span class="badge b2">零依赖</span>
+      <span class="badge b3">AI协议</span>
+      <span class="badge b4">MIT开源</span>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><div class="n" style="color:#00d4ff">17</div><div class="l">代进化</div></div>
+    <div class="stat"><div class="n" style="color:#a855f7">90</div><div class="l">KB引擎</div></div>
+    <div class="stat"><div class="n" style="color:#ffd700">40+</div><div class="l">data-*指令</div></div>
+    <div class="stat"><div class="n" style="color:#22c55e">12</div><div class="l">感官维度</div></div>
+  </section>
+
+  <section class="grid" id="grid"></section>
+
+  <div style="text-align:center;padding:60px 0">
+    <a href="https://github.com/paysssk-creator/GBT-brain-runtime" class="pulse">⭐ GitHub</a>
+  </div>
+  <div class="footer">Built with 🧠 by 自由的风 · MIT</div>
+</div>
+
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+const isM=/Mobi|Android/i.test(navigator.userAgent);
+const cnt=isM?400:1500;
+const c=document.getElementById('c');
+const s=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
+cam.position.z=5;
+const r=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:!isM});
+r.setSize(innerWidth,innerHeight);r.setPixelRatio(Math.min(devicePixelRatio,isM?1:2));
+const g=new THREE.BufferGeometry();
+const p=new Float32Array(cnt*3),cl=new Float32Array(cnt*3);
+const rings=isM?2:3;
+for(let i=0;i<cnt;i++){const ri=i%rings,rad=2.5+ri*.35,a=(i/cnt)*Math.PI*2*(ri+1),y=(Math.random()-.5)*.6*(ri+1);p[i*3]=Math.cos(a)*rad;p[i*3+1]=y;p[i*3+2]=Math.sin(a)*rad;const cc=new THREE.Color();cc.setHSL(.55+ri*.04,.7,.45+Math.random()*.25);cl[i*3]=cc.r;cl[i*3+1]=cc.g;cl[i*3+2]=cc.b}
+g.setAttribute('position',new THREE.BufferAttribute(p,3));g.setAttribute('color',new THREE.BufferAttribute(cl,3));
+const pts=new THREE.Points(g,new THREE.PointsMaterial({size:isM?.04:.018,vertexColors:true,blending:THREE.AdditiveBlending,depthWrite:false}));
+s.add(pts);
+(function A(){requestAnimationFrame(A);pts.rotation.x+=.0002;pts.rotation.y+=.0004;r.render(s,cam)})();
+addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();r.setSize(innerWidth,innerHeight)});
+</script>
+
+<script>
+const versions=[
+  {v:'V5',t:'粒子光环',d:'2000粒子+环形轨道+HSL渐变，移动端自动降级600。一行标签出科技感背景。',tags:['data-gbt3d="particles"','程序化生成']},
+  {v:'V6',t:'高保真模型',d:'GLB加载+HDR环境贴图+PMREMGenerator PBR烘培+ACES色调映射+OrbitControls拖拽缩放。5种内置HDR预设。',tags:['GLTFLoader','RGBELoader','PBR']},
+  {v:'V7',t:'交互热区',d:'Raycaster射线检测+脉冲光点标记+毛玻璃弹窗。点击模型部件弹出介绍卡片，支持跳转链接。',tags:['data-hotspots','Raycaster','点击弹窗']},
+  {v:'V8',t:'材质配置器',d:'data-materials预设颜色+data-gbt3d-part动态换色按钮。color.lerp() 400ms平滑渐变，支持金属度/粗糙度。',tags:['换色','场景阴影','加载进度']},
+  {v:'V9',t:'营销闭环',d:'6视角一键切换(front/back/top)+canvas截图下载+手机系统分享+WebXR AR增强现实。',tags:['截图','AR','视角切换']},
+  {v:'V10',t:'数字孪生',d:'WebSocket/HTTP实时数据源+data-bind数据→模型映射+data-range归一化+GBT_DATA_UPDATE全局事件。',tags:['实时数据','WebSocket','模拟数据']},
+  {v:'V11',t:'多人协同',d:'WebSocket房间管理+相机/材质/热区操作广播+协同光标+3D标记+在线人数。server-sync.js一键启动。',tags:['多人','同步','光标']},
+  {v:'V12',t:'AI虚拟人',d:'GLB骨骼动画(idle/talk)+Web Speech TTS播报+语音识别+对话气泡+内置语义解析器(20+规则)。',tags:['虚拟人','语音','TTS']},
+  {v:'V13',t:'生成式AI',d:'文字→3D模型生成(轮询)+autoLayout自动布景+AR实景放置(WebXR hit-test)+generate-proxy.js代理。',tags:['AI生成','自动布景','AR放置']},
+  {v:'V14',t:'情感计算',d:'FaceDetector表情识别+HandDetector手势+GBT_EMOTION_UPDATE事件+粒子/模型情绪响应。',tags:['表情','手势','情绪']},
+  {v:'V15',t:'多感官融合',d:'Web Audio FFT音频驱动+Web MIDI音符映射+Gamepad摇杆控制+fusionBus事件融合总线。',tags:['音频','MIDI','手柄']},
+  {v:'V16',t:'生产级部署',d:'PWA manifest+service-worker+Docker+Nginx+GitHub Actions CI/CD+WebGPU自适应+内存监控。',tags:['Docker','CI/CD','PWA']},
+  {v:'V17',t:'AI智能体',d:'人格注入+用户画像(localStorage)+自主决策循环+自我策展(热度淘汰)。Agent主动开口推荐。',tags:['Agent','记忆','策展']},
+];
+
+const grid=document.getElementById('grid');
+versions.forEach((v,i)=>{
+  const d=document.createElement('div');
+  d.className='card';d.style.transitionDelay=i*60+'ms';
+  d.innerHTML='<div class="v">'+v.v+'</div><h3>'+v.t+'</h3><p>'+v.d+'</p><div class="tags">'+v.tags.map(t=>'<span class="t">'+t+'</span>').join('')+'</div>';
+  grid.appendChild(d);
+});
+
+const obs=new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('show');obs.unobserve(x.target)}})},{threshold:0.1});
+setTimeout(()=>document.querySelectorAll('.card,.stat').forEach(el=>obs.observe(el)),200);
+</script>
+</body>
+</html>

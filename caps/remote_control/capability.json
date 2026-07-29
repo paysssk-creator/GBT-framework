@@ -1,0 +1,53 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "remote_control",
+  "version": "1.0.0",
+  "description": "GBT远程操控 — 用户一键运行agent.py暴露本地服务+Chrome，GBT通过connect.py接入操控",
+  "language": "python",
+  "risk_level": "high",
+  "auto_exec": false,
+  "category": "网络域",
+  "architecture": {
+    "user_side": "caps/remote_control/agent.py",
+    "gbt_side": "caps/remote_control/connect.py",
+    "protocol": "ngrok/cloudflared 反向隧道 + CDP WebSocket",
+    "flow": "用户运行agent.py → 获取公网URL → 发给GBT → GBT用connect.py接入"
+  },
+  "actions": {
+    "connect": {
+      "description": "connect"
+    },
+    "expose": {
+      "description": "expose"
+    },
+    "run": {
+      "description": "run"
+    },
+    "scan": {
+      "description": "scan"
+    },
+    "status": {
+      "description": "status"
+    }
+  },
+  "requirements": {
+    "user": "Python 3.8+ / ngrok 或 cloudflared / Chrome (可选)",
+    "gbt": "Python 3.8+ / aiohttp"
+  },
+  "triggers": {
+    "keywords": [
+      "远程操控",
+      "远程控制",
+      "远程接入",
+      "remote control",
+      "remote agent",
+      "隧道",
+      "tunnel",
+      "CDP远程",
+      "操控用户电脑",
+      "远程浏览器",
+      "agent.py"
+    ],
+    "intent": "remote_control"
+  }
+}

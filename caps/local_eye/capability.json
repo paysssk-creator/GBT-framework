@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "local_eye",
+  "version": "1.0.0",
+  "description": "本地视觉感知引擎，无需远端模型",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "感知域",
+  "tier": "ready",
+  "actions": {
+    "scan": {
+      "description": "扫描当前屏幕状态"
+    },
+    "diff": {
+      "description": "对比屏幕变化"
+    }
+  },
+  "auto_exec": false
+}

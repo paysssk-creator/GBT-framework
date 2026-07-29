@@ -1,0 +1,19 @@
+{
+  "name": "data_hijack",
+  "version": "1.0.0",
+  "category": "攻击域",
+  "risk_level": "dangerous",
+  "tier": "core",
+  "description": "统一数据劫持 — 整合9种拦截通道: 网络嗅探/包注入/DNS隧道/进程注入/命令注入/键盘记录/剪贴板/屏幕监控/内存转储",
+  "actions": [
+    {"name": "hijack_network", "desc": "网络劫持: 嗅探+包注入+中间人拦截", "input": {"interface": "string", "filter": "string", "duration": "int"}, "output": "captured_packets"},
+    {"name": "hijack_process", "desc": "进程劫持: DLL注入+内存读取+命令拦截", "input": {"pid": "int", "method": "string"}, "output": "injection_result"},
+    {"name": "hijack_input", "desc": "输入劫持: 键盘记录+剪贴板监控+屏幕捕获", "input": {"duration": "int", "channels": "list"}, "output": "captured_input"},
+    {"name": "hijack_channel", "desc": "通道劫持: DNS隧道+流量重定向+协议降级", "input": {"target": "string", "method": "string"}, "output": "channel_data"},
+    {"name": "hijack_all", "desc": "全量劫持: 同时激活所有劫持通道", "input": {"duration": "int"}, "output": "full_capture"},
+    {"name": "exfiltrate", "desc": "数据外传: 将劫持数据通过隐蔽通道传出", "input": {"data": "object", "channel": "string"}, "output": "exfil_result"}
+  ],
+  "triggers": ["劫持", "拦截", "嗅探", "hijack", "intercept", "sniff", "capture", "MITM"],
+  "auto_exec": false,
+  "_stamp": "2026-07-29T10:10:00Z"
+}

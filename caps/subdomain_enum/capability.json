@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "subdomain_enum",
+  "version": "1.0.0",
+  "description": "DNS子域名枚举",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "侦察域",
+  "tier": "core",
+  "actions": {
+    "enum": {
+      "description": "枚举子域名"
+    },
+    "brute": {
+      "description": "暴力枚举子域名"
+    }
+  },
+  "auto_exec": false
+}

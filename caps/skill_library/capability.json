@@ -1,0 +1,46 @@
+{
+  "name": "skill_library",
+  "version": "1.0.0",
+  "description": "生产级工程技能库 · 融合 addyosmani/agent-skills (79k⭐)。Define→Plan→Build→Verify→Review→Ship 六阶段，24项技能+4个AI代理角色。",
+  "category": "编程域",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "actions": {
+    "activate": {
+      "description": "根据上下文自动激活匹配技能"
+    },
+    "agents": {
+      "description": "列出/激活专业AI代理(审查员/审计员/测试员/性能审计)"
+    },
+    "auto_catalog": {
+      "description": "auto_catalog"
+    },
+    "build": {
+      "description": "增量构建: TDD+一次一个切片"
+    },
+    "learn_from_devourer": {
+      "description": "learn_from_devourer"
+    },
+    "plan": {
+      "description": "任务规划: 拆分为小型原子任务"
+    },
+    "review": {
+      "description": "代码审查: 五轴质量门"
+    },
+    "ship": {
+      "description": "发布上线: 越快越安全"
+    },
+    "skill_gap_report": {
+      "description": "skill_gap_report"
+    },
+    "skills": {
+      "description": "列出所有24项技能"
+    },
+    "spec": {
+      "description": "需求定义: 先写规格再写代码"
+    },
+    "test": {
+      "description": "验证: 测试是证明不是装饰"
+    }
+  }
+}

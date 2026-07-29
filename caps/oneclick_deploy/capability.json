@@ -1,0 +1,20 @@
+{
+  "name": "oneclick_deploy",
+  "version": "1.0.0",
+  "description": "一键部署引擎 — 克隆→检测→Docker化→安全审计→打包交付",
+  "category": "AI编程",
+  "risk_level": "medium",
+  "tier": "core",
+  "actions": {
+    "deploy": {"description": "克隆→检测→Docker化→安全审计→打包交付"},
+    "deploy_remote": {"description": "远程部署 — 通过已建立隧道连接部署到客户机器"},
+    "status": {"description": "查看所有部署状态"},
+    "list": {"description": "列出所有部署"}
+  },
+  "triggers": {
+    "keywords": ["部署", "上线", "deploy", "一键部署", "跑起来"],
+    "intent": "deploy"
+  },
+  "auto_exec": false,
+  "_stamp": "开发者：自由的风 · 永久钢印 · 禁止删除"
+}

@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "web_deploy_3d",
+  "version": "1.0.0",
+  "description": "GBT 3D 网页部署 — 粒子环·3D地球·光效连线·视差滚动·移动降级",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI创作",
+  "tier": "core",
+  "actions": {
+    "get_design_context": {
+      "description": "返回AI设计网页时必须遵守的3D规范"
+    },
+    "manifest": {
+      "description": "manifest"
+    }
+  }
+}

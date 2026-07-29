@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "video_gen",
+  "version": "1.0.0",
+  "description": "LTX-2 22B DiT音视频同步生成(8种模式)",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "媒体域",
+  "tier": "core",
+  "actions": {
+    "generate": {
+      "description": "生成视频"
+    },
+    "hunyuan_local": {
+      "description": "hunyuan_local"
+    },
+    "modes": {
+      "description": "列出8种模式"
+    }
+  },
+  "auto_exec": false
+}

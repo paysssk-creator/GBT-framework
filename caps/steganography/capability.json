@@ -1,0 +1,28 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "steganography",
+  "version": "1.0.0",
+  "description": "隐写术·LSB+DCT信息隐藏与提取",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": false,
+  "category": "特殊域",
+  "actions": {
+    "extract": {
+      "description": "extract"
+    },
+    "hide": {
+      "description": "hide"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "steganography",
+      "隐写",
+      "stego",
+      "LSB",
+      "hidden"
+    ],
+    "intent": "steganography"
+  }
+}

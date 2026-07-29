@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "clipboard_monitor",
+  "version": "1.0.0",
+  "description": "clipboard_monitor capability",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "桌面域",
+  "tier": "ready",
+  "actions": {
+    "dump": {
+      "description": "dump"
+    },
+    "start": {
+      "description": "开始监控"
+    },
+    "stop": {
+      "description": "停止监控"
+    }
+  },
+  "auto_exec": false
+}

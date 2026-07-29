@@ -1,0 +1,16 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "wifi_scanner",
+  "version": "1.0.0",
+  "description": "wifi_scanner capability",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "侦察域",
+  "tier": "ready",
+  "actions": {
+    "scan": {
+      "description": "WiFi扫描"
+    }
+  },
+  "auto_exec": false
+}

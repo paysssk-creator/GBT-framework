@@ -1,0 +1,25 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "desktop_master",
+  "version": "1.0.0",
+  "description": "桌面程序autopilot+AI视觉操控",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "桌面域",
+  "tier": "core",
+  "actions": {
+    "autopilot": {
+      "description": "自动驾驶模式"
+    },
+    "claude_computer_use": {
+      "description": "claude_computer_use"
+    },
+    "click": {
+      "description": "点击元素"
+    },
+    "type": {
+      "description": "输入文字"
+    }
+  },
+  "auto_exec": false
+}

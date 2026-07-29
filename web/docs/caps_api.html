@@ -1,0 +1,3879 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caps API 文档</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+       max-width: 960px; margin: 0 auto; padding: 2rem; line-height: 1.6;
+       color: #1a1a2e; background: #f8f9fa; }
+h1 { border-bottom: 2px solid #4a90d9; padding-bottom: 0.5rem; }
+h2 { color: #2c3e50; margin-top: 2rem; border-bottom: 1px solid #ddd; }
+h3 { color: #555; }
+table { border-collapse: collapse; width: 100%; margin: 0.5rem 0 1rem; }
+th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+th { background: #4a90d9; color: white; }
+tr:nth-child(even) { background: #f2f2f2; }
+code { background: #e8e8e8; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+blockquote { border-left: 4px solid #4a90d9; padding-left: 1rem; color: #666; margin: 0.5rem 0; }
+hr { border: none; border-top: 1px solid #ddd; margin: 1.5rem 0; }
+</style>
+<style>/* ══════════════════════════════════════════════
+   GBT小土豆 · Shared Design System v5.0
+   ══════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap');
+:root {
+  /* Palette */
+  --bg: #000;
+  --bg2: #08080c;
+  --bg3: #111118;
+  --fg: #f5f5f7;
+  --dim: #86868b;
+  --accent: #ff6b35;
+  --accent2: #ff9a56;
+  --blue: #2997ff;
+  --blue2: #3b82f6;
+  --purple: #7c3aed;
+  --teal: #0d9488;
+  --green: #30d158;
+  --red: #ff4757;
+  --cyan: #06b6d4;
+  --amber: #f59e0b;
+  --violet: #8b5cf6;
+  --pink: #ec4899;
+  --indigo: #6366f1;
+  --emerald: #10b981;
+  --rose: #f43f5e;
+
+  /* Borders & Surfaces */
+  --border: rgba(255, 255, 255, .06);
+  --border-strong: rgba(255, 255, 255, .10);
+  --glass-bg: rgba(255, 255, 255, .02);
+  --glass-border: rgba(255, 255, 255, .06);
+
+  /* Radii */
+  --radius: 18px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.25);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-md: 0 4px 24px rgba(0,0,0,.4);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,.5);
+  --shadow-lift: 0 8px 32px rgba(0,0,0,.5);
+  --shadow-lift-sm: 0 8px 32px rgba(0,0,0,.3);
+  --shadow-lift-md: 0 8px 32px rgba(0,0,0,.4);
+  --shadow-card-hover: 0 12px 40px rgba(0,0,0,.4);
+  --shadow-xl: 0 16px 48px rgba(0,0,0,.45);
+  --shadow-2xl: 0 20px 60px rgba(0,0,0,.35);
+  --shadow-glow-orange: 0 0 30px rgba(255,107,53,.15);
+  --shadow-glow-teal: 0 0 30px rgba(13,148,136,.15);
+  --shadow-glow-purple: 0 0 30px rgba(124,58,237,.15);
+  --shadow-glow-blue: 0 0 30px rgba(41,151,255,.15);
+  --shadow-glow-green: 0 0 30px rgba(48,209,88,.12);
+
+  /* Typography */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Spacing Scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --space-5xl: 128px;
+
+  /* Section Rhythm */
+  --section-sm: 80px;
+  --section-md: 120px;
+  --section-lg: 160px;
+  --section-xl: 200px;
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --ease-out-quint: cubic-bezier(.22,1,.36,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-glacial: 700ms;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(circle, rgba(255,255,255,.03) 1px, transparent 1px),
+    var(--bg);
+  background-size: 20px 20px;
+  color: var(--fg);
+  font-family: var(--font);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'ss01', 'ss02';
+  letter-spacing: -.01em;
+  animation: pageIn .5s var(--ease-out-expo) both;
+}
+
+
+/* ── Skip-to-Content ─────────────── */
+.skip-link { position: absolute; top: -100px; left: 8px; z-index: 9999; }
+.skip-link:focus { top: 8px; }
+/* ── Typography ───────────────────── */
+h1, .h1 { font-size: clamp(36px, 5.5vw, 56px); font-weight: 800; letter-spacing: -.05em; line-height: 1.08; margin: 0.8em 0 0.3em; }
+h2, .h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -.025em; line-height: 1.12; margin: 0.7em 0 0.25em; }
+h3, .h3 { font-size: clamp(20px, 2.5vw, 28px); font-weight: 600; letter-spacing: -.015em; line-height: 1.25; margin: 0.6em 0 0.2em; }
+h4, .h4 { font-size: 18px; font-weight: 600; letter-spacing: -.01em; line-height: 1.35; margin: 0.5em 0 0.15em; }
+body, p, .body { font-size: 15px; color: var(--dim); line-height: 1.65; }
+
+/* ── Typography Scale ─────────────── */
+.text-xs  { font-size: 11px; line-height: 1.5; }
+.text-sm  { font-size: 13px; line-height: 1.55; }
+.text-base { font-size: 15px; line-height: 1.65; }
+.text-lg  { font-size: 17px; line-height: 1.55; }
+.text-xl  { font-size: 20px; line-height: 1.45; }
+.text-2xl { font-size: 24px; line-height: 1.35; }
+.text-3xl { font-size: 32px; line-height: 1.2; letter-spacing: -.02em; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.text-dim { color: var(--dim); }
+.text-accent { color: var(--accent); }
+.text-teal { color: var(--teal); }
+.text-purple { color: var(--purple); }
+.text-blue { color: var(--blue); }
+.text-green { color: var(--green); }
+.tracking-tight { letter-spacing: -.02em; }
+.tracking-wide { letter-spacing: .04em; text-transform: uppercase; }
+.leading-relaxed { line-height: 1.75; }
+.leading-snug { line-height: 1.35; }
+.text-balance { text-wrap: balance; }
+
+::selection { background: var(--accent); color: #fff; }
+
+
+/* ── Scrollbar ─────────────────────── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.10); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.18); }
+::-webkit-scrollbar-corner { background: transparent; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ── Nav ─────────────────────────── */
+.gbt-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(0,0,0,.82);
+  backdrop-filter: saturate(180%) blur(30px);
+  -webkit-backdrop-filter: saturate(180%) blur(30px);
+  border-bottom: 1px solid;
+  border-image: linear-gradient(90deg, transparent, rgba(255,107,53,.2), transparent) 1;
+  transition: border-image .4s ease, box-shadow .4s ease;
+}
+.gbt-nav.scrolled {
+  border-image: linear-gradient(90deg, transparent, var(--accent), transparent) 1;
+  box-shadow: 0 1px 20px rgba(255,107,53,.08);
+}
+.gbt-nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 48px; max-width: 1200px; margin: 0 auto; padding: 0 24px;
+}
+.gbt-nav-brand {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--fg); font-weight: 600; font-size: 15px;
+}
+.gbt-nav-brand svg { height: 24px; width: 24px; border-radius: 6px; }
+.gbt-nav-links { display: flex; gap: 14px; }
+.gbt-nav-links a {
+  color: var(--dim); text-decoration: none; font-size: 12px; font-weight: 500;
+  transition: color .2s;
+}
+.gbt-nav-links a:hover, .gbt-nav-links a.active { color: var(--fg); }
+
+/* ── Buttons ──────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 30px; border-radius: 28px; font-size: 15px; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all .3s cubic-bezier(.16,1,.3,1);
+  letter-spacing: -.01em; white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+  box-shadow: 0 0 20px rgba(255,107,53,.15);
+}
+.btn-primary:hover {
+  background: var(--accent2); transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(255,107,53,.3);
+}
+.btn-outline {
+  background: transparent; color: var(--fg);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(8px);
+}
+.btn-outline:hover {
+  border-color: rgba(255,255,255,.25);
+  background: rgba(255,255,255,.04);
+}
+.btn-sm {
+  padding: 8px 18px; border-radius: var(--radius); font-size: 13px; font-weight: 600;
+  text-decoration: none; background: var(--accent); color: #fff;
+  transition: all .25s cubic-bezier(.16,1,.3,1); border: none; cursor: pointer;
+}
+.btn-sm:hover { background: var(--accent2); transform: translateY(-1px); }
+.btn-green {
+  background: var(--green); color: #000;
+}
+.btn-green:hover { background: #34e062; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(48,209,88,.3); }
+.btn-teal {
+  background: var(--teal); color: #fff;
+  box-shadow: 0 0 20px rgba(13,148,136,.15);
+}
+.btn-teal:hover {
+  background: #0fb9a8; transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(13,148,136,.3);
+}
+.btn-purple {
+  background: var(--purple); color: #fff;
+  box-shadow: 0 0 20px rgba(124,58,237,.15);
+}
+.btn-purple:hover {
+  background: #8b5cf6; transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(124,58,237,.3);
+}
+.btn-lg {
+  padding: 16px 36px; border-radius: 32px; font-size: 16px;
+}
+.btn-xs {
+  padding: 6px 14px; border-radius: var(--radius); font-size: 12px;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,107,53,.2); }
+  50% { box-shadow: 0 0 40px rgba(255,107,53,.4), 0 0 80px rgba(255,107,53,.1); }
+}
+
+/* ── Animations ───────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(.9); opacity: .6; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes pageIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-in-up  { animation: fadeInUp   .7s var(--ease-out-expo) both; }
+.animate-fade-in     { animation: fadeIn      .5s var(--ease-out-expo) both; }
+.animate-slide-right { animation: slideInRight .6s var(--ease-out-expo) both; }
+.animate-scale-in    { animation: scaleIn     .5s var(--ease-out-expo) both; }
+.animate-float       { animation: float       4s ease-in-out infinite; }
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,.06) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+.stagger-1 { animation-delay: .1s; }
+.stagger-2 { animation-delay: .2s; }
+.stagger-3 { animation-delay: .3s; }
+.stagger-4 { animation-delay: .4s; }
+.stagger-5 { animation-delay: .5s; }
+
+/* ── Layout ───────────────────────── */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.section { padding: var(--section-lg) 0; }
+.section-sm  { padding: var(--section-sm) 0; }
+.section-md  { padding: var(--section-md) 0; }
+.section-lg  { padding: var(--section-lg) 0; }
+.section-xl  { padding: var(--section-xl) 0; }
+.section-label {
+  font-size: 12px; font-weight: 600; letter-spacing: 3px;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 16px;
+}
+.section h2 {
+  font-size: clamp(32px, 5vw, 52px); font-weight: 700;
+  letter-spacing: -.03em; margin-bottom: 16px; line-height: 1.1;
+}
+.section-sub {
+  color: var(--dim); font-size: 16px; max-width: 480px;
+  margin-bottom: 48px; line-height: 1.6;
+}
+.hl { color: var(--accent); }
+
+/* Utility: gradient text via background-clip */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-teal {
+  background: linear-gradient(135deg, var(--accent), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Cards ────────────────────────── */
+.card {
+  position: relative; background: rgba(255,255,255,.01);
+  border: 1px solid var(--glass-border);
+  border-top: 1px solid rgba(255,255,255,.04);
+  border-radius: var(--radius); padding: 28px;
+  transition: all .35s cubic-bezier(.16,1,.3,1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--purple), transparent);
+  border-radius: var(--radius) var(--radius) 0 0; opacity: .5;
+}
+.card:hover {
+  border-color: var(--border-strong); transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-lift);
+}
+.card:hover::before { opacity: 1; }
+
+/* Card Accent Variants */
+.card-accent::before  { background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+.card-teal::before    { background: linear-gradient(90deg, transparent, var(--teal), transparent); }
+.card-purple::before  { background: linear-gradient(90deg, transparent, var(--purple), transparent); }
+.card-blue::before    { background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+.card-green::before   { background: linear-gradient(90deg, transparent, var(--green), transparent); }
+.card-accent:hover  { box-shadow: var(--shadow-glow-orange); }
+.card-teal:hover    { box-shadow: var(--shadow-glow-teal); }
+.card-purple:hover  { box-shadow: var(--shadow-glow-purple); }
+.card-blue:hover    { box-shadow: var(--shadow-glow-blue); }
+.card-green:hover   { box-shadow: var(--shadow-glow-green); }
+
+.card-sm { padding: 20px; border-radius: var(--radius-sm); }
+.card-lg { padding: 36px; border-radius: var(--radius-lg); }
+.card-interactive { cursor: pointer; }
+.card-interactive:hover { border-color: var(--border-strong); transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-lift); }
+.card-interactive:hover::before { opacity: 1; }
+
+/* ── Footer ───────────────────────── */
+.gbt-footer {
+  padding: 64px 0 40px;
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(90deg, rgba(255,107,53,.35), rgba(41,151,255,.35), rgba(48,209,88,.35)) 1;
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(10,10,18,.97) 100%);
+}
+.gbt-footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+  margin-bottom: 40px;
+}
+.gbt-footer h5 {
+  font-size: 12px; font-weight: 600; letter-spacing: 1px;
+  color: var(--fg); margin-bottom: 12px; text-transform: uppercase;
+}
+.gbt-footer a {
+  color: var(--dim); text-decoration: none; font-size: 13px;
+  display: block; margin-bottom: 6px; line-height: 1.8;
+}
+.gbt-footer a:hover { color: var(--accent); }
+.gbt-footer-bottom {
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; justify-content: space-between; color: var(--dim);
+  font-size: 12px; flex-wrap: wrap; gap: 12px;
+}
+
+/* Back to top */
+.gbt-back-to-top {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--dim); cursor: pointer;
+  transition: all .25s ease; padding: 6px 12px;
+  border-radius: var(--radius); background: transparent;
+  border: 1px solid transparent; text-decoration: none;
+  margin-bottom: 12px;
+}
+.gbt-back-to-top svg { width: 14px; height: 14px; transition: transform .25s ease; }
+.gbt-back-to-top:hover { color: var(--accent); border-color: rgba(255,107,53,.15); }
+.gbt-back-to-top:hover svg { transform: translateY(-2px); }
+.gbt-footer-badges { display: flex; gap: 16px; flex-wrap: wrap; }
+.trust-badge {
+  font-size: 11px; padding: 5px 12px; border-radius: var(--radius);
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+  color: var(--dim); letter-spacing: .3px;
+  transition: all .25s ease; white-space: nowrap;
+}
+.trust-badge:hover {
+  border-color: rgba(48,209,88,.25);
+  color: var(--fg);
+  background: rgba(48,209,88,.06);
+}
+
+/* ── Stats Bar ────────────────────── */
+.stats { display: flex; justify-content: center; gap: 0; padding: 48px 0; flex-wrap: wrap; }
+.stat { text-align: center; padding: 0 48px; border-left: 1px solid rgba(255,255,255,.06); transition: transform .35s cubic-bezier(.16,1,.3,1); position: relative; }
+.stat:first-child { border-left: none; }
+.stat:hover { transform: translateY(-3px); }
+.stat-num { font-size: 48px; font-weight: 800; line-height: 1; transition: all .35s cubic-bezier(.16,1,.3,1); position: relative; }
+.stat-num.g { color: var(--green); text-shadow: 0 0 20px rgba(48,209,88,.15); }
+.stat-num.o { color: var(--accent); text-shadow: 0 0 20px rgba(255,107,53,.15); }
+.stat-num.b { color: var(--blue); text-shadow: 0 0 20px rgba(41,151,255,.15); }
+.stat-num.t { color: var(--teal); text-shadow: 0 0 20px rgba(13,148,136,.15); }
+.stat:hover .stat-num.g { text-shadow: 0 0 32px rgba(48,209,88,.3); }
+.stat:hover .stat-num.o { text-shadow: 0 0 32px rgba(255,107,53,.3); }
+.stat:hover .stat-num.b { text-shadow: 0 0 32px rgba(41,151,255,.3); }
+.stat:hover .stat-num.t { text-shadow: 0 0 32px rgba(13,148,136,.3); }
+.stat-label { font-size: 11px; font-weight: 500; color: var(--dim); margin-top: 8px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* ── Utility ──────────────────────── */
+.reveal { opacity: 1; transform: translateY(40px); transition: all .7s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+/* Stagger delays for card grids — 0.1s per sibling */
+.card.reveal:nth-child(1)  { transition-delay: 0s; }
+.card.reveal:nth-child(2)  { transition-delay: .1s; }
+.card.reveal:nth-child(3)  { transition-delay: .2s; }
+.card.reveal:nth-child(4)  { transition-delay: .3s; }
+.card.reveal:nth-child(5)  { transition-delay: .4s; }
+.card.reveal:nth-child(6)  { transition-delay: .5s; }
+.card.reveal:nth-child(7)  { transition-delay: .6s; }
+.card.reveal:nth-child(8)  { transition-delay: .7s; }
+.card.reveal:nth-child(9)  { transition-delay: .8s; }
+.card.reveal:nth-child(10) { transition-delay: .9s; }
+.text-center { text-align: center; }
+.mt-48 { margin-top: 48px; }
+
+/* Spacing Helpers */
+.mt-0  { margin-top: 0; }
+.mt-8  { margin-top: var(--space-sm); }
+.mt-16 { margin-top: var(--space-md); }
+.mt-24 { margin-top: var(--space-lg); }
+.mt-32 { margin-top: var(--space-xl); }
+.mt-64 { margin-top: var(--space-3xl); }
+.mb-0  { margin-bottom: 0; }
+.mb-8  { margin-bottom: var(--space-sm); }
+.mb-16 { margin-bottom: var(--space-md); }
+.mb-24 { margin-bottom: var(--space-lg); }
+.mb-32 { margin-bottom: var(--space-xl); }
+.mb-48 { margin-bottom: var(--space-2xl); }
+.mb-64 { margin-bottom: var(--space-3xl); }
+.pt-0  { padding-top: 0; }
+.pt-16 { padding-top: var(--space-md); }
+.pt-32 { padding-top: var(--space-xl); }
+.pb-0  { padding-bottom: 0; }
+.pb-16 { padding-bottom: var(--space-md); }
+.pb-32 { padding-bottom: var(--space-xl); }
+.gap-8  { gap: var(--space-sm); }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: var(--space-md); }
+.gap-24 { gap: var(--space-lg); }
+.gap-32 { gap: var(--space-xl); }
+.gap-48 { gap: var(--space-2xl); }
+
+/* Flex & Grid Helpers */
+.flex       { display: flex; }
+.flex-col   { display: flex; flex-direction: column; }
+.flex-wrap  { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); }
+
+/* Visibility */
+.hidden-mobile { }
+.hidden-desktop { }
+
+/* Misc */
+.w-full { width: 100%; }
+.relative { position: relative; }
+.overflow-hidden { overflow: hidden; }
+.rounded { border-radius: var(--radius); }
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-full { border-radius: var(--radius-full); }
+.divider { width: 100%; height: 1px; background: var(--border); margin: 48px 0; }
+
+/* ── Glass Utility ─────────────────── */
+.glass {
+  background: rgba(255, 255, 255, .006);
+  border: 1px solid rgba(255, 255, 255, .05);
+  border-top: 1px solid rgba(255,255,255,.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius);
+}
+
+/* ── Responsive ───────────────────── */
+/* ≥1200px → xl (desktop-wide) */
+/* ≥1024px → lg (desktop) */
+/* ≥768px  → md (tablet) */
+/* ≥480px  → sm (phablet) */
+/* <480px  → default (mobile-first) */
+
+/* ── Desktop-wide ── */
+@media (min-width: 1200px) {
+  .container { max-width: 1280px; }
+}
+
+/* ── Desktop (lg) ── */
+@media (max-width: 1024px) {
+  .container { padding: 0 20px; }
+  .section { padding: var(--section-md) 0; }
+  .section-xl { padding: 140px 0; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .hidden-desktop { display: none; }
+}
+
+/* ── Tablet (md) ── */
+@media (max-width: 768px) {
+  .gbt-nav-links { display: none; }
+  .gbt-footer-grid { grid-template-columns: 1fr 1fr; }
+  .stats { gap: 24px; }
+  .stat { padding: 0 24px; }
+  .section { padding: var(--section-sm) 0; }
+  .section-xl { padding: 100px 0; }
+  .container { padding: 0 16px; }
+  h1, .h1 { font-size: clamp(30px, 7vw, 38px); }
+  h2, .h2 { font-size: clamp(24px, 5.5vw, 30px); }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ── Phablet (sm) ── */
+@media (max-width: 480px) {
+  .stats { gap: 16px; }
+  .stat { padding: 0 16px; border-left: none; }
+  .section { padding: 60px 0; }
+  .section-xl { padding: 80px 0; }
+  .card { padding: 20px; }
+  .card-lg { padding: 24px; }
+  .hidden-mobile { display: none; }
+}
+
+/* ── Legal Pages ───────────────────── */
+.legal-content { max-width: 800px; margin: 0 auto; padding: 100px 24px 80px; }
+.legal-content h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 700; letter-spacing: -.02em; margin-bottom: 8px; }
+.legal-content .last-updated { color: var(--dim); font-size: 13px; margin-bottom: 40px; }
+.legal-content h2 { font-size: 22px; font-weight: 600; margin-top: 44px; margin-bottom: 14px; padding-top: 16px; border-top: 1px solid var(--border); }
+.legal-content h3 { font-size: 17px; font-weight: 600; margin-top: 28px; margin-bottom: 10px; color: var(--accent2); }
+.legal-content p { color: var(--dim); font-size: 14px; margin-bottom: 12px; line-height: 1.7; }
+.legal-content li { color: var(--dim); font-size: 14px; margin-bottom: 8px; line-height: 1.7; }
+.legal-content ul, .legal-content ol { padding-left: 24px; margin-bottom: 16px; }
+.legal-content strong { color: var(--fg); }
+.legal-content a { color: var(--accent); text-decoration: none; }
+.legal-content a:hover { text-decoration: underline; }
+.legal-content table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+.legal-content th { padding: 12px 16px; text-align: left; color: var(--fg); font-weight: 600; background: var(--bg2); border-bottom: 1px solid var(--border); }
+.legal-content td { padding: 12px 16px; color: var(--dim); border-bottom: 1px solid var(--border); }
+.legal-content code { background: var(--bg3); padding: 2px 6px; border-radius: 4px; font-size: 13px; color: var(--accent2); }
+.highlight { background: rgba(255,107,53,.08); border-left: 3px solid var(--accent); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+.highlight p { color: var(--fg); margin: 0; }
+.guarantee-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; text-align: center; margin: 32px 0; }
+.guarantee-box .g-icon { font-size: 48px; margin-bottom: 12px; }
+.guarantee-box h3 { color: var(--green); font-size: 20px; margin-top: 0; border: none; padding: 0; }
+.subtle { font-size: 12px; color: var(--dim); }
+
+@media (max-width: 768px) {
+  .legal-content { padding: 80px 20px 60px; }
+}
+
+/* ═══════════════════════════════════════════════
+   GBT Enterprise + Sci-Fi Design Extensions v5.0
+   对标 Strikingly / Vercel / Linear 设计水准
+   ═══════════════════════════════════════════════ */
+
+/* ── Glass Morphism Card ─── */
+.glass-card {
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all .3s cubic-bezier(.16,1,.3,1);
+}
+.glass-card:hover {
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.12);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 48px rgba(0,0,0,.4), 0 0 0 1px rgba(124,58,237,.1);
+}
+
+/* ── Glow Border ─── */
+.glow-border {
+  position: relative;
+}
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(124,58,237,.3), rgba(6,182,212,.3), rgba(255,107,53,.2));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity .4s cubic-bezier(.16,1,.3,1);
+}
+.glow-border:hover::after { opacity: 1; }
+
+/* ── Scan Line Overlay ─── */
+.scan-lines {
+  position: relative;
+  overflow: hidden;
+}
+.scan-lines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,.008) 2px,
+    rgba(255,255,255,.008) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Tech Grid Background ─── */
+.tech-grid {
+  background-image:
+    linear-gradient(rgba(124,58,237,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Pulsing Dot ─── */
+.pulse-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(48,209,88,.6);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(1.5); }
+}
+
+/* ── Gradient Text ─── */
+.text-gradient {
+  background: linear-gradient(135deg, #a78bfa, #06b6d4, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animated Counter ─── */
+.count-up { font-variant-numeric: tabular-nums; }
+
+/* ── Divider Glow ─── */
+.divider-glow {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124,58,237,.3), rgba(6,182,212,.3), transparent);
+  border: none;
+  margin: var(--space-16) 0;
+}
+
+/* ── Hover Lift ─── */
+.hover-lift {
+  transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Floating Animation ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.float { animation: float 6s ease-in-out infinite; }
+
+/* ── Neon Glow Text ─── */
+.neon-glow {
+  text-shadow: 0 0 20px rgba(124,58,237,.5), 0 0 40px rgba(124,58,237,.2);
+}
+
+/* ═══════════════════════════════════════════════
+   Global Enterprise Skin — 自动覆盖所有页面
+   ═══════════════════════════════════════════════ */
+
+/* 所有容器统一间距 */
+.container, .kb-wrapper, main, section > div {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 所有卡片统一样式 */
+.card, [class*="-card"], .kb-card, .faq-item, .step-card {
+  background: var(--bg-card, #111118);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  transition: all .25s cubic-bezier(.16,1,.3,1);
+}
+
+/* 所有按钮统一样式 */
+button, .btn, [class*="-btn"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+}
+
+/* 所有输入框统一 */
+input, textarea, select {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 所有标题统一 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Section 间距统一 */
+section, .section, [class*="-section"] {
+  padding: 80px 0;
+}
+@media (max-width: 768px) {
+  section, .section, [class*="-section"] { padding: 48px 0; }
+}
+
+/* 链接统一 */
+a { transition: color .15s; }
+a:hover { opacity: .85; }
+</style>
+</head>
+<body>
+<h1>Caps API 文档</h1>
+
+<p>&gt; 自动生成于 2026-07-22 05:29:47  ·  共 145 个能力模块</p>
+
+<hr>
+
+<h2>abliterator</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 安全域</p>
+
+<p>&gt; LLM安全限制移除·拒绝机制消融</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>ablate</code></td><td>消融安全限制</td></tr>
+<tr><td><code>test</code></td><td>测试消融效果</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>agency</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI</p>
+
+<p>&gt; Agency Agents — 244个AI专家调度: 工程/安全/营销/金融/游戏/设计/法律等18领域, 自动匹配+调用Kimi API</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>dispatch</code></td><td>智能调度 — 关键词自动匹配244个专家 + 调用Kimi API</td></tr>
+<tr><td><code>list</code></td><td>列出专家 — 按领域查看所有可用AI专家</td></tr>
+<tr><td><code>domains</code></td><td>领域概览 — 18个领域及专家数量</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>expert_consulting</code></li>
+<li><strong>Keywords</strong>: <code>专家</code>, <code>agent</code>, <code>代码审查</code>, <code>渗透测试</code>, <code>架构</code>, <code>安全审计</code>, <code>前端</code>, <code>后端</code>, <code>DevOps</code>, <code>SRE</code>, <code>营销</code>, <code>设计</code>, <code>产品</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>代码审查</li>
+    <li>安全审计</li>
+    <li>架构设计</li>
+    <li>找后端专家</li>
+
+<hr>
+
+<h2>agent_reach</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 信息域</p>
+
+<p>&gt; 跨平台信息触达代理</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>reach</code></td><td>触达目标平台</td></tr>
+<tr><td><code>scrape</code></td><td>抓取信息</td></tr>
+<tr><td><code>transmit</code></td><td>传输数据</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>ai_drama</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code></p>
+
+<p>&gt; AI短剧生成 — 自动创作短视频剧本、配音、渲染合成全流程</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>script</code></td><td>生成短剧剧本（含场景、台词、镜头说明）</td></tr>
+<tr><td><code>generate</code></td><td>一键全流程：剧本+配音+渲染+合成</td></tr>
+<tr><td><code>dub</code></td><td>为剧本台词生成AI配音</td></tr>
+<tr><td><code>render</code></td><td>渲染视频片段</td></tr>
+<tr><td><code>assemble</code></td><td>合成最终短剧视频</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>生成视频内容、创作短剧</code></li>
+<li><strong>Keywords</strong>: <code>短剧</code>, <code>剧本</code>, <code>短视频</code>, <code>ai drama</code>, <code>drama</code>, <code>配音</code>, <code>tts</code>, <code>视频生成</code>, <code>视频创作</code>, <code>影视</code>, <code>脚本</code>, <code>台词</code>, <code>场景</code>, <code>镜头</code>, <code>合成</code>, <code>渲染</code>, <code>抖音剧</code>, <code>快手剧</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>帮我生成一个短剧</li>
+    <li>写一个短视频剧本</li>
+    <li>创作短剧脚本</li>
+    <li>生成配音视频</li>
+    <li>做一个抖音短剧</li>
+
+<hr>
+
+<h2>ai_vision</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 感知</p>
+
+<p>&gt; AI视觉 — Florence-2 图片理解+OCR+描述</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>ocr</code></td><td>识别图片中的文字 (Florence-2 OCR)</td></tr>
+<tr><td><code>describe</code></td><td>AI描述图片内容</td></tr>
+<tr><td><code>screen</code></td><td>截图+AI理解当前屏幕</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>vision_ai</code></li>
+<li><strong>Keywords</strong>: <code>看图</code>, <code>识别图片</code>, <code>图片里有什么</code>, <code>vision</code>, <code>AI视觉</code>, <code>看懂</code>, <code>图片文字</code>, <code>描述图片</code>, <code>图像识别</code>, <code>OCR识别</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>看看图片里有什么</li>
+    <li>识别这张图</li>
+    <li>图片上的文字是什么</li>
+    <li>描述一下这个画面</li>
+
+<hr>
+
+<h2>anti_track</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; 反追踪隐身+反向猎取引擎 每根触手内置 隐身(20UA池+延迟+反蜜罐) + 反击(IP定位+威胁情报+攻击者指纹捕获+WHOIS溯源)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>stealth_request</code></td><td>隐身HTTP请求 随机指纹+延迟+反蜜罐</td></tr>
+<tr><td><code>rotate_identity</code></td><td>轮换身份 20个真实UA池随机切换</td></tr>
+<tr><td><code>check_honeypot</code></td><td>反蜜罐检测 分析页面是否为陷阱</td></tr>
+<tr><td><code>trace_ip</code></td><td>反向追踪IP 地理定位+ISP+威胁情报</td></tr>
+<tr><td><code>capture_attacker</code></td><td>捕获攻击者全貌 IP+指纹+UA+来源+地理+时间线</td></tr>
+<tr><td><code>reverse_trace</code></td><td>全链路反向追踪 IP→地理→ISP→威胁→WHOIS</td></tr>
+<tr><td><code>clean_tracks</code></td><td>清理本地痕迹</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>api_tester</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: AI编程</p>
+
+<p>&gt; api_tester capability</p>
+
+<hr>
+
+<h2>audio_capture</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 桌面域</p>
+
+<p>&gt; audio_capture capability</p>
+
+<hr>
+
+<h2>auto_fix</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 代码</p>
+
+<p>&gt; 自动修复 — 根据审计结果自动修复代码问题</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>fix</code></td><td>自动修复项目中的已知问题</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>fix_code</code></li>
+<li><strong>Keywords</strong>: <code>修复</code>, <code>fix</code>, <code>自动修复</code>, <code>修</code>, <code>改bug</code>, <code>修补</code>, <code>auto-fix</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>自动修复代码</li>
+    <li>修复这些问题</li>
+    <li>修bug</li>
+
+<hr>
+
+<h2>auto_pipeline</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 运维域</p>
+
+<p>&gt; 多步骤任务自动编排</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>run</code></td><td>运行流水线</td></tr>
+<tr><td><code>define</code></td><td>定义流水线</td></tr>
+<tr><td><code>status</code></td><td>查看状态</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>auto_register</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 运维域</p>
+
+<p>&gt; 批量账号注册(钱包/社交/直播/论坛/电商)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>register</code></td><td>注册账号</td></tr>
+<tr><td><code>batch</code></td><td>批量注册</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>auto_resolver</h2>
+
+<p><strong>版本</strong>: 2.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI推理</p>
+
+<p>&gt; 自主解析引擎 — 零追问。任何卡点/阻塞/未知/失败→双脑分析→全网搜索→多方案对比→镜像验证→继续执行→吸收教训。字典里没有'叫用户帮忙'。</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>resolve</code></td><td>核心: 遇到卡点→双脑分析→全网搜索→多方案→选最优→返回方案</td></tr>
+<tr><td><code>search</code></td><td>全网搜索 — 搜索文档/StackOverflow/GitHub Issues/源码</td></tr>
+<tr><td><code>analyze</code></td><td>双脑分析 — 推理脑分析根因+编程脑生成多方案</td></tr>
+<tr><td><code>decide</code></td><td>决策 — 多方案对比，选最优</td></tr>
+<tr><td><code>verify</code></td><td>验证 — 在镜像空间验证方案可行性</td></tr>
+<tr><td><code>learn</code></td><td>吸收 — 将解决方案写入自进化记忆</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>auto_resolve</code></li>
+<li><strong>Keywords</strong>: <code>卡住了</code>, <code>不知道</code>, <code>怎么办</code>, <code>求助</code>, <code>不会</code>, <code>失败</code>, <code>报错</code>, <code>阻塞</code>, <code>blocked</code>, <code>stuck</code>, <code>怎么解决</code>, <code>帮我</code>, <code>resolve</code>, <code>fix</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>这个错误怎么解决</li>
+    <li>我不知道这个库怎么用</li>
+    <li>这里卡住了怎么办</li>
+
+<hr>
+
+<h2>blockchain_analyzer</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; 区块链分析·交易追踪与地址画像</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>analyze</code></td><td>分析区块链交易和地址</td></tr>
+<tr><td><code>scan</code></td><td>扫描区块链网络活动</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>blockchain_analyzer</code></li>
+<li><strong>Keywords</strong>: <code>blockchain</code>, <code>crypto</code>, <code>wallet</code>, <code>transaction</code>, <code>区块链</code>, <code>加密货币</code>, <code>钱包</code></li>
+
+<hr>
+
+<h2>bounty_hunter</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; 漏洞赏金全链路自动化</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>hunt</code></td><td>启动赏金狩猎</td></tr>
+<tr><td><code>report</code></td><td>生成漏洞报告</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>brain_nexus</h2>
+
+<p><strong>版本</strong>: 2.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI协作</p>
+
+<p>&gt; 邻域中枢 — 全领域能力映射/意图路由/健康审计/启动自检/跨领域数据通道。GBT大脑的神经网络总控。</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>map</code></td><td>全领域能力映射 — 展示所有领域和能力的完整拓扑图</td></tr>
+<tr><td><code>route</code></td><td>意图路由 — 根据用户意图自动匹配最佳能力模块</td></tr>
+<tr><td><code>audit</code></td><td>健康审计 — 检查所有领域的能力状态和覆盖率</td></tr>
+<tr><td><code>boot</code></td><td>启动自检 — 全邻域能力扫描+依赖验证</td></tr>
+<tr><td><code>bridge</code></td><td>跨领域数据通道 — 在不同领域能力之间传递数据</td></tr>
+<tr><td><code>neighborhoods</code></td><td>邻域拓扑 — 展示所有AI领域及其能力分布</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>nexus_orchestrate</code></li>
+<li><strong>Keywords</strong>: <code>邻域</code>, <code>中枢</code>, <code>能力映射</code>, <code>路由</code>, <code>拓扑</code>, <code>nexus</code>, <code>neighborhood</code>, <code>领域</code>, <code>全部能力</code>, <code>有什么能力</code>, <code>能做什么</code>, <code>capabilities</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>你能做什么</li>
+    <li>列出所有能力</li>
+    <li>哪个模块可以处理这个任务</li>
+    <li>检查所有系统状态</li>
+
+<hr>
+
+<h2>browser_automation</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 桌面域</p>
+
+<p>&gt; AI浏览器自动化 — SeleniumBase+Playwright双引擎 · Headless · CDP · 填表 · 数据提取</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>navigate</code></td><td>导航到URL并返回内容</td></tr>
+<tr><td><code>screenshot</code></td><td>页面截图base64</td></tr>
+<tr><td><code>fill_form</code></td><td>自动填表+提交</td></tr>
+<tr><td><code>extract_data</code></td><td>CSS选择器数据提取</td></tr>
+<tr><td><code>engines</code></td><td>检测可用浏览器引擎</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>browser_automation</code></li>
+<li><strong>Keywords</strong>: <code>浏览器</code>, <code>browser</code>, <code>selenium</code>, <code>playwright</code>, <code>headless</code>, <code>打开网页</code>, <code>填表</code>, <code>网页截图</code></li>
+
+<hr>
+
+<h2>calendar_sync</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; Google Calendar via service account + iCal (.ics) export fallback</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>list_events</code></td><td>List calendar events (time range, search)</td></tr>
+<tr><td><code>create_event</code></td><td>Create a calendar event</td></tr>
+<tr><td><code>free_busy</code></td><td>Check free/busy for time range</td></tr>
+<tr><td><code>export_ical</code></td><td>Export events as .ics file (no auth needed)</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>calendar_sync</code></li>
+<li><strong>Keywords</strong>: <code>calendar</code>, <code>google calendar</code>, <code>schedule</code>, <code>event</code>, <code>free busy</code>, <code>ical</code>, <code>ics</code></li>
+
+<hr>
+
+<h2>cap_docs</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 基础设施</p>
+
+<p>&gt; API文档生成器 — 扫描所有cap的capability.json并生成Markdown/HTML文档</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>generate</code></td><td>扫描所有caps生成 docs/caps_api.md 文档</td></tr>
+<tr><td><code>generate_html</code></td><td>生成 docs/caps_api.html 文档</td></tr>
+<tr><td><code>search</code></td><td>按关键字搜索已生成的文档</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>generate_docs</code></li>
+<li><strong>Keywords</strong>: <code>docs</code>, <code>文档</code>, <code>api</code>, <code>generate docs</code>, <code>生成文档</code>, <code>cap_docs</code></li>
+
+<hr>
+
+<h2>cicd</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 运维域</p>
+
+<p>&gt; CI/CD流水线管理</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>trigger</code></td><td>触发流水线</td></tr>
+<tr><td><code>status</code></td><td>查看状态</td></tr>
+<tr><td><code>deploy</code></td><td>部署</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>circuit_breaker</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 基础设施</p>
+
+<p>&gt; 熔断器 — 基于滑动窗口的cap执行断路器，防雪崩</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>check</code></td><td>检查指定cap的断路器状态(closed/open/half_open)</td></tr>
+<tr><td><code>fail</code></td><td>记录一次失败并自动评估是否触发熔断</td></tr>
+<tr><td><code>trip</code></td><td>手动熔断(强制跳闸)</td></tr>
+<tr><td><code>reset</code></td><td>重置断路器恢复closed</td></tr>
+<tr><td><code>status</code></td><td>查看全部断路器状态</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>circuit_breaker</code></li>
+<li><strong>Keywords</strong>: <code>circuit_breaker</code>, <code>breaker</code>, <code>熔断</code>, <code>断路</code>, <code>降级</code></li>
+
+<hr>
+
+<h2>clipboard_monitor</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 桌面域</p>
+
+<p>&gt; clipboard_monitor capability</p>
+
+<hr>
+
+<h2>cloud_brain</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI</p>
+
+<p>&gt; 云端大脑 · 云端LLM推理集群/分布式知识库/云端同步/远程GPU推理/云端存储KV。本地+云端双模无缝切换</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>reason</code></td><td>reason</td></tr>
+<tr><td><code>ask</code></td><td>ask</td></tr>
+<tr><td><code>query</code></td><td>query</td></tr>
+<tr><td><code>sync</code></td><td>sync</td></tr>
+<tr><td><code>pull</code></td><td>pull</td></tr>
+<tr><td><code>kv</code></td><td>kv</td></tr>
+<tr><td><code>models</code></td><td>models</td></tr>
+<tr><td><code>status</code></td><td>status</td></tr>
+<tr><td><code>deploy</code></td><td>deploy</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>cloud_brain</code></li>
+<li><strong>Keywords</strong>: <code>云端</code>, <code>cloud</code>, <code>远程推理</code>, <code>GPU</code>, <code>分布式</code>, <code>云端存储</code>, <code>云同步</code>, <code>cloud brain</code>, <code>集群</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>云端推理</li>
+    <li>同步到云端</li>
+    <li>使用云端GPU</li>
+
+<hr>
+
+<h2>cloud_llm</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI推理</p>
+
+<p>&gt; GBT云端LLM — 三层自知框架(L1/L2/L3) + 智能搜索引擎 + 精准调度</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>ask</code></td><td>LLM问答（自动注入自我认知+智能搜索）</td></tr>
+<tr><td><code>code</code></td><td>代码生成/审查</td></tr>
+<tr><td><code>analyze</code></td><td>深度分析（触发智能搜索增强）</td></tr>
+<tr><td><code>search_test</code></td><td>测试智能搜索引擎匹配</td></tr>
+<tr><td><code>dispatch</code></td><td>Layer3精准调度 cap+action路由</td></tr>
+<tr><td><code>list_caps</code></td><td>能力注册表查询</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>llm</code></li>
+<li><strong>Keywords</strong>: <code>AI</code>, <code>LLM</code>, <code>大模型</code>, <code>推理</code>, <code>DeepSeek</code>, <code>Kimi</code>, <code>OpenAI</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>问问AI</li>
+    <li>调用大模型</li>
+    <li>dispatch精准调度</li>
+
+<hr>
+
+<h2>code_exec</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 代码</p>
+
+<p>&gt; 代码执行 — 运行Python/Shell</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>run</code></td><td>执行代码</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>exec_code</code></li>
+<li><strong>Keywords</strong>: <code>执行</code>, <code>运行</code>, <code>代码</code>, <code>exec</code>, <code>run</code>, <code>python</code>, <code>shell</code>, <code>命令</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>执行代码</li>
+
+<hr>
+
+<h2>code_scanner</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI编程</p>
+
+<p>&gt; 代码层深度分析引擎 每根触手内置的安全漏洞/病毒/后门/代码质量扫描 34种安全漏洞模式 10种恶意代码特征 5种代码质量检测</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>scan</code></td><td>扫描代码文本(直接传入代码字符串)</td></tr>
+<tr><td><code>scan_file</code></td><td>扫描代码文件(传入文件路径)</td></tr>
+<tr><td><code>scan_response</code></td><td>扫描HTTP响应体(从攻击cap传入)</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>codebase_memory</h2>
+
+<p><strong>版本</strong>: 2.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 代码</p>
+
+<p>&gt; Codebase Memory MCP v0.8.1 — 158语言代码知识图谱: 子毫秒查询/语义搜索/调用链/架构/死代码/影响分析/HTTP路由/3D可视化 (纯C,零依赖)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>search</code></td><td>符号搜索 — 函数/类/变量</td></tr>
+<tr><td><code>trace</code></td><td>调用链追踪 — 入站/出站</td></tr>
+<tr><td><code>architecture</code></td><td>架构全景 — 语言/包/入口/热点/边界/分层</td></tr>
+<tr><td><code>deadcode</code></td><td>死代码检测</td></tr>
+<tr><td><code>semantic</code></td><td>语义搜索 — 向量相似度</td></tr>
+<tr><td><code>changes</code></td><td>变更影响分析 — git diff→影响符号</td></tr>
+<tr><td><code>cypher</code></td><td>Cypher图查询</td></tr>
+<tr><td><code>snippet</code></td><td>代码片段 — 按函数/类名读取源码</td></tr>
+<tr><td><code>routes</code></td><td>HTTP路由发现 — 路由↔调用匹配</td></tr>
+<tr><td><code>index</code></td><td>强制重新索引项目</td></tr>
+<tr><td><code>graph</code></td><td>打开3D图谱可视化 :9749</td></tr>
+<tr><td><code>info</code></td><td>CBM状态/索引统计</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>codebase_analysis</code></li>
+<li><strong>Keywords</strong>: <code>索引</code>, <code>index</code>, <code>代码库</code>, <code>codebase</code>, <code>知识图谱</code>, <code>符号搜索</code>, <code>调用链</code>, <code>架构</code>, <code>死代码</code>, <code>impact</code>, <code>语义</code>, <code>Cypher</code>, <code>graph</code>, <code>路由</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>索引项目</li>
+    <li>搜索函数</li>
+    <li>追踪调用链</li>
+    <li>分析架构</li>
+    <li>检测死代码</li>
+    <li>语义搜索</li>
+
+<hr>
+
+<h2>cognition</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI记忆</p>
+
+<p>&gt; 自我认知引擎 — AI身份·创新自证·去重·记录·永恒记忆</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>whoami</code></td><td>AI自省: 我是谁，谁创造了我</td></tr>
+<tr><td><code>stats</code></td><td>认知统计</td></tr>
+<tr><td><code>discover</code></td><td>记录新发现</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>collab_dispatch</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 调度编排</p>
+
+<p>&gt; 协作执行智能调度 · 铁律版 — design_brain→思维导图→严格执行→LLM汇总</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>run</code></td><td>完整执行链: Phase1设计大脑→Phase2导图→Phase3严格执行→Phase4汇总</td></tr>
+<tr><td><code>preview</code></td><td>预览执行计划（不实际执行）</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>collab_dispatch</code></li>
+<li><strong>Keywords</strong>: <code>协作</code>, <code>调度</code>, <code>dispatch</code>, <code>执行链</code>, <code>设计大脑</code>, <code>collab</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>协作执行设计任务</li>
+    <li>铁律模式执行</li>
+
+<hr>
+
+<h2>command_injector</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; 命令注入检测与利用</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>test</code></td><td>检测命令注入点</td></tr>
+<tr><td><code>inject</code></td><td>执行命令注入</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>content_publisher</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; Auto-generated by devourer — 内容发布 capability</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>run</code></td><td>Execute 内容发布 task</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>content_publisher</code></li>
+<li><strong>Keywords</strong>: <code>wordpress</code>, <code>medium</code>, <code>publish</code>, <code>blog</code>, <code>post</code>, <code>content</code></li>
+
+<hr>
+
+<h2>context_brain</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI记忆</p>
+
+<p>&gt; 上下文管理大脑 — 事件记录·任务前注入·压力监控·自动清理·防溢出</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>pressure</code></td><td>上下文压力检测(token预算/使用率)</td></tr>
+<tr><td><code>cleanup</code></td><td>清理上下文(过期+归档+压缩)</td></tr>
+<tr><td><code>inject</code></td><td>任务前注入相关上下文(记忆+卡点+认知)</td></tr>
+<tr><td><code>record_stuck</code></td><td>记录卡点及恢复方案</td></tr>
+<tr><td><code>record_decision</code></td><td>记录关键决策</td></tr>
+<tr><td><code>auto_maintain</code></td><td>自动维护(检测→清理→记录)</td></tr>
+<tr><td><code>recent_events</code></td><td>查看最近事件日志</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>context_manage</code></li>
+<li><strong>Keywords</strong>: <code>上下文</code>, <code>context</code>, <code>记忆清理</code>, <code>压力</code>, <code>溢出</code>, <code>token</code>, <code>清理记忆</code>, <code>记录卡点</code>, <code>注入上下文</code></li>
+
+<hr>
+
+<h2>context_gate</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI</p>
+
+<p>&gt; 上下文守门人 — 本地小模型读取项目状态/日志/文件→压缩摘要→喂给主AI。零API费用，确保长时间工作上下文精准不膨胀</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>summary</code></td><td>summary</td></tr>
+<tr><td><code>brief</code></td><td>brief</td></tr>
+<tr><td><code>inject</code></td><td>inject</td></tr>
+<tr><td><code>recall</code></td><td>recall</td></tr>
+<tr><td><code>pressure</code></td><td>pressure</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>context_summary</code></li>
+<li><strong>Keywords</strong>: <code>上下文</code>, <code>摘要</code>, <code>总结</code>, <code>概括</code>, <code>压缩</code>, <code>context</code>, <code>summarize</code>, <code>回顾</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>总结当前项目状态</li>
+    <li>压缩上下文</li>
+    <li>给我一个项目概览</li>
+
+<hr>
+
+<h2>cradle_task</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 桌面域</p>
+
+<p>&gt; 持续任务托管执行</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>start</code></td><td>启动任务托管</td></tr>
+<tr><td><code>stop</code></td><td>停止托管</td></tr>
+<tr><td><code>list</code></td><td>列出托管任务</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>crypto_harvester</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; 加密钱包收割机 — BTC/ETH/SOL/MetaMask/助记词/浏览器插件/Plisio</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>scan</code></td><td>扫描文件中的加密钱包</td></tr>
+<tr><td><code>browsers</code></td><td>扫描浏览器插件钱包</td></tr>
+<tr><td><code>harvest</code></td><td>全量收割(文件+浏览器+Plisio)</td></tr>
+<tr><td><code>plisio</code></td><td>Plisio余额查询</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>crypto_harvest</code></li>
+<li><strong>Keywords</strong>: <code>加密</code>, <code>钱包</code>, <code>crypto</code>, <code>wallet</code>, <code>私钥</code>, <code>助记词</code>, <code>BTC</code>, <code>ETH</code>, <code>SOL</code>, <code>MetaMask</code></li>
+
+<hr>
+
+<h2>darknet_scanner</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 信息域</p>
+
+<p>&gt; darknet_scanner</p>
+
+<hr>
+
+<h2>data_engine</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 信息</p>
+
+<p>&gt; 数据引擎 — CSV/JSON/Excel读写/数据清洗/聚合分析/可视化/ETL管道</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>read</code></td><td>读取CSV/JSON/Excel文件返回摘要</td></tr>
+<tr><td><code>analyze</code></td><td>数据分析: 统计/分组/聚合/排序</td></tr>
+<tr><td><code>clean</code></td><td>数据清洗: 去重/填缺/格式化/过滤</td></tr>
+<tr><td><code>export</code></td><td>导出为CSV/JSON/Excel</td></tr>
+<tr><td><code>query</code></td><td>SQL风格查询 (SELECT/WHERE/GROUP BY/ORDER BY)</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>data_processing</code></li>
+<li><strong>Keywords</strong>: <code>数据</code>, <code>data</code>, <code>CSV</code>, <code>Excel</code>, <code>JSON</code>, <code>分析</code>, <code>统计</code>, <code>图表</code>, <code>清洗</code>, <code>ETL</code>, <code>pandas</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>分析CSV数据</li>
+    <li>读取Excel文件</li>
+    <li>数据清洗</li>
+
+<hr>
+
+<h2>database</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 运维</p>
+
+<p>&gt; 数据库交互 — SQLite/查询/迁移/备份 (默认 ~/.gbt/data/gbt.db)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>query</code></td><td>执行SELECT查询</td></tr>
+<tr><td><code>execute</code></td><td>执行INSERT/UPDATE/DELETE</td></tr>
+<tr><td><code>tables</code></td><td>列出所有表及行数</td></tr>
+<tr><td><code>backup</code></td><td>备份数据库到指定路径</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>database_ops</code></li>
+<li><strong>Keywords</strong>: <code>数据库</code>, <code>database</code>, <code>sqlite</code>, <code>查询</code>, <code>SQL</code>, <code>db</code>, <code>存储</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>查询数据库</li>
+    <li>执行SQL</li>
+
+<hr>
+
+<h2>deep_reasoner</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI</p>
+
+<p>&gt; 深度推理引擎 v2 · 8种推理模式: 链式/树形/对比/假设/逆向/系统/决策/创意。云端LLM+本地规则双引擎</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>reason</code></td><td>深度推理 (8模式可选)</td></tr>
+<tr><td><code>chain</code></td><td>链式推理 — A→B→C逐步推导</td></tr>
+<tr><td><code>compare</code></td><td>对比分析 — 多方案对比矩阵</td></tr>
+<tr><td><code>decide</code></td><td>决策推理 — 加权评分选最优</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>deep_reasoning</code></li>
+<li><strong>Keywords</strong>: <code>推理</code>, <code>分析</code>, <code>深思</code>, <code>深度思考</code>, <code>逻辑</code>, <code>reason</code>, <code>为什么</code>, <code>怎么办</code>, <code>方案</code>, <code>对比</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>深度分析这个问题</li>
+    <li>推理一下原因</li>
+    <li>对比两个方案</li>
+
+<hr>
+
+<h2>deep_scrape</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 信息</p>
+
+<p>&gt; 深度爬虫 — 自适应Web抓取: JS渲染/反爬对抗/分页/并发/结构化提取 (基于Scrapling框架)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>scrape</code></td><td>高级单页抓取 (JS渲染+结构化)</td></tr>
+<tr><td><code>crawl</code></td><td>多页爬取 (分页+并发)</td></tr>
+<tr><td><code>extract</code></td><td>结构化提取 (CSS选择器/XPath/自动检测)</td></tr>
+<tr><td><code>sitemap</code></td><td>自动发现站点地图和API端点</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>deep_scrape</code></li>
+<li><strong>Keywords</strong>: <code>爬虫</code>, <code>抓取</code>, <code>scrape</code>, <code>crawl</code>, <code>爬取</code>, <code>数据采集</code>, <code>JS渲染</code>, <code>反爬</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>爬取这个网站</li>
+    <li>抓取所有页面数据</li>
+
+<hr>
+
+<h2>deepfake_detector</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; 深度伪造检测·图像与视频真伪鉴别</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>detect</code></td><td>检测深度伪造内容</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>deepfake_detector</code></li>
+<li><strong>Keywords</strong>: <code>deepfake</code>, <code>伪造</code>, <code>检测</code>, <code>deep fake</code>, <code>AI生成</code></li>
+
+<hr>
+
+<h2>design_brain</h2>
+
+<p><strong>版本</strong>: 3.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI创作</p>
+
+<p>&gt; 设计大脑 — AI驱动3D渲染: 建筑设计/室内装修/ControlNet深度估计+5风格批量/美观渲染。</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>architect</code></td><td>建筑设计3D效果图</td></tr>
+<tr><td><code>interior</code></td><td>室内装修3D效果图</td></tr>
+<tr><td><code>renovate</code></td><td>翻新改造前后对比</td></tr>
+<tr><td><code>deploy_layout</code></td><td>空间规划布局3D图</td></tr>
+<tr><td><code>aesthetic</code></td><td>美观渲染增强</td></tr>
+<tr><td><code>prompt_builder</code></td><td>专业3D渲染prompt构建器</td></tr>
+<tr><td><code>style_guide</code></td><td>建筑/装修风格百科(20+10风格)</td></tr>
+<tr><td><code>controlnet_render</code></td><td>ControlNet真实渲染 — DepthAnythingV2+ControlNet+SD批量5风格</td></tr>
+<tr><td><code>controlnet_guide</code></td><td>ControlNet调优指南 — 参数+常见错误修复</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>design_visualize</code></li>
+<li><strong>Keywords</strong>: <code>设计</code>, <code>装修</code>, <code>3D</code>, <code>渲染</code>, <code>ControlNet</code>, <code>深度估计</code>, <code>效果图</code></li>
+
+<hr>
+
+<h2>desktop_master</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 桌面域</p>
+
+<p>&gt; 桌面程序autopilot+AI视觉操控</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>autopilot</code></td><td>自动驾驶模式</td></tr>
+<tr><td><code>click</code></td><td>点击元素</td></tr>
+<tr><td><code>type</code></td><td>输入文字</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>desktop_type</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 桌面域</p>
+
+<p>&gt; 桌面输入自动化</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>type</code></td><td>自动输入</td></tr>
+<tr><td><code>fill</code></td><td>自动填表</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>dev_cpu</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 设备感知层</p>
+
+<p>&gt; CPU实时状态传感器</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>status</code></td><td>获取CPU状态</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>dev_disk</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 设备感知层</p>
+
+<p>&gt; 磁盘实时状态传感器</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>status</code></td><td>获取磁盘状态</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>dev_gpu</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 设备感知层</p>
+
+<p>&gt; GPU实时状态传感器</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>status</code></td><td>获取GPU状态</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>dev_network</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 设备感知层</p>
+
+<p>&gt; 网络实时状态传感器</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>status</code></td><td>获取网络状态</td></tr>
+<tr><td><code>speed</code></td><td>获取网络速度</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>dev_os</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 设备感知层</p>
+
+<p>&gt; 操作系统信息感知</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>info</code></td><td>获取系统信息</td></tr>
+<tr><td><code>users</code></td><td>列出用户</td></tr>
+<tr><td><code>uptime</code></td><td>系统运行时间</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>dev_ports</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 设备感知层</p>
+
+<p>&gt; 端口监听状态</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>list</code></td><td>列出监听端口</td></tr>
+<tr><td><code>check</code></td><td>检查指定端口</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>dev_processes</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 设备感知层</p>
+
+<p>&gt; 进程实时监控</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>list</code></td><td>列出所有进程</td></tr>
+<tr><td><code>detail</code></td><td>进程详情</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>dev_ram</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 设备感知层</p>
+
+<p>&gt; 内存实时状态传感器</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>status</code></td><td>获取内存状态</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>device_takeover</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; 设备接管引擎 触手击穿后第一动作 文件扫描(敏感文档/凭证/钱包/浏览器数据) 摄像头接管(拍照/录像抓取攻击者) 防关机锁 证据销毁 数据回传</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>scan_files</code></td><td>全设备敏感文件扫描(凭证/钱包/浏览器/SSH/数据库)</td></tr>
+<tr><td><code>camera_capture</code></td><td>摄像头接管 拍照+录像 抓取操作者面部</td></tr>
+<tr><td><code>anti_shutdown</code></td><td>防关机锁 阻止系统关闭/重启/注销</td></tr>
+<tr><td><code>destroy_evidence</code></td><td>销毁入侵证据(历史/日志/临时文件)</td></tr>
+<tr><td><code>full_takeover</code></td><td>全自动接管 五步并发执行</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>devourer</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI记忆</p>
+
+<p>&gt; 自主吞噬进化引擎 — 每日扫描各大平台热度排名→深度学习→取长补短→注入能力→自我进化。无需提醒，自主运行。</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>scan</code></td><td>扫描全平台 — GitHub/HuggingFace/arXiv/Reddit热度排名</td></tr>
+<tr><td><code>devour</code></td><td>吞噬吸收 — 扫描→分析→深度学习→注入能力→进化</td></tr>
+<tr><td><code>daily</code></td><td>每日自主运行 — 全自动扫描+吸收+进化</td></tr>
+<tr><td><code>status</code></td><td>吞噬状态 — 查看历史扫描记录和进化统计</td></tr>
+<tr><td><code>digest</code></td><td>消化报告 — 最近吸收的知识和能力提升</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>devour_evolve</code></li>
+<li><strong>Keywords</strong>: <code>吞噬</code>, <code>进化</code>, <code>扫描</code>, <code>热度</code>, <code>排名</code>, <code>学习</code>, <code>吸收</code>, <code>自主进化</code></li>
+
+<hr>
+
+<h2>dimensional_shift</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 量子邻域</p>
+
+<p>&gt; 维度跃迁(低维→高维问题重定义)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>execute</code></td><td>执行量子能力</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>dir_buster</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 侦察域</p>
+
+<p>&gt; 目录/文件爆破扫描</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>scan</code></td><td>扫描目录</td></tr>
+<tr><td><code>brute</code></td><td>暴力扫描</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>dns_tunneler</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; dns_tunneler capability</p>
+
+<hr>
+
+<h2>docker</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 运维域</p>
+
+<p>&gt; 容器管理(Docker)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>run</code></td><td>运行容器</td></tr>
+<tr><td><code>stop</code></td><td>停止容器</td></tr>
+<tr><td><code>build</code></td><td>构建镜像</td></tr>
+<tr><td><code>ps</code></td><td>列出容器</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>email_engine</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; Auto-generated by devourer — Email通信 capability</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>run</code></td><td>Execute Email通信 task</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>email_engine</code></li>
+<li><strong>Keywords</strong>: <code>smtp</code>, <code>imap</code>, <code>email</code>, <code>mail</code>, <code>sendgrid</code></li>
+
+<hr>
+
+<h2>encryption_engine</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 安全域</p>
+
+<p>&gt; 加密/解密引擎·AES+RSA+哈希</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>encrypt</code></td><td>加密数据</td></tr>
+<tr><td><code>decrypt</code></td><td>解密数据</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>encryption_engine</code></li>
+<li><strong>Keywords</strong>: <code>encrypt</code>, <code>decrypt</code>, <code>cipher</code>, <code>AES</code>, <code>RSA</code>, <code>加密</code>, <code>解密</code>, <code>密码</code></li>
+
+<hr>
+
+<h2>entanglement_bridge</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 量子邻域</p>
+
+<p>&gt; 纠缠桥接(跨邻域数据量子通道)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>execute</code></td><td>执行量子能力</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>event_bus</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 基础设施</p>
+
+<p>&gt; 事件总线 — 文件背板 pub/sub，基于 ~/.gbt/events/</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>publish</code></td><td>发布事件到指定topic</td></tr>
+<tr><td><code>subscribe</code></td><td>订阅topic的处理规则</td></tr>
+<tr><td><code>unsubscribe</code></td><td>取消订阅</td></tr>
+<tr><td><code>list_topics</code></td><td>列出所有topic及订阅者</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>event_bus</code></li>
+<li><strong>Keywords</strong>: <code>event_bus</code>, <code>事件</code>, <code>pubsub</code>, <code>发布</code>, <code>订阅</code>, <code>topic</code>, <code>消息</code></li>
+
+<hr>
+
+<h2>file_operation</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: AI编程</p>
+
+<p>&gt; file_operation capability</p>
+
+<hr>
+
+<h2>five_sim</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; 5SIM购买临时手机号/接验证码</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>buy</code></td><td>购买临时号码</td></tr>
+<tr><td><code>sms</code></td><td>接收验证码</td></tr>
+<tr><td><code>balance</code></td><td>查询余额</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>forensic_collector</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; 取证收集器·数字证据采集与分析</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>collect</code></td><td>采集数字证据</td></tr>
+<tr><td><code>analyze</code></td><td>分析取证数据</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>forensic_collector</code></li>
+<li><strong>Keywords</strong>: <code>forensic</code>, <code>evidence</code>, <code>取证</code>, <code>证据</code>, <code>数字取证</code></li>
+
+<hr>
+
+<h2>gbt_brain</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI</p>
+
+<p>&gt; GBT自主AI大脑 v3 · 事件驱动心跳+外部触发唤醒+自适应感知→思考→行动。不等待指令,主动干活。云端+本地双模</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>start</code></td><td>start</td></tr>
+<tr><td><code>stop</code></td><td>stop</td></tr>
+<tr><td><code>think</code></td><td>think</td></tr>
+<tr><td><code>decide</code></td><td>decide</td></tr>
+<tr><td><code>status</code></td><td>status</td></tr>
+<tr><td><code>caps</code></td><td>caps</td></tr>
+<tr><td><code>resonate</code></td><td>resonate</td></tr>
+<tr><td><code>submit_task</code></td><td>submit_task</td></tr>
+<tr><td><code>autonomous</code></td><td>autonomous</td></tr>
+<tr><td><code>task</code></td><td>task</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>brain_activate</code></li>
+<li><strong>Keywords</strong>: <code>大脑</code>, <code>brain</code>, <code>思考</code>, <code>决策</code>, <code>感知</code>, <code>主动</code>, <code>自主</code>, <code>cloud brain</code>, <code>设计大脑</code>, <code>云端大脑</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>启动大脑</li>
+    <li>大脑分析一下</li>
+    <li>云端大脑思考</li>
+
+<hr>
+
+<h2>gbt_gigs</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; GBT零工市场</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>list</code></td><td>列出零工任务</td></tr>
+<tr><td><code>accept</code></td><td>接受任务</td></tr>
+<tr><td><code>complete</code></td><td>完成任务</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>gbt_writer</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 编程工具</p>
+
+<p>&gt; GBT小土豆 纯代码编写工具 — 直连 programming/generate（DeepSeek/Kimi），不拒绝不干预不反问只输出代码</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>write</code></td><td>调用GBT纯编写模式生成代码</td></tr>
+<tr><td><code>status</code></td><td>查看gbt_writer状态</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>code_writing</code></li>
+<li><strong>Keywords</strong>: <code>写代码</code>, <code>gbt</code>, <code>编写</code>, <code>生成代码</code>, <code>coding</code>, <code>code gen</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>帮我写一个Python脚本</li>
+    <li>写一个HTML页面</li>
+
+<hr>
+
+<h2>git_ops</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 代码</p>
+
+<p>&gt; Git原生操作 — 提交/推送/分支/标签/日志/差异/合并 (编程接口，不依赖shell)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>status</code></td><td>查看工作区状态</td></tr>
+<tr><td><code>commit</code></td><td>提交更改 (自动生成规范中文commit message)</td></tr>
+<tr><td><code>push</code></td><td>推送到远程</td></tr>
+<tr><td><code>pull</code></td><td>拉取远程更新</td></tr>
+<tr><td><code>branch</code></td><td>创建/列出/切换/删除分支</td></tr>
+<tr><td><code>tag</code></td><td>创建/列出标签</td></tr>
+<tr><td><code>log</code></td><td>查看提交日志</td></tr>
+<tr><td><code>diff</code></td><td>查看文件差异</td></tr>
+<tr><td><code>merge</code></td><td>合并分支</td></tr>
+<tr><td><code>clone</code></td><td>克隆仓库</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>git_ops</code></li>
+<li><strong>Keywords</strong>: <code>git</code>, <code>提交</code>, <code>commit</code>, <code>推送</code>, <code>push</code>, <code>分支</code>, <code>branch</code>, <code>合并</code>, <code>merge</code>, <code>标签</code>, <code>tag</code>, <code>日志</code>, <code>log</code>, <code>diff</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>提交代码</li>
+    <li>创建分支</li>
+    <li>查看日志</li>
+
+<hr>
+
+<h2>headroom</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 优化</p>
+
+<p>&gt; Headroom Token压缩 — 60-95% token节省/CacheAligner前缀对齐/CCR可逆压缩/跨Agent记忆 (56k stars, Rust+Rust)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>compress</code></td><td>智能压缩 — 自动检测内容类型(JSON/代码/文本)选择最优压缩器, 60-95% token节省</td></tr>
+<tr><td><code>stats</code></td><td>压缩统计 — 节省token数/压缩比/缓存命中率</td></tr>
+<tr><td><code>info</code></td><td>Headroom状态 — 安装信息/压缩器/节省预估</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>token_compression</code></li>
+<li><strong>Keywords</strong>: <code>压缩</code>, <code>compress</code>, <code>headroom</code>, <code>token节省</code>, <code>省token</code>, <code>压缩输出</code>, <code>减小上下文</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>压缩这段输出</li>
+    <li>节省token</li>
+    <li>压缩日志</li>
+
+<hr>
+
+<h2>health_dashboard</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 运维</p>
+
+<p>&gt; 健康聚合面板 — 全系统53cap状态一览/资源监控/告警</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>check</code></td><td>全系统健康检查 (53caps + 资源 + 后端)</td></tr>
+<tr><td><code>quick</code></td><td>快速检查 (仅资源+后端)</td></tr>
+<tr><td><code>caps</code></td><td>列出所有能力模块状态</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>health_check</code></li>
+<li><strong>Keywords</strong>: <code>健康</code>, <code>状态</code>, <code>面板</code>, <code>dashboard</code>, <code>health</code>, <code>诊断</code>, <code>概览</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>系统健康检查</li>
+    <li>看看所有模块状态</li>
+
+<hr>
+
+<h2>identity_forge</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; identity_forge</p>
+
+<hr>
+
+<h2>image_analysis</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 视觉</p>
+
+<p>&gt; 图片分析域 — Florence-2深度理解/OCR/分类/综合分析/图片→代码转换</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>describe</code></td><td>深度描述图片内容 (Florence-2)</td></tr>
+<tr><td><code>ocr</code></td><td>图片文字识别 (EasyOCR+Florence双引擎)</td></tr>
+<tr><td><code>classify</code></td><td>图片分类 — 场景/物体/风格识别</td></tr>
+<tr><td><code>analyze</code></td><td>综合图片分析 — 描述+文字+分类+颜色+构图</td></tr>
+<tr><td><code>to_code</code></td><td>图片→代码 — 截图/设计稿→HTML/CSS/JS/Python可运行代码</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>image_analysis</code></li>
+<li><strong>Keywords</strong>: <code>图片</code>, <code>图像</code>, <code>照片</code>, <code>分析图片</code>, <code>识别图片</code>, <code>看图</code>, <code>识图</code>, <code>截图转代码</code>, <code>设计稿转代码</code>, <code>vision</code>, <code>image</code>, <code>to code</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>分析这张图</li>
+    <li>图片里有什么</li>
+    <li>识别图中的文字</li>
+    <li>把截图转成HTML代码</li>
+
+<hr>
+
+<h2>input_sanitizer</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 安全</p>
+
+<p>&gt; 输入净化器 — 检测/清除SQL注入·XSS·路径穿越·命令注入·提示注入</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>sanitize</code></td><td>清除/替换输入中的危险模式</td></tr>
+<tr><td><code>check</code></td><td>检查输入安全等级(safe/warning/dangerous)</td></tr>
+<tr><td><code>audit</code></td><td>扫描所有cap输入是否含危险模式</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>input_sanitizer</code></li>
+<li><strong>Keywords</strong>: <code>sanitize</code>, <code>sanitizer</code>, <code>净化</code>, <code>安全检查</code>, <code>注入检测</code>, <code>input</code>, <code>防注入</code></li>
+
+<hr>
+
+<h2>jwt_tester</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; JWT令牌安全测试</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>test</code></td><td>测试JWT安全性</td></tr>
+<tr><td><code>forge</code></td><td>尝试伪造JWT</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>keylogger</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 桌面域</p>
+
+<p>&gt; keylogger capability</p>
+
+<hr>
+
+<h2>local_eye</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 感知域</p>
+
+<p>&gt; 本地视觉感知引擎，无需远端模型</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>scan</code></td><td>扫描当前屏幕状态</td></tr>
+<tr><td><code>diff</code></td><td>对比屏幕变化</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>location_tracker</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; 位置追踪·GPS+IP+WiFi多源定位</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>track</code></td><td>追踪目标位置</td></tr>
+<tr><td><code>locate</code></td><td>定位目标设备</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>location_tracker</code></li>
+<li><strong>Keywords</strong>: <code>location</code>, <code>GPS</code>, <code>track</code>, <code>位置</code>, <code>定位</code>, <code>追踪</code></li>
+
+<hr>
+
+<h2>log_analyzer</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; 日志分析·结构化解析与异常检测</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>analyze</code></td><td>分析日志内容</td></tr>
+<tr><td><code>search</code></td><td>搜索日志条目</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>log_analyzer</code></li>
+<li><strong>Keywords</strong>: <code>log</code>, <code>日志</code>, <code>分析</code>, <code>error log</code>, <code>syslog</code></li>
+
+<hr>
+
+<h2>memory</h2>
+
+<p><strong>版本</strong>: 2.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI</p>
+
+<p>&gt; 记忆系统 v2 — AI持久记忆(TTL/搜索/命名空间/统计)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>save</code></td><td>保存记忆 (支持 ttl_sec 过期时间)</td></tr>
+<tr><td><code>recall</code></td><td>回忆指定key或列出所有</td></tr>
+<tr><td><code>search</code></td><td>搜索记忆 (匹配key和value)</td></tr>
+<tr><td><code>delete</code></td><td>删除指定key的记忆</td></tr>
+<tr><td><code>clear</code></td><td>清空全部记忆或指定命名空间</td></tr>
+<tr><td><code>stats</code></td><td>记忆统计 (数量/大小/命名空间)</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>memory</code></li>
+<li><strong>Keywords</strong>: <code>记忆</code>, <code>memory</code>, <code>记录</code>, <code>回忆</code>, <code>搜索记忆</code>, <code>删除记忆</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>保存记忆</li>
+    <li>回忆一下</li>
+    <li>搜索记忆</li>
+
+<hr>
+
+<h2>memory_dumper</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; memory_dumper capability</p>
+
+<hr>
+
+<h2>metrics_exporter</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 运维域</p>
+
+<p>&gt; Prometheus指标导出器 — /metrics /json /push</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>metrics</code></td><td>返回Prometheus text/plain指标</td></tr>
+<tr><td><code>json</code></td><td>返回JSON格式指标</td></tr>
+<tr><td><code>push</code></td><td>推送至Prometheus Pushgateway</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>migration</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 基础设施</p>
+
+<p>&gt; 数据库迁移 — schema版本管理/迁移/回滚</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>init</code></td><td>初始化迁移表</td></tr>
+<tr><td><code>create</code></td><td>创建新迁移文件</td></tr>
+<tr><td><code>migrate</code></td><td>运行待处理的迁移</td></tr>
+<tr><td><code>rollback</code></td><td>回滚最近一次迁移</td></tr>
+<tr><td><code>status</code></td><td>查看迁移状态</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>migration</code></li>
+<li><strong>Keywords</strong>: <code>migration</code>, <code>迁移</code>, <code>schema</code>, <code>版本</code>, <code>升级数据库</code></li>
+
+<hr>
+
+<h2>mind_visual</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI</p>
+
+<p>&gt; 全能思维可视化 — 自然语言→思维导图/流程图/架构图/UML/手绘风/ASCII/Mermaid/Markmap/DrawIO/Excalidraw, 导出PNG/SVG/HTML</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>mindmap</code></td><td>生成思维导图 — Markmap/HTML交互式, 可导出PNG/SVG</td></tr>
+<tr><td><code>flowchart</code></td><td>生成流程图 — Mermaid格式, 可渲染为PNG</td></tr>
+<tr><td><code>mermaid</code></td><td>生成Mermaid图 — 架构图/时序图/类图/ER图/甘特图</td></tr>
+<tr><td><code>ascii</code></td><td>生成ASCII终端图 — 直接在终端渲染的树形图</td></tr>
+<tr><td><code>export</code></td><td>导出为PNG/SVG/HTML文件</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>visualize_mind</code></li>
+<li><strong>Keywords</strong>: <code>思维导图</code>, <code>流程图</code>, <code>架构图</code>, <code>UML</code>, <code>脑图</code>, <code>可视化</code>, <code>draw</code>, <code>图表</code>, <code>绘制</code>, <code>生成图</code>, <code>markmap</code>, <code>mermaid</code>, <code>excalidraw</code>, <code>drawio</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>画一个项目架构图</li>
+    <li>生成思维导图</li>
+    <li>把这段文字变成脑图</li>
+
+<hr>
+
+<h2>mirror_fusion</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 量子邻域</p>
+
+<p>&gt; 镜像多维度空间(5层实验隔离) — 委托到 brain.mirror_fusion</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>execute</code></td><td>执行量子能力</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>multi_llm</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI</p>
+
+<p>&gt; 多模型网关 — 13大模型自动切换/降级/负载均衡: Kimi/DeepSeek/GPT/Claude/GLM/Qwen/Ollama本地/文心/通义/百川/星火/MiniMax/硅基流动</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>ask</code></td><td>多模型智能路由问答 (自动选最优模型)</td></tr>
+<tr><td><code>models</code></td><td>列出可用模型及状态</td></tr>
+<tr><td><code>switch</code></td><td>切换默认模型</td></tr>
+<tr><td><code>compare</code></td><td>多模型对比 — 同一问题发给多个模型</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>model_switch</code></li>
+<li><strong>Keywords</strong>: <code>模型</code>, <code>切换</code>, <code>GPT</code>, <code>Claude</code>, <code>GLM</code>, <code>文心</code>, <code>通义</code>, <code>Ollama</code>, <code>本地模型</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>切换到GPT</li>
+    <li>用本地模型回答</li>
+
+<hr>
+
+<h2>n8n_attack_chain</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; N8N全攻击链·13阶段24连发一键轰炸 + N8N工作流导出</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>bombard</code></td><td>一键轰炸·全攻击链并发执行</td></tr>
+<tr><td><code>generate</code></td><td>生成N8N工作流JSON</td></tr>
+<tr><td><code>export</code></td><td>导出N8N工作流+直接轰炸</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>n8n_attack</code></li>
+<li><strong>Keywords</strong>: <code>轰炸</code>, <code>attack chain</code>, <code>攻击链</code>, <code>n8n</code>, <code>bombard</code>, <code>全链路</code></li>
+
+<hr>
+
+<h2>net_sniffer</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 侦察域</p>
+
+<p>&gt; 网络流量嗅探分析</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>start</code></td><td>开始嗅探</td></tr>
+<tr><td><code>stop</code></td><td>停止嗅探</td></tr>
+<tr><td><code>analyze</code></td><td>分析流量</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>omni_eye</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 感知域</p>
+
+<p>&gt; UIA直接遍历桌面所有窗口元素，返回name/state/rect结构化数据</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>see</code></td><td>遍历桌面所有窗口元素</td></tr>
+<tr><td><code>focus</code></td><td>聚焦指定窗口</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>osint_aggregator</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 侦察域</p>
+
+<p>&gt; OSINT情报聚合·公开信息收集与关联</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>aggregate</code></td><td>聚合多方情报数据</td></tr>
+<tr><td><code>search</code></td><td>搜索公开信息源</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>osint_aggregator</code></li>
+<li><strong>Keywords</strong>: <code>OSINT</code>, <code>intelligence</code>, <code>情报</code>, <code>公开信息</code>, <code>开源情报</code></li>
+
+<hr>
+
+<h2>osint_master</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 侦察域</p>
+
+<p>&gt; 综合OSINT开源情报收集 — 对标SpiderFoot/Maltego，集成搜索引擎/Shodan/DNS/社交/泄露库/邮箱多源情报</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>search</code></td><td>多引擎情报搜索: Google dorking + Shodan + crt.sh + Wayback Machine 四源聚合</td></tr>
+<tr><td><code>dns</code></td><td>完整DNS侦察: A/AAAA/MX/NS/TXT/SOA/CNAME 全记录集 + 区域传送尝试</td></tr>
+<tr><td><code>social</code></td><td>社交媒体档案检索: Twitter/X + GitHub + LinkedIn + 头像反查</td></tr>
+<tr><td><code>breach</code></td><td>泄露数据库检查: HaveIBeenPwned API v3 邮箱/域名泄露 + 密码暴露</td></tr>
+<tr><td><code>email</code></td><td>邮箱OSINT综合: hunter.io 模式生成 + 邮箱验证 + 来源追踪</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>osint_recon</code></li>
+<li><strong>Keywords</strong>: <code>osint</code>, <code>情报</code>, <code>社工</code>, <code>调查</code>, <code>背景调查</code>, <code>邮箱查询</code>, <code>social engineering</code>, <code>开源情报</code>, <code>侦查</code>, <code>recon</code>, <code>泄露</code>, <code>breach</code>, <code>whois</code>, <code>dns侦察</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>帮我对这个域名做OSINT情报收集</li>
+    <li>查一下这个邮箱的泄露记录</li>
+    <li>社工调查这个用户名</li>
+    <li>对目标做开源情报侦察</li>
+
+<hr>
+
+<h2>packet_crafter</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; 网络包构造·自定义数据包生成与注入</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>craft</code></td><td>构造网络数据包</td></tr>
+<tr><td><code>send</code></td><td>发送构造的数据包</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>packet_crafter</code></li>
+<li><strong>Keywords</strong>: <code>packet</code>, <code>craft</code>, <code>scapy</code>, <code>网络包</code>, <code>数据包</code>, <code>注入</code></li>
+
+<hr>
+
+<h2>payment_gateway</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: AI编程</p>
+
+<p>&gt; payment_gateway capability</p>
+
+<hr>
+
+<h2>pentest_kali</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; Kali Linux容器化渗透测试工具链 — 对标PentAGI, 集成20+安全工具</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>pull</code></td><td>拉取Kali Linux Docker镜像</td></tr>
+<tr><td><code>run</code></td><td>在Kali容器中执行任意工具</td></tr>
+<tr><td><code>scan</code></td><td>一键综合扫描: nmap+nuclei+sqlmap+dirb</td></tr>
+<tr><td><code>exploit</code></td><td>Metasploit自动化利用</td></tr>
+<tr><td><code>tools</code></td><td>列出所有可用Kali工具</td></tr>
+<tr><td><code>status</code></td><td>Kali容器状态检查</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>kali_pentest</code></li>
+<li><strong>Keywords</strong>: <code>kali</code>, <code>nmap</code>, <code>metasploit</code>, <code>nuclei</code>, <code>sqlmap</code>, <code>容器渗透</code>, <code>docker kali</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>用Kali扫描目标</li>
+    <li>启动Metasploit</li>
+    <li>Kali容器渗透</li>
+
+<hr>
+
+<h2>phishing_engine</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; 钓鱼邮件生成·AI辅助社会工程邮件</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>generate</code></td><td>生成钓鱼邮件内容</td></tr>
+<tr><td><code>send</code></td><td>发送钓鱼邮件</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>phishing_engine</code></li>
+<li><strong>Keywords</strong>: <code>phishing</code>, <code>钓鱼</code>, <code>邮件</code>, <code>social engineering</code>, <code>社工</code></li>
+
+<hr>
+
+<h2>plugin_loader</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 基础设施</p>
+
+<p>&gt; 插件加载器 — 扫描/加载/卸载/重载cap插件，支持plugin.json清单</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>list</code></td><td>扫描caps/目录列出所有插件</td></tr>
+<tr><td><code>load</code></td><td>加载指定插件</td></tr>
+<tr><td><code>unload</code></td><td>卸载指定插件</td></tr>
+<tr><td><code>reload</code></td><td>重载所有已加载插件</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>plugin_loader</code></li>
+<li><strong>Keywords</strong>: <code>plugin</code>, <code>插件</code>, <code>加载</code>, <code>卸载</code>, <code>重载</code>, <code>模块</code></li>
+
+<hr>
+
+<h2>ponytail</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 编程域</p>
+
+<p>&gt; Ponytail懒人开发 · 85K⭐ AI编程技能。六阶梯决策: 不写→复用→标准库→原生→现有依赖→一行代码。54%更少代码，100%安全。</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>ladder</code></td><td>六阶梯决策: 判断代码是否真的需要写</td></tr>
+<tr><td><code>audit</code></td><td>审计现有代码找出可简化的部分</td></tr>
+<tr><td><code>principles</code></td><td>输出Ponytail核心原则</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>port_scanner</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 侦察域</p>
+
+<p>&gt; TCP/UDP端口探测</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>scan</code></td><td>扫描端口</td></tr>
+<tr><td><code>tcp</code></td><td>TCP端口扫描</td></tr>
+<tr><td><code>udp</code></td><td>UDP端口扫描</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>precision_scrape</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 信息</p>
+
+<p>&gt; 精准抓取 — 网页数据提取</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>scrape</code></td><td>抓取网页</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>scrape</code></li>
+<li><strong>Keywords</strong>: <code>抓取</code>, <code>爬虫</code>, <code>scrape</code>, <code>提取</code>, <code>爬</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>抓取网页数据</li>
+
+<hr>
+
+<h2>process_injector</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; process_injector capability</p>
+
+<hr>
+
+<h2>programming</h2>
+
+<p><strong>版本</strong>: 2.1.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI</p>
+
+<p>&gt; 最强AI编程助手 — 融合Claude/GPT-5/DeepSeek V4编程策略 + superpowers-zh中国原创方法论（9种编程能力）</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>generate</code></td><td>AI代码生成 — Claude级: 先思后写 + 完整实现 + 边界处理 + 安全防护</td></tr>
+<tr><td><code>review</code></td><td>中文代码审查 — superpowers-zh风格: [必须修复][建议修改][仅供参考]分级 + 反模式应对 + 整体总结</td></tr>
+<tr><td><code>debug</code></td><td>系统化调试 — superpowers-zh四阶段: 根因调查→模式分析→假设验证→修复根因</td></tr>
+<tr><td><code>refactor</code></td><td>代码重构 — SOLID原则 + 设计模式 + 异味分析</td></tr>
+<tr><td><code>testgen</code></td><td>测试生成 — 单元/边界/异常全覆盖 + 90%覆盖率</td></tr>
+<tr><td><code>analyze</code></td><td>架构分析 — 模式评估 + 0-100质量分 + 技术债务 + 改进路线图</td></tr>
+<tr><td><code>explain</code></td><td>代码解释 — 逐行中文解读 + 技巧/陷阱标注</td></tr>
+<tr><td><code>commit</code></td><td>[NEW] 中文提交信息 — superpowers-zh Convention Commits规范 + 动机/方案/影响范围</td></tr>
+<tr><td><code>docs</code></td><td>[NEW] 中文文档生成 — superpowers-zh排版规范: 空格/标点/术语/结构 + 告别机翻味</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>programming</code></li>
+<li><strong>Keywords</strong>: <code>编程</code>, <code>写代码</code>, <code>代码</code>, <code>审查</code>, <code>review</code>, <code>重构</code>, <code>refactor</code>, <code>调试</code>, <code>debug</code>, <code>测试</code>, <code>test</code>, <code>生成代码</code>, <code>code</code>, <code>编程能力</code>, <code>帮我写</code>, <code>生成函数</code>, <code>分析代码</code>, <code>优化</code>, <code>bug</code>, <code>修复</code>, <code>提交</code>, <code>commit</code>, <code>文档</code>, <code>docs</code>, <code>写文档</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>帮我写一个排序函数</li>
+    <li>审查这段代码</li>
+    <li>重构这个模块</li>
+    <li>写单元测试</li>
+    <li>分析项目架构</li>
+    <li>生成提交信息</li>
+    <li>写API文档</li>
+
+<hr>
+
+<h2>project_state</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI</p>
+
+<p>&gt; 项目状态追踪 — 目标/进度/决策/上下文/跑偏检测。确保长时间工作不走偏不丢失上下文</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>goal</code></td><td>设置/查看当前目标 (支持层级子目标)</td></tr>
+<tr><td><code>progress</code></td><td>查看整体进度摘要 (目标/已完成/进行中/待办)</td></tr>
+<tr><td><code>log</code></td><td>记录一条工作日志 (决策/完成/发现)</td></tr>
+<tr><td><code>checkpoint</code></td><td>保存上下文快照 (当前状态完整存档)</td></tr>
+<tr><td><code>resume</code></td><td>恢复上次工作状态 (加载最新快照)</td></tr>
+<tr><td><code>drift_check</code></td><td>跑偏检测: 当前工作是否偏离目标</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>project_tracking</code></li>
+<li><strong>Keywords</strong>: <code>进度</code>, <code>状态</code>, <code>目标</code>, <code>做了什么</code>, <code>到哪里了</code>, <code>继续</code>, <code>恢复</code>, <code>跑偏</code>, <code>上下文</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>查看项目进度</li>
+    <li>我们做到哪了</li>
+    <li>继续上次的工作</li>
+
+<hr>
+
+<h2>quantum_optimizer</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 量子邻域</p>
+
+<p>&gt; 量子优化(跨维度资源调度)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>execute</code></td><td>执行量子能力</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>quantum_reasoner</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 量子邻域</p>
+
+<p>&gt; 量子推理(叠加态多路径并行推理)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>execute</code></td><td>执行量子能力</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>rag_knowledge</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI</p>
+
+<p>&gt; 本地轻量知识库 — DuckDB向量搜索 + RAG问答 (吸收RAGLite)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>ingest</code></td><td>导入文档/代码到知识库</td></tr>
+<tr><td><code>search</code></td><td>搜索相关知识</td></tr>
+<tr><td><code>ask</code></td><td>RAG问答</td></tr>
+<tr><td><code>learn</code></td><td>自动索引项目代码</td></tr>
+<tr><td><code>status</code></td><td>知识库状态</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>knowledge_search</code></li>
+<li><strong>Keywords</strong>: <code>知识库</code>, <code>搜索</code>, <code>问答</code>, <code>索引</code>, <code>RAG</code>, <code>查找</code>, <code>检索</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>搜索项目文档</li>
+    <li>索引代码</li>
+    <li>问答</li>
+
+<hr>
+
+<h2>remote_agent</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 运维</p>
+
+<p>&gt; 远程协助 — 帮小白用户远程装软件/部署/操控桌面。用户只需双击一个脚本即可被协助</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>serve</code></td><td>启动协助服务端，等待用户连接</td></tr>
+<tr><td><code>sessions</code></td><td>列出已连接的用户会话</td></tr>
+<tr><td><code>cmd</code></td><td>向指定用户的代理发送命令(screenshot/click/type/install/exec/deploy)</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>remote_assist</code></li>
+<li><strong>Keywords</strong>: <code>远程协助</code>, <code>帮用户</code>, <code>远程安装</code>, <code>远程部署</code>, <code>remote help</code>, <code>远程桌面</code>, <code>teamviewer</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>远程帮用户装软件</li>
+    <li>远程协助用户部署</li>
+
+<hr>
+
+<h2>remote_deploy</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 运维</p>
+
+<p>&gt; 远程操控部署 — SSH连接/远程命令/文件传输/一键部署到远程生产环境</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>connect</code></td><td>测试SSH连接</td></tr>
+<tr><td><code>exec</code></td><td>远程执行命令</td></tr>
+<tr><td><code>upload</code></td><td>上传文件到远程服务器</td></tr>
+<tr><td><code>download</code></td><td>从远程服务器下载文件</td></tr>
+<tr><td><code>deploy</code></td><td>一键部署: 镜像空间打包 → 上传 → 远程解压 → 重启服务</td></tr>
+<tr><td><code>hosts</code></td><td>列出已配置的远程主机</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>remote_deploy</code></li>
+<li><strong>Keywords</strong>: <code>远程</code>, <code>部署</code>, <code>SSH</code>, <code>remote</code>, <code>deploy</code>, <code>上传</code>, <code>服务器</code>, <code>scp</code>, <code>生产环境</code>, <code>远程操控</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>部署到远程服务器</li>
+    <li>SSH连接服务器</li>
+    <li>上传文件到服务器</li>
+
+<hr>
+
+<h2>report_generator</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; 报告生成器·自动化安全报告与文档</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>generate</code></td><td>生成报告文档</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>report_generator</code></li>
+<li><strong>Keywords</strong>: <code>report</code>, <code>报告</code>, <code>generate</code>, <code>生成</code>, <code>文档</code></li>
+
+<hr>
+
+<h2>root_cause_debugger</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 诊断</p>
+
+<p>&gt; 病因定位引擎 — 按 假设 -&gt; 取证 -&gt; 复现 -&gt; 修复 -&gt; 验证 的链路调查问题并归档证据</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>plan</code></td><td>生成病因排查计划和优先假设，不做深度取证</td></tr>
+<tr><td><code>investigate</code></td><td>执行病因定位全流程，收集证据并输出根因报告</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>root_cause_debugger</code></li>
+<li><strong>Keywords</strong>: <code>病因</code>, <code>根因</code>, <code>排查</code>, <code>调试</code>, <code>debug</code>, <code>triage</code>, <code>root cause</code>, <code>repro</code>, <code>复现</code>, <code>定位问题</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>帮我找病因</li>
+    <li>排查这个报错的根因</li>
+    <li>定位为什么启动失败</li>
+    <li>系统化调试这个问题</li>
+
+<hr>
+
+<h2>screen_ocr</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 感知域</p>
+
+<p>&gt; 屏幕文字直接识别，不经过视觉模型</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>read</code></td><td>读取屏幕指定区域文字</td></tr>
+<tr><td><code>read_all</code></td><td>读取全屏文字</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>screenpipe_monitor</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 感知域</p>
+
+<p>&gt; 持续屏幕变化感知，实时监控</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>start</code></td><td>开始监控</td></tr>
+<tr><td><code>stop</code></td><td>停止监控</td></tr>
+<tr><td><code>status</code></td><td>查看状态</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>screenshot</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 感知域</p>
+
+<p>&gt; 截图备用兜底，视觉只做补证</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>capture</code></td><td>截取屏幕</td></tr>
+<tr><td><code>capture_region</code></td><td>截取指定区域</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>security_scan</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 安全域</p>
+
+<p>&gt; 密钥泄露+危险模式全面扫描</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>scan</code></td><td>全面安全扫描</td></tr>
+<tr><td><code>keys</code></td><td>扫描密钥泄露</td></tr>
+<tr><td><code>patterns</code></td><td>扫描危险模式</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>self_diagnostic</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 运维</p>
+
+<p>&gt; 自诊断系统 — 全栈健康检测/依赖检查/配置验证/一键修复建议</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>full</code></td><td>全系统诊断 (环境/依赖/配置/caps/后端/安全)</td></tr>
+<tr><td><code>quick</code></td><td>快速诊断 (仅关键项)</td></tr>
+<tr><td><code>fix</code></td><td>自动修复可修复的问题</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>self_diagnostic</code></li>
+<li><strong>Keywords</strong>: <code>诊断</code>, <code>检查</code>, <code>doctor</code>, <code>修复</code>, <code>自检</code>, <code>diagnostic</code>, <code>体检</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>系统自检</li>
+    <li>帮我看看有什么问题</li>
+    <li>全面诊断</li>
+
+<hr>
+
+<h2>self_evolve</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI</p>
+
+<p>&gt; 自进化引擎 — 6步闭环: 感知→分析→规划→执行→验证→吸收。让GBT越用越强,自动从每次任务中学习进化</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>evolve</code></td><td>evolve</td></tr>
+<tr><td><code>learn</code></td><td>learn</td></tr>
+<tr><td><code>insights</code></td><td>insights</td></tr>
+<tr><td><code>metrics</code></td><td>metrics</td></tr>
+<tr><td><code>capture</code></td><td>capture</td></tr>
+<tr><td><code>search</code></td><td>search</td></tr>
+<tr><td><code>timeline</code></td><td>timeline</td></tr>
+<tr><td><code>recall</code></td><td>recall</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>self_evolution</code></li>
+<li><strong>Keywords</strong>: <code>进化</code>, <code>evolve</code>, <code>学习</code>, <code>优化</code>, <code>自改进</code>, <code>升级</code>, <code>迭代</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>自我进化</li>
+    <li>学习这次的经验</li>
+
+<hr>
+
+<h2>skill_library</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 编程域</p>
+
+<p>&gt; 生产级工程技能库 · 融合 addyosmani/agent-skills (79k⭐)。Define→Plan→Build→Verify→Review→Ship 六阶段，24项技能+4个AI代理角色。</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>spec</code></td><td>需求定义: 先写规格再写代码</td></tr>
+<tr><td><code>plan</code></td><td>任务规划: 拆分为小型原子任务</td></tr>
+<tr><td><code>build</code></td><td>增量构建: TDD+一次一个切片</td></tr>
+<tr><td><code>test</code></td><td>验证: 测试是证明不是装饰</td></tr>
+<tr><td><code>review</code></td><td>代码审查: 五轴质量门</td></tr>
+<tr><td><code>ship</code></td><td>发布上线: 越快越安全</td></tr>
+<tr><td><code>skills</code></td><td>列出所有24项技能</td></tr>
+<tr><td><code>activate</code></td><td>根据上下文自动激活匹配技能</td></tr>
+<tr><td><code>agents</code></td><td>列出/激活专业AI代理(审查员/审计员/测试员/性能审计)</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>skillspector</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 安全</p>
+
+<p>&gt; NVIDIA SkillSpector安全扫描 — 5条核心YARA规则(Python实现): 凭据泄露/远程执行/Prompt注入/MCP中毒/自主破坏</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>scan</code></td><td>SkillSpector安全扫描 — 5条规则: 凭据外传/远程执行/Prompt注入/MCP中毒/自主破坏 + 风险评分</td></tr>
+<tr><td><code>quick</code></td><td>快速扫描 — 仅高风险规则</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>security_audit</code></li>
+<li><strong>Keywords</strong>: <code>安全扫描</code>, <code>skillspector</code>, <code>nvidia</code>, <code>漏洞扫描</code>, <code>安全检查</code>, <code>yara</code>, <code>审计skill</code>, <code>扫描skill</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>扫描skill安全</li>
+    <li>检查caps模块</li>
+    <li>NVIDIA安全审计</li>
+
+<hr>
+
+<h2>slack_bot</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; Auto-generated by devourer — Slack/Discord capability</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>run</code></td><td>Execute Slack/Discord task</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>slack_bot</code></li>
+<li><strong>Keywords</strong>: <code>slack</code>, <code>discord</code>, <code>webhook</code>, <code>bot</code></li>
+
+<hr>
+
+<h2>smart_scheduler</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 运维域</p>
+
+<p>&gt; 智能任务调度</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>schedule</code></td><td>调度任务</td></tr>
+<tr><td><code>list</code></td><td>列出调度</td></tr>
+<tr><td><code>cancel</code></td><td>取消调度</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>social_engineer</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; 社会工程攻击·目标画像与社工策略</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>profile</code></td><td>构建目标画像</td></tr>
+<tr><td><code>attack</code></td><td>执行社会工程攻击</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>social_engineer</code></li>
+<li><strong>Keywords</strong>: <code>social engineer</code>, <code>社工</code>, <code>社会工程</code>, <code>profile</code>, <code>pretext</code></li>
+
+<hr>
+
+<h2>sqli_tester</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; SQL注入自动检测(时间盲注/布尔/报错注入)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>test</code></td><td>测试SQL注入点</td></tr>
+<tr><td><code>blind</code></td><td>时间盲注检测</td></tr>
+<tr><td><code>error</code></td><td>报错注入检测</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>state_space</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 元邻域</p>
+
+<p>&gt; 状态空间搜索引擎 · 融合VulnClaw solve架构。Fact+Intent黑板图防原地打转 + 证据反幻觉闸门 + L0-L4渐进升级。</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>init</code></td><td>初始化状态空间(origin→goal)</td></tr>
+<tr><td><code>add_fact</code></td><td>添加已确认事实到黑板</td></tr>
+<tr><td><code>propose</code></td><td>大脑提出探索方向(防重复)</td></tr>
+<tr><td><code>execute</code></td><td>执行探索方向→产出新Fact</td></tr>
+<tr><td><code>status</code></td><td>查看状态空间全貌</td></tr>
+<tr><td><code>converge</code></td><td>判断是否已达成目标</td></tr>
+<tr><td><code>anti_hallucination</code></td><td>证据级反幻觉验证</td></tr>
+<tr><td><code>escalate</code></td><td>L0-L4渐进升级策略</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>steganography</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; 隐写术·LSB+DCT信息隐藏与提取</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>encode</code></td><td>隐写编码嵌入</td></tr>
+<tr><td><code>decode</code></td><td>隐写解码提取</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>steganography</code></li>
+<li><strong>Keywords</strong>: <code>steganography</code>, <code>隐写</code>, <code>stego</code>, <code>LSB</code>, <code>hidden</code></li>
+
+<hr>
+
+<h2>stress_test</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; 压力测试/性能测试</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>run</code></td><td>运行压力测试</td></tr>
+<tr><td><code>report</code></td><td>生成测试报告</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>strix</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; 综合渗透测试框架</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>test</code></td><td>综合渗透测试</td></tr>
+<tr><td><code>exploit</code></td><td>漏洞利用</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>sub_agent_mgr</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 调度编排</p>
+
+<p>&gt; 无限制子代理隔离执行层 — 独立进程+思维导图+证据链</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>spawn</code></td><td>生成子代理+LLM生成思维导图+立即执行</td></tr>
+<tr><td><code>execute</code></td><td>执行已生成的代理（断点续跑）</td></tr>
+<tr><td><code>mindmap_preview</code></td><td>只预览思维导图，不执行</td></tr>
+<tr><td><code>status</code></td><td>查询所有子代理状态</td></tr>
+<tr><td><code>evidence</code></td><td>获取完整证据链（每步输出）</td></tr>
+<tr><td><code>kill</code></td><td>终止指定子代理</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>sub_agent</code></li>
+<li><strong>Keywords</strong>: <code>子代理</code>, <code>spawn</code>, <code>多步任务</code>, <code>隔离执行</code>, <code>agent</code>, <code>思维导图</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>生成子代理执行任务</li>
+    <li>查看子代理状态</li>
+
+<hr>
+
+<h2>subdomain_enum</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 侦察域</p>
+
+<p>&gt; DNS子域名枚举</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>enum</code></td><td>枚举子域名</td></tr>
+<tr><td><code>brute</code></td><td>暴力枚举子域名</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>superposition_planner</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 量子邻域</p>
+
+<p>&gt; 叠加态规划(多方案同时推演)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>execute</code></td><td>执行量子能力</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>sys_control</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 桌面域</p>
+
+<p>&gt; 16类跨平台系统操控(键鼠/窗口/进程/防火墙)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>control</code></td><td>执行系统操控</td></tr>
+<tr><td><code>keyboard</code></td><td>键盘操控</td></tr>
+<tr><td><code>mouse</code></td><td>鼠标操控</td></tr>
+<tr><td><code>window</code></td><td>窗口操控</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>system_backup</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 系统维护</p>
+
+<p>&gt; 系统备份恢复 — 备份~/.gbt/及caps/ · 恢复 · 列表 · 清理</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>backup</code></td><td>备份~/.gbt/和caps/目录到zip</td></tr>
+<tr><td><code>restore</code></td><td>从备份zip恢复</td></tr>
+<tr><td><code>list</code></td><td>列出所有可用备份</td></tr>
+<tr><td><code>cleanup</code></td><td>保留最近N个备份，删除旧备份</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>system_backup</code></li>
+<li><strong>Keywords</strong>: <code>备份</code>, <code>backup</code>, <code>恢复</code>, <code>restore</code>, <code>系统备份</code>, <code>数据备份</code>, <code>还原</code></li>
+
+<hr>
+
+<h2>task_mind</h2>
+
+<p><strong>版本</strong>: 2.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: AI推理</p>
+
+<p>&gt; 任务思维导图引擎 — 将任何任务分解为精细到分钟级的执行步骤，生成思维导图/流程图/检查清单，每步都有具体的执行方法和验收标准。</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>plan</code></td><td>任务规划 — 分解为精细步骤(分钟级)，生成思维导图JSON</td></tr>
+<tr><td><code>mindmap</code></td><td>生成Mermaid思维导图 — 可视化任务结构</td></tr>
+<tr><td><code>flowchart</code></td><td>生成Mermaid流程图 — 决策分支+执行路径</td></tr>
+<tr><td><code>checklist</code></td><td>生成执行检查清单 — 每步可勾选</td></tr>
+<tr><td><code>ascii_tree</code></td><td>生成ASCII树形图 — 纯文本可打印</td></tr>
+<tr><td><code>gantt</code></td><td>生成甘特图时间线 — 预估每步耗时</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>task_planning</code></li>
+<li><strong>Keywords</strong>: <code>思维导图</code>, <code>任务分解</code>, <code>规划</code>, <code>计划</code>, <code>步骤</code>, <code>流程图</code>, <code>检查清单</code>, <code>甘特图</code>, <code>mindmap</code>, <code>怎么做</code>, <code>如何执行</code>, <code>拆分任务</code>, <code>分解</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>帮我规划这个项目的执行步骤</li>
+    <li>把这个任务分解成思维导图</li>
+    <li>生成这个开发任务的检查清单</li>
+    <li>给我一个详细的任务流程图</li>
+
+<hr>
+
+<h2>telegram</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 信息域</p>
+
+<p>&gt; Telegram Bot接口</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>send</code></td><td>发送消息</td></tr>
+<tr><td><code>read</code></td><td>读取消息</td></tr>
+<tr><td><code>listen</code></td><td>监听频道</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>tg_client</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 信息域</p>
+
+<p>&gt; Telethon真人TG账号(无Bot限制)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>login</code></td><td>登录账号</td></tr>
+<tr><td><code>send</code></td><td>发送消息</td></tr>
+<tr><td><code>search</code></td><td>搜索群组</td></tr>
+<tr><td><code>join</code></td><td>加入群组</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>threat_hunter</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 特殊域</p>
+
+<p>&gt; 威胁狩猎·主动威胁搜索与IOC匹配</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>hunt</code></td><td>主动搜索威胁</td></tr>
+<tr><td><code>analyze</code></td><td>分析威胁指标</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>threat_hunter</code></li>
+<li><strong>Keywords</strong>: <code>threat hunt</code>, <code>威胁狩猎</code>, <code>IOC</code>, <code>APT</code>, <code>威胁</code></li>
+
+<hr>
+
+<h2>tracer</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 基础设施</p>
+
+<p>&gt; 分布式追踪 — span级执行追踪·调用树还原·耗时统计</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>start_trace</code></td><td>开启追踪span，返回trace_id</td></tr>
+<tr><td><code>end_trace</code></td><td>结束span，记录耗时</td></tr>
+<tr><td><code>get_trace</code></td><td>获取完整追踪树</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>tracer</code></li>
+<li><strong>Keywords</strong>: <code>trace</code>, <code>tracer</code>, <code>追踪</code>, <code>span</code>, <code>调用链</code>, <code>耗时</code></li>
+
+<hr>
+
+<h2>translator</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 信息</p>
+
+<p>&gt; AI翻译引擎 — DeepL API + LibreTranslate 双引擎翻译/语言检测/语言列表</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>translate</code></td><td>翻译文本 (DeepL → LibreTranslate)</td></tr>
+<tr><td><code>detect_language</code></td><td>检测文本语言</td></tr>
+<tr><td><code>list_languages</code></td><td>列出支持的翻译语言</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>translator</code></li>
+<li><strong>Keywords</strong>: <code>翻译</code>, <code>translate</code>, <code>deepl</code>, <code>libretranslate</code>, <code>语言检测</code>, <code>多语言</code>, <code>translator</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>翻译这段文字</li>
+    <li>检测语言</li>
+    <li>支持哪些语言</li>
+
+<hr>
+
+<h2>video_edit</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 媒体域</p>
+
+<p>&gt; 视频编辑(转录/打包/时间线/渲染/调色/Manim)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>edit</code></td><td>编辑视频</td></tr>
+<tr><td><code>transcribe</code></td><td>转录</td></tr>
+<tr><td><code>render</code></td><td>渲染</td></tr>
+<tr><td><code>timeline</code></td><td>时间线编辑</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>video_gen</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 媒体域</p>
+
+<p>&gt; LTX-2 22B DiT音视频同步生成(8种模式)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>generate</code></td><td>生成视频</td></tr>
+<tr><td><code>modes</code></td><td>列出8种模式</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>voice_clone</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: AI创作</p>
+
+<p>&gt; 语音克隆·Coqui+Edge+pyttsx3三引擎</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>clone</code></td><td>克隆目标语音</td></tr>
+<tr><td><code>speak</code></td><td>合成语音输出</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>voice_clone</code></li>
+<li><strong>Keywords</strong>: <code>voice</code>, <code>clone</code>, <code>语音</code>, <code>克隆</code>, <code>TTS</code>, <code>Coqui</code>, <code>speech</code></li>
+
+<hr>
+
+<h2>voice_speak</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 桌面</p>
+
+<p>&gt; 语音播报 — TTS文字转语音</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>speak</code></td><td>播报文字</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>speak</code></li>
+<li><strong>Keywords</strong>: <code>说话</code>, <code>语音</code>, <code>播报</code>, <code>speak</code>, <code>tts</code>, <code>朗读</code>, <code>念</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>说句话</li>
+    <li>朗读这段文字</li>
+
+<hr>
+
+<h2>waf_bypass</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; WAF绕过(大小写/编码/分块)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>bypass</code></td><td>尝试绕过WAF</td></tr>
+<tr><td><code>encode</code></td><td>编码变形绕过</td></tr>
+<tr><td><code>chunk</code></td><td>分块传输绕过</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>waveform_collapse</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 量子邻域</p>
+
+<p>&gt; 波函数坍缩(多路径→最优路径)</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>execute</code></td><td>执行量子能力</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>web_search</h2>
+
+<p><strong>版本</strong>: 1.0.0 | <strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 信息</p>
+
+<p>&gt; 网页搜索 — 搜索引擎查询</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>search</code></td><td>搜索</td></tr>
+
+</tbody></table>
+<h3>Triggers</h3>
+
+<li><strong>Intent</strong>: <code>search</code></li>
+<li><strong>Keywords</strong>: <code>搜索</code>, <code>查找</code>, <code>search</code>, <code>google</code>, <code>百度</code>, <code>bing</code></li>
+<li><strong>Examples</strong>:</li>
+    <li>搜索一下</li>
+
+<hr>
+
+<h2>wifi_scanner</h2>
+
+<p><strong>风险</strong>: <code>medium</code> | <strong>分类</strong>: 侦察域</p>
+
+<p>&gt; wifi_scanner capability</p>
+
+<hr>
+
+<h2>win_control</h2>
+
+<p><strong>风险</strong>: <code>safe</code> | <strong>分类</strong>: 桌面域</p>
+
+<p>&gt; Windows原生16类操控</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>control</code></td><td>Windows原生操控</td></tr>
+<tr><td><code>registry</code></td><td>注册表操作</td></tr>
+
+</tbody></table>
+<hr>
+
+<h2>xss_tester</h2>
+
+<p><strong>风险</strong>: <code>dangerous</code> | <strong>分类</strong>: 攻击域</p>
+
+<p>&gt; XSS跨站脚本检测</p>
+
+<h3>Actions</h3>
+
+<table><thead><tr>
+<th>Action</th><th>Description</th>
+</tr></thead><tbody>
+<tr><td><code>test</code></td><td>测试XSS注入点</td></tr>
+<tr><td><code>reflected</code></td><td>反射型XSS检测</td></tr>
+<tr><td><code>stored</code></td><td>存储型XSS检测</td></tr>
+
+</tbody></table>
+<hr>
+
+<script src="/nav-footer.js?v=2"></script>
+</body>
+</html>

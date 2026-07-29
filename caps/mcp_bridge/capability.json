@@ -1,0 +1,38 @@
+{
+  "name": "mcp_bridge",
+  "version": "1.0.0",
+  "description": "GBT↔MCP通用桥接 — 连接所有Model Context Protocol服务(Claude生态顶级能力)",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": true,
+  "category": "AI协作",
+  "entry": {
+    "program": "python",
+    "args": ["run.py"]
+  },
+  "actions": {
+    "list_tools": {
+      "description": "列出某MCP服务的全部可用工具",
+      "input": "args",
+      "timeout_ms": 15000,
+      "output": "json"
+    },
+    "call_tool": {
+      "description": "调用MCP工具 — Context7/GitHub/Firecrawl/Stripe/Playwright等",
+      "input": "args",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "list_servers": {
+      "description": "列出所有已配置的MCP服务器及状态",
+      "input": "args",
+      "timeout_ms": 10000,
+      "output": "json"
+    }
+  },
+  "triggers": {
+    "keywords": ["mcp", "context7", "firecrawl", "stripe mcp", "github mcp", "playwright mcp", "web scrape", "real docs"],
+    "intent": "mcp_bridge",
+    "examples": ["用Context7查最新React文档", "用Firecrawl抓这个页面", "列出所有MCP工具"]
+  }
+}

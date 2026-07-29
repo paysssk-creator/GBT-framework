@@ -1,0 +1,47 @@
+{
+  "name": "deep_reasoner",
+  "version": "1.0.0",
+  "description": "深度推理引擎 v2 · 8种推理模式: 链式/树形/对比/假设/逆向/系统/决策/创意。云端LLM+本地规则双引擎",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "推理",
+      "分析",
+      "深思",
+      "深度思考",
+      "逻辑",
+      "reason",
+      "为什么",
+      "怎么办",
+      "方案",
+      "对比"
+    ],
+    "intent": "deep_reasoning",
+    "examples": [
+      "深度分析这个问题",
+      "推理一下原因",
+      "对比两个方案"
+    ]
+  },
+  "actions": {
+    "reason": {
+      "description": "深度推理 (8模式可选)",
+      "args": [
+        "--action",
+        "reason"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    }
+  }
+}

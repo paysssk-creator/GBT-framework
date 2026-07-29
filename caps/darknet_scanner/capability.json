@@ -1,0 +1,16 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "darknet_scanner",
+  "version": "1.0.0",
+  "description": "darknet_scanner",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "信息域",
+  "tier": "ready",
+  "actions": {
+    "scan": {
+      "description": "暗网扫描"
+    }
+  },
+  "auto_exec": false
+}

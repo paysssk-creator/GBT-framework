@@ -1,0 +1,44 @@
+{
+  "name": "database",
+  "version": "1.0.0",
+  "description": "数据库交互 — SQLite/查询/迁移/备份 (默认 ~/.gbt/data/gbt.db)",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "运维",
+  "entry": { "program": "python", "args": ["run.py"] },
+  "triggers": {
+    "keywords": ["数据库", "database", "sqlite", "查询", "SQL", "db", "存储"],
+    "intent": "database_ops",
+    "examples": ["查询数据库", "执行SQL"]
+  },
+  "actions": {
+    "query": {
+      "description": "执行SELECT查询",
+      "args": ["--action", "query"],
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "execute": {
+      "description": "执行INSERT/UPDATE/DELETE",
+      "args": ["--action", "execute"],
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "tables": {
+      "description": "列出所有表及行数",
+      "args": ["--action", "tables"],
+      "timeout_ms": 5000,
+      "output": "json"
+    },
+    "backup": {
+      "description": "备份数据库到指定路径",
+      "args": ["--action", "backup"],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    }
+  }
+}

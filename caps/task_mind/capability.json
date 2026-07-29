@@ -1,0 +1,84 @@
+{
+  "name": "task_mind",
+  "version": "2.0.0",
+  "description": "任务思维导图引擎 — 将任何任务分解为精细到分钟级的执行步骤，生成思维导图/流程图/检查清单，每步都有具体的执行方法和验收标准。",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI推理",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "actions": {
+    "ascii_tree": {
+      "description": "生成ASCII树形图 — 纯文本可打印",
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "checklist": {
+      "description": "生成执行检查清单 — 每步可勾选",
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "decompose_auto": {
+      "description": "decompose_auto"
+    },
+    "flowchart": {
+      "description": "生成Mermaid流程图 — 决策分支+执行路径",
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "gantt": {
+      "description": "生成甘特图时间线 — 预估每步耗时",
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "langgraph_export": {
+      "description": "langgraph_export"
+    },
+    "mindmap": {
+      "description": "生成Mermaid思维导图 — 可视化任务结构",
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "plan": {
+      "description": "任务规划 — 分解为精细步骤(分钟级)，生成思维导图JSON",
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "思维导图",
+      "任务分解",
+      "规划",
+      "计划",
+      "步骤",
+      "流程图",
+      "检查清单",
+      "甘特图",
+      "mindmap",
+      "怎么做",
+      "如何执行",
+      "拆分任务",
+      "分解"
+    ],
+    "intent": "task_planning",
+    "examples": [
+      "帮我规划这个项目的执行步骤",
+      "把这个任务分解成思维导图",
+      "生成这个开发任务的检查清单",
+      "给我一个详细的任务流程图"
+    ]
+  },
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除"
+}

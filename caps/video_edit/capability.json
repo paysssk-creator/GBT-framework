@@ -1,0 +1,25 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "video_edit",
+  "version": "1.0.0",
+  "description": "视频编辑(转录/打包/时间线/渲染/调色/Manim)",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "媒体域",
+  "tier": "ready",
+  "actions": {
+    "edit": {
+      "description": "编辑视频"
+    },
+    "transcribe": {
+      "description": "转录"
+    },
+    "render": {
+      "description": "渲染"
+    },
+    "timeline": {
+      "description": "时间线编辑"
+    }
+  },
+  "auto_exec": false
+}

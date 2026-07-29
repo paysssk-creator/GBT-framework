@@ -1,0 +1,15 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "entanglement_bridge",
+  "version": "1.0.0",
+  "description": "纠缠桥接(跨邻域数据量子通道)",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "量子邻域",
+  "actions": {
+    "bridge": {
+      "description": "bridge"
+    }
+  }
+}

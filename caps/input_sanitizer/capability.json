@@ -1,0 +1,45 @@
+{
+  "id": "input_sanitizer",
+  "name": "input_sanitizer",
+  "version": "1.0.0",
+  "description": "输入净化器 — 检测/清除SQL注入·XSS·路径穿越·命令注入·提示注入",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "安全",
+  "actions": {
+    "sanitize": {
+      "description": "清除/替换输入中的危险模式"
+    },
+    "check": {
+      "description": "检查输入安全等级(safe/warning/dangerous)"
+    },
+    "audit": {
+      "description": "扫描所有cap输入是否含危险模式"
+    },
+    "sanitize_pipeline": {
+      "description": "56条规则全管道净化",
+      "timeout_ms": 30000
+    },
+    "test_injection": {
+      "description": "30种注入向量测试",
+      "timeout_ms": 60000
+    },
+    "auto_learn_rule": {
+      "description": "分析绕过尝试并建议新规则",
+      "timeout_ms": 30000
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "sanitize",
+      "sanitizer",
+      "净化",
+      "安全检查",
+      "注入检测",
+      "input",
+      "防注入"
+    ],
+    "intent": "input_sanitizer"
+  }
+}

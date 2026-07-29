@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "screenshot",
+  "version": "1.0.0",
+  "description": "截图备用兜底，视觉只做补证",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "感知域",
+  "tier": "ready",
+  "actions": {
+    "capture": {
+      "description": "截取屏幕"
+    },
+    "capture_region": {
+      "description": "截取指定区域"
+    }
+  },
+  "auto_exec": false
+}

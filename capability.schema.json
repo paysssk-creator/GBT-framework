@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gbt-xiaotudou.dev/schemas/capability.json",
+  "title": "GBT Capability Module Schema",
+  "description": "Validation schema for GBT小土豆 capability.json files. Every cap MUST conform to this schema.",
+  "type": "object",
+  "required": ["name", "version", "description", "actions"],
+  "properties": {
+    "_stamp": {
+      "type": "string",
+      "description": "Permanent developer stamp — MUST NOT be deleted"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Unique capability identifier (snake_case)"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version (e.g. 1.0.0)"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 200,
+      "description": "One-line description of what this cap does"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["python"],
+      "default": "python"
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["safe", "medium", "dangerous"],
+      "description": "safe=no side effects, medium=controllable side effects, dangerous=irreversible"
+    },
+    "auto_exec": {
+      "type": "boolean",
+      "description": "Whether brain_oversight can auto-approve this cap",
+      "default": false
+    },
+    "category": {
+      "type": "string",
+      "description": "Domain/category for routing"
+    },
+    "entry": {
+      "type": "object",
+      "properties": {
+        "program": {"type": "string", "default": "python"},
+        "args": {"type": "array", "items": {"type": "string"}, "default": ["run.py"]}
+      }
+    },
+    "actions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "description": {"type": "string"},
+          "input": {"type": "string", "enum": ["stdin", "args"]},
+          "timeout_ms": {"type": "integer", "minimum": 1000, "maximum": 600000},
+          "output": {"type": "string", "enum": ["json", "text"]}
+        },
+        "required": ["description"]
+      }
+    },
+    "triggers": {
+      "type": "object",
+      "properties": {
+        "keywords": {"type": "array", "items": {"type": "string"}},
+        "intent": {"type": "string"},
+        "examples": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "depends_on": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Other caps this one depends on"
+    }
+  }
+}

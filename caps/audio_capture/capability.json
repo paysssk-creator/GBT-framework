@@ -1,0 +1,19 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "audio_capture",
+  "version": "1.0.0",
+  "description": "audio_capture capability",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "桌面域",
+  "tier": "ready",
+  "actions": {
+    "record": {
+      "description": "record"
+    },
+    "stream": {
+      "description": "stream"
+    }
+  },
+  "auto_exec": false
+}

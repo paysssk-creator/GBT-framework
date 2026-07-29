@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GBT 设计系统 · Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   GBT Enterprise Design System v1.0
+   对标 sxl.cn / Strikingly / Linear 设计水准
+   ═══════════════════════════════════════════════ */
+
+/* ── Design Tokens ───────────────── */
+:root {
+  /* Primary */
+  --brand-purple: #7c3aed;
+  --brand-purple-light: #a78bfa;
+  --brand-purple-dark: #5b21b6;
+  --brand-cyan: #06b6d4;
+  --brand-teal: #14b8a6;
+  --brand-orange: #f97316;
+
+  /* Neutrals */
+  --gray-50: #f9fafb;  --gray-100: #f3f4f6; --gray-200: #e5e7eb;
+  --gray-300: #d1d5db; --gray-400: #9ca3af; --gray-500: #6b7280;
+  --gray-600: #4b5563; --gray-700: #374151; --gray-800: #1f2937;
+  --gray-900: #111827; --gray-950: #030712;
+
+  /* Semantic */
+  --success: #10b981; --warning: #f59e0b; --error: #ef4444; --info: #3b82f6;
+
+  /* Backgrounds (dark theme) */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #111118;
+  --bg-card: #16161f;
+  --bg-card-hover: #1c1c28;
+  --border-default: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-tertiary: #6b7280;
+
+  /* Spacing (4px base) */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px;
+  --space-4: 16px;  --space-6: 24px;  --space-8: 32px;
+  --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --space-32: 128px;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Radius */
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 24px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.5);
+  --shadow-glow-purple: 0 0 40px rgba(124,58,237,0.15);
+  --shadow-glow-cyan: 0 0 40px rgba(6,182,212,0.15);
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font-sans); background:var(--bg-primary); color:var(--text-primary); line-height:1.6; }
+.container { max-width:1280px; margin:0 auto; padding:0 var(--space-6); }
+
+/* ── Nav ── */
+.top-nav { background:rgba(17,17,24,0.8); backdrop-filter:blur(20px); border-bottom:1px solid var(--border-default); padding:var(--space-4) 0; position:sticky; top:0; z-index:50; }
+.top-nav .container { display:flex; align-items:center; justify-content:space-between; }
+.nav-brand { font-weight:800; font-size:18px; display:flex; align-items:center; gap:var(--space-2); }
+.nav-brand svg { width:24px; height:24px; }
+.nav-links { display:flex; gap:var(--space-6); }
+.nav-links a { color:var(--text-secondary); text-decoration:none; font-size:14px; font-weight:500; transition:color .15s; }
+.nav-links a:hover { color:var(--text-primary); }
+
+/* ── Page Header ── */
+.page-header { padding:var(--space-16) 0 var(--space-12); text-align:center; }
+.page-header h1 { font-size:48px; font-weight:800; letter-spacing:-0.03em; margin-bottom:var(--space-3); background:linear-gradient(135deg,var(--brand-purple-light),var(--brand-cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.page-header p { color:var(--text-secondary); font-size:18px; max-width:600px; margin:0 auto; }
+
+/* ── Section ── */
+.section { padding:var(--space-16) 0; }
+.section-title { font-size:28px; font-weight:700; margin-bottom:var(--space-8); }
+.section-subtitle { color:var(--text-secondary); font-size:15px; margin-bottom:var(--space-8); }
+
+/* ── Color Swatches ── */
+.swatch-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:var(--space-3); }
+.swatch { border-radius:var(--radius-sm); padding:var(--space-4); border:1px solid var(--border-default); }
+.swatch-preview { height:60px; border-radius:6px; margin-bottom:var(--space-2); }
+.swatch-name { font-size:13px; font-weight:600; }
+.swatch-value { font-size:11px; color:var(--text-tertiary); font-family:var(--font-mono); }
+
+/* ── Typography ── */
+.type-sample { margin-bottom:var(--space-6); }
+.type-label { font-size:11px; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:var(--space-1); }
+.type-h1 { font-size:clamp(36px,5vw,64px); font-weight:800; letter-spacing:-0.04em; line-height:1.05; }
+.type-h2 { font-size:clamp(28px,4vw,48px); font-weight:700; letter-spacing:-0.03em; line-height:1.1; }
+.type-h3 { font-size:24px; font-weight:600; letter-spacing:-0.02em; }
+.type-body { font-size:16px; color:var(--text-secondary); line-height:1.7; }
+.type-caption { font-size:13px; color:var(--text-tertiary); }
+.type-code { font-family:var(--font-mono); font-size:14px; background:var(--bg-card); padding:2px 6px; border-radius:4px; }
+
+/* ── Buttons ── */
+.btn-row { display:flex; gap:var(--space-3); flex-wrap:wrap; align-items:center; margin-bottom:var(--space-4); }
+.btn { display:inline-flex; align-items:center; gap:var(--space-2); font-family:var(--font-sans); font-weight:600; border:none; cursor:pointer; border-radius:var(--radius-sm); transition:all .2s var(--ease-out); text-decoration:none; }
+.btn-primary { background:var(--brand-purple); color:#fff; padding:12px 28px; font-size:15px; }
+.btn-primary:hover { background:#8b5cf6; transform:translateY(-1px); box-shadow:var(--shadow-glow-purple); }
+.btn-secondary { background:var(--bg-card); color:var(--text-primary); padding:12px 28px; font-size:15px; border:1px solid var(--border-default); }
+.btn-secondary:hover { border-color:var(--border-hover); background:var(--bg-card-hover); }
+.btn-ghost { background:transparent; color:var(--text-secondary); padding:10px 20px; font-size:14px; }
+.btn-ghost:hover { color:var(--text-primary); background:rgba(255,255,255,0.04); }
+.btn-sm { padding:8px 16px; font-size:13px; }
+.btn-lg { padding:16px 36px; font-size:17px; }
+.btn-danger { background:var(--error); color:#fff; }
+.btn-label { font-size:11px; color:var(--text-tertiary); margin-bottom:var(--space-1); }
+
+/* ── Cards ── */
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:var(--space-4); }
+.card { background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-md); padding:var(--space-6); transition:all .25s var(--ease-out); }
+.card:hover { border-color:var(--border-hover); background:var(--bg-card-hover); transform:translateY(-2px); box-shadow:var(--shadow-lg); }
+.card-icon { width:48px; height:48px; border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-4); font-size:22px; }
+.card-icon.purple { background:rgba(124,58,237,0.12); color:var(--brand-purple-light); }
+.card-icon.cyan { background:rgba(6,182,212,0.12); color:var(--brand-cyan); }
+.card-icon.teal { background:rgba(20,184,166,0.12); color:var(--brand-teal); }
+.card h3 { font-size:17px; font-weight:600; margin-bottom:var(--space-2); }
+.card p { font-size:14px; color:var(--text-secondary); line-height:1.6; }
+
+/* ── Tags ── */
+.tag { display:inline-flex; padding:2px 10px; border-radius:20px; font-size:12px; font-weight:500; }
+.tag-purple { background:rgba(124,58,237,0.12); color:var(--brand-purple-light); }
+.tag-cyan { background:rgba(6,182,212,0.12); color:var(--brand-cyan); }
+.tag-green { background:rgba(16,185,129,0.12); color:var(--success); }
+.tag-orange { background:rgba(249,115,22,0.12); color:var(--brand-orange); }
+
+/* ── Input ── */
+.input { background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-sm); color:var(--text-primary); font-family:var(--font-sans); font-size:15px; padding:12px 16px; width:100%; transition:border-color .15s; }
+.input:focus { outline:none; border-color:var(--brand-purple); box-shadow:0 0 0 3px rgba(124,58,237,0.15); }
+.input::placeholder { color:var(--text-tertiary); }
+
+/* ── Spacing Scale ── */
+.space-demo { display:flex; gap:var(--space-2); align-items:flex-end; margin-bottom:var(--space-4); }
+.space-bar { background:linear-gradient(180deg,var(--brand-purple),var(--brand-cyan)); border-radius:3px 3px 0 0; min-width:12px; }
+.space-label { font-size:11px; color:var(--text-tertiary); text-align:center; margin-top:var(--space-1); }
+.space-value { font-size:10px; color:var(--text-tertiary); font-family:var(--font-mono); text-align:center; }
+
+/* ── Footer ── */
+.footer { border-top:1px solid var(--border-default); padding:var(--space-8) 0; text-align:center; color:var(--text-tertiary); font-size:13px; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="container">
+    <div class="nav-brand">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="url(#g)" stroke-width="2"/><defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs></svg>
+      GBT Design System
+    </div>
+    <div class="nav-links">
+      <a href="#colors">色彩</a>
+      <a href="#typography">字体</a>
+      <a href="#buttons">按钮</a>
+      <a href="#cards">卡片</a>
+      <a href="#spacing">间距</a>
+      <a href="#inputs">输入</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-header">
+  <h1>GBT Enterprise Design System</h1>
+  <p>对标 Strikingly / Linear / Vercel — 企业级 SaaS 设计语言。所有新页面以此为唯一参考。</p>
+</header>
+
+<div class="container">
+
+<!-- ── Colors ── -->
+<section class="section" id="colors">
+  <h2 class="section-title">🎨 色彩系统</h2>
+  <p class="section-subtitle">主色 + 辅色 + 中性色 + 功能色，完整调色板。</p>
+
+  <h3 style="font-size:18px;margin-bottom:12px;">Brand Colors</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-preview" style="background:#7c3aed"></div><div class="swatch-name">Purple</div><div class="swatch-value">#7c3aed</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#a78bfa"></div><div class="swatch-name">Purple Light</div><div class="swatch-value">#a78bfa</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#5b21b6"></div><div class="swatch-name">Purple Dark</div><div class="swatch-value">#5b21b6</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#06b6d4"></div><div class="swatch-name">Cyan</div><div class="swatch-value">#06b6d4</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#14b8a6"></div><div class="swatch-name">Teal</div><div class="swatch-value">#14b8a6</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#f97316"></div><div class="swatch-name">Orange</div><div class="swatch-value">#f97316</div></div>
+  </div>
+
+  <h3 style="font-size:18px;margin:32px 0 12px;">功能色</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-preview" style="background:#10b981"></div><div class="swatch-name">Success</div><div class="swatch-value">#10b981</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#f59e0b"></div><div class="swatch-name">Warning</div><div class="swatch-value">#f59e0b</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#ef4444"></div><div class="swatch-name">Error</div><div class="swatch-value">#ef4444</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#3b82f6"></div><div class="swatch-name">Info</div><div class="swatch-value">#3b82f6</div></div>
+  </div>
+
+  <h3 style="font-size:18px;margin:32px 0 12px;">中性色 (Dark Theme)</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-preview" style="background:#0a0a0f"></div><div class="swatch-name">bg-primary</div><div class="swatch-value">#0a0a0f</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#111118"></div><div class="swatch-name">bg-secondary</div><div class="swatch-value">#111118</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#16161f;border:1px solid rgba(255,255,255,0.1)"></div><div class="swatch-name">bg-card</div><div class="swatch-value">#16161f</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#f9fafb;border:1px solid #e5e7eb"></div><div class="swatch-name">text-primary</div><div class="swatch-value">#f9fafb</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#9ca3af"></div><div class="swatch-name">text-secondary</div><div class="swatch-value">#9ca3af</div></div>
+    <div class="swatch"><div class="swatch-preview" style="background:#6b7280"></div><div class="swatch-name">text-tertiary</div><div class="swatch-value">#6b7280</div></div>
+  </div>
+</section>
+
+<!-- ── Typography ── -->
+<section class="section" id="typography">
+  <h2 class="section-title">📝 字体系统</h2>
+  <p class="section-subtitle">Inter (正文) + SF Mono (代码)。层级从 H1 到 Caption 共 4 级。</p>
+
+  <div class="type-sample">
+    <div class="type-label">Heading 1 · 64px / 800 / -0.04em</div>
+    <div class="type-h1">构建下一代 AI 平台</div>
+  </div>
+  <div class="type-sample">
+    <div class="type-label">Heading 2 · 48px / 700 / -0.03em</div>
+    <div class="type-h2">企业级部署，零运维负担</div>
+  </div>
+  <div class="type-sample">
+    <div class="type-label">Heading 3 · 24px / 600</div>
+    <div class="type-h3">专为代理商打造的批量部署方案</div>
+  </div>
+  <div class="type-sample">
+    <div class="type-label">Body · 16px / 400</div>
+    <div class="type-body">GBT 是一个 AI 驱动的开源项目企业级部署平台。开发者提交代码，AI 自动 Docker 化、加密、上线。代理商批量部署，服务客户。全自动运维，零人工干预。</div>
+  </div>
+  <div class="type-sample">
+    <div class="type-label">Caption · 13px</div>
+    <div class="type-caption">最后更新于 2026年7月 · 版本 v5.0</div>
+  </div>
+  <div class="type-sample">
+    <div class="type-label">Code · 14px SF Mono</div>
+    <div><span class="type-code">gbt deploy my-project --template ecommerce</span></div>
+  </div>
+</section>
+
+<!-- ── Buttons ── -->
+<section class="section" id="buttons">
+  <h2 class="section-title">🔘 按钮</h2>
+  <div class="btn-label">Primary</div>
+  <div class="btn-row">
+    <button class="btn btn-primary btn-lg">立即开始</button>
+    <button class="btn btn-primary">立即开始</button>
+    <button class="btn btn-primary btn-sm">立即开始</button>
+  </div>
+  <div class="btn-label" style="margin-top:16px;">Secondary</div>
+  <div class="btn-row">
+    <button class="btn btn-secondary btn-lg">了解更多</button>
+    <button class="btn btn-secondary">了解更多</button>
+    <button class="btn btn-secondary btn-sm">了解更多</button>
+  </div>
+  <div class="btn-label" style="margin-top:16px;">Ghost</div>
+  <div class="btn-row">
+    <button class="btn btn-ghost">文档</button>
+    <button class="btn btn-ghost btn-sm">定价</button>
+  </div>
+  <div class="btn-label" style="margin-top:24px;">Danger</div>
+  <div class="btn-row">
+    <button class="btn btn-danger">删除项目</button>
+  </div>
+</section>
+
+<!-- ── Cards ── -->
+<section class="section" id="cards">
+  <h2 class="section-title">🃏 卡片</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon purple">🚀</div>
+      <h3>即时部署</h3>
+      <p>提交 GitHub 链接，AI 自动 Docker 化，30秒上线。支持任何语言和框架。</p>
+      <div style="margin-top:12px;"><span class="tag tag-purple">Core</span></div>
+    </div>
+    <div class="card">
+      <div class="card-icon cyan">💰</div>
+      <h3>全球支付</h3>
+      <p>Stripe + Coinflow + 60+ 加密货币全覆盖。信用卡、稳定币、钱包支付。</p>
+      <div style="margin-top:12px;"><span class="tag tag-cyan">Payment</span></div>
+    </div>
+    <div class="card">
+      <div class="card-icon teal">🤖</div>
+      <h3>AI 运维</h3>
+      <p>自动监控、备份、更新、扩容。故障自愈，零人工干预。</p>
+      <div style="margin-top:12px;"><span class="tag tag-green">Auto</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Spacing ── -->
+<section class="section" id="spacing">
+  <h2 class="section-title">📏 间距系统</h2>
+  <p class="section-subtitle">基于 4px 基准。所有 margin/padding/gap 必须使用以下值。</p>
+  <div class="space-demo">
+    <div style="text-align:center"><div class="space-bar" style="height:4px"></div><div class="space-label">4</div><div class="space-value">--space-1</div></div>
+    <div style="text-align:center"><div class="space-bar" style="height:8px"></div><div class="space-label">8</div><div class="space-value">--space-2</div></div>
+    <div style="text-align:center"><div class="space-bar" style="height:12px"></div><div class="space-label">12</div><div class="space-value">--space-3</div></div>
+    <div style="text-align:center"><div class="space-bar" style="height:16px"></div><div class="space-label">16</div><div class="space-value">--space-4</div></div>
+    <div style="text-align:center"><div class="space-bar" style="height:24px"></div><div class="space-label">24</div><div class="space-value">--space-6</div></div>
+    <div style="text-align:center"><div class="space-bar" style="height:32px"></div><div class="space-label">32</div><div class="space-value">--space-8</div></div>
+    <div style="text-align:center"><div class="space-bar" style="height:48px"></div><div class="space-label">48</div><div class="space-value">--space-12</div></div>
+    <div style="text-align:center"><div class="space-bar" style="height:64px"></div><div class="space-label">64</div><div class="space-value">--space-16</div></div>
+    <div style="text-align:center"><div class="space-bar" style="height:96px"></div><div class="space-label">96</div><div class="space-value">--space-24</div></div>
+    <div style="text-align:center"><div class="space-bar" style="height:128px"></div><div class="space-label">128</div><div class="space-value">--space-32</div></div>
+  </div>
+</section>
+
+<!-- ── Inputs ── -->
+<section class="section" id="inputs">
+  <h2 class="section-title">⌨️ 输入框</h2>
+  <div style="max-width:400px;">
+    <div style="margin-bottom:16px;">
+      <div class="btn-label">Default</div>
+      <input class="input" placeholder="输入你的项目名称...">
+    </div>
+    <div style="margin-bottom:16px;">
+      <div class="btn-label">Focused (点击输入框看效果)</div>
+      <input class="input" placeholder="搜索开源项目...">
+    </div>
+  </div>
+</section>
+
+<!-- ── Tags ── -->
+<section class="section">
+  <h2 class="section-title">🏷️ 标签</h2>
+  <div class="btn-row">
+    <span class="tag tag-purple">Enterprise</span>
+    <span class="tag tag-cyan">New</span>
+    <span class="tag tag-green">Active</span>
+    <span class="tag tag-orange">Beta</span>
+  </div>
+</section>
+
+</div>
+
+<footer class="footer">
+  GBT Enterprise Design System v1.0 · 所有新页面请严格遵循此设计规范
+</footer>
+
+</body>
+</html>

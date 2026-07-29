@@ -1,0 +1,6 @@
+Contact: mailto:lopaycn@gmail.com
+Contact: https://github.com/paysssk-creator/GBTxiaotudouV5/issues
+Expires: 2027-07-29T00:00:00Z
+Preferred-Languages: en, zh
+Canonical: https://gbtxiaotudou.com/.well-known/security.txt
+Policy: https://gbtxiaotudou.com/privacy.html

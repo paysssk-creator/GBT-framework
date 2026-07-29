@@ -1,0 +1,35 @@
+{
+  "id": "plugin_loader",
+  "name": "plugin_loader",
+  "version": "1.0.0",
+  "description": "插件加载器 — 扫描/加载/卸载/重载cap插件，支持plugin.json清单",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "基础设施",
+  "actions": {
+    "list": {
+      "description": "扫描caps/目录列出所有插件"
+    },
+    "load": {
+      "description": "加载指定插件"
+    },
+    "unload": {
+      "description": "卸载指定插件"
+    },
+    "reload": {
+      "description": "重载所有已加载插件"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "plugin",
+      "插件",
+      "加载",
+      "卸载",
+      "重载",
+      "模块"
+    ],
+    "intent": "plugin_loader"
+  }
+}

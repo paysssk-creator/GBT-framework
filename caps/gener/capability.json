@@ -1,0 +1,68 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "gener",
+  "version": "1.0.0",
+  "description": "内容生成工具集：二维码文件/电子名片/HTML表单/Sitemap/robots.txt",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "内容生成",
+  "tier": "utility",
+  "actions": {
+    "qrcode_file": {
+      "description": "生成二维码PNG文件到磁盘",
+      "params": [
+        "text",
+        "output",
+        "box_size",
+        "border",
+        "version"
+      ]
+    },
+    "vcard": {
+      "description": "生成 vCard 电子名片(.vcf文件)",
+      "params": [
+        "name",
+        "phone",
+        "email",
+        "org",
+        "title",
+        "url",
+        "address",
+        "note",
+        "birthday",
+        "output"
+      ]
+    },
+    "form_html": {
+      "description": "根据字段定义生成HTML表单",
+      "params": [
+        "fields",
+        "title",
+        "action",
+        "method",
+        "output",
+        "css",
+        "submit_label"
+      ]
+    },
+    "sitemap": {
+      "description": "生成 sitemap.xml",
+      "params": [
+        "urls",
+        "output"
+      ]
+    },
+    "robots": {
+      "description": "生成 robots.txt",
+      "params": [
+        "user_agents",
+        "allow",
+        "disallow",
+        "sitemap",
+        "crawl_delay",
+        "output"
+      ]
+    }
+  },
+  "auto_exec": false
+}

@@ -1,0 +1,28 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "metrics_exporter",
+  "version": "1.0.0",
+  "description": "Prometheus指标导出器 — /metrics /json /push",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "运维域",
+  "tier": "core",
+  "actions": {
+    "collect_all": {
+      "description": "collect_all"
+    },
+    "json": {
+      "description": "返回JSON格式指标"
+    },
+    "metrics": {
+      "description": "返回Prometheus text/plain指标"
+    },
+    "prometheus_format": {
+      "description": "prometheus_format"
+    },
+    "trend_report": {
+      "description": "trend_report"
+    }
+  },
+  "auto_exec": false
+}

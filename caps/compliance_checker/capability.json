@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "compliance_checker",
+  "version": "1.0.0",
+  "description": "合规/审计引擎 — GDPR/SOC2/ISO 27001合规检查与代码扫描",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": false,
+  "category": "AI协作",
+  "entry": { "program": "python", "args": ["run.py"] },
+  "triggers": {
+    "keywords": ["compliance", "audit", "regulation", "gdpr", "soc2", "iso", "合规", "审计"],
+    "intent": "compliance_checker",
+    "examples": ["检查GDPR合规", "扫描代码安全风险", "列出合规标准"]
+  },
+  "actions": {
+    "check": { "description": "运行合规检查 (gdpr/soc2/iso27001)" },
+    "list": { "description": "列出支持的合规标准" },
+    "scan": { "description": "扫描代码中的合规风险" },
+    "status": { "description": "查看模块状态" }
+  }
+}

@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="GBT小土豆定价方案——从独立开发者到企业团队，按小时计费，加密即付5秒到账。$29-$299/月。">
+<meta name="theme-color" content="#000">
+<meta property="og:title" content="GBT小土豆 · 定价">
+<meta property="og:description" content="AI基础设施定价，$29-$299/月，加密即付5秒到账。Coinflow + Dodo集成。">
+<meta property="og:image" content="/logo.svg">
+<meta name="twitter:card" content="summary_large_image">
+<title>GBT小土豆 · 定价</title>
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<link rel="canonical" href="https://gbtxiaotudou.com/pricing.html">
+<style>/* ══════════════════════════════════════════════
+   GBT小土豆 · Shared Design System v5.0
+   ══════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap');
+:root {
+  /* Palette */
+  --bg: #000;
+  --bg2: #08080c;
+  --bg3: #111118;
+  --fg: #f5f5f7;
+  --dim: #86868b;
+  --accent: #ff6b35;
+  --accent2: #ff9a56;
+  --blue: #2997ff;
+  --blue2: #3b82f6;
+  --purple: #7c3aed;
+  --teal: #0d9488;
+  --green: #30d158;
+  --red: #ff4757;
+  --cyan: #06b6d4;
+  --amber: #f59e0b;
+  --violet: #8b5cf6;
+  --pink: #ec4899;
+  --indigo: #6366f1;
+  --emerald: #10b981;
+  --rose: #f43f5e;
+
+  /* Borders & Surfaces */
+  --border: rgba(255, 255, 255, .06);
+  --border-strong: rgba(255, 255, 255, .10);
+  --glass-bg: rgba(255, 255, 255, .02);
+  --glass-border: rgba(255, 255, 255, .06);
+
+  /* Radii */
+  --radius: 18px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.25);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-md: 0 4px 24px rgba(0,0,0,.4);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,.5);
+  --shadow-lift: 0 8px 32px rgba(0,0,0,.5);
+  --shadow-lift-sm: 0 8px 32px rgba(0,0,0,.3);
+  --shadow-lift-md: 0 8px 32px rgba(0,0,0,.4);
+  --shadow-card-hover: 0 12px 40px rgba(0,0,0,.4);
+  --shadow-xl: 0 16px 48px rgba(0,0,0,.45);
+  --shadow-2xl: 0 20px 60px rgba(0,0,0,.35);
+  --shadow-glow-orange: 0 0 30px rgba(255,107,53,.15);
+  --shadow-glow-teal: 0 0 30px rgba(13,148,136,.15);
+  --shadow-glow-purple: 0 0 30px rgba(124,58,237,.15);
+  --shadow-glow-blue: 0 0 30px rgba(41,151,255,.15);
+  --shadow-glow-green: 0 0 30px rgba(48,209,88,.12);
+
+  /* Typography */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Spacing Scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --space-5xl: 128px;
+
+  /* Section Rhythm */
+  --section-sm: 80px;
+  --section-md: 120px;
+  --section-lg: 160px;
+  --section-xl: 200px;
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --ease-out-quint: cubic-bezier(.22,1,.36,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-glacial: 700ms;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(circle, rgba(255,255,255,.03) 1px, transparent 1px),
+    var(--bg);
+  background-size: 20px 20px;
+  color: var(--fg);
+  font-family: var(--font);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'ss01', 'ss02';
+  letter-spacing: -.01em;
+  animation: pageIn .5s var(--ease-out-expo) both;
+}
+
+
+/* ── Skip-to-Content ─────────────── */
+.skip-link { position: absolute; top: -100px; left: 8px; z-index: 9999; }
+.skip-link:focus { top: 8px; }
+/* ── Typography ───────────────────── */
+h1, .h1 { font-size: clamp(36px, 5.5vw, 56px); font-weight: 800; letter-spacing: -.05em; line-height: 1.08; margin: 0.8em 0 0.3em; }
+h2, .h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -.025em; line-height: 1.12; margin: 0.7em 0 0.25em; }
+h3, .h3 { font-size: clamp(20px, 2.5vw, 28px); font-weight: 600; letter-spacing: -.015em; line-height: 1.25; margin: 0.6em 0 0.2em; }
+h4, .h4 { font-size: 18px; font-weight: 600; letter-spacing: -.01em; line-height: 1.35; margin: 0.5em 0 0.15em; }
+body, p, .body { font-size: 15px; color: var(--dim); line-height: 1.65; }
+
+/* ── Typography Scale ─────────────── */
+.text-xs  { font-size: 11px; line-height: 1.5; }
+.text-sm  { font-size: 13px; line-height: 1.55; }
+.text-base { font-size: 15px; line-height: 1.65; }
+.text-lg  { font-size: 17px; line-height: 1.55; }
+.text-xl  { font-size: 20px; line-height: 1.45; }
+.text-2xl { font-size: 24px; line-height: 1.35; }
+.text-3xl { font-size: 32px; line-height: 1.2; letter-spacing: -.02em; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.text-dim { color: var(--dim); }
+.text-accent { color: var(--accent); }
+.text-teal { color: var(--teal); }
+.text-purple { color: var(--purple); }
+.text-blue { color: var(--blue); }
+.text-green { color: var(--green); }
+.tracking-tight { letter-spacing: -.02em; }
+.tracking-wide { letter-spacing: .04em; text-transform: uppercase; }
+.leading-relaxed { line-height: 1.75; }
+.leading-snug { line-height: 1.35; }
+.text-balance { text-wrap: balance; }
+
+::selection { background: var(--accent); color: #fff; }
+
+
+/* ── Scrollbar ─────────────────────── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.10); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.18); }
+::-webkit-scrollbar-corner { background: transparent; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ── Nav ─────────────────────────── */
+.gbt-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(0,0,0,.82);
+  backdrop-filter: saturate(180%) blur(30px);
+  -webkit-backdrop-filter: saturate(180%) blur(30px);
+  border-bottom: 1px solid;
+  border-image: linear-gradient(90deg, transparent, rgba(255,107,53,.2), transparent) 1;
+  transition: border-image .4s ease, box-shadow .4s ease;
+}
+.gbt-nav.scrolled {
+  border-image: linear-gradient(90deg, transparent, var(--accent), transparent) 1;
+  box-shadow: 0 1px 20px rgba(255,107,53,.08);
+}
+.gbt-nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 48px; max-width: 1200px; margin: 0 auto; padding: 0 24px;
+}
+.gbt-nav-brand {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--fg); font-weight: 600; font-size: 15px;
+}
+.gbt-nav-brand svg { height: 24px; width: 24px; border-radius: 6px; }
+.gbt-nav-links { display: flex; gap: 14px; }
+.gbt-nav-links a {
+  color: var(--dim); text-decoration: none; font-size: 12px; font-weight: 500;
+  transition: color .2s;
+}
+.gbt-nav-links a:hover, .gbt-nav-links a.active { color: var(--fg); }
+
+/* ── Buttons ──────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 30px; border-radius: 28px; font-size: 15px; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all .3s cubic-bezier(.16,1,.3,1);
+  letter-spacing: -.01em; white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+  box-shadow: 0 0 20px rgba(255,107,53,.15);
+}
+.btn-primary:hover {
+  background: var(--accent2); transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(255,107,53,.3);
+}
+.btn-outline {
+  background: transparent; color: var(--fg);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(8px);
+}
+.btn-outline:hover {
+  border-color: rgba(255,255,255,.25);
+  background: rgba(255,255,255,.04);
+}
+.btn-sm {
+  padding: 8px 18px; border-radius: var(--radius); font-size: 13px; font-weight: 600;
+  text-decoration: none; background: var(--accent); color: #fff;
+  transition: all .25s cubic-bezier(.16,1,.3,1); border: none; cursor: pointer;
+}
+.btn-sm:hover { background: var(--accent2); transform: translateY(-1px); }
+.btn-green {
+  background: var(--green); color: #000;
+}
+.btn-green:hover { background: #34e062; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(48,209,88,.3); }
+.btn-teal {
+  background: var(--teal); color: #fff;
+  box-shadow: 0 0 20px rgba(13,148,136,.15);
+}
+.btn-teal:hover {
+  background: #0fb9a8; transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(13,148,136,.3);
+}
+.btn-purple {
+  background: var(--purple); color: #fff;
+  box-shadow: 0 0 20px rgba(124,58,237,.15);
+}
+.btn-purple:hover {
+  background: #8b5cf6; transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(124,58,237,.3);
+}
+.btn-lg {
+  padding: 16px 36px; border-radius: 32px; font-size: 16px;
+}
+.btn-xs {
+  padding: 6px 14px; border-radius: var(--radius); font-size: 12px;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,107,53,.2); }
+  50% { box-shadow: 0 0 40px rgba(255,107,53,.4), 0 0 80px rgba(255,107,53,.1); }
+}
+
+/* ── Animations ───────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(.9); opacity: .6; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes pageIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-in-up  { animation: fadeInUp   .7s var(--ease-out-expo) both; }
+.animate-fade-in     { animation: fadeIn      .5s var(--ease-out-expo) both; }
+.animate-slide-right { animation: slideInRight .6s var(--ease-out-expo) both; }
+.animate-scale-in    { animation: scaleIn     .5s var(--ease-out-expo) both; }
+.animate-float       { animation: float       4s ease-in-out infinite; }
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,.06) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+.stagger-1 { animation-delay: .1s; }
+.stagger-2 { animation-delay: .2s; }
+.stagger-3 { animation-delay: .3s; }
+.stagger-4 { animation-delay: .4s; }
+.stagger-5 { animation-delay: .5s; }
+
+/* ── Layout ───────────────────────── */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.section { padding: var(--section-lg) 0; }
+.section-sm  { padding: var(--section-sm) 0; }
+.section-md  { padding: var(--section-md) 0; }
+.section-lg  { padding: var(--section-lg) 0; }
+.section-xl  { padding: var(--section-xl) 0; }
+.section-label {
+  font-size: 12px; font-weight: 600; letter-spacing: 3px;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 16px;
+}
+.section h2 {
+  font-size: clamp(32px, 5vw, 52px); font-weight: 700;
+  letter-spacing: -.03em; margin-bottom: 16px; line-height: 1.1;
+}
+.section-sub {
+  color: var(--dim); font-size: 16px; max-width: 480px;
+  margin-bottom: 48px; line-height: 1.6;
+}
+.hl { color: var(--accent); }
+
+/* Utility: gradient text via background-clip */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-teal {
+  background: linear-gradient(135deg, var(--accent), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Cards ────────────────────────── */
+.card {
+  position: relative; background: rgba(255,255,255,.01);
+  border: 1px solid var(--glass-border);
+  border-top: 1px solid rgba(255,255,255,.04);
+  border-radius: var(--radius); padding: 28px;
+  transition: all .35s cubic-bezier(.16,1,.3,1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--purple), transparent);
+  border-radius: var(--radius) var(--radius) 0 0; opacity: .5;
+}
+.card:hover {
+  border-color: var(--border-strong); transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-lift);
+}
+.card:hover::before { opacity: 1; }
+
+/* Card Accent Variants */
+.card-accent::before  { background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+.card-teal::before    { background: linear-gradient(90deg, transparent, var(--teal), transparent); }
+.card-purple::before  { background: linear-gradient(90deg, transparent, var(--purple), transparent); }
+.card-blue::before    { background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+.card-green::before   { background: linear-gradient(90deg, transparent, var(--green), transparent); }
+.card-accent:hover  { box-shadow: var(--shadow-glow-orange); }
+.card-teal:hover    { box-shadow: var(--shadow-glow-teal); }
+.card-purple:hover  { box-shadow: var(--shadow-glow-purple); }
+.card-blue:hover    { box-shadow: var(--shadow-glow-blue); }
+.card-green:hover   { box-shadow: var(--shadow-glow-green); }
+
+.card-sm { padding: 20px; border-radius: var(--radius-sm); }
+.card-lg { padding: 36px; border-radius: var(--radius-lg); }
+.card-interactive { cursor: pointer; }
+.card-interactive:hover { border-color: var(--border-strong); transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-lift); }
+.card-interactive:hover::before { opacity: 1; }
+
+/* ── Footer ───────────────────────── */
+.gbt-footer {
+  padding: 64px 0 40px;
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(90deg, rgba(255,107,53,.35), rgba(41,151,255,.35), rgba(48,209,88,.35)) 1;
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(10,10,18,.97) 100%);
+}
+.gbt-footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+  margin-bottom: 40px;
+}
+.gbt-footer h5 {
+  font-size: 12px; font-weight: 600; letter-spacing: 1px;
+  color: var(--fg); margin-bottom: 12px; text-transform: uppercase;
+}
+.gbt-footer a {
+  color: var(--dim); text-decoration: none; font-size: 13px;
+  display: block; margin-bottom: 6px; line-height: 1.8;
+}
+.gbt-footer a:hover { color: var(--accent); }
+.gbt-footer-bottom {
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; justify-content: space-between; color: var(--dim);
+  font-size: 12px; flex-wrap: wrap; gap: 12px;
+}
+
+/* Back to top */
+.gbt-back-to-top {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--dim); cursor: pointer;
+  transition: all .25s ease; padding: 6px 12px;
+  border-radius: var(--radius); background: transparent;
+  border: 1px solid transparent; text-decoration: none;
+  margin-bottom: 12px;
+}
+.gbt-back-to-top svg { width: 14px; height: 14px; transition: transform .25s ease; }
+.gbt-back-to-top:hover { color: var(--accent); border-color: rgba(255,107,53,.15); }
+.gbt-back-to-top:hover svg { transform: translateY(-2px); }
+.gbt-footer-badges { display: flex; gap: 16px; flex-wrap: wrap; }
+.trust-badge {
+  font-size: 11px; padding: 5px 12px; border-radius: var(--radius);
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+  color: var(--dim); letter-spacing: .3px;
+  transition: all .25s ease; white-space: nowrap;
+}
+.trust-badge:hover {
+  border-color: rgba(48,209,88,.25);
+  color: var(--fg);
+  background: rgba(48,209,88,.06);
+}
+
+/* ── Stats Bar ────────────────────── */
+.stats { display: flex; justify-content: center; gap: 0; padding: 48px 0; flex-wrap: wrap; }
+.stat { text-align: center; padding: 0 48px; border-left: 1px solid rgba(255,255,255,.06); transition: transform .35s cubic-bezier(.16,1,.3,1); position: relative; }
+.stat:first-child { border-left: none; }
+.stat:hover { transform: translateY(-3px); }
+.stat-num { font-size: 48px; font-weight: 800; line-height: 1; transition: all .35s cubic-bezier(.16,1,.3,1); position: relative; }
+.stat-num.g { color: var(--green); text-shadow: 0 0 20px rgba(48,209,88,.15); }
+.stat-num.o { color: var(--accent); text-shadow: 0 0 20px rgba(255,107,53,.15); }
+.stat-num.b { color: var(--blue); text-shadow: 0 0 20px rgba(41,151,255,.15); }
+.stat-num.t { color: var(--teal); text-shadow: 0 0 20px rgba(13,148,136,.15); }
+.stat:hover .stat-num.g { text-shadow: 0 0 32px rgba(48,209,88,.3); }
+.stat:hover .stat-num.o { text-shadow: 0 0 32px rgba(255,107,53,.3); }
+.stat:hover .stat-num.b { text-shadow: 0 0 32px rgba(41,151,255,.3); }
+.stat:hover .stat-num.t { text-shadow: 0 0 32px rgba(13,148,136,.3); }
+.stat-label { font-size: 11px; font-weight: 500; color: var(--dim); margin-top: 8px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* ── Utility ──────────────────────── */
+.reveal { opacity: 1; transform: translateY(40px); transition: all .7s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+/* Stagger delays for card grids — 0.1s per sibling */
+.card.reveal:nth-child(1)  { transition-delay: 0s; }
+.card.reveal:nth-child(2)  { transition-delay: .1s; }
+.card.reveal:nth-child(3)  { transition-delay: .2s; }
+.card.reveal:nth-child(4)  { transition-delay: .3s; }
+.card.reveal:nth-child(5)  { transition-delay: .4s; }
+.card.reveal:nth-child(6)  { transition-delay: .5s; }
+.card.reveal:nth-child(7)  { transition-delay: .6s; }
+.card.reveal:nth-child(8)  { transition-delay: .7s; }
+.card.reveal:nth-child(9)  { transition-delay: .8s; }
+.card.reveal:nth-child(10) { transition-delay: .9s; }
+.text-center { text-align: center; }
+.mt-48 { margin-top: 48px; }
+
+/* Spacing Helpers */
+.mt-0  { margin-top: 0; }
+.mt-8  { margin-top: var(--space-sm); }
+.mt-16 { margin-top: var(--space-md); }
+.mt-24 { margin-top: var(--space-lg); }
+.mt-32 { margin-top: var(--space-xl); }
+.mt-64 { margin-top: var(--space-3xl); }
+.mb-0  { margin-bottom: 0; }
+.mb-8  { margin-bottom: var(--space-sm); }
+.mb-16 { margin-bottom: var(--space-md); }
+.mb-24 { margin-bottom: var(--space-lg); }
+.mb-32 { margin-bottom: var(--space-xl); }
+.mb-48 { margin-bottom: var(--space-2xl); }
+.mb-64 { margin-bottom: var(--space-3xl); }
+.pt-0  { padding-top: 0; }
+.pt-16 { padding-top: var(--space-md); }
+.pt-32 { padding-top: var(--space-xl); }
+.pb-0  { padding-bottom: 0; }
+.pb-16 { padding-bottom: var(--space-md); }
+.pb-32 { padding-bottom: var(--space-xl); }
+.gap-8  { gap: var(--space-sm); }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: var(--space-md); }
+.gap-24 { gap: var(--space-lg); }
+.gap-32 { gap: var(--space-xl); }
+.gap-48 { gap: var(--space-2xl); }
+
+/* Flex & Grid Helpers */
+.flex       { display: flex; }
+.flex-col   { display: flex; flex-direction: column; }
+.flex-wrap  { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); }
+
+/* Visibility */
+.hidden-mobile { }
+.hidden-desktop { }
+
+/* Misc */
+.w-full { width: 100%; }
+.relative { position: relative; }
+.overflow-hidden { overflow: hidden; }
+.rounded { border-radius: var(--radius); }
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-full { border-radius: var(--radius-full); }
+.divider { width: 100%; height: 1px; background: var(--border); margin: 48px 0; }
+
+/* ── Glass Utility ─────────────────── */
+.glass {
+  background: rgba(255, 255, 255, .006);
+  border: 1px solid rgba(255, 255, 255, .05);
+  border-top: 1px solid rgba(255,255,255,.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius);
+}
+
+/* ── Responsive ───────────────────── */
+/* ≥1200px → xl (desktop-wide) */
+/* ≥1024px → lg (desktop) */
+/* ≥768px  → md (tablet) */
+/* ≥480px  → sm (phablet) */
+/* <480px  → default (mobile-first) */
+
+/* ── Desktop-wide ── */
+@media (min-width: 1200px) {
+  .container { max-width: 1280px; }
+}
+
+/* ── Desktop (lg) ── */
+@media (max-width: 1024px) {
+  .container { padding: 0 20px; }
+  .section { padding: var(--section-md) 0; }
+  .section-xl { padding: 140px 0; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .hidden-desktop { display: none; }
+}
+
+/* ── Tablet (md) ── */
+@media (max-width: 768px) {
+  .gbt-nav-links { display: none; }
+  .gbt-footer-grid { grid-template-columns: 1fr 1fr; }
+  .stats { gap: 24px; }
+  .stat { padding: 0 24px; }
+  .section { padding: var(--section-sm) 0; }
+  .section-xl { padding: 100px 0; }
+  .container { padding: 0 16px; }
+  h1, .h1 { font-size: clamp(30px, 7vw, 38px); }
+  h2, .h2 { font-size: clamp(24px, 5.5vw, 30px); }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ── Phablet (sm) ── */
+@media (max-width: 480px) {
+  .stats { gap: 16px; }
+  .stat { padding: 0 16px; border-left: none; }
+  .section { padding: 60px 0; }
+  .section-xl { padding: 80px 0; }
+  .card { padding: 20px; }
+  .card-lg { padding: 24px; }
+  .hidden-mobile { display: none; }
+}
+
+/* ── Legal Pages ───────────────────── */
+.legal-content { max-width: 800px; margin: 0 auto; padding: 100px 24px 80px; }
+.legal-content h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 700; letter-spacing: -.02em; margin-bottom: 8px; }
+.legal-content .last-updated { color: var(--dim); font-size: 13px; margin-bottom: 40px; }
+.legal-content h2 { font-size: 22px; font-weight: 600; margin-top: 44px; margin-bottom: 14px; padding-top: 16px; border-top: 1px solid var(--border); }
+.legal-content h3 { font-size: 17px; font-weight: 600; margin-top: 28px; margin-bottom: 10px; color: var(--accent2); }
+.legal-content p { color: var(--dim); font-size: 14px; margin-bottom: 12px; line-height: 1.7; }
+.legal-content li { color: var(--dim); font-size: 14px; margin-bottom: 8px; line-height: 1.7; }
+.legal-content ul, .legal-content ol { padding-left: 24px; margin-bottom: 16px; }
+.legal-content strong { color: var(--fg); }
+.legal-content a { color: var(--accent); text-decoration: none; }
+.legal-content a:hover { text-decoration: underline; }
+.legal-content table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+.legal-content th { padding: 12px 16px; text-align: left; color: var(--fg); font-weight: 600; background: var(--bg2); border-bottom: 1px solid var(--border); }
+.legal-content td { padding: 12px 16px; color: var(--dim); border-bottom: 1px solid var(--border); }
+.legal-content code { background: var(--bg3); padding: 2px 6px; border-radius: 4px; font-size: 13px; color: var(--accent2); }
+.highlight { background: rgba(255,107,53,.08); border-left: 3px solid var(--accent); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+.highlight p { color: var(--fg); margin: 0; }
+.guarantee-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; text-align: center; margin: 32px 0; }
+.guarantee-box .g-icon { font-size: 48px; margin-bottom: 12px; }
+.guarantee-box h3 { color: var(--green); font-size: 20px; margin-top: 0; border: none; padding: 0; }
+.subtle { font-size: 12px; color: var(--dim); }
+
+@media (max-width: 768px) {
+  .legal-content { padding: 80px 20px 60px; }
+}
+
+/* ═══════════════════════════════════════════════
+   GBT Enterprise + Sci-Fi Design Extensions v5.0
+   对标 Strikingly / Vercel / Linear 设计水准
+   ═══════════════════════════════════════════════ */
+
+/* ── Glass Morphism Card ─── */
+.glass-card {
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all .3s cubic-bezier(.16,1,.3,1);
+}
+.glass-card:hover {
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.12);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 48px rgba(0,0,0,.4), 0 0 0 1px rgba(124,58,237,.1);
+}
+
+/* ── Glow Border ─── */
+.glow-border {
+  position: relative;
+}
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(124,58,237,.3), rgba(6,182,212,.3), rgba(255,107,53,.2));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity .4s cubic-bezier(.16,1,.3,1);
+}
+.glow-border:hover::after { opacity: 1; }
+
+/* ── Scan Line Overlay ─── */
+.scan-lines {
+  position: relative;
+  overflow: hidden;
+}
+.scan-lines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,.008) 2px,
+    rgba(255,255,255,.008) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Tech Grid Background ─── */
+.tech-grid {
+  background-image:
+    linear-gradient(rgba(124,58,237,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Pulsing Dot ─── */
+.pulse-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(48,209,88,.6);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(1.5); }
+}
+
+/* ── Gradient Text ─── */
+.text-gradient {
+  background: linear-gradient(135deg, #a78bfa, #06b6d4, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animated Counter ─── */
+.count-up { font-variant-numeric: tabular-nums; }
+
+/* ── Divider Glow ─── */
+.divider-glow {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124,58,237,.3), rgba(6,182,212,.3), transparent);
+  border: none;
+  margin: var(--space-16) 0;
+}
+
+/* ── Hover Lift ─── */
+.hover-lift {
+  transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Floating Animation ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.float { animation: float 6s ease-in-out infinite; }
+
+/* ── Neon Glow Text ─── */
+.neon-glow {
+  text-shadow: 0 0 20px rgba(124,58,237,.5), 0 0 40px rgba(124,58,237,.2);
+}
+
+/* ═══════════════════════════════════════════════
+   Global Enterprise Skin — 自动覆盖所有页面
+   ═══════════════════════════════════════════════ */
+
+/* 所有容器统一间距 */
+.container, .kb-wrapper, main, section > div {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 所有卡片统一样式 */
+.card, [class*="-card"], .kb-card, .faq-item, .step-card {
+  background: var(--bg-card, #111118);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  transition: all .25s cubic-bezier(.16,1,.3,1);
+}
+
+/* 所有按钮统一样式 */
+button, .btn, [class*="-btn"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+}
+
+/* 所有输入框统一 */
+input, textarea, select {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 所有标题统一 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Section 间距统一 */
+section, .section, [class*="-section"] {
+  padding: 80px 0;
+}
+@media (max-width: 768px) {
+  section, .section, [class*="-section"] { padding: 48px 0; }
+}
+
+/* 链接统一 */
+a { transition: color .15s; }
+a:hover { opacity: .85; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="/assets/gbt-3d.js" defer></script>
+<style>
+/* ═══════════════════════════════════════════════
+   GBT小土豆 · Pricing Page — Premium v6.0
+   ═══════════════════════════════════════════════ */
+:root {
+  --purple: #a855f7;
+  --purple2: #c084fc;
+  --green: #30d158;
+  --cyan: #22d3ee;
+}
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif; letter-spacing: -.01em; }
+
+/* ── Container ─────────────────────── */
+.pricing-container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* ── Hero ─────────────────────────── */
+.hero { text-align: center; padding: 160px 0 100px; position: relative; overflow: hidden; }
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, rgba(168,85,247,.06) 0%, rgba(255,107,53,.04) 35%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 18px;
+  border: 1px solid rgba(168,85,247,.25);
+  border-radius: 24px;
+  font-size: 12px; font-weight: 500;
+  color: var(--purple2);
+  margin-bottom: 20px;
+  background: rgba(168,85,247,.06);
+  backdrop-filter: blur(8px);
+  letter-spacing: .3px;
+}
+.hero-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+.hero h1 {
+  font-size: clamp(40px, 6.5vw, 64px); font-weight: 800;
+  letter-spacing: -.03em; line-height: 1.08; margin-bottom: 16px;
+}
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 45%, var(--cyan) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero p { color: var(--dim); font-size: 17px; max-width: 520px; margin: 0 auto; line-height: 1.65; }
+
+/* ── Crypto Banner ─────────────────── */
+.crypto-banner {
+  background: linear-gradient(135deg, rgba(48,209,88,.04), rgba(168,85,247,.04));
+  border: 1px solid rgba(48,209,88,.12);
+  border-radius: var(--radius);
+  padding: 36px 40px;
+  text-align: center;
+  margin-bottom: 56px;
+  position: relative;
+  overflow: hidden;
+}
+.crypto-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(48,209,88,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.crypto-banner h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; letter-spacing: -.01em; }
+.crypto-banner p { color: var(--dim); font-size: 14px; max-width: 540px; margin: 0 auto 20px; line-height: 1.65; }
+.crypto-icons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.crypto-icon {
+  padding: 7px 18px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius);
+  font-size: 12px; font-weight: 600;
+  background: rgba(255,255,255,.02);
+  color: var(--dim);
+  transition: all .25s;
+  cursor: default;
+}
+.crypto-icon:hover { border-color: rgba(255,255,255,.18); color: var(--fg); transform: translateY(-1px); }
+.crypto-icon.usdc { border-color: rgba(39,119,221,.25); color: #2775dd; }
+.crypto-icon.usdt { border-color: rgba(38,161,123,.25); color: #26a17b; }
+.crypto-icon.btc  { border-color: rgba(247,147,26,.25); color: #f7931a; }
+.crypto-icon.eth  { border-color: rgba(98,126,234,.25); color: #627eea; }
+.crypto-icon.sol  { border-color: rgba(153,69,255,.25); color: #9945ff; }
+.crypto-icon.coinflow { border-color: rgba(34,211,238,.25); color: var(--cyan); }
+.crypto-icon.dodo { border-color: rgba(255,107,53,.25); color: var(--accent); }
+
+/* ── Billing Toggle ────────────────── */
+.billing-toggle {
+  display: flex; justify-content: center; gap: 2px;
+  margin: 0 auto 52px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 5px;
+  width: fit-content;
+  position: relative;
+}
+.toggle-opt {
+  padding: 10px 32px;
+  border-radius: 11px;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer;
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+  border: none;
+  background: transparent;
+  color: var(--dim);
+  font-family: inherit;
+  position: relative;
+  z-index: 1;
+}
+.toggle-opt.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 16px rgba(255,107,53,.25);
+}
+.toggle-opt:not(.active):hover { color: var(--fg); }
+.save-badge {
+  font-size: 10px; font-weight: 700;
+  background: rgba(48,209,136,.12);
+  color: var(--green);
+  padding: 2px 8px; border-radius: 5px;
+  margin-left: 4px;
+  letter-spacing: .3px;
+}
+
+/* ── Pricing Cards ─────────────────── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 80px;
+}
+.pricing-card {
+  background: linear-gradient(180deg, rgba(255,255,255,.015) 0%, var(--bg2) 30%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 34px 28px;
+  transition: all .35s cubic-bezier(.4,0,.2,1);
+  position: relative;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.pricing-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  opacity: 0;
+  transition: opacity .35s;
+}
+.pricing-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,.12); }
+.pricing-card:hover::after { opacity: 1; }
+
+/* Card accent colors */
+.pricing-card.starter::after  { background: linear-gradient(90deg, var(--purple), var(--purple2)); }
+.pricing-card.pro::after      { background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+.pricing-card.agency::after   { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+.pricing-card.enterprise::after { background: linear-gradient(90deg, var(--green), var(--teal)); }
+
+/* Featured card */
+.pricing-card.featured {
+  border-color: rgba(168,85,247,.25);
+  background: linear-gradient(180deg, rgba(168,85,247,.06) 0%, var(--bg2) 35%);
+  box-shadow: 0 0 40px rgba(168,85,247,.06);
+}
+.pricing-card.featured::before {
+  content: 'MOST POPULAR';
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: #fff;
+  font-size: 9px; font-weight: 700; letter-spacing: 1.2px;
+  padding: 4px 16px; border-radius: 10px;
+  z-index: 2;
+  box-shadow: 0 2px 12px rgba(168,85,247,.3);
+}
+
+/* Enterprise card subtle border */
+.pricing-card.enterprise {
+  border-color: rgba(48,209,136,.15);
+}
+
+/* Card content */
+.plan-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+.plan-icon.starter-i  { background: rgba(168,85,247,.1); }
+.plan-icon.pro-i      { background: rgba(41,151,255,.1); }
+.plan-icon.agency-i   { background: rgba(255,107,53,.1); }
+.plan-icon.enterprise-i { background: rgba(48,209,136,.1); }
+
+.plan-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; letter-spacing: -.01em; }
+.plan-desc { color: var(--dim); font-size: 13px; margin-bottom: 22px; line-height: 1.45; }
+.plan-price { margin-bottom: 22px; min-height: 52px; }
+.plan-price .amount {
+  font-size: 46px; font-weight: 800;
+  letter-spacing: -.03em;
+  transition: all .35s;
+}
+.plan-price .period { font-size: 14px; color: var(--dim); font-weight: 400; }
+.plan-price .original {
+  font-size: 15px; color: var(--dim);
+  text-decoration: line-through;
+  margin-right: 6px;
+  display: inline-block;
+}
+
+/* Feature list */
+.plan-features { list-style: none; margin: 0 0 28px; flex: 1; }
+.plan-features li {
+  padding: 6px 0; font-size: 13px; color: var(--dim);
+  display: flex; align-items: center; gap: 9px;
+  line-height: 1.4;
+}
+.plan-features li .chk {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 9px; font-weight: 700;
+}
+.chk.yes { background: rgba(48,209,136,.12); color: var(--green); }
+.chk.no  { background: rgba(255,255,255,.03); color: rgba(255,255,255,.12); }
+.plan-features li.muted { color: rgba(255,255,255,.18); }
+
+/* Buttons */
+.btn-plan {
+  width: 100%; padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; border: none;
+  transition: all .25s;
+  font-family: inherit;
+  letter-spacing: -.01em;
+}
+.btn-plan.primary { background: var(--accent); color: #fff; }
+.btn-plan.primary:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 4px 24px rgba(255,107,53,.25); }
+.btn-plan.purple { background: var(--purple); color: #fff; }
+.btn-plan.purple:hover { background: #9333ea; transform: translateY(-1px); box-shadow: 0 4px 24px rgba(168,85,247,.3); }
+.btn-plan.blue { background: var(--blue); color: #fff; }
+.btn-plan.blue:hover { background: var(--blue2); transform: translateY(-1px); box-shadow: 0 4px 24px rgba(41,151,255,.3); }
+.btn-plan.green { background: var(--green); color: #000; }
+.btn-plan.green:hover { background: #34e062; transform: translateY(-1px); box-shadow: 0 4px 24px rgba(48,209,136,.3); }
+.btn-plan.outline {
+  background: transparent; color: var(--fg);
+  border: 1px solid rgba(255,255,255,.12);
+}
+.btn-plan.outline:hover { border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.03); transform: translateY(-1px); }
+
+/* ── Section Header ────────────────── */
+.section { padding: 100px 0; }
+.section-label {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 3.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.section h2 {
+  font-size: clamp(26px, 4.5vw, 42px); font-weight: 700;
+  text-align: center; margin-bottom: 10px;
+  letter-spacing: -.02em;
+}
+.section-sub {
+  color: var(--dim); font-size: 15px;
+  text-align: center; margin-bottom: 48px;
+  max-width: 500px; margin-left: auto; margin-right: auto;
+}
+
+/* ── Feature Comparison Table ──────── */
+.feat-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg2);
+}
+.feat-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13px;
+}
+.feat-table thead th {
+  padding: 14px 18px;
+  text-align: center;
+  color: var(--dim);
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  background: rgba(255,255,255,.015);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.feat-table thead th:first-child { text-align: left; padding-left: 20px; }
+.feat-table td {
+  padding: 13px 18px;
+  text-align: center;
+  color: var(--dim);
+  border-bottom: 1px solid rgba(255,255,255,.03);
+  transition: background .2s;
+}
+.feat-table td:first-child {
+  text-align: left; padding-left: 20px;
+  color: var(--fg); font-weight: 500;
+  white-space: nowrap;
+}
+.feat-table tbody tr:hover td { background: rgba(255,255,255,.015); }
+.feat-table tbody tr:last-child td { border-bottom: none; }
+.feat-table .yes { color: var(--green); font-weight: 700; font-size: 15px; }
+.feat-table .no  { color: rgba(255,255,255,.08); }
+.feat-table .hl-col { color: var(--accent) !important; font-weight: 700 !important; }
+.feat-table .hl-col-bg { background: rgba(255,107,53,.03) !important; }
+
+/* ── Competitor Comparison ─────────── */
+.vs-highlight { color: var(--accent) !important; font-weight: 700 !important; }
+.vs-section { background: var(--bg2); padding: 100px 0; }
+
+/* ── FAQ ───────────────────────────── */
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  max-width: 920px; margin: 0 auto;
+}
+.faq-item {
+  background: rgba(255,255,255,.015);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  transition: all .3s;
+  cursor: default;
+}
+.faq-item:hover {
+  border-color: rgba(255,255,255,.12);
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.025);
+}
+.faq-item h4 {
+  font-size: 15px; font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: -.01em;
+  display: flex; align-items: center; gap: 10px;
+}
+.faq-item h4 .faq-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.faq-dot.q1 { background: var(--accent); }
+.faq-dot.q2 { background: var(--green); }
+.faq-dot.q3 { background: var(--purple); }
+.faq-dot.q4 { background: var(--blue); }
+.faq-dot.q5 { background: var(--cyan); }
+.faq-dot.q6 { background: var(--teal); }
+.faq-item p { color: var(--dim); font-size: 13px; line-height: 1.65; }
+
+/* ── CTA ───────────────────────────── */
+.cta-section {
+  text-align: center;
+  padding: 120px 24px;
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(168,85,247,.04) 40%, rgba(255,107,53,.03) 70%, var(--bg) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse at center, rgba(168,85,247,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-section h2 {
+  font-size: clamp(30px, 5.5vw, 52px); font-weight: 700;
+  margin-bottom: 14px; letter-spacing: -.025em;
+}
+.cta-section p { color: var(--dim); margin-bottom: 32px; font-size: 17px; }
+.cta-section .btn {
+  display: inline-flex; align-items: center;
+  padding: 15px 34px; border-radius: 30px;
+  font-size: 15px; font-weight: 600;
+  text-decoration: none;
+  transition: all .25s;
+  border: none; cursor: pointer;
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+  box-shadow: 0 0 36px rgba(255,107,53,.2);
+}
+.btn-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 4px 40px rgba(255,107,53,.3); }
+.btn-outline {
+  background: transparent; color: var(--fg);
+  border: 1px solid rgba(255,255,255,.15);
+  margin-left: 12px;
+}
+.btn-outline:hover { border-color: rgba(255,255,255,.3); transform: translateY(-1px); }
+
+/* ── Guarantee Box ─────────────────── */
+.guarantee-box {
+  background: linear-gradient(135deg, rgba(48,209,136,.04), rgba(48,209,136,.01));
+  border: 1px solid rgba(48,209,136,.12);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  margin-top: 56px;
+}
+
+/* ── Developer Revenue Share Callout ─ */
+.dev-revenue-callout {
+  background: linear-gradient(135deg, rgba(255,107,53,.06), rgba(168,85,247,.06));
+  border: 1px solid rgba(255,107,53,.15);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-bottom: 80px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: all .3s;
+}
+.dev-revenue-callout:hover {
+  border-color: rgba(255,107,53,.25);
+  border-left-color: var(--accent2);
+}
+.dev-revenue-callout .callout-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.dev-revenue-callout .callout-body h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -.01em;
+}
+.dev-revenue-callout .callout-body p {
+  color: var(--dim);
+  font-size: 13px;
+  line-height: 1.65;
+  margin-bottom: 8px;
+}
+.dev-revenue-callout .callout-body .callout-link {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color .2s;
+}
+.dev-revenue-callout .callout-body .callout-link:hover {
+  color: var(--accent2);
+}
+.dev-revenue-callout .callout-body .callout-link::after {
+  content: '\2192';
+  transition: transform .2s;
+}
+.dev-revenue-callout .callout-body .callout-link:hover::after {
+  transform: translateX(3px);
+}
+
+.guarantee-box .g-icon { font-size: 40px; margin-bottom: 10px; }
+.guarantee-box h3 { color: var(--green); font-size: 19px; margin-bottom: 6px; font-weight: 700; }
+.guarantee-box p { color: var(--dim); font-size: 13px; line-height: 1.6; }
+
+/* ── Reveal Animation ──────────────── */
+.reveal { opacity: 1; transform: translateY(20px); transition: all .7s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: .1s; }
+.delay-2 { transition-delay: .2s; }
+.delay-3 { transition-delay: .3s; }
+.delay-4 { transition-delay: .4s; }
+
+/* ── Responsive ────────────────────── */
+@media (max-width: 1024px) {
+  .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .hero { padding: 120px 0 60px; }
+  .hero h1 { font-size: clamp(30px, 8vw, 44px); }
+  .crypto-banner { padding: 28px 20px; }
+  .section { padding: 70px 0; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .cta-section .btn-outline { margin-left: 0; margin-top: 12px; }
+  .cta-section .btn { display: block; width: 100%; max-width: 300px; margin: 0 auto; }
+}
+@media (max-width: 480px) {
+  .pricing-grid { grid-template-columns: 1fr; }
+  .billing-toggle { width: calc(100% - 48px); }
+  .toggle-opt { flex: 1; text-align: center; padding: 10px 16px; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+</style>
+</head>
+<body>
+<script src="/nav-footer.js?v=2"></script>
+<main>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="pricing-container">
+    <div class="hero-badge reveal">
+      <span class="hero-badge-dot"></span>
+      London, UK &middot; Global Pricing
+    </div>
+    <h1 class="reveal delay-1">AI Infrastructure,<br><span class="gradient-text">Priced to Ship</span></h1>
+    <p class="reveal delay-2">From $29/mo for solo builders to $299/mo for enterprise agencies. Crypto instant settlement, fiat available. No hidden fees.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CRYPTO BANNER
+     ═══════════════════════════════════════════════ -->
+<div class="pricing-container">
+  <div class="crypto-banner reveal">
+    <h3>&#9889; Pay with Crypto &mdash; <span style="color:var(--green)">Instant Settlement</span></h3>
+    <p>USDC on Polygon settles in ~2 seconds. USDT on TRC-20 in ~3 seconds. No waiting, no chargebacks, no intermediaries. Your AI tools deploy the moment payment confirms on-chain.</p>
+    <div class="crypto-icons">
+      <span class="crypto-icon usdc">USDC (Polygon)</span>
+      <span class="crypto-icon usdt">USDT (TRC-20)</span>
+      <span class="crypto-icon usdt">USDT (BEP-20)</span>
+      <span class="crypto-icon btc">BTC</span>
+      <span class="crypto-icon eth">ETH</span>
+      <span class="crypto-icon sol">SOL</span>
+      <span class="crypto-icon coinflow">Coinflow (Solana)</span>
+      <span class="crypto-icon dodo">Dodo DEX</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     BILLING TOGGLE
+     ═══════════════════════════════════════════════ -->
+<div class="billing-toggle reveal delay-1" id="billingToggle">
+  <button class="toggle-opt active" onclick="toggleBilling('monthly', this)">Monthly</button>
+  <button class="toggle-opt" onclick="toggleBilling('annual', this)">Annual <span class="save-badge">Save 20%</span></button>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PRICING CARDS
+     ═══════════════════════════════════════════════ -->
+<div class="pricing-container" id="plans">
+  <div class="pricing-grid">
+
+    <!-- Starter -->
+    <div class="pricing-card starter reveal delay-1">
+      <div class="plan-icon starter-i">&#9679;</div>
+      <div class="plan-name">Starter</div>
+      <div class="plan-desc">For solo developers exploring AI</div>
+      <div class="plan-price">
+        <span class="original monthly" id="starter-orig">&mdash;</span>
+        <span class="amount monthly">$29</span><span class="period monthly">/mo</span>
+        <span class="amount annual" style="display:none">$23</span><span class="period annual" style="display:none">/mo</span>
+      </div>
+      <ul class="plan-features">
+        <li><span class="chk yes">&#10003;</span> 5 AI tools concurrently</li>
+        <li><span class="chk yes">&#10003;</span> 10 GB storage per tool</li>
+        <li><span class="chk yes">&#10003;</span> Auto SSL + domain</li>
+        <li><span class="chk yes">&#10003;</span> Basic monitoring</li>
+        <li><span class="chk yes">&#10003;</span> Community Discord</li>
+        <li class="muted"><span class="chk no">&mdash;</span> GPU instances</li>
+        <li class="muted"><span class="chk no">&mdash;</span> API access</li>
+        <li class="muted"><span class="chk no">&mdash;</span> White-label</li>
+      </ul>
+      <button class="btn-plan blue" onclick="subscribe('starter','monthly')">Start Free Trial</button>
+    </div>
+
+    <!-- Pro -->
+    <div class="pricing-card pro featured reveal delay-2">
+      <div class="plan-icon pro-i">&#9679;</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-desc">For AI builders in production</div>
+      <div class="plan-price">
+        <span class="original monthly">&mdash;</span>
+        <span class="amount monthly">$99</span><span class="period monthly">/mo</span>
+        <span class="amount annual" style="display:none">$79</span><span class="period annual" style="display:none">/mo</span>
+      </div>
+      <ul class="plan-features">
+        <li><span class="chk yes">&#10003;</span> 25 AI tools concurrently</li>
+        <li><span class="chk yes">&#10003;</span> 100 GB storage per tool</li>
+        <li><span class="chk yes">&#10003;</span> Auto SSL + custom domains</li>
+        <li><span class="chk yes">&#10003;</span> Advanced analytics</li>
+        <li><span class="chk yes">&#10003;</span> Priority support</li>
+        <li><span class="chk yes">&#10003;</span> GPU instances available</li>
+        <li><span class="chk yes">&#10003;</span> REST API access</li>
+        <li class="muted"><span class="chk no">&mdash;</span> White-label</li>
+      </ul>
+      <button class="btn-plan purple" onclick="subscribe('pro','monthly')">Get Pro</button>
+    </div>
+
+    <!-- Agency -->
+    <div class="pricing-card agency reveal delay-3">
+      <div class="plan-icon agency-i">&#9679;</div>
+      <div class="plan-name">Agency</div>
+      <div class="plan-desc">For teams managing clients</div>
+      <div class="plan-price">
+        <span class="original monthly">&mdash;</span>
+        <span class="amount monthly">$199</span><span class="period monthly">/mo</span>
+        <span class="amount annual" style="display:none">$159</span><span class="period annual" style="display:none">/mo</span>
+      </div>
+      <ul class="plan-features">
+        <li><span class="chk yes">&#10003;</span> 50 AI tools concurrently</li>
+        <li><span class="chk yes">&#10003;</span> 500 GB storage per tool</li>
+        <li><span class="chk yes">&#10003;</span> Multi-tenant dashboard</li>
+        <li><span class="chk yes">&#10003;</span> Client management</li>
+        <li><span class="chk yes">&#10003;</span> Dedicated support</li>
+        <li><span class="chk yes">&#10003;</span> GPU instances included</li>
+        <li><span class="chk yes">&#10003;</span> API + Webhooks</li>
+        <li><span class="chk yes">&#10003;</span> White-label ready</li>
+      </ul>
+      <button class="btn-plan primary" onclick="subscribe('agency','monthly')">Get Agency</button>
+    </div>
+
+    <!-- Enterprise -->
+    <div class="pricing-card enterprise reveal delay-4">
+      <div class="plan-icon enterprise-i">&#9679;</div>
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-desc">For large-scale operations</div>
+      <div class="plan-price">
+        <span class="original monthly">&mdash;</span>
+        <span class="amount monthly">$299</span><span class="period monthly">/mo</span>
+        <span class="amount annual" style="display:none">$239</span><span class="period annual" style="display:none">/mo</span>
+      </div>
+      <ul class="plan-features">
+        <li><span class="chk yes">&#10003;</span> Unlimited AI tools</li>
+        <li><span class="chk yes">&#10003;</span> Dedicated GPU cluster</li>
+        <li><span class="chk yes">&#10003;</span> Full white-label</li>
+        <li><span class="chk yes">&#10003;</span> SLA 99.9% uptime</li>
+        <li><span class="chk yes">&#10003;</span> Named support engineer</li>
+        <li><span class="chk yes">&#10003;</span> Custom integrations</li>
+        <li><span class="chk yes">&#10003;</span> Reseller pricing</li>
+        <li><span class="chk yes">&#10003;</span> Revenue share 85%</li>
+      </ul>
+      <button class="btn-plan green" onclick="subscribe('enterprise','monthly')">Contact Sales</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     DEVELOPER REVENUE SHARE CALLOUT
+     ═══════════════════════════════════════════════ -->
+<div class="pricing-container">
+  <div class="dev-revenue-callout reveal delay-1">
+    <div class="callout-icon">&#128188;</div>
+    <div class="callout-body">
+      <h4>Are you a developer listing a project?</h4>
+      <p>Instead of subscription fees, developers earn through our <strong>80/20 revenue share</strong> model. List your open-source project on GBT, set an hourly rental price, and keep 80% of every hour billed. No monthly fees. We handle deployment, CDN, SSL, and billing — you collect passive income daily.</p>
+      <a href="/onboard.html" class="callout-link">Learn more about listing your project</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     FEATURE COMPARISON
+     ═══════════════════════════════════════════════ -->
+<section class="section">
+  <div class="pricing-container">
+    <div class="section-label reveal">Compare Plans</div>
+    <h2 class="reveal delay-1">Full <span class="gradient-text">Feature Breakdown</span></h2>
+    <p class="section-sub reveal delay-2">Every plan includes 30-second deploy, auto SSL, encrypted storage, and AI ops monitoring.</p>
+
+    <div class="feat-table-wrap reveal delay-3">
+      <table class="feat-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Starter</th>
+            <th>Pro</th>
+            <th>Agency</th>
+            <th>Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Concurrent AI tools</td><td>5</td><td>25</td><td>50</td><td>Unlimited</td></tr>
+          <tr><td>Storage per tool</td><td>10 GB</td><td>100 GB</td><td>500 GB</td><td>Custom</td></tr>
+          <tr><td>Auto SSL + Domain</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+          <tr><td>Custom domains</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+          <tr><td>GPU instances</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+          <tr><td>REST API</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+          <tr><td>Webhooks</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+          <tr><td>Multi-tenant</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+          <tr><td>White-label</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+          <tr><td>Support level</td><td>Community</td><td>Priority</td><td>Dedicated</td><td>Named Engineer</td></tr>
+          <tr><td>SLA</td><td>99.9%</td><td>99.9%</td><td>99.9%</td><td>99.9%</td></tr>
+          <tr><td>Revenue share</td><td>80%</td><td>80%</td><td>82%</td><td>85%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     COMPETITOR COMPARISON
+     ═══════════════════════════════════════════════ -->
+<section class="vs-section">
+  <div class="pricing-container">
+    <div class="section-label reveal">Why GBT</div>
+    <h2 class="reveal delay-1">GBT vs <span class="gradient-text">the Competition</span></h2>
+    <p class="section-sub reveal delay-2">Honest comparison. We're not the cheapest &mdash; we're the most capable platform for AI SaaS sellers.</p>
+
+    <div class="feat-table-wrap reveal delay-3">
+      <table class="feat-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th class="vs-highlight">GBT&#23567;&#22303;&#35910;</th>
+            <th>Whop</th>
+            <th>Gumroad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Platform fee</td>
+            <td class="hl-col hl-col-bg">20% revenue share</td>
+            <td>3% + $0.30/txn</td>
+            <td>10% flat</td>
+          </tr>
+          <tr>
+            <td>Crypto settlement</td>
+            <td class="yes">&#10003; Instant (USDC/USDT)</td>
+            <td class="no">&mdash;</td>
+            <td class="no">&mdash;</td>
+          </tr>
+          <tr>
+            <td>AI tool hosting</td>
+            <td class="yes">&#10003; Full AI infra + deploy</td>
+            <td class="no">&mdash;</td>
+            <td class="no">&mdash;</td>
+          </tr>
+          <tr>
+            <td>GPU instances</td>
+            <td class="yes">&#10003; Available on Pro+</td>
+            <td class="no">&mdash;</td>
+            <td class="no">&mdash;</td>
+          </tr>
+          <tr>
+            <td>White-label</td>
+            <td class="yes">&#10003; Agency + Enterprise</td>
+            <td class="no">&mdash;</td>
+            <td class="no">&mdash;</td>
+          </tr>
+          <tr>
+            <td>REST API + Webhooks</td>
+            <td class="yes">&#10003; All plans</td>
+            <td>Limited</td>
+            <td>Limited</td>
+          </tr>
+          <tr>
+            <td>Auto SSL + Domain</td>
+            <td class="yes">&#10003; Included</td>
+            <td class="no">&mdash;</td>
+            <td>Custom domain</td>
+          </tr>
+          <tr>
+            <td>Shopify Partner</td>
+            <td class="yes">&#10003; Official</td>
+            <td class="no">&mdash;</td>
+            <td class="no">&mdash;</td>
+          </tr>
+          <tr>
+            <td>Multi-tenant dashboard</td>
+            <td class="yes">&#10003; Agency +</td>
+            <td class="no">&mdash;</td>
+            <td class="no">&mdash;</td>
+          </tr>
+          <tr>
+            <td>Revenue share (seller)</td>
+            <td class="hl-col hl-col-bg">Up to 85%</td>
+            <td>Variable</td>
+            <td>Up to 90%</td>
+          </tr>
+          <tr>
+            <td>30-day refund guarantee</td>
+            <td class="yes">&#10003;</td>
+            <td class="yes">&#10003;</td>
+            <td class="yes">&#10003;</td>
+          </tr>
+          <tr>
+            <td>Best for</td>
+            <td class="hl-col hl-col-bg">AI SaaS sellers</td>
+            <td>Digital communities</td>
+            <td>Digital products</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FAQ
+     ═══════════════════════════════════════════════ -->
+<section class="section" style="background:var(--bg2)">
+  <div class="pricing-container">
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="reveal delay-1">Common <span class="gradient-text">Questions</span></h2>
+    <p class="section-sub reveal delay-2">Everything you need to know about GBT AI Stack pricing and billing.</p>
+
+    <div class="faq-grid">
+      <div class="faq-item reveal delay-1">
+        <h4><span class="faq-dot q1"></span> How does instant settlement work?</h4>
+        <p>Pay with USDC on Polygon (~2s) or USDT on TRC-20 (~3s). Payment is confirmed on-chain, and your AI tool deploys immediately. No waiting for bank processing or manual approval.</p>
+      </div>
+      <div class="faq-item reveal delay-2">
+        <h4><span class="faq-dot q2"></span> Can I pay with a credit card?</h4>
+        <p>Yes. We accept Visa and Mastercard via Coinflow/CryptAPI. Fiat payments take T+2 business days to settle to your account, but AI tools deploy instantly on payment confirmation.</p>
+      </div>
+      <div class="faq-item reveal delay-1">
+        <h4><span class="faq-dot q3"></span> What does the revenue share mean?</h4>
+        <p>For developers listing open-source projects on GBT, you earn 80% of the hourly rental fee (up to 85% on Enterprise). Our SaaS subscription plans ($29-$299/mo) are for teams deploying AI tools. If you're a developer listing projects, there are no monthly fees &mdash; just the 80/20 split. <a href="/onboard.html" style="color:var(--accent);text-decoration:none;font-weight:500">See onboarding &rarr;</a></p>
+      </div>
+      <div class="faq-item reveal delay-2">
+        <h4><span class="faq-dot q4"></span> Can I cancel anytime?</h4>
+        <p>Yes. All plans are month-to-month with no long-term contract. Cancel anytime &mdash; your tools stay live until the end of the billing period. No cancellation fees.</p>
+      </div>
+      <div class="faq-item reveal delay-3">
+        <h4><span class="faq-dot q5"></span> Do you support Shopify integration?</h4>
+        <p>Yes. We're an official Shopify Partner. Embed our AI tools directly in your Shopify store with our Buy Button or headless Storefront API integration.</p>
+      </div>
+      <div class="faq-item reveal delay-4">
+        <h4><span class="faq-dot q6"></span> Where are you based and what currencies?</h4>
+        <p>London, United Kingdom. We serve customers globally. All prices are in USD. Crypto payments have no geographic restrictions &mdash; anyone can pay from anywhere.</p>
+      </div>
+    </div>
+
+    <!-- Guarantee -->
+    <div class="guarantee-box reveal">
+      <div class="g-icon">&#128737;</div>
+      <h3>30-Day Money-Back Guarantee</h3>
+      <p>Not satisfied with your AI tools? Request a full refund within 30 days. No questions asked. We'll even help you migrate your data.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CTA
+     ═══════════════════════════════════════════════ -->
+<section class="cta-section">
+  <h2 class="reveal">Deploy Your <span class="gradient-text">AI Stack</span> Today</h2>
+  <p class="reveal delay-1">30-second deploy. Instant crypto settlement. Plans from $29/mo. Developers: 80/20 revenue share.</p>
+  <div class="reveal delay-2">
+    <a href="/stack.html" class="btn btn-primary">Browse AI Tools</a>
+    <a href="/shopify.html" class="btn btn-outline">Shopify Store</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════ -->
+
+</main>
+<script>
+function toggleBilling(period, btn) {
+  document.querySelectorAll('.toggle-opt').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var isAnnual = period === 'annual';
+  document.querySelectorAll('.monthly').forEach(function(el) { el.style.display = isAnnual ? 'none' : ''; });
+  document.querySelectorAll('.annual').forEach(function(el) { el.style.display = isAnnual ? '' : 'none'; });
+}
+
+var API = 'https://api.gbtxiaotudou.com/api';
+
+function subscribe(plan, period) {
+  var prices = { starter: 29, pro: 99, agency: 199, enterprise: 299 };
+  if (period === 'annual') { prices = { starter: 23, pro: 79, agency: 159, enterprise: 239 }; }
+
+  var btn = event && event.target;
+  var origText = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ 处理中...'; }
+
+  var ctrl = new AbortController();
+  var timer = setTimeout(function() { ctrl.abort(); }, 15000);
+
+  fetch(API + '/payment/create', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      plan: plan,
+      period: period,
+      amount: prices[plan],
+      currency: 'usdc',
+      order_id: 'GBT-' + Date.now()
+    }),
+    signal: ctrl.signal
+  })
+    .then(function(r) { clearTimeout(timer); return r.json(); })
+    .then(function(d) {
+      if (d && d.ok) {
+        if (d.payment_url) { window.location.href = d.payment_url; }
+        else { alert('已提交! 我们将联系您完成设置。'); }
+      } else {
+        alert('提交失败: ' + ((d && d.error) || '未知错误'));
+      }
+      if (btn) { btn.disabled = false; btn.textContent = origText; }
+    })
+    .catch(function() {
+      if (btn) { btn.disabled = false; btn.textContent = origText; }
+      alert('API 连接失败,请稍后重试。');
+    });
+}
+
+// Reveal on scroll
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+})();
+</script>
+
+</body>
+</html>

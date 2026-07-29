@@ -1,0 +1,22 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "net_sniffer",
+  "version": "1.0.0",
+  "description": "网络流量嗅探分析",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "侦察域",
+  "tier": "ready",
+  "actions": {
+    "start": {
+      "description": "开始嗅探"
+    },
+    "stop": {
+      "description": "停止嗅探"
+    },
+    "analyze": {
+      "description": "分析流量"
+    }
+  },
+  "auto_exec": false
+}

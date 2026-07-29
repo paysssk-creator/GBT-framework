@@ -1,0 +1,19 @@
+{
+  "name": "ponytail",
+  "version": "1.0.0",
+  "description": "Ponytail懒人开发 · 85K⭐ AI编程技能。六阶梯决策: 不写→复用→标准库→原生→现有依赖→一行代码。54%更少代码，100%安全。",
+  "category": "编程域",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "actions": {
+    "ladder": {
+      "description": "六阶梯决策: 判断代码是否真的需要写"
+    },
+    "audit": {
+      "description": "审计现有代码找出可简化的部分"
+    },
+    "principles": {
+      "description": "输出Ponytail核心原则"
+    }
+  }
+}

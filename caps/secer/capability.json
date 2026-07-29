@@ -1,0 +1,61 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "secer",
+  "version": "1.0.0",
+  "description": "安全工具集：强密码生成/熵评估/JWT解码/文件哈希/安全随机数/多编码转换",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "安全工具",
+  "tier": "utility",
+  "actions": {
+    "password": {
+      "description": "强密码生成（secrets模块，可配置字符集和长度）",
+      "params": [
+        "length",
+        "upper",
+        "lower",
+        "digits",
+        "symbols"
+      ]
+    },
+    "entropy": {
+      "description": "密码强度评估（熵值计算+常见模式检测+键盘路径检测",
+      "params": [
+        "password"
+      ]
+    },
+    "jwt_decode": {
+      "description": "JWT解码（不验证签名，仅解析header/payload）",
+      "params": [
+        "token"
+      ]
+    },
+    "hash_file": {
+      "description": "文件哈希计算（MD5/SHA1/SHA256）",
+      "params": [
+        "path",
+        "algo"
+      ]
+    },
+    "random": {
+      "description": "安全随机生成（int/float/bytes/string/uuid/token_hex/token_urlsafe/choice/sample）",
+      "params": [
+        "action",
+        "min",
+        "max",
+        "length",
+        "count",
+        "items",
+        "format"
+      ]
+    },
+    "encode": {
+      "description": "多编码转换（hex/rot13/morse/base64/url）",
+      "params": [
+        "text",
+        "action"
+      ]
+    }
+  },
+  "auto_exec": false
+}

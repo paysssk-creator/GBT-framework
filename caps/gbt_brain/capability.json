@@ -1,0 +1,137 @@
+{
+  "name": "gbt_brain",
+  "version": "1.0.0",
+  "description": "GBT自主AI大脑 v3 · 事件驱动心跳+外部触发唤醒+自适应感知→思考→行动。不等待指令,主动干活。云端+本地双模",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "大脑",
+      "brain",
+      "思考",
+      "决策",
+      "感知",
+      "主动",
+      "自主",
+      "cloud brain",
+      "设计大脑",
+      "云端大脑"
+    ],
+    "intent": "brain_activate",
+    "examples": [
+      "启动大脑",
+      "大脑分析一下",
+      "云端大脑思考"
+    ]
+  },
+  "actions": {
+    "start": {
+      "description": "start",
+      "args": [
+        "--action",
+        "start"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "stop": {
+      "description": "stop",
+      "args": [
+        "--action",
+        "stop"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "think": {
+      "description": "think",
+      "args": [
+        "--action",
+        "think"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "decide": {
+      "description": "decide",
+      "args": [
+        "--action",
+        "decide"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "status": {
+      "description": "status",
+      "args": [
+        "--action",
+        "status"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "caps": {
+      "description": "caps",
+      "args": [
+        "--action",
+        "caps"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "resonate": {
+      "description": "resonate",
+      "args": [
+        "--action",
+        "resonate"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "submit_task": {
+      "description": "submit_task",
+      "args": [
+        "--action",
+        "submit_task"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "autonomous": {
+      "description": "autonomous",
+      "args": [
+        "--action",
+        "autonomous"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "task": {
+      "description": "task",
+      "args": [
+        "--action",
+        "task"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    }
+  }
+}

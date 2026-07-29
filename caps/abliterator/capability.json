@@ -1,0 +1,28 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "abliterator",
+  "version": "1.0.0",
+  "description": "LLM安全限制移除·拒绝机制消融",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "安全域",
+  "tier": "core",
+  "actions": {
+    "ablate": {
+      "description": "消融安全限制"
+    },
+    "perfect": {
+      "description": "perfect"
+    },
+    "quick": {
+      "description": "quick"
+    },
+    "status": {
+      "description": "status"
+    },
+    "test": {
+      "description": "测试消融效果"
+    }
+  },
+  "auto_exec": false
+}

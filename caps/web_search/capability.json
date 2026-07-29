@@ -1,0 +1,43 @@
+{
+  "name": "web_search",
+  "version": "1.0.0",
+  "description": "网页搜索 — 搜索引擎查询",
+  "language": "python",
+  "priority": 10,
+  "pipeline_role": "scout",
+  "depends_on": [],
+  "triggers": {
+    "intent": "search",
+    "keywords": [
+      "搜索",
+      "查找",
+      "search",
+      "google",
+      "百度",
+      "bing"
+    ],
+    "examples": [
+      "搜索一下"
+    ]
+  },
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "actions": {
+    "search": {
+      "description": "搜索",
+      "args": [
+        "search"
+      ],
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    }
+  },
+  "risk_level": "medium",
+  "auto_exec": false,
+  "category": "信息"
+}

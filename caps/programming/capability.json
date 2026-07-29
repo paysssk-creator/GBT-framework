@@ -1,0 +1,166 @@
+{
+  "name": "programming",
+  "version": "2.1.0",
+  "description": "最强AI编程助手 — 融合Claude/GPT-5/DeepSeek V4编程策略 + superpowers-zh中国原创方法论（9种编程能力）",
+  "language": "python",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "编程",
+      "写代码",
+      "代码",
+      "审查",
+      "review",
+      "重构",
+      "refactor",
+      "调试",
+      "debug",
+      "测试",
+      "test",
+      "生成代码",
+      "code",
+      "编程能力",
+      "帮我写",
+      "生成函数",
+      "分析代码",
+      "优化",
+      "bug",
+      "修复",
+      "提交",
+      "commit",
+      "文档",
+      "docs",
+      "写文档"
+    ],
+    "intent": "programming",
+    "examples": [
+      "帮我写一个排序函数",
+      "审查这段代码",
+      "重构这个模块",
+      "写单元测试",
+      "分析项目架构",
+      "生成提交信息",
+      "写API文档"
+    ]
+  },
+  "actions": {
+    "generate": {
+      "description": "AI代码生成 — Claude级: 先思后写 + 完整实现 + 边界处理 + 安全防护",
+      "args": [
+        "--action",
+        "generate"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "review": {
+      "description": "中文代码审查 — superpowers-zh风格: [必须修复][建议修改][仅供参考]分级 + 反模式应对 + 整体总结",
+      "args": [
+        "--action",
+        "review"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "debug": {
+      "description": "系统化调试 — superpowers-zh四阶段: 根因调查→模式分析→假设验证→修复根因",
+      "args": [
+        "--action",
+        "debug"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "refactor": {
+      "description": "代码重构 — SOLID原则 + 设计模式 + 异味分析",
+      "args": [
+        "--action",
+        "refactor"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "testgen": {
+      "description": "测试生成 — 单元/边界/异常全覆盖 + 90%覆盖率",
+      "args": [
+        "--action",
+        "testgen"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "analyze": {
+      "description": "架构分析 — 模式评估 + 0-100质量分 + 技术债务 + 改进路线图",
+      "args": [
+        "--action",
+        "analyze"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "explain": {
+      "description": "代码解释 — 逐行中文解读 + 技巧/陷阱标注",
+      "args": [
+        "--action",
+        "explain"
+      ],
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "commit": {
+      "description": "[NEW] 中文提交信息 — superpowers-zh Convention Commits规范 + 动机/方案/影响范围",
+      "args": [
+        "--action",
+        "commit"
+      ],
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    },
+    "docs": {
+      "description": "[NEW] 中文文档生成 — superpowers-zh排版规范: 空格/标点/术语/结构 + 告别机翻味",
+      "args": [
+        "--action",
+        "docs"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "tdd": {
+      "description": "TDD驱动开发 — 红→绿→重构循环",
+      "args": ["--action", "tdd"],
+      "input": "stdin", "timeout_ms": 180000, "output": "json"
+    },
+    "verify": {
+      "description": "代码验证 — 编译检查+测试运行+lint扫描",
+      "args": ["--action", "verify"],
+      "input": "stdin", "timeout_ms": 60000, "output": "json"
+    },
+    "brainstorm": {
+      "description": "头脑风暴 — 多方案生成+评估+择优",
+      "args": ["--action", "brainstorm"],
+      "input": "stdin", "timeout_ms": 120000, "output": "json"
+    },
+    "gitflow": {
+      "description": "Git工作流 — 分支/PR/合并自动化",
+      "args": ["--action", "gitflow"],
+      "input": "stdin", "timeout_ms": 60000, "output": "json"
+    }
+  },
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI"
+}

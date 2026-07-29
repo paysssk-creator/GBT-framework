@@ -1,0 +1,32 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "n8n_attack_chain",
+  "version": "1.0.0",
+  "description": "N8N全攻击链·13阶段24连发一键轰炸 + N8N工作流导出",
+  "language": "python",
+  "risk_level": "dangerous",
+  "auto_exec": false,
+  "category": "攻击域",
+  "actions": {
+    "bombard": {
+      "description": "一键轰炸·全攻击链并发执行"
+    },
+    "generate": {
+      "description": "生成N8N工作流JSON"
+    },
+    "export": {
+      "description": "导出N8N工作流+直接轰炸"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "轰炸",
+      "attack chain",
+      "攻击链",
+      "n8n",
+      "bombard",
+      "全链路"
+    ],
+    "intent": "n8n_attack"
+  }
+}

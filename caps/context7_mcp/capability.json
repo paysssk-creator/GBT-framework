@@ -1,0 +1,32 @@
+{
+  "name": "context7_mcp",
+  "version": "1.0.0",
+  "description": "Context7实时文档 — 终结AI幻觉, 注入最新库文档到上下文 (~58k GitHub stars)",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI知识",
+  "entry": {
+    "program": "python",
+    "args": ["run.py"]
+  },
+  "actions": {
+    "resolve_docs": {
+      "description": "获取指定库的最新版本文档 (如React/Next.js/Prisma/Tailwind等)",
+      "input": "args",
+      "timeout_ms": 30000,
+      "output": "json"
+    },
+    "search_docs": {
+      "description": "查询库文档中的特定内容",
+      "input": "args",
+      "timeout_ms": 30000,
+      "output": "json"
+    }
+  },
+  "triggers": {
+    "keywords": ["context7", "实时文档", "最新API", "library docs", "use context7", "查文档"],
+    "intent": "resolve_docs",
+    "examples": ["用Context7查React 19新特性", "use context7 Prisma最新API"]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "trending_scanner",
+  "version": "1.0.0",
+  "description": "GitHub Trending实时扫描 — 每日抓取GitHub Trending更新排行榜",
+  "category": "AI编程",
+  "risk_level": "safe",
+  "tier": "core",
+  "actions": ["scan", "leaderboard", "refresh"],
+  "triggers": {
+    "keywords": ["趋势", "排行", "热门", "trending", "leaderboard", "排行榜"],
+    "intent": "trending"
+  },
+  "auto_exec": false,
+  "_stamp": "开发者：自由的风 · 永久钢印 · 禁止删除"
+}

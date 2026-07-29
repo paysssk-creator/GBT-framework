@@ -1,0 +1,21 @@
+{
+  "name": "multi_llm",
+  "version": "1.0.0",
+  "description": "多模型网关 — 7大模型自动切换/降级/负载均衡: Kimi/DeepSeek/OpenAI/Zhipu/Qwen/Ollama/SiliconFlow",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI",
+  "entry": { "program": "python", "args": ["run.py"] },
+  "triggers": {
+    "keywords": ["模型","切换","GPT","Claude","GLM","文心","通义","Ollama","本地模型"],
+    "intent": "model_switch",
+    "examples": ["切换到GPT","用本地模型回答"]
+  },
+  "actions": {
+    "ask": { "description": "多模型智能路由问答 (自动选最优模型)", "args": ["--action","ask"], "input":"stdin", "timeout_ms":60000, "output":"json" },
+    "models": { "description": "列出可用模型及状态", "args": ["--action","models"], "timeout_ms":5000, "output":"json" },
+    "switch": { "description": "切换默认模型", "args": ["--action","switch"], "input":"stdin", "timeout_ms":5000, "output":"json" },
+    "compare": { "description": "多模型对比 — 同一问题发给多个模型", "args": ["--action","compare"], "input":"stdin", "timeout_ms":120000, "output":"json" }
+  }
+}

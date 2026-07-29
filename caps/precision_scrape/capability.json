@@ -1,0 +1,42 @@
+{
+  "name": "precision_scrape",
+  "version": "1.0.0",
+  "description": "精准抓取 — 网页数据提取",
+  "language": "python",
+  "priority": 25,
+  "pipeline_role": "analyze",
+  "depends_on": [],
+  "triggers": {
+    "intent": "scrape",
+    "keywords": [
+      "抓取",
+      "爬虫",
+      "scrape",
+      "提取",
+      "爬"
+    ],
+    "examples": [
+      "抓取网页数据"
+    ]
+  },
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "actions": {
+    "scrape": {
+      "description": "抓取网页",
+      "args": [
+        "scrape"
+      ],
+      "input": "stdin",
+      "timeout_ms": 30000,
+      "output": "json"
+    }
+  },
+  "risk_level": "medium",
+  "auto_exec": false,
+  "category": "信息"
+}

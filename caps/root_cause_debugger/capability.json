@@ -1,0 +1,67 @@
+{
+  "name": "root_cause_debugger",
+  "version": "1.0.0",
+  "description": "病因定位引擎 — 按 假设 -> 取证 -> 复现 -> 修复 -> 验证 的链路调查问题并归档证据",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "诊断",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "病因",
+      "根因",
+      "排查",
+      "调试",
+      "debug",
+      "triage",
+      "root cause",
+      "repro",
+      "复现",
+      "定位问题"
+    ],
+    "intent": "root_cause_debugger",
+    "examples": [
+      "帮我找病因",
+      "排查这个报错的根因",
+      "定位为什么启动失败",
+      "系统化调试这个问题"
+    ]
+  },
+  "actions": {
+    "auto_debug": {
+      "description": "auto_debug"
+    },
+    "fix_attempt": {
+      "description": "fix_attempt"
+    },
+    "hypothesis": {
+      "description": "hypothesis"
+    },
+    "investigate": {
+      "description": "执行病因定位全流程，收集证据并输出根因报告",
+      "args": [
+        "--action",
+        "investigate"
+      ],
+      "input": "stdin",
+      "timeout_ms": 90000,
+      "output": "json"
+    },
+    "plan": {
+      "description": "生成病因排查计划和优先假设，不做深度取证",
+      "args": [
+        "--action",
+        "plan"
+      ],
+      "input": "stdin",
+      "timeout_ms": 20000,
+      "output": "json"
+    }
+  }
+}

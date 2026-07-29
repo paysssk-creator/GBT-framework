@@ -1,0 +1,61 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "devourer",
+  "version": "1.0.0",
+  "description": "自主吞噬进化引擎 — 每日扫描各大平台热度排名→深度学习→取长补短→注入能力→自我进化。无需提醒，自主运行。",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI记忆",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "actions": {
+    "auto_create_gaps": {
+      "description": "auto_create_gaps"
+    },
+    "continuous_scan": {
+      "description": "continuous_scan"
+    },
+    "daily": {
+      "description": "daily"
+    },
+    "devour": {
+      "description": "devour"
+    },
+    "digest": {
+      "description": "digest"
+    },
+    "gaps": {
+      "description": "gaps"
+    },
+    "scan": {
+      "description": "scan"
+    },
+    "smart_filter": {
+      "description": "smart_filter"
+    },
+    "status": {
+      "description": "status"
+    },
+    "trend_alert": {
+      "description": "trend_alert"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "吞噬",
+      "进化",
+      "扫描",
+      "热度",
+      "排名",
+      "学习",
+      "吸收",
+      "自主进化"
+    ],
+    "intent": "devour_evolve"
+  }
+}

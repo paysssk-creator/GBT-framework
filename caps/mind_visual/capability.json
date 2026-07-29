@@ -1,0 +1,22 @@
+{
+  "name": "mind_visual",
+  "version": "1.0.0",
+  "description": "全能思维可视化 — 自然语言→思维导图/流程图/架构图/UML/手绘风/ASCII/Mermaid/Markmap/DrawIO/Excalidraw, 导出PNG/SVG/HTML",
+  "language": "python",
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI",
+  "entry": { "program": "python", "args": ["run.py"] },
+  "triggers": {
+    "keywords": ["思维导图","流程图","架构图","UML","脑图","可视化","draw","图表","绘制","生成图","markmap","mermaid","excalidraw","drawio"],
+    "intent": "visualize_mind",
+    "examples": ["画一个项目架构图","生成思维导图","把这段文字变成脑图"]
+  },
+  "actions": {
+    "mindmap":   { "description": "生成思维导图 — Markmap/HTML交互式, 可导出PNG/SVG", "args":["--action","mindmap"],"input":"stdin","timeout_ms":60000,"output":"json" },
+    "flowchart": { "description": "生成流程图 — Mermaid格式, 可渲染为PNG", "args":["--action","flowchart"],"input":"stdin","timeout_ms":60000,"output":"json" },
+    "mermaid":   { "description": "生成Mermaid图 — 架构图/时序图/类图/ER图/甘特图", "args":["--action","mermaid"],"input":"stdin","timeout_ms":60000,"output":"json" },
+    "ascii":     { "description": "生成ASCII终端图 — 直接在终端渲染的树形图", "args":["--action","ascii"],"input":"stdin","timeout_ms":30000,"output":"json" },
+    "export":    { "description": "导出为PNG/SVG/HTML文件", "args":["--action","export"],"input":"stdin","timeout_ms":30000,"output":"json" }
+  }
+}

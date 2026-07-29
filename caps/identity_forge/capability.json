@@ -1,0 +1,16 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "identity_forge",
+  "version": "1.0.0",
+  "description": "identity_forge",
+  "language": "python",
+  "risk_level": "dangerous",
+  "category": "特殊域",
+  "tier": "ready",
+  "actions": {
+    "generate": {
+      "description": "生成身份"
+    }
+  },
+  "auto_exec": false
+}

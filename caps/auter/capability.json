@@ -1,0 +1,64 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "auter",
+  "version": "1.0.0",
+  "description": "自动化工具箱：crontab表达式生成/文件变化监控/批量重命名/文件备份/临时文件清理",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "自动化",
+  "tier": "utility",
+  "actions": {
+    "cron": {
+      "description": "语义→crontab 表达式生成（如 'every hour', 'every monday at 9am'）",
+      "params": [
+        "schedule"
+      ]
+    },
+    "watch": {
+      "description": "文件变化监控（MD5轮询快照与差异对比）",
+      "params": [
+        "path",
+        "pattern",
+        "recursive",
+        "prev",
+        "action"
+      ]
+    },
+    "batch_rename": {
+      "description": "批量重命名（正则匹配替换+前后缀+扩展名）",
+      "params": [
+        "path",
+        "pattern",
+        "find",
+        "replace",
+        "prefix",
+        "suffix",
+        "extension",
+        "dry_run"
+      ]
+    },
+    "backup": {
+      "description": "文件备份（复制+时间戳，支持目录打包zip）",
+      "params": [
+        "path",
+        "dest",
+        "name",
+        "timestamp_fmt",
+        "keep",
+        "compress"
+      ]
+    },
+    "cleanup": {
+      "description": "临时文件清理（按模式+天数+大小筛选）",
+      "params": [
+        "path",
+        "pattern",
+        "older_than_days",
+        "recursive",
+        "dry_run",
+        "max_size_mb"
+      ]
+    }
+  },
+  "auto_exec": false
+}

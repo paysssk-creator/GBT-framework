@@ -1,0 +1,50 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "daemon_launcher",
+  "version": "1.0.0",
+  "description": "守护进程启动器 — 管理 heartbeat + smart_scheduler 后台进程的启停与存活监控",
+  "language": "python",
+  "risk_level": "medium",
+  "auto_exec": true,
+  "category": "运维域",
+  "tier": "ready",
+  "entry": {
+    "program": "python",
+    "args": ["run.py"]
+  },
+  "actions": {
+    "start_all": {
+      "description": "启动全部守护进程 (heartbeat + smart_scheduler worker)",
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "stop_all": {
+      "description": "停止全部管理的守护进程",
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "status": {
+      "description": "报告各守护进程存活状态",
+      "input": "stdin",
+      "timeout_ms": 5000,
+      "output": "json"
+    },
+    "install_service": {
+      "description": "创建 Windows 计划任务，用户登录时自动启动 daemon_launcher",
+      "input": "stdin",
+      "timeout_ms": 15000,
+      "output": "json"
+    }
+  },
+  "triggers": {
+    "keywords": ["守护进程", "daemon", "启动器", "后台进程", "launcher", "自启"],
+    "intent": "daemon_manage",
+    "examples": [
+      "启动所有守护进程",
+      "检查后台进程状态",
+      "安装自启动服务"
+    ]
+  }
+}

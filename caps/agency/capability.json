@@ -1,0 +1,80 @@
+{
+  "name": "agency",
+  "version": "1.0.0",
+  "description": "Agency Agents — 244个AI专家调度: 工程/安全/营销/金融/游戏/设计/法律等18领域, 自动匹配+调用Kimi API",
+  "language": "python",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "专家",
+      "agent",
+      "代码审查",
+      "渗透测试",
+      "架构",
+      "安全审计",
+      "前端",
+      "后端",
+      "DevOps",
+      "SRE",
+      "营销",
+      "设计",
+      "产品"
+    ],
+    "intent": "expert_consulting",
+    "examples": [
+      "代码审查",
+      "安全审计",
+      "架构设计",
+      "找后端专家"
+    ]
+  },
+  "actions": {
+    "collect_results": {
+      "description": "collect_results"
+    },
+    "dispatch": {
+      "description": "智能调度 — 关键词自动匹配244个专家 + 调用Kimi API",
+      "args": [
+        "--action",
+        "dispatch"
+      ],
+      "input": "stdin",
+      "timeout_ms": 120000,
+      "output": "json"
+    },
+    "dispatch_batch": {
+      "description": "dispatch_batch"
+    },
+    "domains": {
+      "description": "领域概览 — 18个领域及专家数量",
+      "args": [
+        "--action",
+        "domains"
+      ],
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    },
+    "expert_select": {
+      "description": "expert_select"
+    },
+    "list": {
+      "description": "列出专家 — 按领域查看所有可用AI专家",
+      "args": [
+        "--action",
+        "list"
+      ],
+      "input": "stdin",
+      "timeout_ms": 10000,
+      "output": "json"
+    }
+  },
+  "risk_level": "safe",
+  "auto_exec": true,
+  "category": "AI"
+}

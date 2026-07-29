@@ -1,0 +1,25 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "tg_client",
+  "version": "1.0.0",
+  "description": "Telethon真人TG账号(无Bot限制)",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "信息域",
+  "tier": "core",
+  "actions": {
+    "login": {
+      "description": "登录账号"
+    },
+    "send": {
+      "description": "发送消息"
+    },
+    "search": {
+      "description": "搜索群组"
+    },
+    "join": {
+      "description": "加入群组"
+    }
+  },
+  "auto_exec": false
+}

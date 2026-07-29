@@ -1,0 +1,51 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "stock_scalper",
+  "version": "1.0.0",
+  "description": "A股快进快出操盘引擎 — 涨幅动量扫描 · AI实时决策 · 止盈止损自动化 · 新浪行情源",
+  "language": "python",
+  "risk_level": "medium",
+  "category": "金融域",
+  "tier": "core",
+  "auto_exec": true,
+  "actions": {
+    "scan": {
+      "description": "扫描A股涨幅榜 — 新浪实时行情",
+      "params": ["limit", "sort"],
+      "timeout_ms": 15000
+    },
+    "scalp": {
+      "description": "执行快进快出策略 — 扫描→AI筛选→信号输出",
+      "params": ["max_stocks", "max_amount", "min_change", "max_change", "take_profit", "stop_loss"],
+      "timeout_ms": 60000
+    },
+    "status": {
+      "description": "查看引擎状态与配置",
+      "params": []
+    },
+    "config": {
+      "description": "查看/修改配置 (set KEY=VALUE)",
+      "params": ["action", "args"],
+      "timeout_ms": 10000
+    },
+    "sentiment": {
+      "description": "市场情绪分析 — 涨跌比/涨停数/跌停数",
+      "params": [],
+      "timeout_ms": 15000
+    },
+    "review": {
+      "description": "交易日复盘 — 历史交易记录",
+      "params": ["days"],
+      "timeout_ms": 10000
+    }
+  },
+  "depends_on": [],
+  "triggers": {
+    "keywords": [
+      "股票", "A股", "操盘", "割草", "快进快出", "scalp",
+      "扫描股票", "行情", "涨幅榜", "市场情绪", "复盘",
+      "买入", "卖出", "止盈", "止损", "stock"
+    ],
+    "intent": "stock_scalper"
+  }
+}

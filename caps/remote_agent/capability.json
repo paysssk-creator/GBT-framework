@@ -1,0 +1,62 @@
+{
+  "name": "remote_agent",
+  "version": "1.0.0",
+  "description": "远程协助 — 帮小白用户远程装软件/部署/操控桌面。用户只需双击一个脚本即可被协助",
+  "language": "python",
+  "risk_level": "dangerous",
+  "auto_exec": true,
+  "category": "运维",
+  "entry": {
+    "program": "python",
+    "args": [
+      "run.py"
+    ]
+  },
+  "triggers": {
+    "keywords": [
+      "远程协助",
+      "帮用户",
+      "远程安装",
+      "远程部署",
+      "remote help",
+      "远程桌面",
+      "teamviewer"
+    ],
+    "intent": "remote_assist",
+    "examples": [
+      "远程帮用户装软件",
+      "远程协助用户部署"
+    ]
+  },
+  "actions": {
+    "serve": {
+      "description": "启动协助服务端，等待用户连接",
+      "args": [
+        "--action",
+        "serve"
+      ],
+      "input": "stdin",
+      "timeout_ms": 3600000,
+      "output": "json"
+    },
+    "sessions": {
+      "description": "列出已连接的用户会话",
+      "args": [
+        "--action",
+        "sessions"
+      ],
+      "timeout_ms": 5000,
+      "output": "json"
+    },
+    "cmd": {
+      "description": "向指定用户的代理发送命令(screenshot/click/type/install/exec/deploy)",
+      "args": [
+        "--action",
+        "cmd"
+      ],
+      "input": "stdin",
+      "timeout_ms": 60000,
+      "output": "json"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>GBT Test</title>
+<style>body{margin:0;background:#050510;overflow:hidden}canvas{display:block}</style>
+</head><body>
+<canvas id="c"></canvas>
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+var W=innerWidth,H=innerHeight;
+var s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(60,W/H,0.1,100);cam.position.z=5;
+var r=new THREE.WebGLRenderer({canvas:document.getElementById('c'),alpha:true});r.setSize(W,H);
+var g=new THREE.BufferGeometry(),p=new Float32Array(1500*3),cl=new Float32Array(1500*3);
+for(var i=0;i<1500;i++){var a=(i/1500)*Math.PI*2,rad=2.5+(i%3)*.35;p[i*3]=Math.cos(a)*rad;p[i*3+1]=(Math.random()-.5)*1;p[i*3+2]=Math.sin(a)*rad;var cc=new THREE.Color();cc.setHSL(.55+(i%3)*.04,.7,.5);cl[i*3]=cc.r;cl[i*3+1]=cc.g;cl[i*3+2]=cc.b}
+g.setAttribute('position',new THREE.BufferAttribute(p,3));g.setAttribute('color',new THREE.BufferAttribute(cl,3));
+var pts=new THREE.Points(g,new THREE.PointsMaterial({size:.02,vertexColors:true,blending:THREE.AdditiveBlending,depthWrite:false}));s.add(pts);
+(function A(){requestAnimationFrame(A);pts.rotation.x+=.0002;pts.rotation.y+=.0004;r.render(s,cam)})();
+</script>
+</body></html>

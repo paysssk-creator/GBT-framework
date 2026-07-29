@@ -1,0 +1,239 @@
+{
+  "_stamp": "开发者：自由的风 · 永久钢印 · 禁止删除",
+  "version": "1.0.0",
+  "description": "A股量化操盘知识库 — 技术指标/交易规则/风控策略",
+  "trading_rules": {
+    "market_hours": {
+      "morning_auction": "9:15-9:25 (9:20-9:25不可撤单)",
+      "morning_session": "9:30-11:30",
+      "afternoon_session": "13:00-15:00",
+      "closing_auction": "14:57-15:00 (沪深两市)",
+      "block_trade": "15:00-15:30"
+    },
+    "t_plus_1": "当日买入的股票，最早次日才能卖出。T+0仅限融券卖出后当日买回或ETF申赎。",
+    "price_limits": {
+      "main_board": "±10% (ST/*ST: ±5%)",
+      "chinext": "±20% (创业板)",
+      "star_market": "±20% (科创板)",
+      "beijing": "±30% (北交所)",
+      "new_stock_day1": "前5日无涨跌幅 (临停:涨跌30%/60%各停10分钟, 沪深主板+创业板+科创板)"
+    },
+    "lot_size": "100股=1手，买入必须是100股整数倍，卖出可零股",
+    "stamp_tax": "卖出时征收0.05%印花税 (买入免征, 2023年8月28日起减半)",
+    "commission": "通常万2.5-万3，最低5元",
+    "settlement": "T+1交收，资金T+1可用，T+2可取",
+    "price_cage": "全面注册制价格笼子: 买入申报≤基准价102%, 卖出申报≥基准价98%, 超出为废单"
+  },
+  "technical_indicators": {
+    "MA": {
+      "name": "移动平均线",
+      "params": {
+        "MA5": "5日均线-短线",
+        "MA10": "10日均线-短线",
+        "MA20": "20日均线-中短线",
+        "MA60": "60日均线-中线",
+        "MA120": "半年线",
+        "MA250": "年线"
+      },
+      "signals": {
+        "golden_cross": "短期MA上穿长期MA → 买入信号",
+        "death_cross": "短期MA下穿长期MA → 卖出信号",
+        "bullish_arrange": "短>中>长 多头排列 → 上升趋势确认",
+        "bearish_arrange": "短<中<长 空头排列 → 下降趋势确认",
+        "ma_support": "价格回踩重要均线不破 → 支撑有效",
+        "ma_resistance": "价格反弹至重要均线受阻 → 压力有效"
+      }
+    },
+    "MACD": {
+      "name": "指数平滑异同移动平均线",
+      "params": {
+        "DIF": "快线(EMA12-EMA26)",
+        "DEA": "慢线(DIF的9日EMA)",
+        "BAR": "柱状图(2*(DIF-DEA))"
+      },
+      "signals": {
+        "golden_cross": "DIF上穿DEA → 金叉买入",
+        "death_cross": "DIF下穿DEA → 死叉卖出",
+        "top_divergence": "价格新高但DIF未新高 → 顶背离 见顶信号",
+        "bottom_divergence": "价格新低但DIF未新低 → 底背离 见底信号",
+        "zero_axis_golden": "零轴上方金叉 → 强势多头",
+        "zero_axis_death": "零轴下方死叉 → 加速下跌"
+      }
+    },
+    "KDJ": {
+      "name": "随机指标",
+      "params": {
+        "K": "快线",
+        "D": "慢线",
+        "J": "敏感线(3K-2D)"
+      },
+      "signals": {
+        "oversold": "K/D < 20 → 超卖区域 反弹概率大",
+        "overbought": "K/D > 80 → 超买区域 回调概率大",
+        "golden_cross": "K上穿D在超卖区 → 低位金叉 强买入",
+        "death_cross": "K下穿D在超买区 → 高位死叉 强卖出",
+        "bottom_divergence": "价低K不低 → 底背离",
+        "top_divergence": "价高K不高 → 顶背离",
+        "passivated_overbought": "高位钝化(>80持续) → 超强趋势 别轻易做空",
+        "passivated_oversold": "低位钝化(<20持续) → 超弱趋势 别轻易抄底"
+      }
+    },
+    "BOLL": {
+      "name": "布林带",
+      "params": {
+        "UPPER": "上轨(MA20+2σ)",
+        "MID": "中轨(MA20)",
+        "LOWER": "下轨(MA20-2σ)"
+      },
+      "signals": {
+        "squeeze": "带宽收窄 → 变盘在即",
+        "expand": "带宽扩大 → 趋势加速",
+        "upper_break": "突破上轨+放量 → 主升浪启动",
+        "lower_break": "跌破下轨+放量 → 加速下跌",
+        "mid_support": "回踩中轨 → 趋势中继",
+        "bounce_upper": "触碰上轨回落 → 短线见顶",
+        "bounce_lower": "触碰下轨反弹 → 短线见底"
+      }
+    },
+    "RSI": {
+      "name": "相对强弱指标",
+      "params": {
+        "RSI6": "6日RSI-超短线",
+        "RSI14": "14日RSI-标准",
+        "RSI24": "24日RSI-中长线"
+      },
+      "signals": {
+        "oversold": "RSI < 30 → 超卖",
+        "overbought": "RSI > 70 → 超买",
+        "strong_oversold": "RSI < 20 → 极度超卖 强反弹信号",
+        "strong_overbought": "RSI > 80 → 极度超买 强回调信号",
+        "divergence": "价格与RSI背离 → 趋势反转预警"
+      }
+    },
+    "volume_analysis": {
+      "price_up_volume_up": "价涨量增 → 上涨趋势健康 继续看多",
+      "price_up_volume_down": "价涨量缩 → 上涨乏力 可能见顶",
+      "price_down_volume_up": "价跌量增 → 恐慌抛售或主力出货",
+      "price_down_volume_down": "价跌量缩 → 下跌动能衰减 可能见底",
+      "volume_breakout": "成交量突然放大3倍+ → 主力异动",
+      "volume_dry": "地量(1/3均量以下) → 变盘前兆",
+      "volume_heavy": "天量(3倍均量以上) → 顶部/底部信号"
+    }
+  },
+  "candlestick_patterns": {
+    "bullish": {
+      "hammer": "长下影线 实体小 → 底部反转信号",
+      "inverted_hammer": "长上影线 实体小 出现在下跌后 → 可能反转",
+      "morning_star": "阴线+十字星+阳线 → 强烈底部反转",
+      "bullish_engulfing": "阳线实体完全包住前一日阴线 → 强烈买入",
+      "piercing_line": "阳线开盘低于前低 收盘超过前阴一半 → 买入",
+      "three_white_soldiers": "连续三根递增阳线 → 强势上涨启动"
+    },
+    "bearish": {
+      "shooting_star": "长上影线 实体小 出现在上涨后 → 见顶信号",
+      "hanging_man": "长下影线 实体小 出现在上涨后 → 警示信号",
+      "evening_star": "阳线+十字星+阴线 → 强烈顶部反转",
+      "bearish_engulfing": "阴线实体完全包住前一日阳线 → 强烈卖出",
+      "dark_cloud_cover": "阴线开盘高于前高 收盘低于前阳一半 → 卖出",
+      "three_black_crows": "连续三根递减阴线 → 加速下跌"
+    },
+    "neutral": {
+      "doji": "十字星 → 多空平衡 变盘信号",
+      "spinning_top": "小实体 长影线 → 方向不明确",
+      "marubozu": "光头光脚 → 单边力量极强"
+    }
+  },
+  "risk_management": {
+    "position_sizing": {
+      "single_stock_max": "单只股票仓位不超过总资金20%",
+      "industry_max": "单一行业仓位不超过总资金40%",
+      "total_position": "市场趋势良好时总仓位60-80%，震荡40-60%，下跌<30%",
+      "cash_reserve": "永远保留至少10%现金"
+    },
+    "stop_loss": {
+      "hard_stop": "亏损超过买入价5% → 无条件止损",
+      "trailing_stop": "从最高点回落3% → 移动止盈",
+      "time_stop": "买入后3个交易日未盈利 → 减仓",
+      "volume_stop": "下跌放量2倍以上 → 立即止损"
+    },
+    "risk_metrics": {
+      "max_drawdown": "单日最大回撤不超过5%",
+      "weekly_loss_limit": "单周亏损超过8% → 停止交易",
+      "monthly_loss_limit": "单月亏损超过15% → 全仓停止",
+      "win_rate_target": "目标胜率>55%",
+      "profit_loss_ratio": "目标盈亏比>2:1"
+    }
+  },
+  "market_sentiment": {
+    "advance_decline": {
+      "strong_bull": "涨跌比>3:1 → 全面做多",
+      "bull": "涨跌比>1.5:1 → 偏多",
+      "neutral": "涨跌比0.8-1.5 → 震荡",
+      "bear": "涨跌比<0.6 → 偏空",
+      "strong_bear": "涨跌比<0.3 → 恐慌"
+    },
+    "limit_up_down": {
+      "extreme_bull": "涨停>100家且跌停<5 → 极度强势",
+      "bull": "涨停>50家 → 做多氛围",
+      "bear": "跌停>50家 → 恐慌蔓延",
+      "extreme_bear": "跌停>200家 → 系统性风险"
+    },
+    "north_bound": {
+      "heavy_inflow": "北向资金单日净流入>100亿 → 外资看好",
+      "heavy_outflow": "北向资金单日净流出>100亿 → 外资撤离",
+      "consecutive_inflow": "连续5日净流入 → 中期看涨",
+      "consecutive_outflow": "连续5日净流出 → 中期看跌"
+    }
+  },
+  "sector_rotation": {
+    "early_bull": [
+      "券商",
+      "有色",
+      "军工",
+      "科技"
+    ],
+    "mid_bull": [
+      "消费",
+      "医药",
+      "新能源",
+      "汽车"
+    ],
+    "late_bull": [
+      "银行",
+      "地产",
+      "钢铁",
+      "煤炭"
+    ],
+    "bear_market": [
+      "公用事业",
+      "黄金",
+      "农业",
+      "高股息"
+    ],
+    "recovery": [
+      "可选消费",
+      "交通运输",
+      "旅游",
+      "传媒"
+    ]
+  },
+  "common_mistakes": [
+    "追涨杀跌：看到涨了才买，看到跌了才卖 — 应该低吸高抛",
+    "满仓重仓：一把梭全仓单只股票 — 必须分散",
+    "不止损：亏了扛着等解套 — 亏损扩大是最大风险",
+    "频繁交易：每天买卖换股追逐热点 — 手续费吃掉利润",
+    "听消息买股：听信小道消息不自己分析 — 消息已反映在价格中",
+    "逆势加仓：越跌越买摊低成本 — 趋势不对加仓=找死",
+    "贪心不卖：已经赚了还想赚更多 — 落袋为安才是真",
+    "恐慌割肉：大盘一跌就全卖 — 冷静分析再做决定"
+  ],
+  "daily_checklist": [
+    "检查隔夜外盘(美股/港股/A50期货)走势",
+    "查看当日重要经济数据和政策新闻",
+    "确认手中持仓的止盈止损位",
+    "扫描北向资金流向",
+    "关注集合竞价异动股票",
+    "操作前再次确认T+1规则影响",
+    "收盘后复盘: 记录每笔交易原因和结果"
+  ]
+}

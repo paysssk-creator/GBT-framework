@@ -1,0 +1,31 @@
+{
+  "_stamp": "2026-07-22T00:00:00Z",
+  "name": "phishing_engine",
+  "version": "1.0.0",
+  "description": "钓鱼邮件生成·AI辅助社会工程邮件",
+  "language": "python",
+  "risk_level": "dangerous",
+  "auto_exec": false,
+  "category": "攻击域",
+  "actions": {
+    "clone": {
+      "description": "clone"
+    },
+    "generate": {
+      "description": "生成钓鱼邮件内容"
+    },
+    "list": {
+      "description": "list"
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "phishing",
+      "钓鱼",
+      "邮件",
+      "social engineering",
+      "社工"
+    ],
+    "intent": "phishing_engine"
+  }
+}

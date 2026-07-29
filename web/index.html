@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8号当铺 · AI替你打工 — 开源项目一键部署变现</title>
+<meta name="description" content="贴个GitHub链接，AI自动部署。30秒上线，80%收益。租用或买断，你的开源项目变成赚钱机器。">
+<meta property="og:title" content="8号当铺 · AI开源项目市场">
+<meta property="og:description" content="贴个链接，AI替你打工。30秒上线，80%收益归你。">
+<meta property="og:image" content="/logo.svg">
+<meta name="theme-color" content="#08080d">
+<link rel="stylesheet" href="/assets/gbt-animations.css">
+<script src="/assets/gbt-3d.js" defer></script>
+<style>
+:root{--bg:#08080d;--card:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.06);--blue:#00d4ff;--gold:#ffd700;--purple:#a855f7;--green:#22c55e;--red:#ff4444}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:#e0e0e0;font-family:'Inter',-apple-system,'SF Pro Display',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 32px;height:56px;display:flex;justify-content:space-between;align-items:center;background:rgba(8,8,13,.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+nav a{color:rgba(255,255,255,.5);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s}
+nav a:hover{color:#fff}
+nav .logo{font-weight:800;font-size:16px;color:#fff;display:flex;align-items:center;gap:6px}
+nav .logo em{font-style:normal;color:var(--blue);font-size:11px;background:rgba(0,212,255,.12);padding:2px 8px;border-radius:100px}
+nav .links{display:flex;gap:24px;align-items:center}
+nav .btn{background:var(--blue);color:#000;padding:7px 18px;border-radius:100px;font-size:12px;font-weight:700;text-decoration:none}
+nav .btn:hover{box-shadow:0 4px 16px rgba(0,212,255,.3)}
+@media(max-width:768px){nav .links{display:none}}
+
+.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 24px}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px}
+.hero .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15);border-radius:100px;padding:6px 16px;font-size:12px;color:var(--blue);margin-bottom:24px;font-weight:600}
+.hero .badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green)}
+.hero h1{font-size:clamp(44px,8vw,76px);font-weight:900;line-height:1.08;letter-spacing:-.04em;margin-bottom:12px;color:#fff}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--blue),var(--purple),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(15px,2vw,18px);color:rgba(255,255,255,.4);max-width:500px;line-height:1.7;margin-bottom:32px}
+.hero .btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:100px;font-size:15px;font-weight:700;text-decoration:none;transition:all .3s;cursor:pointer}
+.btn-w{background:#fff;color:#000}.btn-w:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,255,255,.15)}
+.btn-o{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.15)}.btn-o:hover{border-color:rgba(255,255,255,.4)}
+.hero .stats{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap;justify-content:center}
+.hero .stat{text-align:center}.hero .stat .n{font-size:30px;font-weight:900;color:#fff}.hero .stat .l{font-size:11px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.08em}
+
+.sec{padding:80px 0;position:relative;z-index:1}
+.sec-tag{font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--blue);margin-bottom:8px;font-weight:700}
+.sec h2{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.sec h2 em{font-style:normal;color:var(--blue)}
+.sec .sub{font-size:15px;color:rgba(255,255,255,.35);max-width:460px;line-height:1.6;margin-bottom:36px}
+
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all .35s;backdrop-filter:blur(20px)}
+.card:hover{border-color:rgba(255,255,255,.12);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
+.card .ico{font-size:28px;margin-bottom:12px}
+.card h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.card p{font-size:13px;color:rgba(255,255,255,.4);line-height:1.6}
+.card .tag{display:inline-block;margin-top:10px;font-size:11px;color:var(--blue);font-weight:600}
+
+.market{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;gap:14px;align-items:center;transition:all .3s}
+.item:hover{border-color:rgba(255,255,255,.12)}
+.item .rk{font-size:24px;font-weight:900;color:rgba(255,255,255,.05);min-width:32px}
+.item .info{flex:1}.item .info h4{font-size:14px;font-weight:700}.item .info .ts{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap}
+.item .info .t{font-size:10px;padding:2px 8px;border-radius:100px;font-weight:600}
+.item .info .t.s{background:rgba(0,212,255,.08);color:var(--blue)}
+.item .info .t.n{background:rgba(34,197,94,.08);color:var(--green)}
+.item .info .t.h{background:rgba(255,68,68,.08);color:var(--red)}
+.market{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px}
+.item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;display:grid;grid-template-columns:32px 1fr auto;gap:16px;align-items:center;transition:all .3s}
+.item:hover{border-color:rgba(0,212,255,.2);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.item .rk{font-size:26px;font-weight:900;color:rgba(255,255,255,.04);text-align:center}
+.item .info h4{font-size:14px;font-weight:700;margin-bottom:2px}
+.item .info .ts{display:flex;gap:4px;flex-wrap:wrap;margin:4px 0}
+.item .info .t{font-size:10px;padding:2px 8px;border-radius:100px;font-weight:600}
+.item .info .t.b{background:rgba(0,212,255,.1);color:var(--blue)}
+.item .info .t.g{background:rgba(34,197,94,.1);color:var(--green)}
+.item .info .save{font-size:11px;color:var(--green);margin-top:4px;font-weight:600}
+.item .act{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.item .act .rent{font-size:12px;color:rgba(255,255,255,.35)}.item .act .rent s{color:rgba(255,255,255,.15)}
+.item .act .buy{display:inline-block;background:linear-gradient(135deg,var(--blue),#0099cc);color:#000;padding:8px 18px;border-radius:100px;font-size:12px;font-weight:700;text-decoration:none;transition:all .2s}
+.item .act .buy:hover{box-shadow:0 4px 16px rgba(0,212,255,.35)}
+</style>
+<body>
+
+
+<nav>
+    <a href="/" class="logo">8号当铺<em>AI</em></a>
+    <div class="links">
+        <a href="/stack.html">Tech</a><a href="#market">Market</a>
+        <a href="/pricing.html">Pricing</a><a href="/help.html">Help</a>
+        <a href="/deploy.html" class="btn">Deploy</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="badge gbt-reveal"><span class="dot"></span>AI-Powered · Deploy in 30s · 80% Revenue</div>
+    <h1 class="gbt-reveal">AI界<em>8号当铺</em></h1>
+    <p class="sub gbt-reveal">Paste a GitHub link. AI builds, ships, and monetizes your open-source project.<br>贴个链接，AI替你打工。30秒上线，80%收益归你。</p>
+    <div class="btns gbt-reveal">
+        <a href="/deploy.html" class="btn btn-w">🚀 Deploy Now · 立即部署</a>
+        <button onclick="githubLogin()" class="btn btn-o" style="cursor:pointer;border:1px solid rgba(255,255,255,0.2)">🔑 GitHub 一键登录授权</button>
+        <a href="#how" class="btn btn-o">▶ How It Works</a>
+    </div>
+        <div class="stat"><div class="n">10+</div><div class="l">热门项目</div></div>
+        <div class="stat"><div class="n">$2.8M+</div><div class="l">开发者收益</div></div>
+        <div class="stat"><div class="n">30s</div><div class="l">平均部署</div></div>
+        <div class="stat"><div class="n">租+售</div><div class="l">双模式</div></div>
+        <div class="stat"><div class="n">80%</div><div class="l">最高分成</div></div>
+    </div>
+</div>
+</section>
+
+<section class="sec" id="how"><div class="wrap">
+    <div class="sec-tag gbt-reveal-left">WORKFLOW</div>
+    <h2 class="gbt-reveal-left">三步，从代码到<em>收租</em></h2>
+    <p class="sub gbt-reveal-left">全程自动化，像贴链接一样简单</p>
+    <div class="g3 gbt-reveal-scale">
+        <div class="card" data-parallax data-parallax-depth="1"><div class="ico">📦</div><h3>1. 粘贴 GitHub 链接</h3><p>提交你的开源项目仓库地址，支持任何语言、任何框架。AI自动检测项目类型。</p><span class="tag">~5秒</span></div>
+        <div class="card" data-parallax data-parallax-depth="2"><div class="ico">🤖</div><h3>2. AI 自动构建 + 审计</h3><p>自动审计代码安全(≥70分放行)，生成Docker镜像，配置SSL和全球加速隧道。</p><span class="tag">~30秒</span></div>
+        <div class="card" data-parallax data-parallax-depth="1"><div class="ico">💰</div><h3>3. 上线收租</h3><p>生成公网地址，用户按小时租赁或一次性买断，收益80%自动结算。</p><span class="tag">已赚$2.8M+</span></div>
+    </div>
+</div></section>
+
+<section class="sec" id="market"><div class="wrap">
+    <div class="sec-tag gbt-reveal-right">MARKET</div>
+    <h2 class="gbt-reveal-right">热门<em>开源项目</em></h2>
+    <p class="sub gbt-reveal-right">开发者正在部署这些项目，按小时出租或买断</p>
+    <div class="market gbt-reveal-scale">
+        <div class="item"><div class="rk">01</div><div class="info"><h4>LangGraph · Agent编排框架</h4><div class="ts"><span class="t b">AI Agent</span><span class="t b">工作流</span></div><div class="save">买断省0 vs 年租</div></div><div class="act"><div class="rent"><s>/h</s></div><a href="/deploy.html" class="buy">99 买断</a></div></div>
+        <div class="item"><div class="rk">02</div><div class="info"><h4>Qwen3-235B · 开源Agent模型</h4><div class="ts"><span class="t h">LLM</span><span class="t b">Agent</span></div><div class="save">买断省0 vs 年租</div></div><div class="act"><div class="rent"><s>/h</s></div><a href="/deploy.html" class="buy">99 买断</a></div></div>
+        <div class="item"><div class="rk">03</div><div class="info"><h4>Openship · 自托管部署平台</h4><div class="ts"><span class="t g">NEW</span><span class="t b">DevOps</span><span class="t g">8.9K⭐</span></div><div class="save">买断省0 vs 年租</div></div><div class="act"><div class="rent"><s>/h</s></div><a href="/deploy.html" class="buy">99 买断</a></div></div>
+        <div class="item"><div class="rk">04</div><div class="info"><h4>Supabase · 开源BaaS</h4><div class="ts"><span class="t b">数据库</span><span class="t b">BaaS</span></div><div class="save">买断省0 vs 年租</div></div><div class="act"><div class="rent"><s>/h</s></div><a href="/deploy.html" class="buy">9 买断</a></div></div>
+        <div class="item"><div class="rk">05</div><div class="info"><h4>N8N · 自动化工作流引擎</h4><div class="ts"><span class="t b">工作流</span><span class="t b">自动化</span></div><div class="save">买断省5 vs 年租</div></div><div class="act"><div class="rent"><s>.5/h</s></div><a href="/deploy.html" class="buy">9 买断</a></div></div>
+        <div class="item"><div class="rk">06</div><div class="info"><h4>3D Portfolio · 个人作品集</h4><div class="ts"><span class="t g">NEW</span><span class="t b">React 19</span><span class="t g">3D</span></div><div class="save">买断省 vs 年租</div></div><div class="act"><div class="rent"><s>/h</s></div><a href="/deploy.html" class="buy">9 买断</a></div></div>
+        <div class="item"><div class="rk">07</div><div class="info"><h4>Perplexica · AI搜索引擎</h4><div class="ts"><span class="t g">NEW</span><span class="t b">AI搜索</span><span class="t g">28K⭐</span></div><div class="save">买断省5 vs 年租</div></div><div class="act"><div class="rent"><s>/h</s></div><a href="/deploy.html" class="buy">49 买断</a></div></div>
+        <div class="item"><div class="rk">08</div><div class="info"><h4>LibreChat · 多模型聊天</h4><div class="ts"><span class="t g">NEW</span><span class="t b">ChatGPT</span><span class="t g">30K⭐</span></div><div class="save">买断省0 vs 年租</div></div><div class="act"><div class="rent"><s>/h</s></div><a href="/deploy.html" class="buy">99 买断</a></div></div>
+
+    </div>
+</div></section>
+
+<section class="sec" id="why"><div class="wrap">
+    <div class="sec-tag gbt-reveal-left">WHY US</div>
+    <h2 class="gbt-reveal-left">为什么开发者选择<em>8号当铺</em></h2>
+    <div class="g3 gbt-reveal-scale" style="margin-top:32px">
+        <div class="card"><div class="ico">🤖</div><h3>AI 全自动部署</h3><p>提交链接，AI自动Docker化、配置域名、SSL证书、全球隧道。零配置，30秒上线。</p><span class="tag">任何语言·任何框架</span></div>
+        <div class="card"><div class="ico">🛡</div><h3>自动审计门禁</h3><p>每次部署强制代码审计。密钥泄露、依赖漏洞、安全配置——不合格直接拦截。</p><span class="tag">≥70分才放行</span></div>
+        <div class="card"><div class="ico">💰</div><h3>租+售双模式</h3><p>按小时租赁吸引流量，一次性买断提高客单价。80%分成，周周结算。</p><span class="tag">USDC/USDT/法币</span></div>
+    </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+    <div class="sec-tag gbt-reveal-right">LOVE</div>
+    <h2 class="gbt-reveal-right">开发者<em>真实反馈</em></h2>
+    <div class="g3 gbt-reveal-scale" style="margin-top:32px">
+        <div class="tcard"><div class="stars">★★★★★</div><div class="q">"周五晚上部署了ComfyUI，周六早上已经跑了8小时，赚了$40。太魔幻了。"</div><div class="au"><div class="av">L</div><div><div class="nm">@leolee_dev</div><div class="hn">已赚$1,280</div></div></div></div>
+        <div class="tcard"><div class="stars">★★★★★</div><div class="q">"以前Ngrok+服务器折腾一整天。这边贴链接30秒上线，分成80%比自己卖API划算。"</div><div class="au"><div class="av">M</div><div><div class="nm">@mike_ai_lab</div><div class="hn">已赚$3,450</div></div></div></div>
+        <div class="tcard"><div class="stars">★★★★★</div><div class="q">"团队3人把AI工具挂上去，第一周200+小时租赁。需求比想象的大得多。"</div><div class="au"><div class="av">T</div><div><div class="nm">@techstartup_lab</div><div class="hn">已赚$5,800</div></div></div></div>
+    </div>
+</div></section>
+
+<section class="cta">
+    <div class="ctac gbt-reveal-scale">
+        <h2>今天部署，明天收租</h2>
+        <p>把你的开源项目挂上8号当铺，让全球用户为你的代码付费</p>
+        <a href="/deploy.html" class="btn btn-w" style="font-size:16px;padding:16px 40px">🚀 立即部署你的项目 →</a>
+        <p style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.2)">新用户10小时免费·无需信用卡·随时可提现·80%分成</p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 8号当铺 · GBT小土豆 · 自由的风</p>
+    <p style="margin-top:4px">10脑·19邻域·196能力·亿万触手 · <a href="/showcase.html">技术架构</a> · <a href="/deploy.html">立即部署</a></p>
+</footer>
+
+<script>
+// GitHub OAuth 一键登录授权
+function githubLogin(){
+  var w=600,h=700;
+  var l=screen.width/2-w/2,t=screen.height/2-h/2;
+  var win=window.open('/api/oauth/login','github_oauth','width='+w+',height='+h+',left='+l+',top='+t);
+  var timer=setInterval(function(){
+    if(win.closed){clearInterval(timer);checkAuthStatus();}
+  },500);
+}
+function checkAuthStatus(){
+  fetch('/api/oauth/status').then(r=>r.json()).then(d=>{
+    if(d.ok&&d.token){
+      document.querySelector('.btn-o').textContent='✅ GitHub已授权 · '+d.login;
+      document.querySelector('.btn-o').style.background='rgba(34,197,94,0.15)';
+      document.querySelector('.btn-o').style.borderColor='rgba(34,197,94,0.4)';
+      document.querySelector('.btn-o').onclick=null;
+    }
+  }).catch(()=>{});
+}
+// 页面加载时检查是否已授权
+checkAuthStatus();
+</script>
+
+</body>

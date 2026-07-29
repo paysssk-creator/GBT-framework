@@ -1,0 +1,59 @@
+<!-- pages/goods/goods.wxml — 商品详情 -->
+<view class="page" wx:if="{{goods}}">
+  <!-- 图片轮播 -->
+  <swiper
+    class="goods-swiper"
+    indicator-dots
+    bindchange="onSwiperChange"
+  >
+    <swiper-item wx:for="{{goods.images}}" wx:key="*this">
+      <image class="goods-image" src="{{item}}" mode="aspectFill" bindtap="onImageTap" />
+    </swiper-item>
+  </swiper>
+
+  <!-- 商品信息 -->
+  <view class="goods-info">
+    <view class="goods-name">{{goods.name}}</view>
+    <view class="goods-price-row">
+      <text class="price-lg"><text class="price-symbol">¥</text>{{goods.price}}</text>
+      <text class="original-price" wx:if="{{goods.originalPrice > goods.price}}">¥{{goods.originalPrice}}</text>
+    </view>
+    <view class="goods-sales">已售 {{goods.sales}} 件 · 库存 {{goods.stock}} 件</view>
+  </view>
+
+  <!-- 规格选择 -->
+  <view class="spec-section" bindtap="onShowSpec">
+    <text class="spec-label">规格</text>
+    <view class="spec-tags">
+      <text class="spec-tag" wx:for="{{goods.specs}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 数量 -->
+  <view class="qty-section">
+    <text class="qty-label">数量</text>
+    <view class="qty-stepper">
+      <view class="qty-btn {{qty <= 1 ? 'disabled' : ''}}" bindtap="onQtyMinus">−</view>
+      <text class="qty-value">{{qty}}</text>
+      <view class="qty-btn {{qty >= goods.stock ? 'disabled' : ''}}" bindtap="onQtyPlus">+</view>
+    </view>
+  </view>
+
+  <!-- 商品详情 -->
+  <view class="desc-section">
+    <view class="desc-title">商品详情</view>
+    <view class="desc-content">
+      <rich-text nodes="{{goods.desc}}" />
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="bottom-cart" bindtap="onAddCart">
+      <text>加入购物车</text>
+    </view>
+    <view class="bottom-buy" bindtap="onBuyNow">
+      <text>立即购买</text>
+    </view>
+  </view>
+</view>

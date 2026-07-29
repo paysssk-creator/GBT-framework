@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GBT 开发者文档</title>
+<link rel="stylesheet" href="/styles.css">
+<style>
+:root{--sidebar-w:260px}
+body{display:flex;min-height:100vh;font-family:'Inter',-apple-system,sans-serif}
+.sidebar{width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);padding:20px;position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:10}
+.sidebar h2{font-size:14px;font-weight:700;margin-bottom:16px;color:var(--accent)}
+.sidebar nav{display:flex;flex-direction:column;gap:4px}
+.sidebar a{color:var(--dim);text-decoration:none;font-size:13px;padding:6px 10px;border-radius:6px;transition:all .15s;display:block}
+.sidebar a:hover,.sidebar a.active{color:var(--text);background:rgba(255,255,255,.04)}
+.sidebar .section{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-top:20px;margin-bottom:8px;padding-left:10px}
+.main{margin-left:var(--sidebar-w);flex:1;padding:40px 60px;max-width:900px}
+.main h1{font-size:32px;font-weight:800;margin-bottom:8px;letter-spacing:-.02em}
+.main h2{font-size:22px;font-weight:700;margin:40px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.main h3{font-size:17px;font-weight:600;margin:24px 0 8px}
+.main p{font-size:15px;color:var(--dim);line-height:1.8;margin-bottom:16px}
+.main code{background:var(--bg);padding:2px 8px;border-radius:4px;font-size:13px;color:var(--accent);font-family:monospace}
+.main pre{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px 20px;overflow-x:auto;margin:16px 0;font-size:13px;line-height:1.6}
+.main pre code{background:none;padding:0;color:var(--text)}
+.main ul,.main ol{padding-left:24px;margin-bottom:16px}
+.main li{font-size:15px;color:var(--dim);line-height:2}
+.main .callout{background:rgba(88,166,255,.08);border-left:3px solid var(--accent);padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;font-size:14px}
+.main .callout.warn{background:rgba(245,158,11,.08);border-left-color:var(--orange)}
+.main .step{display:flex;gap:16px;align-items:flex-start;margin:20px 0}
+.main .step-num{width:36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:16px}
+.main table{width:100%;border-collapse:collapse;margin:20px 0}
+.main th{text-align:left;padding:10px 14px;font-size:12px;color:var(--dim);text-transform:uppercase;border-bottom:1px solid var(--border)}
+.main td{padding:10px 14px;font-size:14px;border-bottom:1px solid rgba(255,255,255,.03)}
+@media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:24px 20px}}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <h2>📖 GBT Docs</h2>
+  <nav>
+    <a href="/docs/" class="active">首页</a>
+    <div class="section">快速开始</div>
+    <a href="/docs/quickstart.html">5分钟部署第一个项目</a>
+    <div class="section">核心</div>
+    <a href="/docs/pricing.html">定价与分成</a>
+    <a href="/docs/faq.html">常见问题</a>
+  </nav>
+</aside>
+
+<main class="main">
+  <h1>GBT 开发者文档</h1>
+  <p>GBT 是一个 AI 驱动的开源项目部署平台。提交 GitHub 链接，AI 自动 Docker 化并上线，30秒即可生成可租赁的在线服务。开发者拿80%收益。</p>
+  
+  <div class="callout">🚀 新用户赠送 10 小时免费租赁额度，零成本体验完整流程。</div>
+
+  <h2>三步上手</h2>
+  
+  <div class="step"><div class="step-num">1</div><div><strong style="font-size:16px">粘贴 GitHub 链接</strong><br>输入你的开源项目仓库地址，支持 Python / Node.js / Go / 静态站 / ComfyUI 等</div></div>
+  <div class="step"><div class="step-num">2</div><div><strong style="font-size:16px">AI 自动构建部署</strong><br>GBT 自动检测项目类型 → 生成 Dockerfile → 构建镜像 → 配置隧道</div></div>
+  <div class="step"><div class="step-num">3</div><div><strong style="font-size:16px">上线并开始收租</strong><br>~30秒生成公网地址，自动定价上架项目市场，开发者持续收租</div></div>
+
+  <h2>快速链接</h2>
+  <table>
+    <tr><th>页面</th><th>内容</th></tr>
+    <tr><td><a href="/docs/quickstart.html">快速开始 →</a></td><td>5分钟部署你的第一个项目</td></tr>
+    <tr><td><a href="/docs/pricing.html">定价与分成 →</a></td><td>80% 怎么算、结算周期、提现方式</td></tr>
+    <tr><td><a href="/docs/faq.html">常见问题 →</a></td><td>部署失败、租不出去、提现问题</td></tr>
+  </table>
+</main>
+
+</body>
+</html>

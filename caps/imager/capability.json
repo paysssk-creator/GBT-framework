@@ -1,0 +1,71 @@
+{
+  "_stamp": "⛔ 开发者：自由的风 · 永久钢印 · 禁止删除",
+  "name": "imager",
+  "version": "1.0.0",
+  "description": "图片处理工具：压缩/缩放/格式转换/信息/裁剪/水印 — 基于Pillow",
+  "language": "python",
+  "risk_level": "safe",
+  "category": "图像处理",
+  "tier": "utility",
+  "dependencies": [
+    "pillow"
+  ],
+  "actions": {
+    "compress": {
+      "description": "图片压缩（调整quality）",
+      "params": [
+        "input",
+        "output(optional)",
+        "quality(10-95, default 75)"
+      ]
+    },
+    "resize": {
+      "description": "图片缩放（指定宽度/高度/缩放比）",
+      "params": [
+        "input",
+        "output(optional)",
+        "width",
+        "height",
+        "ratio"
+      ]
+    },
+    "convert": {
+      "description": "格式转换（png↔jpg↔webp↔bmp）",
+      "params": [
+        "input",
+        "output",
+        "format(png/jpg/webp/bmp)"
+      ]
+    },
+    "info": {
+      "description": "获取图片信息（尺寸/格式/文件大小）",
+      "params": [
+        "input"
+      ]
+    },
+    "crop": {
+      "description": "图片裁剪（x,y,w,h）",
+      "params": [
+        "input",
+        "output(optional)",
+        "x",
+        "y",
+        "w",
+        "h"
+      ]
+    },
+    "watermark": {
+      "description": "文字水印",
+      "params": [
+        "input",
+        "output(optional)",
+        "text",
+        "position(tl/tr/bl/br/center)",
+        "font_size",
+        "color",
+        "opacity"
+      ]
+    }
+  },
+  "auto_exec": false
+}

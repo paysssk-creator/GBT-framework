@@ -1,0 +1,33 @@
+{
+  "name": "@gbt/checkout",
+  "version": "1.0.0",
+  "description": "GBT Checkout — self-contained embedded checkout widget for gbtxiaotudou.com. Inspired by Whop.com checkout architecture.",
+  "main": "gbt-checkout.js",
+  "unpkg": "gbt-checkout.js",
+  "jsdelivr": "gbt-checkout.js",
+  "files": [
+    "gbt-checkout.js"
+  ],
+  "keywords": [
+    "gbt",
+    "checkout",
+    "payment",
+    "crypto",
+    "usdt",
+    "usdc",
+    "stripe",
+    "embedded",
+    "widget",
+    "whop"
+  ],
+  "author": "GBT小土豆",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gbtxiaotudou/gbt-checkout"
+  },
+  "bugs": {
+    "url": "https://github.com/gbtxiaotudou/gbt-checkout/issues"
+  },
+  "homepage": "https://gbtxiaotudou.com"
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GBT Brain Runtime · 30层活体演示</title>
+<style>
+:root{--bg:#050510;--card:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.06);--text:#ddd;--muted:#666;--blue:#00d4ff;--purple:#a855f7;--gold:#ffd700;--green:#22c55e}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;overflow:hidden;height:100vh;display:flex}
+#gbt-stage{position:absolute;top:0;left:0;width:100vw;height:100vh;z-index:1}
+#gbt-stage canvas{display:block}
+.sidebar{position:relative;z-index:20;width:260px;min-width:260px;height:100vh;background:rgba(5,5,16,0.92);backdrop-filter:blur(20px);border-right:1px solid var(--border);overflow-y:auto;padding:16px;display:flex;flex-direction:column}
+.sidebar h2{font-size:0.95rem;color:var(--blue);margin-bottom:2px}
+.sidebar .sub{font-size:0.7rem;color:var(--muted);margin-bottom:14px}
+.era-label{font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:8px 4px 4px;border-top:1px solid var(--border);margin-top:4px}
+.ver{padding:7px 10px;border-radius:6px;cursor:pointer;margin-bottom:2px;font-size:0.75rem;transition:all 0.15s;border:1px solid transparent;display:flex;align-items:center;gap:8px}
+.ver:hover{background:rgba(0,212,255,0.06);border-color:rgba(0,212,255,0.15)}
+
+.ver.v1-v4{border-left:2px solid rgba(136,136,136,0.3)}
+.ver.v5{border-left:2px solid rgba(0,212,255,0.6)}
+.ver.v6-v20{border-left:2px solid rgba(168,85,247,0.3)}
+.ver.v21-v30{border-left:2px solid rgba(255,215,0,0.5)}
+.ver.active.v21-v30,.ver.active.v30-ultimate{box-shadow:0 0 20px rgba(255,215,0,0.2),inset 0 0 20px rgba(255,215,0,0.05);border-color:rgba(255,215,0,0.6)!important}
+.ver.v30-ultimate{animation:ultimate-glow 2s ease-in-out infinite}
+@keyframes ultimate-glow{0%,100%{border-color:rgba(255,215,0,0.3)}50%{border-color:rgba(255,215,0,0.7)}}
+.singularity{position:absolute;pointer-events:none;top:50%;left:50%;transform:translate(-50%,-50%);width:0;height:0;border-radius:50%;background:rgba(255,255,255,0.9);pointer-events:none;z-index:5;animation:singularity-burst 1.5s ease-out forwards}
+@keyframes singularity-burst{0%{width:0;height:0;opacity:1}30%{width:400px;height:400px;opacity:0.8}100%{width:2000px;height:2000px;opacity:0}}
+
+.ver.active{background:rgba(0,212,255,0.12);border-color:rgba(0,212,255,0.3)}
+.ver .vtag{font-size:0.6rem;font-weight:700;padding:1px 5px;border-radius:3px;min-width:26px;text-align:center;color:#fff}
+.ver .vname{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.glass-card{position:absolute;z-index:10;bottom:40px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);backdrop-filter:blur(16px);border:1px solid rgba(0,212,255,0.15);border-radius:16px;padding:20px 32px;text-align:center;max-width:550px;pointer-events:none;transition:all 0.4s}
+.glass-card h2{font-size:1.3rem;font-weight:800;margin-bottom:6px}
+.glass-card p{color:var(--muted);font-size:0.85rem;line-height:1.5;margin-bottom:10px}
+.glass-card .tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.glass-card .tag{font-size:0.7rem;padding:3px 10px;border-radius:10px;background:rgba(0,212,255,0.08);color:var(--blue);border:1px solid rgba(0,212,255,0.15)}
+.glass-card .meta{font-size:0.7rem;color:var(--muted);margin-top:8px}
+.footer-corner{position:absolute;z-index:20;bottom:12px;right:16px;color:var(--muted);font-size:0.65rem}
+@media(max-width:768px){.sidebar{width:180px;min-width:180px;padding:10px}.glass-card{max-width:90vw;padding:16px 20px}}
+</style>
+</head>
+<body>
+
+<div id="gbt-stage"></div>
+
+<div class="sidebar">
+  <h2>🧠 GBT Runtime</h2>
+  <div class="sub">103KB · 30层 · 活体演示</div>
+  <div id="vlist"></div>
+</div>
+
+<div class="glass-card" id="info-card">
+  <h2 id="card-title" style="color:var(--blue)">V30 · 全息链接</h2>
+  <p id="card-desc">30层进化，103KB引擎，全声明式3D交互操作系统</p>
+  <div class="tags" id="card-tags">
+    <span class="tag">data-* 声明式</span>
+    <span class="tag">零依赖</span>
+    <span class="tag">MIT开源</span>
+  </div>
+  <div class="meta" id="card-meta"></div>
+</div>
+
+<div class="footer-corner">gbtxiaotudou.com · 自由的风</div>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script src="gbt-3d.js"></script>
+<script src="menu-handler.js"></script>
+
+</body>
+</html>
